@@ -13,10 +13,22 @@ import type { Goal, Match, Stage } from '../lib/types';
 
 interface OfGoal {
   name: string;
-  minute: number;
-  offset?: number;
+  /** upstream sends this as a string ("67", sometimes "90+3") or a number */
+  minute: number | string;
+  offset?: number | string;
   penalty?: boolean;
   owngoal?: boolean;
+}
+
+/** "67" → 67, "90+3" → 93, 45 → 45 — never string-concatenates. */
+function toMinute(minute: number | string | undefined, offset: number | string | undefined): number {
+  const parse = (v: number | string | undefined): number => {
+    if (typeof v === 'number') return v;
+    if (!v) return 0;
+    const m = /^(\d+)(?:\+(\d+))?$/.exec(String(v).trim());
+    return m ? Number(m[1]) + Number(m[2] ?? 0) : 0;
+  };
+  return parse(minute) + parse(offset);
 }
 interface OfMatch {
   num?: number;
@@ -93,7 +105,7 @@ function parseGoals(of: OfMatch): Goal[] | undefined {
       out.push({
         side,
         name: g.name,
-        minute: (g.minute ?? 0) + (g.offset ?? 0),
+        minute: toMinute(g.minute, g.offset),
         ...(g.penalty ? { penalty: true } : {}),
         ...(g.owngoal ? { owngoal: true } : {}),
       });

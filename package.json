@@ -8,10 +8,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "prebuild": "npm run data:schedule && npm run data:squads && npm run data:highlights",
+    "prebuild": "npm run data:schedule && npm run data:squads && npm run data:highlights && npm run data:cards",
     "data:schedule": "tsx scripts/refresh-schedule.ts",
     "data:squads": "tsx scripts/fetch-player-photos.ts",
-    "data:highlights": "tsx scripts/fetch-highlights.ts"
+    "data:highlights": "tsx scripts/fetch-highlights.ts",
+    "data:cards": "tsx scripts/fetch-match-details.ts"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.0.0",

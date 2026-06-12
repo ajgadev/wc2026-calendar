@@ -3,7 +3,14 @@ import { STADIUMS, HOST_COUNTRIES } from '../data/stadiums';
 import { TEAMS } from '../data/teams';
 import { STAGE_LABELS } from '../data/schedule';
 import { venueDate, venueTime } from './time';
+import { hasRedCard, type MatchDetailsArchive } from './cards';
+import matchDetails from '../../public/data/matchDetails.json';
 import type { Match } from './types';
+
+/** Red-card indicator for rows/chips — baked from the committed archive. */
+export function matchHasRed(m: Match): boolean {
+  return hasRedCard((matchDetails as MatchDetailsArchive)[String(m.n)]);
+}
 
 export function stadiumOf(m: Match) {
   return STADIUMS[m.stadium];

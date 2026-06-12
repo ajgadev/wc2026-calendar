@@ -1,0 +1,27 @@
+{
+ "1": {
+  "cards": [
+   {
+    "minute": 17,
+    "side": 1,
+    "player": "Teboho Mokoena",
+    "type": "Y"
+   },
+   {
+    "minute": 23,
+    "side": 0,
+    "player": "Brian Gutiérrez",
+    "type": "Y"
+   },
+   {
+    "minute": 49,
+    "side": 1,
+    "player": "Sphephelo Sithole",
+    "type": "R"
+   }
+  ]
+ },
+ "2": {
+  "cards": []
+ }
+}

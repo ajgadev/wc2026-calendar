@@ -9,7 +9,16 @@ import {
 } from '../../lib/client';
 import { matchVideoToMatch } from '../../lib/highlights';
 import { sportsDbNameFor } from '../../data/teamNames';
-import type { Highlight, Match } from '../../lib/types';
+import {
+  hasRedCard,
+  matchEventToMatch,
+  parseTimelineCards,
+  type CardEvent,
+  type MatchDetailsArchive,
+  type SdbEvent,
+  type SdbTimelineEntry,
+} from '../../lib/cards';
+import type { Highlight, Match, Stadium } from '../../lib/types';
 
 /**
  * Slide-over drawer for teams and matches. Statically rendered rows
@@ -32,6 +41,93 @@ let archivePromise: Promise<Record<string, Highlight>> | null = null;
 function fetchHighlightArchive() {
   archivePromise ??= fetch('/data/highlights.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
   return archivePromise;
+}
+
+let detailsPromise: Promise<MatchDetailsArchive> | null = null;
+function fetchMatchDetails() {
+  detailsPromise ??= fetch('/data/matchDetails.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+  return detailsPromise;
+}
+
+/**
+ * Cards for one match: the committed archive first; for matches the
+ * daily Action hasn't covered yet (just finished / in play), fall back
+ * to TheSportsDB directly from the browser (CORS-friendly), cached in
+ * sessionStorage so each day/event is fetched at most once per session.
+ */
+async function fetchCardsFor(m: Match, venueDay: string): Promise<CardEvent[]> {
+  const archive = await fetchMatchDetails();
+  const archived = archive[String(m.n)];
+  if (archived) return archived.cards;
+
+  try {
+    // most reliable first: league recent results, then both candidate days
+    const sources = [
+      `https://www.thesportsdb.com/api/v1/json/123/eventspastleague.php?id=4429`,
+      `https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d=${venueDay}&s=Soccer`,
+      `https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d=${m.utc.slice(0, 10)}&s=Soccer`,
+    ];
+    let hit: { event: SdbEvent; swapped: boolean } | null = null;
+    for (const url of sources) {
+      const cacheKey = `wc26-sdb-${url.slice(-40)}`;
+      let events: SdbEvent[] | null = null;
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) events = JSON.parse(cached);
+      if (!events) {
+        const res = await fetch(url);
+        if (!res.ok) continue;
+        const data = (await res.json()) as { events?: SdbEvent[] | null };
+        events = (data.events ?? []).filter((e) => /world cup/i.test(e.strLeague ?? ''));
+        try { sessionStorage.setItem(cacheKey, JSON.stringify(events)); } catch { /* ignore */ }
+      }
+      for (const event of events) {
+        const found = matchEventToMatch(event, [m]);
+        if (found) { hit = { event, swapped: found.swapped }; break; }
+      }
+      if (hit) break;
+    }
+    if (hit) {
+      const event = hit.event;
+      const tlKey = `wc26-sdb-tl-${event.idEvent}`;
+      const cachedTl = sessionStorage.getItem(tlKey);
+      let timeline: SdbTimelineEntry[];
+      if (cachedTl) {
+        timeline = JSON.parse(cachedTl);
+      } else {
+        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/123/lookuptimeline.php?id=${event.idEvent}`);
+        if (!res.ok) return [];
+        timeline = ((await res.json()) as { timeline?: SdbTimelineEntry[] | null }).timeline ?? [];
+        try { sessionStorage.setItem(tlKey, JSON.stringify(timeline)); } catch { /* ignore */ }
+      }
+      return parseTimelineCards(timeline, hit.swapped);
+    }
+  } catch { /* cards silently absent — never an error state */ }
+  return [];
+}
+
+const normName = (s: string) =>
+  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z ]/g, '').trim();
+
+/** Inline kit-number chip — visually distinct from minutes ("67'"). */
+function NumChip({ n }: { n: number | null | undefined }) {
+  if (n == null) return null;
+  return (
+    <span className="tnum mr-1 inline-flex min-w-[18px] items-center justify-center rounded-[3px] border border-border-strong px-[3px] font-mono text-[10px] leading-[15px] text-text-3">
+      {n}
+    </span>
+  );
+}
+
+/** Card icon — CSS rect, not emoji; YR = second yellow (red with yellow notch). */
+function CardIcon({ type }: { type: CardEvent['type'] }) {
+  const base: import('react').CSSProperties = {
+    display: 'inline-block', width: 9, height: 12, borderRadius: 2, verticalAlign: '-1px',
+  };
+  if (type === 'Y') return <span style={{ ...base, background: '#FFD60A' }} title="Yellow card" />;
+  if (type === 'R') return <span style={{ ...base, background: '#E5484D' }} title="Red card" />;
+  return (
+    <span style={{ ...base, background: 'linear-gradient(135deg, #FFD60A 45%, #E5484D 55%)' }} title="Second yellow → red" />
+  );
 }
 
 let rssPromise: Promise<Highlight[]> | null = null;
@@ -127,14 +223,35 @@ function TeamDrawer({ code, openMatch }: { code: string; openMatch: (n: number) 
   const [squad, setSquad] = useState<PlayerOut[] | null>(null);
   const [descOpen, setDescOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [cardTotals, setCardTotals] = useState<Record<string, { y: number; r: number }>>({});
 
   useEffect(() => {
     let alive = true;
     setInfo('loading');
     setSquad(null);
     setDescOpen(false);
+    setCardTotals({});
     fetchSportsDb(code).then((v) => alive && setInfo(v));
     fetchPlayers().then((all) => alive && setSquad(all[code] ?? null));
+    // tournament card totals per player (from the archived timelines)
+    fetchMatchDetails().then((archive) => {
+      if (!alive) return;
+      const totals: Record<string, { y: number; r: number }> = {};
+      for (const m of matches) {
+        if (m.a !== code && m.b !== code) continue;
+        const det = archive[String(m.n)];
+        if (!det) continue;
+        const side = m.a === code ? 0 : 1;
+        for (const c of det.cards) {
+          if (c.side !== side) continue;
+          const k = normName(c.player);
+          totals[k] ??= { y: 0, r: 0 };
+          if (c.type === 'Y') totals[k].y++;
+          else totals[k].r++;
+        }
+      }
+      setCardTotals(totals);
+    });
     return () => { alive = false; };
   }, [code]);
 
@@ -239,7 +356,19 @@ function TeamDrawer({ code, openMatch }: { code: string; openMatch: (n: number) 
                     </div>
                     <div className="flex flex-col gap-px px-0.5">
                       <span className="t-micro truncate font-semibold whitespace-nowrap text-text-2">{pl.name}</span>
-                      <span className="truncate text-[10px] whitespace-nowrap text-text-dim">{age(pl.dob)}</span>
+                      <span className="flex items-center gap-1 truncate text-[10px] whitespace-nowrap text-text-dim">
+                        {age(pl.dob)}
+                        {(() => {
+                          const t = cardTotals[normName(pl.name)];
+                          if (!t) return null;
+                          return (
+                            <>
+                              {t.y > 0 && <span className="inline-flex items-center gap-px"><CardIcon type="Y" />{t.y > 1 ? t.y : ''}</span>}
+                              {t.r > 0 && <span className="inline-flex items-center gap-px"><CardIcon type="R" />{t.r > 1 ? t.r : ''}</span>}
+                            </>
+                          );
+                        })()}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -359,6 +488,34 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
   const dom = domMatchState(n);
   const [highlight, setHighlight] = useState<Highlight | null>(null);
   const [playerOpen, setPlayerOpen] = useState(false);
+  const [cards, setCards] = useState<CardEvent[]>([]);
+  const [shirtNums, setShirtNums] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    let alive = true;
+    setCards([]);
+    setShirtNums({});
+    if (!m || (!m.ft && dom.state === 'up')) return;
+    const v = stadiums[m.stadium];
+    const venueDay = new Intl.DateTimeFormat('en-CA', {
+      year: 'numeric', month: '2-digit', day: '2-digit', timeZone: v.timezone,
+    }).format(new Date(m.utc));
+    fetchCardsFor(m, venueDay).then((c) => alive && setCards(c));
+    // kit numbers for scorers/cards lines, resolved by normalized name
+    fetchPlayers().then((all) => {
+      if (!alive) return;
+      const map: Record<string, number> = {};
+      for (const code of [m.a, m.b]) {
+        for (const p of (code && all[code]) || []) {
+          if (p.shirtNumber != null) map[normName(p.name)] = p.shirtNumber;
+        }
+      }
+      setShirtNums(map);
+    });
+    return () => { alive = false; };
+  }, [n, dom.state]);
+
+  const numFor = (player: string): number | null => shirtNums[normName(player)] ?? null;
 
   useEffect(() => {
     let alive = true;
@@ -441,13 +598,14 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
         </span>
       </div>
 
-      {/* scorers */}
+      {/* scorers — kit number chip up front, minute always with the ' mark */}
       {(scorersA.length > 0 || scorersB.length > 0) && (
         <div className="grid grid-cols-[1fr_14px_1fr] items-start gap-x-2.5 gap-y-1">
           <div className="flex flex-col items-end gap-1">
             {scorersA.map((g, i) => (
               <div key={i} className="t-meta text-right text-text-2">
-                {g.name} {g.minute}'{g.penalty ? ' (P)' : ''}{g.owngoal ? ' (OG)' : ''}
+                <NumChip n={numFor(g.name)} />
+                {g.name} <span className="tnum">{g.minute}'</span>{g.penalty ? ' (P)' : ''}{g.owngoal ? ' (OG)' : ''}
               </div>
             ))}
           </div>
@@ -455,9 +613,36 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
           <div className="flex flex-col gap-1">
             {scorersB.map((g, i) => (
               <div key={i} className="t-meta text-text-2">
-                {g.name} {g.minute}'{g.penalty ? ' (P)' : ''}{g.owngoal ? ' (OG)' : ''}
+                <NumChip n={numFor(g.name)} />
+                {g.name} <span className="tnum">{g.minute}'</span>{g.penalty ? ' (P)' : ''}{g.owngoal ? ' (OG)' : ''}
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* discipline — same two-column layout as scorers */}
+      {cards.length > 0 && (
+        <div className="flex flex-col gap-2">
+          <span className={microHead}>DISCIPLINE</span>
+          <div className="grid grid-cols-[1fr_14px_1fr] items-start gap-x-2.5 gap-y-1">
+            <div className="flex flex-col items-end gap-1">
+              {cards.filter((c) => c.side === 0).map((c, i) => (
+                <div key={i} className="t-meta text-right text-text-2">
+                  <NumChip n={numFor(c.player)} />
+                  {c.player} <span className="tnum">{c.minute}'</span> <CardIcon type={c.type} />
+                </div>
+              ))}
+            </div>
+            <div className="h-full justify-self-center border-l border-border" />
+            <div className="flex flex-col gap-1">
+              {cards.filter((c) => c.side === 1).map((c, i) => (
+                <div key={i} className="t-meta text-text-2">
+                  <CardIcon type={c.type} /> <NumChip n={numFor(c.player)} />
+                  {c.player} <span className="tnum">{c.minute}'</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}

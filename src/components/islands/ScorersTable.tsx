@@ -20,7 +20,7 @@ function initials(name: string): string {
 export default function ScorersTable({ local }: Props) {
   const [rows, setRows] = useState<ScorerRow[]>(local);
   const [source, setSource] = useState<'local' | 'api'>('local');
-  const [photos, setPhotos] = useState<Record<string, string>>({});
+  const [players, setPlayers] = useState<Record<string, { photo: string | null; num: number | null }>>({});
 
   useEffect(() => {
     let alive = true;
@@ -35,13 +35,13 @@ export default function ScorersTable({ local }: Props) {
       .catch(() => { /* keep the local fallback */ });
     fetch('/data/players.json')
       .then((r) => (r.ok ? r.json() : {}))
-      .then((all: Record<string, { name: string; photoUrl: string | null }[]>) => {
+      .then((all: Record<string, { name: string; photoUrl: string | null; shirtNumber: number | null }[]>) => {
         if (!alive) return;
-        const map: Record<string, string> = {};
+        const map: Record<string, { photo: string | null; num: number | null }> = {};
         for (const list of Object.values(all)) {
-          for (const p of list) if (p.photoUrl) map[p.name] = p.photoUrl;
+          for (const p of list) map[p.name] = { photo: p.photoUrl, num: p.shirtNumber };
         }
-        setPhotos(map);
+        setPlayers(map);
       })
       .catch(() => { /* initials only */ });
     return () => { alive = false; };
@@ -61,8 +61,8 @@ export default function ScorersTable({ local }: Props) {
           <div key={`${s.name}-${idx}`} className="tnum grid min-h-12 grid-cols-[24px_36px_minmax(0,1fr)_36px_36px] items-center gap-1.5 border-t border-border p-1">
             <span className="t-micro font-mono text-text-dim">{String(idx + 1).padStart(2, '0')}</span>
             <span className="inline-flex size-8 items-center justify-center overflow-hidden rounded-full border border-border bg-surface-2">
-              {photos[s.name] ? (
-                <img src={photos[s.name]} alt="" loading="lazy" className="h-full w-full object-cover" />
+              {players[s.name]?.photo ? (
+                <img src={players[s.name].photo!} alt="" loading="lazy" className="h-full w-full object-cover" />
               ) : (
                 <span className="disp text-[11px] font-extrabold text-text-3">{initials(s.name)}</span>
               )}
@@ -74,6 +74,7 @@ export default function ScorersTable({ local }: Props) {
                   <img src={flagUrl(teams[s.team].flag)} alt="" className="h-[10px] w-[14px] rounded-[1px] object-cover" />
                 )}
                 {s.team}
+                {players[s.name]?.num != null && <span className="font-mono text-text-dim">#{players[s.name].num}</span>}
               </span>
             </span>
             <span className="disp t-time text-center font-black text-text">{s.goals}</span>

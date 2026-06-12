@@ -39,6 +39,7 @@ jobs:
           npx tsx scripts/refresh-schedule.ts
           npx tsx scripts/fetch-player-photos.ts
           npx tsx scripts/fetch-highlights.ts
+          npx tsx scripts/fetch-match-details.ts
       - name: Commit refreshed data (triggers the Pages deploy)
         id: commit
         run: |

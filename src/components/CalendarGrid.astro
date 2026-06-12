@@ -6,7 +6,7 @@
  * and the spelled-out "Group X" / round caption.
  */
 import { MATCHES, TOURNAMENT_START, TOURNAMENT_END } from '../data/schedule';
-import { stadiumOf, flagSrc, groupCaption, hostClass, matchDayKey, searchText, stateOf, venueKick } from '../lib/view';
+import { stadiumOf, flagSrc, groupCaption, hostClass, matchDayKey, matchHasRed, searchText, stateOf, venueKick } from '../lib/view';
 import type { Match } from '../lib/types';
 
 const byDay = new Map<string, Match[]>();
@@ -110,7 +110,10 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                           <img src={flagSrc(m.b!)} alt="" width="13" height="10" loading="lazy" class="h-[10px] w-[13px] shrink-0 rounded-[2px] object-cover" />
                           <span class="w-live live-dot size-1.5 shrink-0 rounded-full" style="background: var(--color-live-badge);"></span>
                         </span>
-                        <span class="text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">{groupCaption(m)}</span>
+                        <span class="flex items-center gap-1 text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">
+                          {groupCaption(m)}
+                          {matchHasRed(m) && <span class="inline-block h-2 w-1.5 rounded-[1px]" style="background:#E5484D" title="Red card in this match"></span>}
+                        </span>
                       </>
                     ) : (
                       <span class="t-micro truncate font-mono whitespace-nowrap text-text-3">{groupCaption(m)} · M{m.n}</span>

@@ -6,7 +6,7 @@
  */
 import { TEAMS } from '../data/teams';
 import { stadiumOf } from '../lib/view';
-import { flagSrc, hostClass, roundLabel, searchText, stateOf, venueChip, venueKick } from '../lib/view';
+import { flagSrc, hostClass, matchHasRed, roundLabel, searchText, stateOf, venueChip, venueKick } from '../lib/view';
 import type { Match } from '../lib/types';
 
 interface Props {
@@ -91,7 +91,10 @@ const country = stadiumOf(m).country.toLowerCase();
 
   <!-- venue + round -->
   <span class="ml-auto flex flex-col items-end gap-1">
-    <span class:list={['host-chip t-micro rounded-(--radius-chip) px-[7px] py-[2px] font-semibold tracking-[0.05em] whitespace-nowrap', hostClass(m)]}>{venueChip(m)}</span>
+    <span class="flex items-center gap-1.5">
+      {matchHasRed(m) && <span class="inline-block h-3 w-[9px] rounded-[2px]" style="background:#E5484D" title="Red card in this match"></span>}
+      <span class:list={['host-chip t-micro rounded-(--radius-chip) px-[7px] py-[2px] font-semibold tracking-[0.05em] whitespace-nowrap', hostClass(m)]}>{venueChip(m)}</span>
+    </span>
     <span class="t-micro tracking-[0.06em] whitespace-nowrap text-text-dim">{roundLabel(m)}</span>
   </span>
 </button>

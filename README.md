@@ -36,6 +36,7 @@ archive + squad photos (`YOUTUBE_API_KEY`, free Google Cloud key).
 | Team details | TheSportsDB (CORS-friendly) | on click, sessionStorage cache | `Drawer` island |
 | Squads & photos | football-data.org + Wikipedia | build (daily) | `scripts/fetch-player-photos.ts` → `public/data/players.json` |
 | Highlights | MagentaSport RSS + YouTube Data API | runtime 30min cache + build archive | `api/highlights.ts`, `scripts/fetch-highlights.ts` |
+| Cards (yellow/red) | TheSportsDB timelines | daily archive + browser fallback | `scripts/fetch-match-details.ts`, drawer island |
 
 Key invariants:
 
