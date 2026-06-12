@@ -1,0 +1,6 @@
+# Cloudflare Pages configuration (free tier).
+# Secrets (FOOTBALL_DATA_TOKEN, YOUTUBE_API_KEY) are set as encrypted
+# environment variables in the Pages dashboard, never here.
+name = "wc-2026-calendar"
+compatibility_date = "2026-06-01"
+pages_build_output_dir = "./dist"

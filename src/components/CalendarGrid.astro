@@ -1,0 +1,127 @@
+---
+/**
+ * Month calendar — June + July 2026, both rendered; html[data-month]
+ * picks the visible one (JS toggle; both stack for no-JS visitors).
+ * Day cells hold compact match chips: flags, codes, score or kickoff,
+ * and the spelled-out "Group X" / round caption.
+ */
+import { MATCHES, TOURNAMENT_START, TOURNAMENT_END } from '../data/schedule';
+import { stadiumOf, flagSrc, groupCaption, hostClass, matchDayKey, searchText, stateOf, venueKick } from '../lib/view';
+import type { Match } from '../lib/types';
+
+const byDay = new Map<string, Match[]>();
+for (const m of MATCHES) {
+  const k = matchDayKey(m);
+  if (!byDay.has(k)) byDay.set(k, []);
+  byDay.get(k)!.push(m);
+}
+
+const buildToday = new Date().toISOString().slice(0, 10);
+const WEEKDAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+interface Cell {
+  key: string;
+  num: number | '';
+  date?: string;
+  inTournament?: boolean;
+  rest?: boolean;
+  matches?: Match[];
+}
+
+function monthCells(month: 6 | 7): Cell[] {
+  const daysInMonth = month === 6 ? 30 : 31;
+  const firstDow = new Date(Date.UTC(2026, month - 1, 1)).getUTCDay();
+  const cells: Cell[] = [];
+  for (let b = 0; b < firstDow; b++) cells.push({ key: `b${b}`, num: '' });
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = `2026-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const ms = (byDay.get(date) ?? []).sort((x, y) => Date.parse(x.utc) - Date.parse(y.utc) || x.n - y.n);
+    const inTournament = date >= TOURNAMENT_START && date <= TOURNAMENT_END;
+    cells.push({ key: date, num: day, date, inTournament, rest: inTournament && ms.length === 0, matches: ms });
+  }
+  while (cells.length % 7 !== 0) cells.push({ key: `e${cells.length}`, num: '' });
+  return cells;
+}
+
+const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
+  { month: 6, label: 'JUNE 2026', cells: monthCells(6) },
+  { month: 7, label: 'JULY 2026', cells: monthCells(7) },
+];
+---
+
+<div class="overflow-x-auto pt-5">
+  <div class="flex min-w-[640px] flex-col gap-6">
+    {months.map(({ month, label, cells }) => (
+      <div class={`cal-month-${month} flex flex-col gap-2`}>
+        <h2 class="disp t-time m-0 font-black tracking-[0.06em] text-text-3">{label}</h2>
+        <div class="grid grid-cols-7 gap-2">
+          {WEEKDAYS.map((d) => (
+            <div class="t-micro px-1 font-bold tracking-[0.12em] text-text-dim">{d}</div>
+          ))}
+        </div>
+        <div class="grid grid-cols-7 gap-2">
+          {cells.map((c) => (
+            <div
+              data-date={c.date}
+              data-is-today={c.date === buildToday ? '' : undefined}
+              class:list={[
+                'flex min-h-24 flex-col gap-[5px] rounded-(--radius-row) border p-[7px]',
+                c.date && c.inTournament ? 'border-border bg-surface' : 'border-transparent',
+                c.date && !c.inTournament ? 'opacity-50' : '',
+              ]}
+            >
+              {c.date && (
+                <div class="flex min-h-[18px] items-center justify-between">
+                  <span class:list={['disp t-meta font-bold', c.inTournament ? 'text-text-3' : 'text-text-dim']}>{c.num}</span>
+                  <span class="today-badge rounded-[3px] px-[5px] py-px text-[9px] font-bold tracking-[0.1em]" style="color: var(--color-bg); background: var(--color-text);">TODAY</span>
+                </div>
+              )}
+              {c.rest && <span class="t-micro font-mono text-text-dim">rest day</span>}
+              {(c.matches ?? []).map((m) => {
+                const real = !!(m.a && m.b);
+                const state = stateOf(m);
+                const [fa, fb] = m.ft ?? [0, 0];
+                return (
+                  <button
+                    type="button"
+                    data-match
+                    data-n={m.n}
+                    data-open-match={m.n}
+                    data-state={state}
+                    data-group={m.group ?? ''}
+                    data-stage={m.stage}
+                    data-country={stadiumOf(m).country.toLowerCase()}
+                    data-teams={[m.a, m.b].filter(Boolean).join(' ')}
+                    data-search={searchText(m)}
+                    title={real ? `${m.a} vs ${m.b}` : `${m.pa} vs ${m.pb}`}
+                    class:list={[
+                      'focus-ring live-border tinted-chip box-border flex min-h-[44px] w-full min-w-0 flex-col items-center justify-center gap-[2px] overflow-hidden rounded-[7px] border px-1.5 py-[5px] hover:border-border-strong',
+                      hostClass(m),
+                    ]}
+                  >
+                    {real ? (
+                      <>
+                        <span class="flex min-w-0 items-center gap-[5px]">
+                          <img src={flagSrc(m.a!)} alt="" width="13" height="10" loading="lazy" class="h-[10px] w-[13px] shrink-0 rounded-[2px] object-cover" />
+                          <span class="disp t-micro font-bold text-text-2">{m.a}</span>
+                          <span class="w-score disp t-meta font-black whitespace-nowrap text-text score-slot rounded-sm px-0.5"><span data-score>{state === 'ft' ? `${fa}–${fb}` : ''}</span></span>
+                          <span class="w-up disp t-meta font-black whitespace-nowrap text-text" data-kick={m.utc}>{venueKick(m)}</span>
+                          <span class="disp t-micro font-bold text-text-2">{m.b}</span>
+                          <img src={flagSrc(m.b!)} alt="" width="13" height="10" loading="lazy" class="h-[10px] w-[13px] shrink-0 rounded-[2px] object-cover" />
+                          <span class="w-live live-dot size-1.5 shrink-0 rounded-full" style="background: var(--color-live-badge);"></span>
+                        </span>
+                        <span class="text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">{groupCaption(m)}</span>
+                      </>
+                    ) : (
+                      <span class="t-micro truncate font-mono whitespace-nowrap text-text-3">{groupCaption(m)} · M{m.n}</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,114 @@
+/* ============================================================
+   MATCHDAY26 — World Cup 2026 Live Calendar
+   Design tokens · "Lower Third" direction
+   Ready for Tailwind v4: import into your CSS entry via @theme.
+   Dark is the default theme; light overrides via [data-theme="light"].
+   ============================================================ */
+
+@theme {
+  /* ---- Color · ground ---- */
+  --color-bg: #0E1116;            /* page background */
+  --color-surface: #171C23;       /* match rows, cards, tables */
+  --color-surface-2: #1E2530;     /* nested surfaces, avatar wells */
+  --color-raised: #232C39;        /* active segment, pressed chip */
+
+  /* ---- Color · lines ---- */
+  --color-border: #2A323D;        /* hairlines, card borders */
+  --color-border-strong: #46525F; /* interactive borders, hover */
+
+  /* ---- Color · text ---- */
+  --color-text: #F2F5F8;          /* primary — 15.6:1 on bg */
+  --color-text-2: #C3CBD5;        /* secondary — 10.2:1 */
+  --color-text-3: #98A4B3;        /* tertiary, meta — 6.0:1 */
+  --color-text-dim: #6B7686;      /* lowest readable — 3.6:1, large/bold meta only */
+
+  /* ---- Color · host coding (structural) ----
+     Row tint:   color-mix(in oklab, <host> 9%, var(--color-surface))
+                 (5% subtle / 9% standard / 17% loud)
+     Chip text:  the raw host color on bg/surface — all ≥ 4.6:1 */
+  --color-host-mx: #2DBD85;
+  --color-host-us: #58A0F8;
+  --color-host-ca: #F2655C;
+
+  /* ---- Color · semantic ---- */
+  --color-live: #FFB224;          /* LIVE accent — amber, never red (red = Canada) */
+  --color-live-ink: #1A1206;      /* text on the LIVE badge */
+  --color-win: #FFFFFF;           /* winner emphasis (+ weight 800 + ▸ marker) */
+  --color-focus: #8AB8FF;         /* 2px offset ring: 0 0 0 2px bg, 0 0 0 4px focus */
+
+  /* ---- Type ----
+     Display/scores: Archivo, font-stretch 125%, weight 800–900,
+                     font-variant-numeric: tabular-nums everywhere a number lives.
+     Body/meta:      IBM Plex Sans 400–700.
+     Data labels:    IBM Plex Mono 400–500, letter-spacing 0.06–0.14em. */
+  --font-display: "Archivo", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --text-score-lg: 38px;  /* match detail hero score */
+  --text-h1: 21px;        /* page/drawer titles */
+  --text-score: 22px;     /* score in a match row */
+  --text-time: 15px;      /* kickoff time in a row */
+  --text-team: 14.5px;    /* team names */
+  --text-body: 14px;
+  --text-meta: 12px;      /* chips, table numbers */
+  --text-micro: 10.5px;   /* labels, legends — always 600+ weight */
+
+  /* ---- Spacing rhythm (4px base) ---- */
+  --spacing-row-y: 11px;  /* match row vertical padding */
+  --spacing-row-x: 14px;
+  --spacing-gap: 8px;     /* default flex/grid gap */
+  --spacing-section: 28px;/* between agenda days */
+
+  /* ---- Radius ---- */
+  --radius-row: 10px;     /* match rows */
+  --radius-card: 12px;    /* cards, tables */
+  --radius-chip: 4px;     /* venue chips, badges */
+  --radius-pill: 99px;    /* filter chips */
+
+  /* ---- Shadow (used sparingly — drawer only) ---- */
+  --shadow-drawer: -24px 0 60px rgb(0 0 0 / 0.45);
+
+  /* ---- Motion (the entire budget) ---- */
+  --animate-live-pulse: live-pulse 1.6s ease-in-out infinite;
+  --animate-score-flash: score-flash 1.2s ease-out 1;
+
+  @keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  @keyframes score-flash { 0% { background: rgb(255 178 36 / 0.45); } 100% { background: transparent; } }
+}
+
+/* ---- Light theme (secondary) — pure token swap ---- */
+[data-theme="light"] {
+  --color-bg: #EDEFF2;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #E5E8EC;
+  --color-raised: #F7F8FA;
+  --color-border: #D3D8DF;
+  --color-border-strong: #A9B3BF;
+  --color-text: #14171C;
+  --color-text-2: #3A424D;
+  --color-text-3: #5C6675;
+  --color-text-dim: #8893A2;
+  --color-host-mx: #0E8A5E;
+  --color-host-us: #2563C7;
+  --color-host-ca: #C73E35;
+  --color-live: #8F5B00;   /* badge fill stays #FFB224 with dark ink in both themes */
+  --color-win: #000000;
+  --color-focus: #2563C7;
+}
+
+/* ---- Text-size preference (Tweaks bar) ---- */
+[data-textsize="large"] {
+  --text-h1: 24px; --text-score: 27px; --text-score-lg: 44px;
+  --text-team: 16.5px; --text-body: 16px; --text-time: 17px;
+  --text-meta: 13.5px; --text-micro: 12px;
+}
+[data-textsize="compact"] {
+  --text-score: 19px; --text-score-lg: 32px; --text-team: 13.5px;
+  --text-body: 13px; --text-time: 13.5px; --text-meta: 11px; --text-micro: 10px;
+}
+
+/* ---- Reduced motion: kills both effects, nothing else moves ---- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; }
+}

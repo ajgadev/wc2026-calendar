@@ -1,0 +1,97 @@
+---
+/**
+ * One agenda match row — all three states are server-rendered and
+ * switched via data-state (CSS): "up" and "ft" come from the static
+ * layer, "live" is flipped on by the LiveOverlay island at runtime.
+ */
+import { TEAMS } from '../data/teams';
+import { stadiumOf } from '../lib/view';
+import { flagSrc, hostClass, roundLabel, searchText, stateOf, venueChip, venueKick } from '../lib/view';
+import type { Match } from '../lib/types';
+
+interface Props {
+  match: Match;
+}
+
+const { match: m } = Astro.props;
+const real = !!(m.a && m.b);
+const state = stateOf(m);
+const [fa, fb] = m.ft ?? [0, 0];
+const winA = state === 'ft' && fa > fb;
+const winB = state === 'ft' && fb > fa;
+const A = m.a ? TEAMS[m.a] : null;
+const B = m.b ? TEAMS[m.b] : null;
+const country = stadiumOf(m).country.toLowerCase();
+---
+
+<button
+  type="button"
+  data-match
+  data-n={m.n}
+  data-open-match={m.n}
+  data-state={state}
+  data-group={m.group ?? ''}
+  data-stage={m.stage}
+  data-country={country}
+  data-teams={[m.a, m.b].filter(Boolean).join(' ')}
+  data-search={searchText(m)}
+  class:list={[
+    'focus-ring live-border tinted box-border flex min-h-[56px] w-full flex-wrap items-center gap-x-3.5 gap-y-2 rounded-(--radius-row) px-3.5 py-[11px] hover:border-border-strong',
+    hostClass(m),
+    real ? 'border border-border' : 'border border-dashed border-border-strong',
+  ]}
+>
+  <!-- state block -->
+  <span class="flex w-14 shrink-0 flex-col items-start gap-[3px]">
+    <span class="w-up disp t-time font-bold text-text" data-kick={m.utc}>{venueKick(m)}</span>
+    <span class="w-live inline-flex items-center gap-1 rounded-(--radius-chip) px-1.5 py-[2.5px] text-[9.5px] font-extrabold tracking-[0.1em]" style="background: var(--color-live-badge); color: var(--color-live-ink);">
+      <span class="live-dot size-[5px] rounded-full" style="background: var(--color-live-ink);"></span>LIVE
+    </span>
+    <span class="w-live disp t-meta font-bold text-live" data-minute></span>
+    <span class="w-ft t-micro font-bold tracking-[0.14em] text-text-3">FT</span>
+  </span>
+
+  <!-- teams + score -->
+  <span class="grid min-w-0 grow basis-[250px] grid-cols-[1fr_auto_1fr] items-center gap-2.5">
+    <span class="flex min-w-0 items-center justify-end gap-[7px]">
+      <span
+        data-name-a
+        class:list={['disp t-team truncate', winA ? 'font-extrabold text-win' : winB ? 'font-semibold text-text-3' : 'font-bold text-text-2']}
+      >
+        {m.a && <span data-star-team={m.a}></span>}
+        <span class="max-[979px]:hidden">{A ? A.name : m.pa}</span>
+        <span class="min-[980px]:hidden">{A ? m.a : m.pa}</span>
+      </span>
+      {A
+        ? <img src={flagSrc(m.a!)} alt="" width="22" height="16" loading="lazy" class="w-[22px] h-4 shrink-0 rounded-[2px] object-cover" style={winB ? 'opacity:.55' : undefined} />
+        : <span class="box-border h-4 w-[22px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
+    </span>
+
+    <span class="w-score disp t-score score-slot inline-flex items-center gap-[5px] rounded-md px-1.5 font-black text-text">
+      <span class="text-[11px] text-text-2">{winA ? '◂' : ''}</span>
+      <span data-score>{state === 'ft' ? `${fa}–${fb}` : ''}</span>
+      <span class="text-[11px] text-text-2">{winB ? '▸' : ''}</span>
+    </span>
+    <span class="w-vs t-meta px-2 text-text-3">vs</span>
+
+    <span class="flex min-w-0 items-center gap-[7px]">
+      {B
+        ? <img src={flagSrc(m.b!)} alt="" width="22" height="16" loading="lazy" class="w-[22px] h-4 shrink-0 rounded-[2px] object-cover" style={winA ? 'opacity:.55' : undefined} />
+        : <span class="box-border h-4 w-[22px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
+      <span
+        data-name-b
+        class:list={['disp t-team truncate', winB ? 'font-extrabold text-win' : winA ? 'font-semibold text-text-3' : 'font-bold text-text-2']}
+      >
+        <span class="max-[979px]:hidden">{B ? B.name : m.pb}</span>
+        <span class="min-[980px]:hidden">{B ? m.b : m.pb}</span>
+        {m.b && <span data-star-team={m.b}></span>}
+      </span>
+    </span>
+  </span>
+
+  <!-- venue + round -->
+  <span class="ml-auto flex flex-col items-end gap-1">
+    <span class:list={['host-chip t-micro rounded-(--radius-chip) px-[7px] py-[2px] font-semibold tracking-[0.05em] whitespace-nowrap', hostClass(m)]}>{venueChip(m)}</span>
+    <span class="t-micro tracking-[0.06em] whitespace-nowrap text-text-dim">{roundLabel(m)}</span>
+  </span>
+</button>

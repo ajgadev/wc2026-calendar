@@ -1,0 +1,53 @@
+---
+/** Agenda view — matches grouped by venue-local day (static-first). */
+import { MATCHES, STAGE_LABELS } from '../data/schedule';
+import { dayLabel } from '../lib/time';
+import { matchDayKey } from '../lib/view';
+import MatchRow from './MatchRow.astro';
+import type { Match } from '../lib/types';
+
+const byDay = new Map<string, Match[]>();
+for (const m of MATCHES) {
+  const k = matchDayKey(m);
+  if (!byDay.has(k)) byDay.set(k, []);
+  byDay.get(k)!.push(m);
+}
+const days = [...byDay.entries()]
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([key, ms]) => {
+    const sorted = ms.sort((x, y) => Date.parse(x.utc) - Date.parse(y.utc) || x.n - y.n);
+    const rounds = [...new Set(sorted.map((m) => (m.stage === 'GR' ? 'Group stage' : STAGE_LABELS[m.stage])))];
+    return {
+      key,
+      label: dayLabel(key),
+      sub: `${sorted.length} ${sorted.length === 1 ? 'match' : 'matches'} · ${rounds.join(' · ')}`,
+      matches: sorted,
+    };
+  });
+
+const buildToday = new Date().toISOString().slice(0, 10);
+---
+
+<div class="mx-auto max-w-[880px] pt-5">
+  <div data-agenda-empty hidden class="mt-3 flex flex-col items-center gap-2.5 rounded-[14px] border border-dashed border-border-strong px-5 py-14">
+    <span class="disp t-h1 font-extrabold text-text-2">No matches found</span>
+    <span class="t-body text-text-3">Nothing fits these filters. Try widening the search.</span>
+  </div>
+
+  {days.map((day) => (
+    <section
+      id={`day-${day.key}`}
+      data-day-section
+      data-date={day.key}
+      data-is-today={day.key === buildToday ? '' : undefined}
+      class="mb-7 flex flex-col gap-2"
+    >
+      <div class="flex items-baseline gap-2.5 px-0.5">
+        <h3 class="disp t-time m-0 font-extrabold tracking-[0.05em] text-text">{day.label}</h3>
+        <span class="t-micro font-medium tracking-[0.04em] text-text-dim">{day.sub}</span>
+        <span class="today-badge t-micro rounded-(--radius-chip) px-2 py-[2px] font-bold tracking-[0.1em]" style="color: var(--color-bg); background: var(--color-text);">TODAY</span>
+      </div>
+      {day.matches.map((m) => <MatchRow match={m} />)}
+    </section>
+  ))}
+</div>

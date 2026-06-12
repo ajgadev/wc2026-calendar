@@ -1,0 +1,28 @@
+---
+import Layout from '../components/Layout.astro';
+import AgendaList from '../components/AgendaList.astro';
+import CalendarGrid from '../components/CalendarGrid.astro';
+import FilterBar from '../components/islands/FilterBar';
+import LiveOverlay from '../components/islands/LiveOverlay';
+---
+
+<Layout active="matches">
+  <FilterBar client:load />
+  <div class="view-agenda">
+    <AgendaList />
+  </div>
+  <div class="view-calendar">
+    <CalendarGrid />
+  </div>
+  <LiveOverlay client:idle />
+
+  <script>
+    // Anchor today's section on load (agenda view), once today-marking ran.
+    requestAnimationFrame(() => {
+      const today = document.querySelector('[data-day-section][data-is-today]');
+      if (today && !location.search && innerWidth < 1000) {
+        today.scrollIntoView({ block: 'start' });
+      }
+    });
+  </script>
+</Layout>

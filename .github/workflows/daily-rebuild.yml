@@ -1,0 +1,17 @@
+# Daily rebuild: refreshes the static layer (scores, resolved knockout
+# teams, squads, highlight archive) even if the live API is down.
+# Set CLOUDFLARE_DEPLOY_HOOK_URL in the repo secrets — Cloudflare Pages
+# → Settings → Builds & deployments → Deploy hooks.
+name: daily-rebuild
+on:
+  schedule:
+    - cron: '15 6 * * *' # 06:15 UTC, after the previous night's results land
+  workflow_dispatch:
+jobs:
+  trigger-pages-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy hook
+        run: curl -fsS -X POST "$DEPLOY_HOOK"
+        env:
+          DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}

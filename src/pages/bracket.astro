@@ -1,0 +1,10 @@
+---
+import Layout from '../components/Layout.astro';
+import Bracket from '../components/Bracket.astro';
+import LiveOverlay from '../components/islands/LiveOverlay';
+---
+
+<Layout active="bracket" title="Bracket — MATCHDAY26 · World Cup 2026">
+  <Bracket />
+  <LiveOverlay client:idle />
+</Layout>

@@ -1,0 +1,127 @@
+---
+/**
+ * Knockout wallchart: Round of 32 → Final, third place beneath the
+ * final. Built from the schedule's W{n}/group references (lib/bracket),
+ * so resolved teams fill in on rebuild with zero code changes.
+ * Desktop: five columns. Mobile: one round per screen via scroll-snap,
+ * with round tabs + a "you are here" indicator (small client script).
+ */
+import { MATCHES } from '../data/schedule';
+import { TEAMS } from '../data/teams';
+import { buildBracket, shortPlaceholder } from '../lib/bracket';
+import { shortDate } from '../lib/time';
+import { stadiumOf, flagSrc, hostClass, matchDayKey, stateOf, venueChip, venueKick, searchText } from '../lib/view';
+import type { Match } from '../lib/types';
+
+const { columns, thirdPlace } = buildBracket(MATCHES);
+
+function slot(m: Match, side: 'a' | 'b') {
+  const code = side === 'a' ? m.a : m.b;
+  const ph = side === 'a' ? m.pa : m.pb;
+  const [fa, fb] = m.ft ?? [-1, -1];
+  const won = m.ft ? (side === 'a' ? fa > fb : fb > fa) : false;
+  const lost = m.ft ? (side === 'a' ? fa < fb : fb < fa) : false;
+  return {
+    code,
+    label: code ? TEAMS[code].name : shortPlaceholder(ph ?? ''),
+    score: m.ft ? (side === 'a' ? fa : fb) : null,
+    won,
+    lost,
+  };
+}
+---
+
+<div class="pt-5">
+  <div class="flex items-center gap-4 px-0.5 pb-3.5">
+    <span class="t-micro text-text-dim">
+      Pairings fill in as groups conclude — placeholders show who feeds each slot. Single elimination · Jun 28 – Jul 19.
+    </span>
+  </div>
+
+  <!-- round tabs (mobile navigation for the scroll-snap columns) -->
+  <div class="mb-3 flex gap-1.5 overflow-x-auto min-[1100px]:hidden" data-round-tabs>
+    {columns.map((col) => (
+      <a
+        href={`#round-${col.stage}`}
+        data-round-tab={col.stage}
+        class="focus-ring t-micro shrink-0 rounded-(--radius-pill) border border-border bg-surface px-3 py-2 font-bold tracking-[0.06em] whitespace-nowrap text-text-3 no-underline aria-[current]:border-border-strong aria-[current]:bg-raised aria-[current]:text-text"
+      >
+        {col.stage === 'F' ? 'Final' : col.stage}
+      </a>
+    ))}
+  </div>
+
+  <div class="bracket-scroll flex items-stretch gap-4 overflow-x-auto pb-2" data-bracket>
+    {columns.map((col) => (
+      <div
+        id={`round-${col.stage}`}
+        data-round={col.stage}
+        class="bracket-col flex w-[86vw] shrink-0 flex-col gap-2.5 min-[1100px]:w-auto min-[1100px]:min-w-0 min-[1100px]:flex-1 min-[1100px]:shrink"
+      >
+        <div class="disp t-meta px-0.5 font-black tracking-[0.06em] text-text-3">{col.label}</div>
+        <div class="flex flex-1 flex-col justify-around gap-2">
+          {[...col.matches, ...(col.stage === 'F' && thirdPlace ? [thirdPlace] : [])].map((m) => {
+            const a = slot(m, 'a');
+            const b = slot(m, 'b');
+            return (
+              <button
+                type="button"
+                data-match
+                data-n={m.n}
+                data-open-match={m.n}
+                data-state={stateOf(m)}
+                data-stage={m.stage}
+                data-country={stadiumOf(m).country.toLowerCase()}
+                data-teams={[m.a, m.b].filter(Boolean).join(' ')}
+                data-search={searchText(m)}
+                class:list={[
+                  'focus-ring live-border tinted box-border flex w-full flex-col gap-1.5 rounded-[9px] border border-border px-[11px] py-[9px] hover:border-border-strong',
+                  hostClass(m),
+                ]}
+              >
+                <span class="flex w-full items-center justify-between gap-1.5">
+                  <span class="font-mono text-[9.5px] whitespace-nowrap text-text-dim">M{m.n} · {shortDate(matchDayKey(m))} · <span data-kick={m.utc}>{venueKick(m)}</span></span>
+                  <span class:list={['host-chip rounded-(--radius-chip) px-[5px] py-px text-[9.5px] font-semibold tracking-[0.04em] whitespace-nowrap', hostClass(m)]}>{venueChip(m)}</span>
+                </span>
+                {m.stage === '3RD' && <span class="text-[9px] font-bold tracking-[0.12em] text-text-3">THIRD PLACE</span>}
+                {[a, b].map((s) => (
+                  <span class="flex w-full min-w-0 items-center gap-[7px]">
+                    {s.code
+                      ? <img src={flagSrc(s.code)} alt="" width="18" height="13" loading="lazy" class:list={['h-[13px] w-[18px] shrink-0 rounded-[2px] object-cover', s.lost ? 'opacity-55' : '']} />
+                      : <span class="box-border h-[13px] w-[18px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
+                    <span class:list={['t-micro truncate whitespace-nowrap', s.won ? 'font-extrabold text-win' : s.lost ? 'font-semibold text-text-dim' : 'font-semibold text-text-2']}>
+                      {s.label}{s.won ? ' ▸' : ''}
+                    </span>
+                    {s.score !== null && <span class="disp t-meta ml-auto font-black tnum" class:list={[s.won ? 'text-win' : 'text-text-3']}>{s.score}</span>}
+                  </span>
+                ))}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  // "You are here": pick the round whose date window contains today,
+  // mark its tab and snap to it on mobile.
+  const WINDOWS: [string, string, string][] = [
+    ['R32', '2026-06-28', '2026-07-03'],
+    ['R16', '2026-07-04', '2026-07-07'],
+    ['QF', '2026-07-08', '2026-07-11'],
+    ['SF', '2026-07-12', '2026-07-17'],
+    ['F', '2026-07-18', '2026-07-19'],
+  ];
+  const today = new Date().toISOString().slice(0, 10);
+  let current = WINDOWS.find(([, from, to]) => today >= from && today <= to)?.[0];
+  if (!current && today > '2026-07-19') current = 'F';
+  if (!current) current = 'R32';
+  const tab = document.querySelector(`[data-round-tab="${current}"]`);
+  tab?.setAttribute('aria-current', 'true');
+  if (window.innerWidth < 1100 && current !== 'R32') {
+    document.getElementById(`round-${current}`)?.scrollIntoView({ inline: 'start', block: 'nearest' });
+    window.scrollTo({ top: 0 });
+  }
+</script>

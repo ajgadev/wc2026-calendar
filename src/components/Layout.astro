@@ -1,0 +1,147 @@
+---
+import '../styles/global.css';
+import { MATCHES, STAGE_LABELS } from '../data/schedule';
+import { TEAMS } from '../data/teams';
+import { STADIUMS } from '../data/stadiums';
+import Drawer from './islands/Drawer';
+import Tweaks from './islands/Tweaks';
+
+interface Props {
+  title?: string;
+  active: 'matches' | 'bracket' | 'standings' | 'stats';
+  description?: string;
+}
+
+const { active, title = 'MATCHDAY26 — World Cup 2026 Live Calendar', description = 'Every World Cup 2026 match — live scores, calendar, bracket, standings and stats. USA · Mexico · Canada, June 11 – July 19.' } = Astro.props;
+
+const tabs = [
+  { id: 'matches', label: 'Matches', href: '/' },
+  { id: 'bracket', label: 'Bracket', href: '/bracket' },
+  { id: 'standings', label: 'Standings', href: '/standings' },
+  { id: 'stats', label: 'Stats', href: '/stats' },
+] as const;
+
+// Embedded data blob for the islands (drawer, live overlay, filters).
+const appData = JSON.stringify({
+  matches: MATCHES,
+  teams: TEAMS,
+  stadiums: STADIUMS,
+  stageLabels: STAGE_LABELS,
+}).replace(/</g, '\\u003c');
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark" data-textsize="standard" data-tint="loud" data-layout="auto" data-month={new Date().getUTCMonth() === 6 ? '7' : '6'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://flagcdn.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+    <script is:inline>
+      // Apply Tweaks prefs before first paint (no theme flash).
+      try {
+        var p = JSON.parse(localStorage.getItem('wc26-prefs') || '{}');
+        var root = document.documentElement;
+        if (p.theme) root.dataset.theme = p.theme;
+        if (p.textsize) root.dataset.textsize = p.textsize;
+        if (p.tint) root.dataset.tint = p.tint;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <script type="application/json" id="wc-data" set:html={appData} />
+
+    <div class="mx-auto max-w-[1280px] px-4 pb-20">
+      <!-- outage banner (toggled by the LiveOverlay island) -->
+      <div
+        data-outage-banner
+        hidden
+        class="mt-3 flex items-center gap-2.5 rounded-lg border px-3.5 py-2.5"
+        style="border-color: color-mix(in srgb, var(--color-live-badge) 55%, transparent); background: color-mix(in srgb, var(--color-live-badge) 9%, var(--color-surface));"
+      >
+        <span class="size-2 shrink-0 rounded-full" style="background: var(--color-live-badge);"></span>
+        <span class="t-meta text-text-2"><strong class="text-text">Live updates unavailable.</strong> Showing the schedule's last known scores.</span>
+      </div>
+
+      <header class="flex flex-wrap items-center gap-x-[22px] gap-y-3 px-0.5 pt-[18px] pb-3.5">
+        <a href="/" class="focus-ring flex flex-col gap-[3px] no-underline rounded-md">
+          <span class="disp t-h1 font-black leading-none tracking-[0.03em] text-text">MATCHDAY<span class="text-live">26</span></span>
+          <span class="font-mono t-micro tracking-[0.06em] text-text-dim">WORLD CUP LIVE CALENDAR · JUN 11 – JUL 19</span>
+        </a>
+        <div class="hidden items-center gap-3.5 px-1 min-[860px]:flex">
+          <span class="t-micro inline-flex items-center gap-1.5 font-semibold tracking-[0.06em] text-text-3"><span class="size-2 rounded-[2px] bg-host-mx"></span>MEXICO</span>
+          <span class="t-micro inline-flex items-center gap-1.5 font-semibold tracking-[0.06em] text-text-3"><span class="size-2 rounded-[2px] bg-host-us"></span>USA</span>
+          <span class="t-micro inline-flex items-center gap-1.5 font-semibold tracking-[0.06em] text-text-3"><span class="size-2 rounded-[2px] bg-host-ca"></span>CANADA</span>
+        </div>
+        <span data-live-summary class="t-micro ml-auto font-mono text-text-dim"></span>
+      </header>
+
+      <nav aria-label="Sections" class="flex gap-1 border-b border-border">
+        {tabs.map((t) => (
+          <a
+            href={t.href}
+            aria-current={active === t.id ? 'page' : undefined}
+            class:list={[
+              'focus-ring -mb-px flex min-h-[44px] items-center rounded-t-md border-b-2 px-4 py-2 font-display font-bold tracking-[0.02em] no-underline t-body hover:text-text',
+              active === t.id ? 'border-text text-text' : 'border-transparent text-text-3',
+            ]}
+          >
+            {t.label}
+          </a>
+        ))}
+      </nav>
+
+      <slot />
+
+      <footer class="mt-14 flex flex-col gap-2 border-t border-border pt-5">
+        <span class="t-micro font-mono tracking-[0.06em] text-text-dim">
+          DATA: OPENFOOTBALL (SCHEDULE) · FOOTBALL-DATA.ORG (LIVE &amp; SCORERS) · THESPORTSDB (TEAMS) · MAGENTASPORT (HIGHLIGHTS)
+        </span>
+        <span class="t-micro text-text-dim">
+          Unofficial fan project — not affiliated with FIFA. Kickoffs in <span data-tz-note>stadium-local time</span>.
+          <a class="text-text-3 underline underline-offset-2 hover:text-text" href="/api/calendar.ics">Subscribe to all matches (.ics)</a>
+        </span>
+      </footer>
+    </div>
+
+    <Drawer client:idle />
+    <Tweaks client:idle />
+
+    <script>
+      // ---- progressive enhancement: local kickoff times ----
+      const fmt = (iso: string) =>
+        new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+      document.querySelectorAll<HTMLElement>('[data-kick]').forEach((el) => {
+        el.textContent = fmt(el.dataset.kick!);
+      });
+      document.querySelectorAll<HTMLElement>('[data-tz-note]').forEach((el) => {
+        el.textContent = 'your local time';
+      });
+
+      // ---- today marking (client clock beats build clock) ----
+      const now = new Date();
+      const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      document.querySelectorAll<HTMLElement>('[data-date]').forEach((el) => {
+        if (el.dataset.date === todayKey) el.setAttribute('data-is-today', '');
+        else el.removeAttribute('data-is-today');
+      });
+      // calendar month default follows the real today
+      if (todayKey >= '2026-07-01' && !localStorage.getItem('wc26-month-touched')) {
+        document.documentElement.dataset.month = '7';
+      }
+
+      // ---- follow stars on static rows ----
+      import { applyFollowStars, getFollows, onFollowsChange } from '../lib/client';
+      applyFollowStars(getFollows());
+      onFollowsChange(applyFollowStars);
+    </script>
+  </body>
+</html>

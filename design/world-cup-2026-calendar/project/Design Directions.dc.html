@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Chakra+Petch:wght@500;600;700&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=Barlow:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+  <style>
+    html, body { margin: 0; padding: 0; background: #E6E7EA; }
+    @keyframes livePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; background: #E6E7EA; font-family: 'IBM Plex Sans', sans-serif; color: #1C1E22; padding: 48px 28px 80px;">
+  <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;">
+
+    <!-- ================= HEADER ================= -->
+    <header style="display: flex; flex-direction: column; gap: 10px; max-width: 860px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #6B7280; text-transform: uppercase;">World Cup 2026 Live Calendar · design pass 1 · June 11, 2026</div>
+      <h1 style="font-family: 'Archivo', sans-serif; font-stretch: 115%; font-weight: 800; font-size: 34px; line-height: 1.1; margin: 0;">Three directions for a broadcast-grade match calendar</h1>
+      <p style="font-size: 15px; line-height: 1.6; color: #44484F; margin: 0; text-wrap: pretty;">All three share the working thesis — <strong>broadcast scoreboard, not dashboard</strong> — and the same information skeleton. They differ on the axes you flagged: how loud the host-country coding is, retro scoreboard vs. modern broadcast, and how dense the rows get. Each thumbnail shows the identical slice of real data (Sunday, June 14 — Germany's opener day) so the comparison is fair.</p>
+    </header>
+
+    <!-- ================= ASSUMPTIONS ================= -->
+    <section style="background: #FFFFFF; border: 1px solid #D6D8DD; border-radius: 12px; padding: 22px 26px; display: flex; flex-direction: column; gap: 8px;">
+      <h2 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; color: #6B7280; margin: 0 0 4px;">Assumptions &amp; ground rules</h2>
+      <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7; color: #2A2D33; display: flex; flex-direction: column; gap: 4px;">
+        <li><strong>Real data.</strong> Groups, fixtures, venues and kickoff times are the published post-draw schedule (Mexico–South Africa at the Azteca today, Germany–Curaçao in Houston June 14, etc.). Scores and scorers for matches after kickoff are <em>simulated</em> for the mockups and labeled as such.</li>
+        <li><strong>Demo moment: Sun June 14, 19:38 ET.</strong> The one day this opening week where finished, live and upcoming naturally coexist on screen. The prototype gets a "moment" tweak so you can rewind to opening day.</li>
+        <li><strong>LIVE is amber, never red.</strong> Red belongs to Canada in the host-coding system; the live state must not collide with it. Amber also reads as "broadcast" (clock graphics) rather than "alert".</li>
+        <li><strong>States differ by shape and weight, not hue alone.</strong> Upcoming shows a kickoff time where the score would sit; live adds a filled badge + running minute + pulse; finished shows FT + a solid winner marker (▸) and dims the loser.</li>
+        <li><strong>Host coding is double-encoded.</strong> Row tint <em>and</em> a venue chip naming city + country — colorblind-safe and screen-reader friendly.</li>
+        <li><strong>No FIFA marks, no trophy, no stock heroes.</strong> Flags and the fixture data are the only imagery. Squad photos arrive as user-supplied assets; the initials fallback is designed first.</li>
+        <li><strong>Dark-first.</strong> Light theme ships as a pure token swap (CSS custom properties → Tailwind v4 <code style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0F3; padding: 1px 5px; border-radius: 4px;">@theme</code>).</li>
+      </ul>
+    </section>
+
+    <!-- ================= DIRECTIONS GRID ================= -->
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(370px, 1fr)); gap: 22px; align-items: start;">
+
+      <!-- ============ DIRECTION 1: LOWER THIRD ============ -->
+      <article style="background: #FFFFFF; border: 1px solid #D6D8DD; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: baseline; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6B7280;">01</span>
+          <h3 style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: 0.01em;">Lower Third</h3>
+          <span style="font-size: 11px; font-weight: 600; color: #0B6E4F; background: #DEF3EA; border-radius: 99px; padding: 2px 9px;">Recommended</span>
+        </div>
+        <p style="font-size: 13.5px; line-height: 1.6; color: #44484F; margin: 0; text-wrap: pretty;">The modern broadcast graphic, translated to product. Cool near-black ground, rows as self-contained scoreboard plates, scores set in <strong>Archivo Expanded</strong> — wide, heavy, tabular — sized to read from a sofa. Host coding at medium volume: a tinted plate + colored venue chip per row. Disciplined everywhere else: one amber for LIVE, white for winners, quiet IBM&nbsp;Plex body.</p>
+        <!-- palette -->
+        <div style="display: flex; gap: 6px;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #0E1116; border: 1px solid #D6D8DD;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#0E1116</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #171C23; border: 1px solid #D6D8DD;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#171C23</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #2DBD85;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#2DBD85</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #58A0F8;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#58A0F8</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #F2655C;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#F2655C</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #FFB224;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#FFB224</span></div>
+        </div>
+        <!-- type -->
+        <div style="border: 1px solid #E3E5E9; border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 24px; font-variant-numeric: tabular-nums;">GER 3–0 CUW</span>
+          <span style="font-size: 13px; color: #44484F;">Archivo Expanded 900 · IBM Plex Sans 400–600 for body &amp; meta</span>
+        </div>
+        <!-- thumbnail -->
+        <div style="background: #0E1116; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 4px 6px;">
+            <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800; font-size: 13px; color: #F2F5F8; letter-spacing: 0.06em;">SUN JUN 14</span>
+            <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; font-weight: 600; color: #0E1116; background: #F2F5F8; border-radius: 4px; padding: 2px 7px; letter-spacing: 0.08em;">TODAY</span>
+          </div>
+          <!-- FT Germany -->
+          <div style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; background: color-mix(in oklab, #58A0F8 8%, #171C23); border: 1px solid #2A323D; border-radius: 9px; padding: 10px 12px; min-height: 44px;">
+            <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; font-weight: 700; color: #98A4B3; letter-spacing: 0.12em;">FT</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 14px; color: #F2F5F8;">GER</span><img src="https://flagcdn.com/w40/de.png" alt="Germany" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 19px; color: #F2F5F8; font-variant-numeric: tabular-nums;"><span style="color: #F2F5F8; font-size: 11px; vertical-align: 2px;">◂</span> 3–0</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/cw.png" alt="Curaçao" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover; opacity: 0.6;"><span style="font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 14px; color: #98A4B3;">CUW</span></div>
+            </div>
+            <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 9.5px; font-weight: 600; color: #58A0F8; border: 1px solid color-mix(in srgb, #58A0F8 45%, transparent); border-radius: 4px; padding: 2px 6px; letter-spacing: 0.04em;">HOU · USA</span>
+          </div>
+          <!-- FT draw NED JPN -->
+          <div style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; background: color-mix(in oklab, #58A0F8 8%, #171C23); border: 1px solid #2A323D; border-radius: 9px; padding: 10px 12px; min-height: 44px;">
+            <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; font-weight: 700; color: #98A4B3; letter-spacing: 0.12em;">FT</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; color: #D7DEE6;">NED</span><img src="https://flagcdn.com/w40/nl.png" alt="Netherlands" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 19px; color: #F2F5F8; font-variant-numeric: tabular-nums;">1–1</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/jp.png" alt="Japan" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; color: #D7DEE6;">JPN</span></div>
+            </div>
+            <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 9.5px; font-weight: 600; color: #58A0F8; border: 1px solid color-mix(in srgb, #58A0F8 45%, transparent); border-radius: 4px; padding: 2px 6px; letter-spacing: 0.04em;">DAL · USA</span>
+          </div>
+          <!-- LIVE -->
+          <div style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; background: color-mix(in oklab, #58A0F8 8%, #171C23); border: 1px solid color-mix(in srgb, #FFB224 55%, transparent); border-radius: 9px; padding: 10px 12px; min-height: 44px;">
+            <div style="display: flex; flex-direction: column; gap: 3px; align-items: flex-start;">
+              <span style="display: inline-flex; align-items: center; gap: 4px; font-family: 'IBM Plex Sans', sans-serif; font-size: 9px; font-weight: 800; color: #1A1206; background: #FFB224; border-radius: 3px; padding: 2px 5px; letter-spacing: 0.1em;"><span style="width: 5px; height: 5px; border-radius: 99px; background: #1A1206; animation: livePulse 1.6s ease-in-out infinite;"></span>LIVE</span>
+              <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 11px; color: #FFB224; font-variant-numeric: tabular-nums;">64′</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; color: #D7DEE6;">CIV</span><img src="https://flagcdn.com/w40/ci.png" alt="Côte d'Ivoire" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 19px; color: #FFFFFF; font-variant-numeric: tabular-nums;">1–2</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/ec.png" alt="Ecuador" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; color: #D7DEE6;">ECU</span></div>
+            </div>
+            <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 9.5px; font-weight: 600; color: #58A0F8; border: 1px solid color-mix(in srgb, #58A0F8 45%, transparent); border-radius: 4px; padding: 2px 6px; letter-spacing: 0.04em;">PHI · USA</span>
+          </div>
+          <!-- Upcoming -->
+          <div style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; background: color-mix(in oklab, #2DBD85 9%, #171C23); border: 1px solid #2A323D; border-radius: 9px; padding: 10px 12px; min-height: 44px;">
+            <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 13px; color: #F2F5F8; font-variant-numeric: tabular-nums;">22:00</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; color: #D7DEE6;">SWE</span><img src="https://flagcdn.com/w40/se.png" alt="Sweden" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; color: #98A4B3;">vs</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/tn.png" alt="Tunisia" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; color: #D7DEE6;">TUN</span></div>
+            </div>
+            <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 9.5px; font-weight: 600; color: #2DBD85; border: 1px solid color-mix(in srgb, #2DBD85 45%, transparent); border-radius: 4px; padding: 2px 6px; letter-spacing: 0.04em;">MTY · MEX</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DIRECTION 2: FLOODLIGHT ============ -->
+      <article style="background: #FFFFFF; border: 1px solid #D6D8DD; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: baseline; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6B7280;">02</span>
+          <h3 style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: 0.03em;">Floodlight</h3>
+        </div>
+        <p style="font-size: 13.5px; line-height: 1.6; color: #44484F; margin: 0; text-wrap: pretty;">The retro stadium scoreboard — warm black like a night sky over the pitch, scores in <strong>Chakra Petch</strong>, whose octagonal cuts echo LED segment displays without going full novelty. Host coding at its loudest here: rows wear a heavier tint and the country chip fills solid. Amber does double duty as the LIVE color and the direction's signature accent. Nostalgic, charismatic, slightly less neutral.</p>
+        <!-- palette -->
+        <div style="display: flex; gap: 6px;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #110F0A; border: 1px solid #D6D8DD;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#110F0A</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #1C1812; border: 1px solid #D6D8DD;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#1C1812</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #45B583;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#45B583</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #5E9CDF;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#5E9CDF</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #E8625A;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#E8625A</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #FFB52E;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#FFB52E</span></div>
+        </div>
+        <!-- type -->
+        <div style="border: 1px solid #E3E5E9; border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 24px; font-variant-numeric: tabular-nums;">GER 3–0 CUW</span>
+          <span style="font-size: 13px; color: #44484F;">Chakra Petch 600–700 · Barlow 400–600 for body &amp; meta</span>
+        </div>
+        <!-- thumbnail -->
+        <div style="background: #110F0A; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 4px 6px;">
+            <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 13px; color: #FFB52E; letter-spacing: 0.1em;">SUN JUN 14</span>
+            <span style="font-family: 'Barlow', sans-serif; font-size: 10px; font-weight: 600; color: #110F0A; background: #FFB52E; border-radius: 3px; padding: 2px 7px; letter-spacing: 0.08em;">TODAY</span>
+          </div>
+          <!-- FT Germany -->
+          <div style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; background: color-mix(in oklab, #5E9CDF 16%, #1C1812); border: 1px solid #3A3322; border-radius: 6px; padding: 10px 12px; min-height: 44px;">
+            <span style="font-family: 'Barlow', sans-serif; font-size: 10px; font-weight: 700; color: #A89F8B; letter-spacing: 0.14em;">FT</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 14px; color: #F5EFE2;">GER</span><img src="https://flagcdn.com/w40/de.png" alt="Germany" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 20px; color: #F5EFE2; font-variant-numeric: tabular-nums;"><span style="font-size: 11px; vertical-align: 2px;">◂</span> 3–0</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/cw.png" alt="Curaçao" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover; opacity: 0.55;"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 500; font-size: 14px; color: #A89F8B;">CUW</span></div>
+            </div>
+            <span style="font-family: 'Barlow', sans-serif; font-size: 9.5px; font-weight: 700; color: #110F0A; background: #5E9CDF; border-radius: 3px; padding: 2px 6px; letter-spacing: 0.06em;">HOU · USA</span>
+          </div>
+          <!-- FT draw -->
+          <div style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; background: color-mix(in oklab, #5E9CDF 16%, #1C1812); border: 1px solid #3A3322; border-radius: 6px; padding: 10px 12px; min-height: 44px;">
+            <span style="font-family: 'Barlow', sans-serif; font-size: 10px; font-weight: 700; color: #A89F8B; letter-spacing: 0.14em;">FT</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 14px; color: #E4DECF;">NED</span><img src="https://flagcdn.com/w40/nl.png" alt="Netherlands" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 20px; color: #F5EFE2; font-variant-numeric: tabular-nums;">1–1</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/jp.png" alt="Japan" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 14px; color: #E4DECF;">JPN</span></div>
+            </div>
+            <span style="font-family: 'Barlow', sans-serif; font-size: 9.5px; font-weight: 700; color: #110F0A; background: #5E9CDF; border-radius: 3px; padding: 2px 6px; letter-spacing: 0.06em;">DAL · USA</span>
+          </div>
+          <!-- LIVE -->
+          <div style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; background: color-mix(in oklab, #5E9CDF 16%, #1C1812); border: 1px solid #FFB52E; border-radius: 6px; padding: 10px 12px; min-height: 44px; box-shadow: 0 0 14px color-mix(in srgb, #FFB52E 18%, transparent);">
+            <div style="display: flex; flex-direction: column; gap: 3px; align-items: flex-start;">
+              <span style="display: inline-flex; align-items: center; gap: 4px; font-family: 'Chakra Petch', sans-serif; font-size: 9px; font-weight: 700; color: #110F0A; background: #FFB52E; border-radius: 2px; padding: 2px 5px; letter-spacing: 0.12em;"><span style="width: 5px; height: 5px; border-radius: 99px; background: #110F0A; animation: livePulse 1.6s ease-in-out infinite;"></span>LIVE</span>
+              <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 11px; color: #FFB52E; font-variant-numeric: tabular-nums;">64′</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 14px; color: #E4DECF;">CIV</span><img src="https://flagcdn.com/w40/ci.png" alt="Côte d'Ivoire" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 20px; color: #FFB52E; font-variant-numeric: tabular-nums;">1–2</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/ec.png" alt="Ecuador" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 14px; color: #E4DECF;">ECU</span></div>
+            </div>
+            <span style="font-family: 'Barlow', sans-serif; font-size: 9.5px; font-weight: 700; color: #110F0A; background: #5E9CDF; border-radius: 3px; padding: 2px 6px; letter-spacing: 0.06em;">PHI · USA</span>
+          </div>
+          <!-- Upcoming -->
+          <div style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; background: color-mix(in oklab, #45B583 17%, #1C1812); border: 1px solid #3A3322; border-radius: 6px; padding: 10px 12px; min-height: 44px;">
+            <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 13px; color: #F5EFE2; font-variant-numeric: tabular-nums;">22:00</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 14px; color: #E4DECF;">SWE</span><img src="https://flagcdn.com/w40/se.png" alt="Sweden" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Barlow', sans-serif; font-size: 11px; color: #A89F8B;">vs</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/tn.png" alt="Tunisia" style="width: 21px; height: 15px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 14px; color: #E4DECF;">TUN</span></div>
+            </div>
+            <span style="font-family: 'Barlow', sans-serif; font-size: 9.5px; font-weight: 700; color: #110F0A; background: #45B583; border-radius: 3px; padding: 2px 6px; letter-spacing: 0.06em;">MTY · MEX</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ DIRECTION 3: PRESS BOX ============ -->
+      <article style="background: #FFFFFF; border: 1px solid #D6D8DD; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: baseline; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6B7280;">03</span>
+          <h3 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Press Box</h3>
+        </div>
+        <p style="font-size: 13.5px; line-height: 1.6; color: #44484F; margin: 0; text-wrap: pretty;">The wire-service ticker: hairline rules instead of cards, <strong>Barlow Condensed</strong> team names, every number in <strong>Space Mono</strong> so columns of times and scores lock into a perfect grid. Host coding at its quietest — a 3px edge bar and a colored city label, nothing else. The densest of the three: six matches fit where the others show four. Editorial and disciplined, but live matches shout the least.</p>
+        <!-- palette -->
+        <div style="display: flex; gap: 6px;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #131416; border: 1px solid #D6D8DD;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#131416</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #2E3033;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#2E3033</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #29A06E;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#29A06E</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #4D8BE0;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#4D8BE0</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #D95850;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#D95850</span></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><div style="height: 34px; border-radius: 6px; background: #E8B62A;"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6B7280;">#E8B62A</span></div>
+        </div>
+        <!-- type -->
+        <div style="border: 1px solid #E3E5E9; border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px;">GERMANY <span style="font-family: 'Space Mono', monospace; font-size: 20px;">3–0</span> CURAÇAO</span>
+          <span style="font-size: 13px; color: #44484F;">Barlow Condensed 500–700 · Space Mono for every numeral</span>
+        </div>
+        <!-- thumbnail -->
+        <div style="background: #131416; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 0 8px;">
+            <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; color: #EDEEF0; letter-spacing: 0.1em;">SUN JUN 14 <span style="color: #9A9DA3; font-weight: 500;">— MATCHDAY 4</span></span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #131416; background: #EDEEF0; padding: 1px 6px; letter-spacing: 0.08em;">TODAY</span>
+          </div>
+          <!-- FT Germany -->
+          <div style="display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; border-top: 1px solid #2E3033; border-left: 3px solid #4D8BE0; padding: 9px 10px; min-height: 36px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #9A9DA3; letter-spacing: 0.1em;">FT</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; color: #EDEEF0; letter-spacing: 0.04em;">GERMANY ▸</span><img src="https://flagcdn.com/w40/de.png" alt="Germany" style="width: 19px; height: 14px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px; color: #EDEEF0;">3–0</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/cw.png" alt="Curaçao" style="width: 19px; height: 14px; border-radius: 2px; object-fit: cover; opacity: 0.55;"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 500; font-size: 15px; color: #9A9DA3; letter-spacing: 0.04em;">CURAÇAO</span></div>
+            </div>
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #4D8BE0;">HOU·USA</span>
+          </div>
+          <!-- FT draw -->
+          <div style="display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; border-top: 1px solid #2E3033; border-left: 3px solid #4D8BE0; padding: 9px 10px; min-height: 36px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #9A9DA3; letter-spacing: 0.1em;">FT</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: #D9DBDE; letter-spacing: 0.04em;">NETHERLANDS</span><img src="https://flagcdn.com/w40/nl.png" alt="Netherlands" style="width: 19px; height: 14px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px; color: #EDEEF0;">1–1</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/jp.png" alt="Japan" style="width: 19px; height: 14px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: #D9DBDE; letter-spacing: 0.04em;">JAPAN</span></div>
+            </div>
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #4D8BE0;">DAL·USA</span>
+          </div>
+          <!-- LIVE -->
+          <div style="display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; border-top: 1px solid #2E3033; border-left: 3px solid #E8B62A; padding: 9px 10px; min-height: 36px; background: color-mix(in srgb, #E8B62A 6%, transparent);">
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="display: inline-flex; align-items: center; gap: 3px; font-family: 'Space Mono', monospace; font-size: 8px; font-weight: 700; color: #131416; background: #E8B62A; padding: 1px 4px; letter-spacing: 0.1em;"><span style="width: 4px; height: 4px; border-radius: 99px; background: #131416; animation: livePulse 1.6s ease-in-out infinite;"></span>LIVE</span>
+              <span style="font-family: 'Space Mono', monospace; font-size: 10px; color: #E8B62A;">64′</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: #D9DBDE; letter-spacing: 0.04em;">CÔTE D'IVOIRE</span><img src="https://flagcdn.com/w40/ci.png" alt="Côte d'Ivoire" style="width: 19px; height: 14px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px; color: #E8B62A;">1–2</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/ec.png" alt="Ecuador" style="width: 19px; height: 14px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: #D9DBDE; letter-spacing: 0.04em;">ECUADOR</span></div>
+            </div>
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #4D8BE0;">PHI·USA</span>
+          </div>
+          <!-- Upcoming -->
+          <div style="display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; border-top: 1px solid #2E3033; border-bottom: 1px solid #2E3033; border-left: 3px solid #29A06E; padding: 9px 10px; min-height: 36px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #EDEEF0;">22:00</span>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: #D9DBDE; letter-spacing: 0.04em;">SWEDEN</span><img src="https://flagcdn.com/w40/se.png" alt="Sweden" style="width: 19px; height: 14px; border-radius: 2px; object-fit: cover;"></div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #9A9DA3;">v</span>
+              <div style="display: flex; align-items: center; gap: 6px;"><img src="https://flagcdn.com/w40/tn.png" alt="Tunisia" style="width: 19px; height: 14px; border-radius: 2px; object-fit: cover;"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: #D9DBDE; letter-spacing: 0.04em;">TUNISIA</span></div>
+            </div>
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #29A06E;">MTY·MEX</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ================= RECOMMENDATION ================= -->
+    <section style="background: #15181D; color: #F2F5F8; border-radius: 12px; padding: 26px 30px; display: flex; flex-direction: column; gap: 10px;">
+      <h2 style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 18px; margin: 0; text-transform: uppercase; letter-spacing: 0.02em;">Recommendation: 01 · Lower Third</h2>
+      <p style="font-size: 14.5px; line-height: 1.65; color: #C3CBD5; margin: 0; max-width: 880px; text-wrap: pretty;">It hits the brief's thesis most directly. <strong style="color: #F2F5F8;">Expanded-width scores are the loudest typographic voice on the page</strong> — legible across a room — while everything else stays quiet. The medium-loud host tint (your pick from the questionnaire) keeps the geography readable from the calendar alone without fighting the live state, and it survives WCAG AA: text never sits on saturated color, only on an 8–9% tint. Floodlight is charming but its warmth fights the blue/green/red host triad; Press Box is the most scannable but mutes exactly the signature element you asked to make structural. Lower Third also degrades best to a light theme — it's a pure token swap.</p>
+      <p style="font-size: 13px; color: #98A4B3; margin: 4px 0 0;">Built and shipped alongside this doc — see below.</p>
+    </section>
+
+    <!-- ================= DELIVERABLES ================= -->
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px; align-items: start;">
+      <article style="background: #FFFFFF; border: 1px solid #D6D8DD; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 16px; margin: 0; text-transform: uppercase;">Interactive prototype</h2>
+        <p style="font-size: 13.5px; line-height: 1.6; color: #44484F; margin: 0; text-wrap: pretty;">One working app, all screens: agenda with the three match states and inline detail, calendar month grid (June/July) with 44px chips, team drawer with Germany's squad grid (photo placeholders + initials fallback), standings with qualification zones, computed stats, sticky filter bar, knockout placeholders and rest-day empty states. Live matches tick in real time; standings and scorers are computed from the simulated results, never hand-typed.</p>
+        <a href="World Cup 2026.dc.html" style="display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; min-height: 44px; padding: 8px 18px; border-radius: 9px; background: #15181D; color: #F2F5F8; font-weight: 700; font-size: 13.5px; text-decoration: none;">Open the prototype →</a>
+        <p style="font-size: 12px; color: #6B7280; margin: 4px 0 0; line-height: 1.55;">Groups, fixtures, venues and kickoff times are the real published schedule. Results, scorers and standings after each kickoff are <strong>simulated</strong> (and labeled in match detail). Resize the window: agenda is the mobile default, calendar the desktop default.</p>
+      </article>
+      <article style="background: #FFFFFF; border: 1px solid #D6D8DD; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 16px; margin: 0; text-transform: uppercase;">Token sheet + Tweaks bar</h2>
+        <p style="font-size: 13.5px; line-height: 1.6; color: #44484F; margin: 0; text-wrap: pretty;"><a href="tokens.css" style="color: #1C1E22; font-weight: 600;">tokens.css</a> is a Tailwind v4 <code style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0F3; padding: 1px 5px; border-radius: 4px;">@theme</code> block: ground/line/text colors with contrast notes, the three host accents with the row-tint recipe, live/win semantics, type scale, spacing rhythm, radii, and the two-keyframe motion budget. The prototype consumes the same custom properties, so theme and text size are pure attribute swaps (<code style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0F3; padding: 1px 5px; border-radius: 4px;">data-theme</code> / <code style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0F3; padding: 1px 5px; border-radius: 4px;">data-textsize</code>).</p>
+        <div style="border: 1px solid #E3E5E9; border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #2A2D33;">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #6B7280;">TWEAKS — open the Tweaks panel on the prototype</span>
+          <span><strong>theme</strong> dark / light · <strong>textSize</strong> compact / standard / large</span>
+          <span><strong>hostTint</strong> subtle / standard / loud — the loudness axis from the questionnaire, live</span>
+          <span><strong>moment</strong> Jun 11 opener · Jun 14 (default) · Jun 24 decision day — re-simulates every screen</span>
+          <span><strong>liveOutage</strong> on/off — the "live updates unavailable" fallback state</span>
+        </div>
+      </article>
+    </section>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

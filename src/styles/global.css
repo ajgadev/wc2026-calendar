@@ -1,0 +1,214 @@
+/* ============================================================
+   MATCHDAY26 — World Cup 2026 Live Calendar
+   Design tokens · "Lower Third" direction (from the design handoff)
+   Dark is the default theme; light overrides via [data-theme="light"].
+   ============================================================ */
+@import "tailwindcss";
+
+@theme {
+  /* ---- Color · ground ---- */
+  --color-bg: #0E1116;
+  --color-surface: #171C23;
+  --color-surface-2: #1E2530;
+  --color-raised: #232C39;
+
+  /* ---- Color · lines ---- */
+  --color-border: #2A323D;
+  --color-border-strong: #46525F;
+
+  /* ---- Color · text ---- */
+  --color-text: #F2F5F8;
+  --color-text-2: #C3CBD5;
+  --color-text-3: #98A4B3;
+  --color-text-dim: #6B7686;
+
+  /* ---- Color · host coding (structural) ---- */
+  --color-host-mx: #2DBD85;
+  --color-host-us: #58A0F8;
+  --color-host-ca: #F2655C;
+
+  /* ---- Color · semantic ---- */
+  --color-live: #FFB224;       /* LIVE accent — amber, never red (red = Canada) */
+  --color-live-badge: #FFB224; /* badge fill is amber in both themes */
+  --color-live-ink: #1A1206;
+  --color-win: #FFFFFF;
+  --color-focus: #8AB8FF;
+
+  /* ---- Type ---- */
+  --font-display: "Archivo", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --text-score-lg: 38px;
+  --text-h1: 21px;
+  --text-score: 22px;
+  --text-time: 15px;
+  --text-team: 14.5px;
+  --text-body: 14px;
+  --text-meta: 12px;
+  --text-micro: 10.5px;
+
+  /* ---- Radius ---- */
+  --radius-row: 10px;
+  --radius-card: 12px;
+  --radius-chip: 4px;
+  --radius-pill: 99px;
+
+  /* ---- Shadow (drawer only) ---- */
+  --shadow-drawer: -24px 0 60px rgb(0 0 0 / 0.45);
+
+  /* ---- Motion (the entire budget) ---- */
+  --animate-live-pulse: live-pulse 1.6s ease-in-out infinite;
+  --animate-score-flash: score-flash 1.2s ease-out 1;
+
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @keyframes score-flash {
+    0% { background: rgb(255 178 36 / 0.45); }
+    100% { background: transparent; }
+  }
+}
+
+/* ---- Light theme (secondary) — pure token swap ---- */
+[data-theme="light"] {
+  --color-bg: #EDEFF2;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #E5E8EC;
+  --color-raised: #F7F8FA;
+  --color-border: #D3D8DF;
+  --color-border-strong: #A9B3BF;
+  --color-text: #14171C;
+  --color-text-2: #3A424D;
+  --color-text-3: #5C6675;
+  --color-text-dim: #8893A2;
+  --color-host-mx: #0E8A5E;
+  --color-host-us: #2563C7;
+  --color-host-ca: #C73E35;
+  --color-live: #8F5B00;
+  --color-win: #000000;
+  --color-focus: #2563C7;
+}
+
+/* ---- Text-size preference (Tweaks bar) ---- */
+[data-textsize="large"] {
+  --text-h1: 24px; --text-score: 27px; --text-score-lg: 44px;
+  --text-team: 16.5px; --text-body: 16px; --text-time: 17px;
+  --text-meta: 13.5px; --text-micro: 12px;
+}
+[data-textsize="compact"] {
+  --text-score: 19px; --text-score-lg: 32px; --text-team: 13.5px;
+  --text-body: 13px; --text-time: 13.5px; --text-meta: 11px; --text-micro: 10px;
+}
+
+/* ---- Host tint loudness (Tweaks bar) — loud is the chosen default ---- */
+:root { --tint: 17; --tint-chip: 20; }
+[data-tint="subtle"] { --tint: 5; --tint-chip: 8; }
+[data-tint="standard"] { --tint: 9; --tint-chip: 12; }
+[data-tint="loud"] { --tint: 17; --tint-chip: 20; }
+
+/* Host coding: set --host per row/chip via .host-mx / .host-us / .host-ca */
+.host-mx { --host: var(--color-host-mx); }
+.host-us { --host: var(--color-host-us); }
+.host-ca { --host: var(--color-host-ca); }
+.tinted { background: color-mix(in oklab, var(--host) calc(var(--tint) * 1%), var(--color-surface)); }
+.tinted-chip {
+  background: color-mix(in oklab, var(--host) calc(var(--tint-chip) * 1%), var(--color-surface-2));
+  border-color: color-mix(in srgb, var(--host) 28%, var(--color-border));
+}
+.host-chip {
+  color: var(--host);
+  border: 1px solid color-mix(in srgb, var(--host) 45%, transparent);
+}
+
+/* ---- Base ---- */
+html { background: var(--color-bg); }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+}
+button { font: inherit; color: inherit; text-align: inherit; cursor: pointer; }
+input, select { font: inherit; }
+input::placeholder { color: var(--color-text-dim); }
+
+/* ---- Type scale helpers (sizes track the Tweaks text-size tokens) ---- */
+.t-h1 { font-size: var(--text-h1); }
+.t-score { font-size: var(--text-score); }
+.t-score-lg { font-size: var(--text-score-lg); }
+.t-time { font-size: var(--text-time); }
+.t-team { font-size: var(--text-team); }
+.t-body { font-size: var(--text-body); }
+.t-meta { font-size: var(--text-meta); }
+.t-micro { font-size: var(--text-micro); }
+
+/* Display face for scores & team codes: Archivo stretched, tabular numerals */
+.disp {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-variant-numeric: tabular-nums;
+}
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ---- Focus (designed, not browser default) ---- */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-focus);
+}
+.focus-ring-surface:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-focus);
+}
+
+/* ---- LIVE pulse + score flash (the entire motion budget) ---- */
+.live-dot { animation: live-pulse 1.6s ease-in-out infinite; }
+.score-flash { animation: score-flash 1.2s ease-out 1; }
+
+/* ---- View switching (no-JS safe) ----
+   data-layout="auto" lets the breakpoint decide: agenda on mobile,
+   calendar on desktop. JS toggles set "agenda" / "calendar" explicitly. */
+[data-layout="agenda"] .view-calendar { display: none; }
+[data-layout="calendar"] .view-agenda { display: none; }
+@media (max-width: 999px) {
+  [data-layout="auto"] .view-calendar { display: none; }
+}
+@media (min-width: 1000px) {
+  [data-layout="auto"] .view-agenda { display: none; }
+}
+[data-month="6"] .cal-month-7 { display: none; }
+[data-month="7"] .cal-month-6 { display: none; }
+
+/* Filtered-out rows/chips (set by the FilterBar island) */
+.filtered-out { display: none !important; }
+
+/* ---- Match state switching ----
+   Rows/chips carry data-state="up|live|ft". Server renders up/ft from
+   the static layer; the LiveOverlay island flips to "live" at runtime.
+   Each state-specific fragment is tagged .w-up / .w-live / .w-ft. */
+[data-state="up"] :is(.w-live, .w-ft) { display: none !important; }
+[data-state="live"] :is(.w-up, .w-ft) { display: none !important; }
+[data-state="ft"] :is(.w-up, .w-live) { display: none !important; }
+/* score shows for live + ft; "vs" only for upcoming */
+[data-state="up"] .w-score { display: none !important; }
+:is([data-state="live"], [data-state="ft"]) .w-vs { display: none !important; }
+/* live rows/chips get the amber border (state beyond color: badge + minute) */
+[data-state="live"].live-border { border-color: color-mix(in srgb, var(--color-live-badge) 60%, transparent) !important; }
+
+/* TODAY badge shows only on the actual today (set client-side; the
+   build bakes an approximation for no-JS visitors) */
+[data-date] .today-badge { display: none; }
+[data-date][data-is-today] .today-badge { display: inline-block; }
+[data-date][data-is-today] { scroll-margin-top: 130px; }
+
+/* Mobile bracket: one round per screen with scroll snap */
+.bracket-scroll {
+  scroll-snap-type: x mandatory;
+}
+.bracket-col { scroll-snap-align: start; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto !important; }
+}

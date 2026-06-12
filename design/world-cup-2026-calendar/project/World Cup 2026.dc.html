@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0E1116; }
+    :root {
+      --bg: #0E1116; --surface: #171C23; --surface2: #1E2530; --raised: #232C39;
+      --border: #2A323D; --border2: #46525F;
+      --text: #F2F5F8; --text2: #C3CBD5; --text3: #98A4B3; --dim: #6B7686;
+      --mx: #2DBD85; --us: #58A0F8; --ca: #F2655C;
+      --live: #FFB224; --live-badge: #FFB224; --live-ink: #1A1206;
+      --win: #FFFFFF; --focus: #8AB8FF;
+      --fs-h1: 21px; --fs-score: 22px; --fs-score-lg: 38px; --fs-team: 14.5px;
+      --fs-body: 14px; --fs-meta: 12px; --fs-micro: 10.5px; --fs-time: 15px;
+    }
+    [data-theme="light"] {
+      --bg: #EDEFF2; --surface: #FFFFFF; --surface2: #E5E8EC; --raised: #F7F8FA;
+      --border: #D3D8DF; --border2: #A9B3BF;
+      --text: #14171C; --text2: #3A424D; --text3: #5C6675; --dim: #8893A2;
+      --mx: #0E8A5E; --us: #2563C7; --ca: #C73E35;
+      --live: #8F5B00; --win: #000000; --focus: #2563C7;
+    }
+    [data-textsize="large"] {
+      --fs-h1: 24px; --fs-score: 27px; --fs-score-lg: 44px; --fs-team: 16.5px;
+      --fs-body: 16px; --fs-meta: 13.5px; --fs-micro: 12px; --fs-time: 17px;
+    }
+    [data-textsize="compact"] {
+      --fs-score: 19px; --fs-score-lg: 32px; --fs-team: 13.5px;
+      --fs-body: 13px; --fs-meta: 11px; --fs-micro: 10px; --fs-time: 13.5px;
+    }
+    button { background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; text-align: inherit; }
+    input, select { font: inherit; }
+    input::placeholder { color: #6B7686; }
+    @keyframes livePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    @keyframes scoreFlash { 0% { background: rgba(255, 178, 36, 0.45); } 100% { background: rgba(255, 178, 36, 0); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+</helmet>
+
+<div data-theme="{{ theme }}" data-textsize="{{ textSize }}" style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: var(--fs-body);">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 16px 80px;">
+
+  <!-- ============ OUTAGE BANNER ============ -->
+  <sc-if value="{{ outage }}">
+    <div style="display: flex; align-items: center; gap: 10px; margin: 12px 0 0; padding: 10px 14px; border: 1px solid color-mix(in srgb, var(--live-badge) 55%, transparent); border-radius: 8px; background: color-mix(in srgb, var(--live-badge) 9%, var(--surface));">
+      <span style="width: 8px; height: 8px; flex-grow: 0; flex-shrink: 0; flex-basis: 8px; border-radius: 99px; background: var(--live-badge);"></span>
+      <span style="font-size: var(--fs-meta); color: var(--text2);"><strong style="color: var(--text);">Live updates unavailable.</strong> Showing last received scores — match minutes are paused.</span>
+    </div>
+  </sc-if>
+
+  <!-- ============ HEADER ============ -->
+  <header style="display: flex; align-items: center; flex-wrap: wrap; gap: 12px 22px; padding: 18px 2px 14px;">
+    <div style="display: flex; flex-direction: column; gap: 3px;">
+      <div style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 21px; letter-spacing: 0.03em; line-height: 1; color: var(--text);">MATCHDAY<span style="color: var(--live);">26</span></div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); letter-spacing: 0.06em; color: var(--dim);">WORLD CUP LIVE CALENDAR · JUN 11 – JUL 19</div>
+    </div>
+    <sc-if value="{{ wide }}">
+      <div style="display: flex; align-items: center; gap: 14px; padding: 0 4px;">
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-micro); font-weight: 600; letter-spacing: 0.06em; color: var(--text3);"><span style="width: 8px; height: 8px; border-radius: 2px; background: var(--mx);"></span>MEXICO</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-micro); font-weight: 600; letter-spacing: 0.06em; color: var(--text3);"><span style="width: 8px; height: 8px; border-radius: 2px; background: var(--us);"></span>USA</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-micro); font-weight: 600; letter-spacing: 0.06em; color: var(--text3);"><span style="width: 8px; height: 8px; border-radius: 2px; background: var(--ca);"></span>CANADA</span>
+      </div>
+    </sc-if>
+    <div style="margin-left: auto; display: inline-flex; align-items: center; gap: 7px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; font-weight: 500; letter-spacing: 0.1em; color: var(--bg); background: var(--text3); border-radius: 3px; padding: 2px 5px;">SIM</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); color: var(--dim);">{{ simLabel }}</span>
+    </div>
+  </header>
+
+  <!-- ============ NAV TABS ============ -->
+  <nav aria-label="Sections" style="display: flex; gap: 4px; border-bottom: 1px solid var(--border);">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+      <button onClick="{{ t.on }}" aria-current="{{ t.cur }}" style="min-height: 44px; padding: 8px 16px; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-body); letter-spacing: 0.02em; color: {{ t.c }}; border-bottom: 2px solid {{ t.b }}; margin-bottom: -1px;" style-hover="color: var(--text);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus); border-radius: 6px;">{{ t.label }}</button>
+    </sc-for>
+  </nav>
+
+  <!-- ============ MATCHES VIEW ============ -->
+  <sc-if value="{{ isMatches }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Matches">
+
+      <!-- controls -->
+      <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 14px 0 4px;">
+        <div role="group" aria-label="Layout" style="display: inline-flex; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 3px; gap: 2px;">
+          <sc-for list="{{ laySegs }}" as="s">
+            <button onClick="{{ s.on }}" style="min-height: 38px; padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: var(--fs-meta); background: {{ s.bg }}; color: {{ s.c }};" style-focus="outline: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus);">{{ s.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ isCal }}">
+          <div role="group" aria-label="Month" style="display: inline-flex; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 3px; gap: 2px;">
+            <sc-for list="{{ monthSegs }}" as="s">
+              <button onClick="{{ s.on }}" style="min-height: 38px; padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: var(--fs-meta); background: {{ s.bg }}; color: {{ s.c }};" style-focus="outline: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus);">{{ s.label }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <button onClick="{{ goToday }}" style="min-height: 44px; padding: 8px 16px; border-radius: 9px; border: 1px solid var(--border2); font-weight: 700; font-size: var(--fs-meta); color: var(--text);" style-hover="background: var(--surface);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">Today</button>
+        <span style="margin-left: auto; font-size: var(--fs-micro); color: var(--dim);">Kickoffs shown in your local time</span>
+      </div>
+
+      <!-- filter bar -->
+      <div style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 10px 2px; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);">
+        <input type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="Search team…" aria-label="Search team" style="min-height: 40px; width: 160px; padding: 6px 12px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: var(--fs-meta); outline: none;" style-focus="border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 30%, transparent);">
+        <select value="{{ fGroup }}" onChange="{{ onGroup }}" aria-label="Filter by group" style="min-height: 40px; padding: 6px 10px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: var(--fs-meta); outline: none;" style-focus="border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 30%, transparent);">
+          <option value="">All groups</option>
+          <option value="A">Group A</option><option value="B">Group B</option><option value="C">Group C</option>
+          <option value="D">Group D</option><option value="E">Group E</option><option value="F">Group F</option>
+          <option value="G">Group G</option><option value="H">Group H</option><option value="I">Group I</option>
+          <option value="J">Group J</option><option value="K">Group K</option><option value="L">Group L</option>
+        </select>
+        <sc-for list="{{ countryChips }}" as="ch">
+          <button onClick="{{ ch.on }}" aria-pressed="{{ ch.active }}" style="display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 6px 13px; border-radius: 99px; border: 1px solid {{ ch.bdr }}; background: {{ ch.bg }}; color: {{ ch.c }}; font-weight: 600; font-size: var(--fs-meta);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);"><span style="width: 8px; height: 8px; border-radius: 2px; background: {{ ch.dot }};"></span>{{ ch.label }}</button>
+        </sc-for>
+        <sc-for list="{{ stageChips }}" as="ch">
+          <button onClick="{{ ch.on }}" aria-pressed="{{ ch.active }}" style="min-height: 40px; padding: 6px 13px; border-radius: 99px; border: 1px solid {{ ch.bdr }}; background: {{ ch.bg }}; color: {{ ch.c }}; font-weight: 600; font-size: var(--fs-meta);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">{{ ch.label }}</button>
+        </sc-for>
+        <button onClick="{{ onMine }}" aria-pressed="{{ fMine }}" style="min-height: 40px; padding: 6px 13px; border-radius: 99px; border: 1px solid {{ mineBdr }}; background: {{ mineBg }}; color: {{ mineC }}; font-weight: 600; font-size: var(--fs-meta);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">★ My teams</button>
+        <sc-if value="{{ anyFilter }}">
+          <button onClick="{{ clearFilters }}" style="min-height: 40px; padding: 6px 12px; font-size: var(--fs-meta); font-weight: 600; color: var(--text3); text-decoration: underline; text-underline-offset: 3px;" style-hover="color: var(--text);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus); border-radius: 6px;">Clear</button>
+        </sc-if>
+      </div>
+
+      <!-- ======== AGENDA ======== -->
+      <sc-if value="{{ isAgenda }}" hint-placeholder-val="{{ true }}">
+        <div data-screen-label="Agenda" style="max-width: 880px; margin: 0 auto; padding-top: 20px;">
+          <sc-if value="{{ emptyAgenda }}">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 56px 20px; border: 1px dashed var(--border2); border-radius: 14px; margin-top: 12px;">
+              <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800; font-size: var(--fs-h1); color: var(--text2);">No matches found</span>
+              <span style="font-size: var(--fs-body); color: var(--text3);">Nothing fits these filters. Try widening the search.</span>
+              <button onClick="{{ clearFilters }}" style="margin-top: 6px; min-height: 44px; padding: 8px 20px; border-radius: 9px; border: 1px solid var(--border2); font-weight: 700; font-size: var(--fs-meta); color: var(--text);" style-hover="background: var(--surface);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">Clear filters</button>
+            </div>
+          </sc-if>
+          <sc-for list="{{ days }}" as="day">
+            <section id="day-{{ day.key }}" style="display: flex; flex-direction: column; gap: 8px; margin: 0 0 28px;">
+              <div style="display: flex; align-items: baseline; gap: 10px; padding: 0 2px;">
+                <h3 style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800; font-size: var(--fs-time); letter-spacing: 0.05em; margin: 0; color: var(--text);">{{ day.label }}</h3>
+                <span style="font-size: var(--fs-micro); font-weight: 500; letter-spacing: 0.04em; color: var(--dim);">{{ day.sub }}</span>
+                <sc-if value="{{ day.isToday }}">
+                  <span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.1em; color: var(--bg); background: var(--text); border-radius: 4px; padding: 2px 8px;">TODAY</span>
+                </sc-if>
+              </div>
+              <sc-for list="{{ day.matches }}" as="m">
+                <div style="display: flex; flex-direction: column;">
+                  <!-- real match row -->
+                  <sc-if value="{{ m.isReal }}">
+                    <button onClick="{{ m.toggle }}" aria-expanded="{{ m.expanded }}" style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; width: 100%; box-sizing: border-box; min-height: 56px; padding: 11px 14px; border-radius: 10px; background: {{ m.bg }}; border: 1px solid {{ m.bdr }};" style-hover="border-color: var(--border2);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">
+                      <span style="flex-grow: 0; flex-shrink: 0; flex-basis: 56px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px;">
+                        <sc-if value="{{ m.isLive }}">
+                          <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 800; color: var(--live-ink); background: var(--live-badge); border-radius: 4px; padding: 2.5px 6px; letter-spacing: 0.1em;"><span style="width: 5px; height: 5px; border-radius: 99px; background: var(--live-ink); animation: livePulse 1.6s ease-in-out infinite;"></span>LIVE</span>
+                          <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-meta); color: var(--live); font-variant-numeric: tabular-nums;">{{ m.minuteLabel }}</span>
+                        </sc-if>
+                        <sc-if value="{{ m.isFT }}">
+                          <span style="font-size: var(--fs-micro); font-weight: 700; color: var(--text3); letter-spacing: 0.14em;">FT</span>
+                        </sc-if>
+                        <sc-if value="{{ m.isUp }}">
+                          <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-time); color: var(--text); font-variant-numeric: tabular-nums;">{{ m.timeLocal }}</span>
+                        </sc-if>
+                      </span>
+                      <span style="flex-grow: 1; flex-shrink: 1; flex-basis: 250px; min-width: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px;">
+                        <span style="display: flex; align-items: center; justify-content: flex-end; gap: 7px; min-width: 0;">
+                          <span style="font-family: 'Archivo', sans-serif; font-weight: {{ m.aW }}; font-size: var(--fs-team); color: {{ m.aC }}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ m.starA }}{{ m.aName }}</span>
+                          {{ m.aFlagEl }}
+                        </span>
+                        <sc-if value="{{ m.hasScore }}">
+                          <span style="display: inline-flex; align-items: center; gap: 5px; font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-score); color: {{ m.scoreC }}; font-variant-numeric: tabular-nums; padding: 0 6px; border-radius: 6px; animation: {{ m.scoreAnim }};"><span style="font-size: 11px; color: var(--text2);">{{ m.triA }}</span>{{ m.score }}<span style="font-size: 11px; color: var(--text2);">{{ m.triB }}</span></span>
+                        </sc-if>
+                        <sc-if value="{{ m.isUp }}">
+                          <span style="font-size: var(--fs-meta); color: var(--text3); padding: 0 8px;">vs</span>
+                        </sc-if>
+                        <span style="display: flex; align-items: center; gap: 7px; min-width: 0;">
+                          {{ m.bFlagEl }}
+                          <span style="font-family: 'Archivo', sans-serif; font-weight: {{ m.bW }}; font-size: var(--fs-team); color: {{ m.bC }}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ m.bName }}{{ m.starB }}</span>
+                        </span>
+                      </span>
+                      <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px; margin-left: auto;">
+                        <span style="font-size: var(--fs-micro); font-weight: 600; color: {{ m.chipC }}; border: 1px solid color-mix(in srgb, {{ m.chipC }} 45%, transparent); border-radius: 4px; padding: 2px 7px; letter-spacing: 0.05em; white-space: nowrap;">{{ m.venueChip }}</span>
+                        <span style="font-size: var(--fs-micro); color: var(--dim); letter-spacing: 0.06em; white-space: nowrap;">{{ m.roundLabel }}</span>
+                      </span>
+                    </button>
+                  </sc-if>
+                  <!-- knockout placeholder row -->
+                  <sc-if value="{{ m.isPh }}">
+                    <button onClick="{{ m.toggle }}" aria-expanded="{{ m.expanded }}" style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; width: 100%; box-sizing: border-box; min-height: 56px; padding: 11px 14px; border-radius: 10px; background: {{ m.bg }}; border: 1px dashed var(--border2);" style-hover="border-color: var(--text3);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">
+                      <span style="flex-grow: 0; flex-shrink: 0; flex-basis: 56px;"><span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-time); color: var(--text); font-variant-numeric: tabular-nums;">{{ m.timeLocal }}</span></span>
+                      <span style="flex-grow: 1; flex-shrink: 1; flex-basis: 250px; min-width: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px;">
+                        <span style="display: flex; align-items: center; justify-content: flex-end; gap: 7px;"><span style="font-size: var(--fs-meta); font-weight: 600; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ m.phA }}</span><span style="width: 22px; height: 16px; flex-grow: 0; flex-shrink: 0; flex-basis: 22px; border-radius: 2px; border: 1px dashed var(--border2); box-sizing: border-box;"></span></span>
+                        <span style="font-size: var(--fs-meta); color: var(--dim); padding: 0 8px;">vs</span>
+                        <span style="display: flex; align-items: center; gap: 7px;"><span style="width: 22px; height: 16px; flex-grow: 0; flex-shrink: 0; flex-basis: 22px; border-radius: 2px; border: 1px dashed var(--border2); box-sizing: border-box;"></span><span style="font-size: var(--fs-meta); font-weight: 600; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ m.phB }}</span></span>
+                      </span>
+                      <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px; margin-left: auto;">
+                        <span style="font-size: var(--fs-micro); font-weight: 600; color: {{ m.chipC }}; border: 1px solid color-mix(in srgb, {{ m.chipC }} 45%, transparent); border-radius: 4px; padding: 2px 7px; letter-spacing: 0.05em; white-space: nowrap;">{{ m.venueChip }}</span>
+                        <span style="font-size: var(--fs-micro); color: var(--dim); letter-spacing: 0.06em; white-space: nowrap;">{{ m.roundLabel }}</span>
+                      </span>
+                    </button>
+                  </sc-if>
+                  <!-- inline detail -->
+                  <sc-if value="{{ m.expanded }}">
+                    <div style="border: 1px solid var(--border); border-top: none; border-radius: 0 0 12px 12px; background: var(--surface); margin: -4px 10px 0; padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px;">
+                      <div style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); letter-spacing: 0.06em; color: var(--dim);">{{ m.det.statusLine }}</div>
+                      <sc-if value="{{ m.det.hasScorers }}">
+                        <div style="display: grid; grid-template-columns: 1fr 14px 1fr; gap: 4px 12px; align-items: start;">
+                          <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-end;">
+                            <sc-for list="{{ m.det.scorersA }}" as="s">
+                              <div style="font-size: var(--fs-meta); color: var(--text2); text-align: right;">{{ s.t }}<sc-if value="{{ s.hasA }}"><span style="color: var(--dim);"> · {{ s.a }}</span></sc-if></div>
+                            </sc-for>
+                          </div>
+                          <div style="border-left: 1px solid var(--border); height: 100%; justify-self: center;"></div>
+                          <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <sc-for list="{{ m.det.scorersB }}" as="s">
+                              <div style="font-size: var(--fs-meta); color: var(--text2);">{{ s.t }}<sc-if value="{{ s.hasA }}"><span style="color: var(--dim);"> · {{ s.a }}</span></sc-if></div>
+                            </sc-for>
+                          </div>
+                        </div>
+                      </sc-if>
+                      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <div style="flex-grow: 1; flex-shrink: 1; flex-basis: 240px; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">
+                          <span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim);">VENUE</span>
+                          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-team); color: var(--text);">{{ m.det.venueName }}</span>
+                          <span style="font-size: var(--fs-meta); color: var(--text3);">{{ m.det.venueCity }} · capacity {{ m.det.cap }}</span>
+                        </div>
+                        <div style="flex-grow: 1; flex-shrink: 1; flex-basis: 240px; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">
+                          <span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim);">KICKOFF</span>
+                          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-team); color: var(--text); font-variant-numeric: tabular-nums;">{{ m.det.timeLocal }} your time</span>
+                          <span style="font-size: var(--fs-meta); color: var(--text3); font-variant-numeric: tabular-nums;">{{ m.det.timeVenue }} in {{ m.det.city }}</span>
+                        </div>
+                      </div>
+                      <sc-if value="{{ m.isReal }}">
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                          <button onClick="{{ m.openA }}" style="min-height: 44px; padding: 8px 14px; border-radius: 9px; border: 1px solid var(--border2); font-weight: 600; font-size: var(--fs-meta); color: var(--text); display: inline-flex; align-items: center; gap: 8px;" style-hover="background: var(--surface2);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus);">{{ m.aBtnFlagEl }}{{ m.aFull }} →</button>
+                          <button onClick="{{ m.openB }}" style="min-height: 44px; padding: 8px 14px; border-radius: 9px; border: 1px solid var(--border2); font-weight: 600; font-size: var(--fs-meta); color: var(--text); display: inline-flex; align-items: center; gap: 8px;" style-hover="background: var(--surface2);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus);">{{ m.bBtnFlagEl }}{{ m.bFull }} →</button>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </section>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- ======== CALENDAR ======== -->
+      <sc-if value="{{ isCal }}">
+        <div data-screen-label="Calendar" style="padding-top: 20px; overflow-x: auto;">
+          <div style="min-width: 640px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px;">
+              <div style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim); padding: 0 4px;">SUN</div>
+              <div style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim); padding: 0 4px;">MON</div>
+              <div style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim); padding: 0 4px;">TUE</div>
+              <div style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim); padding: 0 4px;">WED</div>
+              <div style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim); padding: 0 4px;">THU</div>
+              <div style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim); padding: 0 4px;">FRI</div>
+              <div style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim); padding: 0 4px;">SAT</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px;">
+              <sc-for list="{{ calCells }}" as="c">
+                <div style="min-height: 96px; border-radius: 10px; border: 1px solid {{ c.bdr }}; background: {{ c.bg }}; padding: 7px; display: flex; flex-direction: column; gap: 5px; opacity: {{ c.op }};">
+                  <div style="display: flex; align-items: center; justify-content: space-between; min-height: 18px;">
+                    <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-meta); color: {{ c.numC }}; font-variant-numeric: tabular-nums;">{{ c.num }}</span>
+                    <sc-if value="{{ c.isToday }}"><span style="font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: var(--bg); background: var(--text); border-radius: 3px; padding: 1px 5px;">TODAY</span></sc-if>
+                  </div>
+                  <sc-if value="{{ c.rest }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); color: var(--dim);">rest day</span></sc-if>
+                  <sc-for list="{{ c.chips }}" as="ch">
+                    <button onClick="{{ ch.open }}" title="{{ ch.title }}" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 44px; padding: 5px 6px; border-radius: 7px; background: {{ ch.bg }}; border: 1px solid {{ ch.bdr }}; width: 100%; box-sizing: border-box; min-width: 0; overflow: hidden;" style-hover="border-color: var(--border2);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--focus);">
+                      <sc-if value="{{ ch.isReal }}">
+                        <span style="display: flex; align-items: center; gap: 5px; min-width: 0;">
+                          {{ ch.aFlagEl }}
+                          <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-micro); color: var(--text2);">{{ ch.aCode }}</span>
+                          <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-meta); color: {{ ch.midC }}; font-variant-numeric: tabular-nums; white-space: nowrap;">{{ ch.mid }}</span>
+                          <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-micro); color: var(--text2);">{{ ch.bCode }}</span>
+                          {{ ch.bFlagEl }}
+                          <sc-if value="{{ ch.live }}"><span style="width: 6px; height: 6px; flex-grow: 0; flex-shrink: 0; flex-basis: 6px; border-radius: 99px; background: var(--live-badge); animation: livePulse 1.6s ease-in-out infinite;"></span></sc-if>
+                        </span>
+                        <span style="font-size: 9px; font-weight: 600; letter-spacing: 0.08em; color: var(--text3); white-space: nowrap;">{{ ch.grpLabel }}</span>
+                      </sc-if>
+                      <sc-if value="{{ ch.isPh }}">
+                        <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ ch.label }}</span>
+                      </sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- ============ BRACKET ============ -->
+  <sc-if value="{{ isBracket }}">
+    <div data-screen-label="Bracket" style="padding-top: 20px; overflow-x: auto;">
+      <div style="display: flex; align-items: center; gap: 16px; padding: 0 2px 14px;">
+        <span style="font-size: var(--fs-micro); color: var(--dim);">Pairings fill in as groups conclude — placeholders show who feeds each slot. All knockout matches are single-elimination; Jun 28 – Jul 19.</span>
+      </div>
+      <div style="display: flex; gap: 16px; min-width: 1080px; align-items: stretch; padding-bottom: 8px;">
+        <sc-for list="{{ brCols }}" as="bc">
+          <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-meta); letter-spacing: 0.06em; color: var(--text3); padding: 0 2px;">{{ bc.label }}</div>
+            <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-around; gap: 8px;">
+              <sc-for list="{{ bc.ms }}" as="km">
+                <button onClick="{{ km.open }}" style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box; padding: 9px 11px; border-radius: 9px; background: {{ km.bg }}; border: 1px solid var(--border);" style-hover="border-color: var(--border2);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--focus);">
+                  <span style="display: flex; align-items: center; justify-content: space-between; gap: 6px; width: 100%;">
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: var(--dim); white-space: nowrap;">M{{ km.n }} · {{ km.date }}</span>
+                    <span style="font-size: 9.5px; font-weight: 600; color: {{ km.chipC }}; border: 1px solid color-mix(in srgb, {{ km.chipC }} 45%, transparent); border-radius: 4px; padding: 1px 5px; letter-spacing: 0.04em; white-space: nowrap;">{{ km.venueChip }}</span>
+                  </span>
+                  <sc-if value="{{ km.tag }}"><span style="font-size: 9px; font-weight: 700; letter-spacing: 0.12em; color: var(--text3);">{{ km.tag }}</span></sc-if>
+                  <span style="display: flex; align-items: center; gap: 7px; width: 100%; min-width: 0;">
+                    <sc-if value="{{ km.ph }}"><span style="width: 18px; height: 13px; flex-grow: 0; flex-shrink: 0; flex-basis: 18px; border-radius: 2px; border: 1px dashed var(--border2); box-sizing: border-box;"></span></sc-if>
+                    <sc-if value="{{ km.real }}">{{ km.aFlagEl }}</sc-if>
+                    <span style="font-size: var(--fs-micro); font-weight: 600; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ km.aLabel }}</span>
+                  </span>
+                  <span style="display: flex; align-items: center; gap: 7px; width: 100%; min-width: 0;">
+                    <sc-if value="{{ km.ph }}"><span style="width: 18px; height: 13px; flex-grow: 0; flex-shrink: 0; flex-basis: 18px; border-radius: 2px; border: 1px dashed var(--border2); box-sizing: border-box;"></span></sc-if>
+                    <sc-if value="{{ km.real }}">{{ km.bFlagEl }}</sc-if>
+                    <span style="font-size: var(--fs-micro); font-weight: 600; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ km.bLabel }}</span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ STANDINGS ============ -->
+  <sc-if value="{{ isStandings }}">
+    <div data-screen-label="Standings" style="padding-top: 20px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 16px; padding: 0 2px;">
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-micro); color: var(--text3);"><span style="width: 14px; height: 3px; background: var(--text2); border-radius: 2px;"></span>Top two advance</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-micro); color: var(--text3);"><span style="width: 14px; height: 0; border-top: 3px dashed var(--dim);"></span>Third — best 8 of 12 advance</span>
+        <span style="margin-left: auto; font-size: var(--fs-micro); color: var(--dim);">Computed from results up to the simulated time</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px;">
+        <sc-for list="{{ tables }}" as="t">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 14px 8px; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 2px 4px;">
+              <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-team); letter-spacing: 0.05em; color: var(--text);">GROUP {{ t.g }}</span>
+              <span style="font-size: var(--fs-micro); color: var(--dim);">{{ t.played }}</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 18px minmax(0, 1fr) repeat(4, 24px) 32px 32px; gap: 4px; padding: 0 6px; font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.06em; color: var(--dim);">
+              <span></span><span></span><span style="text-align: center;">P</span><span style="text-align: center;">W</span><span style="text-align: center;">D</span><span style="text-align: center;">L</span><span style="text-align: center;">GD</span><span style="text-align: center;">PTS</span>
+            </div>
+            <sc-for list="{{ t.rows }}" as="r">
+              <button onClick="{{ r.open }}" style="display: grid; grid-template-columns: 18px minmax(0, 1fr) repeat(4, 24px) 32px 32px; gap: 4px; align-items: center; min-height: 44px; padding: 4px 6px; border-left: {{ r.bar }}; border-radius: 4px; font-variant-numeric: tabular-nums;" style-hover="background: var(--surface2);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus);">
+                <span style="font-size: var(--fs-micro); color: var(--dim);">{{ r.pos }}</span>
+                <span style="display: flex; align-items: center; gap: 7px; min-width: 0;">{{ r.flagEl }}<span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-meta); color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ r.name }}</span></span>
+                <span style="text-align: center; font-size: var(--fs-meta); color: var(--text3);">{{ r.p }}</span>
+                <span style="text-align: center; font-size: var(--fs-meta); color: var(--text3);">{{ r.w }}</span>
+                <span style="text-align: center; font-size: var(--fs-meta); color: var(--text3);">{{ r.d }}</span>
+                <span style="text-align: center; font-size: var(--fs-meta); color: var(--text3);">{{ r.l }}</span>
+                <span style="text-align: center; font-size: var(--fs-meta); color: var(--text3);">{{ r.gd }}</span>
+                <span style="text-align: center; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-meta); color: var(--text);">{{ r.pts }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ STATS ============ -->
+  <sc-if value="{{ isStats }}">
+    <div data-screen-label="Stats" style="padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; align-items: start;">
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
+        <div style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-team); letter-spacing: 0.05em; color: var(--text); padding: 0 2px 10px;">TOP SCORERS</div>
+        <div style="display: grid; grid-template-columns: 24px 36px minmax(0, 1fr) 36px 36px; gap: 6px; padding: 0 4px 6px; font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.06em; color: var(--dim);">
+          <span></span><span></span><span></span><span style="text-align: center;">G</span><span style="text-align: center;">A</span>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ scorers }}" as="s">
+            <div style="display: grid; grid-template-columns: 24px 36px minmax(0, 1fr) 36px 36px; gap: 6px; align-items: center; min-height: 48px; padding: 4px; border-top: 1px solid var(--border); font-variant-numeric: tabular-nums;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); color: var(--dim);">{{ s.rank }}</span>
+              <span style="width: 32px; height: 32px; border-radius: 99px; background: var(--surface2); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 11px; color: var(--text3);">{{ s.initials }}</span>
+              <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0;">
+                <span style="font-weight: 600; font-size: var(--fs-meta); color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ s.name }}</span>
+                <span style="display: inline-flex; align-items: center; gap: 5px; font-size: var(--fs-micro); color: var(--text3);">{{ s.flagEl }}{{ s.code }}</span>
+              </span>
+              <span style="text-align: center; font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-time); color: var(--text);">{{ s.g }}</span>
+              <span style="text-align: center; font-size: var(--fs-meta); color: var(--text3);">{{ s.a }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
+          <div style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-team); letter-spacing: 0.05em; color: var(--text); padding: 0 2px 12px;">GOALS BY GROUP</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{ groupGoals }}" as="g" hint-placeholder-count="6">
+              <div style="display: grid; grid-template-columns: 20px 1fr 28px; gap: 10px; align-items: center;">
+                <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-meta); color: var(--text3);">{{ g.g }}</span>
+                <span style="height: 10px; border-radius: 99px; background: var(--surface2); overflow: hidden; display: block;"><span style="display: block; height: 100%; border-radius: 99px; background: var(--text3); width: {{ g.w }};"></span></span>
+                <span style="font-size: var(--fs-meta); color: var(--text2); font-variant-numeric: tabular-nums; text-align: right;">{{ g.n }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+          <sc-for list="{{ statCards }}" as="sc" hint-placeholder-count="3">
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim);">{{ sc.k }}</span>
+              <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-h1); color: var(--text); font-variant-numeric: tabular-nums;">{{ sc.v }}</span>
+              <span style="font-size: var(--fs-micro); color: var(--text3);">{{ sc.sub }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+  <!-- ============ DRAWER ============ -->
+  <sc-if value="{{ drawerOpen }}">
+    <div onClick="{{ closeDrawer }}" style="position: fixed; inset: 0; background: rgba(5, 7, 10, 0.62); z-index: 40;"></div>
+    <div role="dialog" aria-modal="true" data-screen-label="Drawer" style="position: fixed; top: 0; right: 0; bottom: 0; width: {{ drawerW }}; max-width: 100vw; box-sizing: border-box; background: var(--bg); border-left: 1px solid var(--border2); z-index: 41; overflow-y: auto; box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45);">
+      <div style="position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); letter-spacing: 0.1em; color: var(--dim);">{{ drTitle }}</span>
+        <button onClick="{{ closeDrawer }}" aria-label="Close" style="width: 44px; height: 44px; border-radius: 9px; border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-size: 16px; color: var(--text2);" style-hover="background: var(--surface);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">✕</button>
+      </div>
+
+      <!-- team drawer -->
+      <sc-if value="{{ dr.isTeam }}">
+        <div style="padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            {{ dr.flagEl }}
+            <div style="display: flex; flex-direction: column; gap: 5px; min-width: 0;">
+              <span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-h1); line-height: 1.05; color: var(--text);">{{ dr.name }}</span>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.08em; color: var(--text3); border: 1px solid var(--border2); border-radius: 4px; padding: 2px 7px; white-space: nowrap;">{{ dr.groupLabel }}</span>
+                <sc-if value="{{ dr.hostChip }}"><span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.08em; color: {{ dr.hostC }}; border: 1px solid color-mix(in srgb, {{ dr.hostC }} 45%, transparent); border-radius: 4px; padding: 2px 7px;">{{ dr.hostChip }}</span></sc-if>
+              </div>
+            </div>
+            <button onClick="{{ dr.toggleFollow }}" aria-pressed="{{ dr.following }}" style="margin-left: auto; min-height: 44px; padding: 8px 16px; border-radius: 9px; border: 1px solid {{ dr.fBdr }}; background: {{ dr.fBg }}; color: {{ dr.fC }}; font-weight: 700; font-size: var(--fs-meta); white-space: nowrap;" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">{{ dr.followLabel }}</button>
+          </div>
+
+          <sc-if value="{{ dr.hasSquad }}">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-team); letter-spacing: 0.04em; color: var(--text);">SQUAD · 26</span>
+                <span style="font-size: var(--fs-micro); color: var(--dim);">Coach — {{ dr.coach }}</span>
+              </div>
+              <sc-for list="{{ dr.posGroups }}" as="pg">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.14em; color: var(--dim);">{{ pg.label }}</span>
+                  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(94px, 1fr)); gap: 8px;">
+                    <sc-for list="{{ pg.players }}" as="p">
+                      <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="position: relative; aspect-ratio: 1 / 1.08; border-radius: 9px; overflow: hidden; border: 1px solid var(--border); background: {{ p.avBg }}; display: flex; align-items: center; justify-content: center;">
+                          <sc-if value="{{ p.photo }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; color: var(--dim);">PHOTO</span></sc-if>
+                          <sc-if value="{{ p.noPhoto }}"><span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 20px; color: var(--text3);">{{ p.initials }}</span></sc-if>
+                          <span style="position: absolute; bottom: 5px; right: 6px; font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 13px; color: var(--text); background: color-mix(in srgb, var(--bg) 72%, transparent); border-radius: 4px; padding: 1px 6px; font-variant-numeric: tabular-nums;">{{ p.num }}</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 1px; padding: 0 2px;">
+                          <span style="font-size: var(--fs-micro); font-weight: 600; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ p.name }}{{ p.cap }}</span>
+                          <span style="font-size: 10px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ p.meta }}</span>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ dr.noSquad }}">
+            <div style="border: 1px dashed var(--border2); border-radius: 10px; padding: 16px; font-size: var(--fs-meta); color: var(--text3); line-height: 1.55;">Squad grid is mocked for <strong style="color: var(--text2);">Germany</strong> in this prototype — open Germany to see the photo grid and the initials fallback. Production pulls all 48 squads from the same component.</div>
+          </sc-if>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-team); letter-spacing: 0.04em; color: var(--text);">FIXTURES</span>
+            <div style="display: flex; flex-direction: column;">
+              <sc-for list="{{ dr.fx }}" as="f">
+                <div style="display: grid; grid-template-columns: 72px minmax(0, 1fr) auto 30px; gap: 10px; align-items: center; min-height: 48px; padding: 6px 4px; border-top: 1px solid var(--border); font-variant-numeric: tabular-nums;">
+                  <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: var(--fs-micro); font-weight: 600; color: var(--text3);">{{ f.date }}</span><span style="font-size: 10px; color: var(--dim); letter-spacing: 0.06em;">{{ f.rd }}</span></span>
+                  <span style="display: flex; align-items: center; gap: 7px; min-width: 0;"><span style="font-size: var(--fs-micro); color: var(--dim);">v</span>{{ f.flagEl }}<span style="font-weight: 600; font-size: var(--fs-meta); color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ f.opp }}</span></span>
+                  <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-meta); color: {{ f.midC }}; white-space: nowrap;">{{ f.mid }}</span>
+                  <span style="text-align: center; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-micro); color: {{ f.resC }};">{{ f.res }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- match drawer -->
+      <sc-if value="{{ dr.isMatch }}">
+        <div style="padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 18px;">
+          <div style="background: {{ dr.bg }}; border: 1px solid {{ dr.bdr }}; border-radius: 14px; padding: 20px 16px; display: flex; flex-direction: column; gap: 12px; align-items: center;">
+            <sc-if value="{{ dr.live }}">
+              <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 800; color: var(--live-ink); background: var(--live-badge); border-radius: 4px; padding: 3px 8px; letter-spacing: 0.12em;"><span style="width: 5px; height: 5px; border-radius: 99px; background: var(--live-ink); animation: livePulse 1.6s ease-in-out infinite;"></span>LIVE · {{ dr.minute }}</span>
+            </sc-if>
+            <sc-if value="{{ dr.ft }}"><span style="font-size: var(--fs-micro); font-weight: 700; color: var(--text3); letter-spacing: 0.16em;">FULL TIME</span></sc-if>
+            <sc-if value="{{ dr.up }}"><span style="font-size: var(--fs-micro); font-weight: 700; color: var(--text3); letter-spacing: 0.16em;">UPCOMING</span></sc-if>
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; width: 100%;">
+              <span style="display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0;">
+                <sc-if value="{{ dr.hasTeams }}">{{ dr.aFlagEl }}</sc-if>
+                <sc-if value="{{ dr.noFlags }}"><span style="width: 44px; height: 32px; border-radius: 4px; border: 1px dashed var(--border2); box-sizing: border-box;"></span></sc-if>
+                <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-meta); color: var(--text2); text-align: center;">{{ dr.aLabel }}</span>
+              </span>
+              <sc-if value="{{ dr.hasScore }}"><span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-score-lg); color: var(--text); font-variant-numeric: tabular-nums; line-height: 1;">{{ dr.score }}</span></sc-if>
+              <sc-if value="{{ dr.up }}"><span style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: var(--fs-score-lg); color: var(--text); font-variant-numeric: tabular-nums; line-height: 1;">{{ dr.kick }}</span></sc-if>
+              <span style="display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0;">
+                <sc-if value="{{ dr.hasTeams }}">{{ dr.bFlagEl }}</sc-if>
+                <sc-if value="{{ dr.noFlags }}"><span style="width: 44px; height: 32px; border-radius: 4px; border: 1px dashed var(--border2); box-sizing: border-box;"></span></sc-if>
+                <span style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-meta); color: var(--text2); text-align: center;">{{ dr.bLabel }}</span>
+              </span>
+            </div>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); letter-spacing: 0.06em; color: var(--dim); text-align: center;">{{ dr.statusLine }}</span>
+          </div>
+          <sc-if value="{{ dr.hasScorers }}">
+            <div style="display: grid; grid-template-columns: 1fr 14px 1fr; gap: 4px 10px; align-items: start;">
+              <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-end;">
+                <sc-for list="{{ dr.scorersA }}" as="s"><div style="font-size: var(--fs-meta); color: var(--text2); text-align: right;">{{ s.t }}<sc-if value="{{ s.hasA }}"><span style="color: var(--dim);"> · {{ s.a }}</span></sc-if></div></sc-for>
+              </div>
+              <div style="border-left: 1px solid var(--border); height: 100%; justify-self: center;"></div>
+              <div style="display: flex; flex-direction: column; gap: 4px;">
+                <sc-for list="{{ dr.scorersB }}" as="s"><div style="font-size: var(--fs-meta); color: var(--text2);">{{ s.t }}<sc-if value="{{ s.hasA }}"><span style="color: var(--dim);"> · {{ s.a }}</span></sc-if></div></sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim);">VENUE</span>
+              <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-team); color: var(--text);">{{ dr.venueName }}</span>
+              <span style="font-size: var(--fs-meta); color: var(--text3);">{{ dr.venueCity }} · capacity {{ dr.cap }}</span>
+            </div>
+            <div style="border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; color: var(--dim);">KICKOFF</span>
+              <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: var(--fs-team); color: var(--text); font-variant-numeric: tabular-nums;">{{ dr.timeLocal }} your time</span>
+              <span style="font-size: var(--fs-meta); color: var(--text3); font-variant-numeric: tabular-nums;">{{ dr.timeVenue }} in {{ dr.city }}</span>
+            </div>
+          </div>
+          <sc-if value="{{ dr.hasTeams }}">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <button onClick="{{ dr.openA }}" style="min-height: 44px; padding: 8px 14px; border-radius: 9px; border: 1px solid var(--border2); font-weight: 600; font-size: var(--fs-meta); color: var(--text); display: inline-flex; align-items: center; gap: 8px;" style-hover="background: var(--surface);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">{{ dr.aBtnFlagEl }}{{ dr.aLabel }} →</button>
+              <button onClick="{{ dr.openB }}" style="min-height: 44px; padding: 8px 14px; border-radius: 9px; border: 1px solid var(--border2); font-weight: 600; font-size: var(--fs-meta); color: var(--text); display: inline-flex; align-items: center; gap: 8px;" style-hover="background: var(--surface);" style-focus="outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);">{{ dr.bBtnFlagEl }}{{ dr.bLabel }} →</button>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dark&quot;, &quot;light&quot;], &quot;default&quot;: &quot;dark&quot;, &quot;tsType&quot;: &quot;'dark' | 'light'&quot; },
+  &quot;textSize&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;compact&quot;, &quot;standard&quot;, &quot;large&quot;], &quot;default&quot;: &quot;standard&quot;, &quot;tsType&quot;: &quot;'compact' | 'standard' | 'large'&quot; },
+  &quot;moment&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;jun11&quot;, &quot;jun14&quot;, &quot;jun24&quot;], &quot;default&quot;: &quot;jun14&quot;, &quot;tsType&quot;: &quot;'jun11' | 'jun14' | 'jun24'&quot; },
+  &quot;hostTint&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;subtle&quot;, &quot;standard&quot;, &quot;loud&quot;], &quot;default&quot;: &quot;standard&quot;, &quot;tsType&quot;: &quot;'subtle' | 'standard' | 'loud'&quot; },
+  &quot;liveOutage&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    d: null, view: 'matches', layout: null, month: 6, expanded: null, drawer: null,
+    q: '', fGroup: '', fCountry: '', fStage: '', fMine: false,
+    follows: ['GER'], w: 1200, tick: 0,
+  };
+
+  componentDidMount() {
+    import('./wc-data.js').then((d) => this.setState({ d }));
+    this._flash = {}; this._prev = {};
+    this._rs = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._rs);
+    this._rs();
+    try {
+      const f = JSON.parse(localStorage.getItem('wc26-follows') || 'null');
+      if (Array.isArray(f)) this.setState({ follows: f });
+    } catch (e) {}
+    this._kd = (e) => { if (e.key === 'Escape' && this.state.drawer) this.setState({ drawer: null }); };
+    window.addEventListener('keydown', this._kd);
+    this._tm = setInterval(() => {
+      if (!(this.props.liveOutage ?? false)) this.setState((s) => ({ tick: s.tick + 1 }));
+    }, 30000);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._rs);
+    window.removeEventListener('keydown', this._kd);
+    clearInterval(this._tm);
+  }
+
+  now() {
+    const d = this.state.d;
+    const key = this.props.moment ?? 'jun14';
+    const M = d && d.MOMENTS[key] ? d.MOMENTS[key] : { utc: '2026-06-15T00:21:00Z' };
+    return Date.parse(M.utc) + this.state.tick * 30000;
+  }
+
+  // match status at simulated time
+  info(m, now) {
+    const kick = Date.parse(m.utc);
+    const el = (now - kick) / 60000;
+    if (!m.a || el < 0) return { kind: 'up', a: 0, b: 0, goals: [] };
+    let kind = 'live', minNum, minLabel;
+    if (el <= 47) { minNum = Math.max(1, Math.ceil(el)); minLabel = minNum > 45 ? "45+'" : minNum + "'"; if (minNum > 45) minNum = 45; }
+    else if (el <= 62) { minNum = 45; minLabel = 'HT'; }
+    else if (el <= 109) { minNum = Math.min(90, Math.floor(el - 17)); minLabel = minNum >= 90 ? "90+'" : minNum + "'"; }
+    else { kind = 'ft'; minNum = 999; minLabel = 'FT'; }
+    const goals = (m.goals || []).filter((g) => g[0] <= minNum);
+    return {
+      kind, minLabel,
+      a: goals.filter((g) => g[1] === 0).length,
+      b: goals.filter((g) => g[1] === 1).length,
+      goals,
+    };
+  }
+
+  pad(n) { return (n < 10 ? '0' : '') + n; }
+  vDate(utc, tz) { return new Date(Date.parse(utc) + tz * 3600000); }
+  dayKey(m) {
+    const V = this.state.d.VENUES[m.v];
+    return this.vDate(m.utc, V.tz).toISOString().slice(0, 10);
+  }
+  fmtLocalTime(utc) {
+    return new Date(utc).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+  }
+  fmtVenueTime(utc, tz) {
+    const dd = this.vDate(utc, tz);
+    return this.pad(dd.getUTCHours()) + ':' + this.pad(dd.getUTCMinutes());
+  }
+  dayLabel(key) {
+    const DOW = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'];
+    const dd = new Date(key + 'T12:00:00Z');
+    return DOW[dd.getUTCDay()] + ' ' + MON[dd.getUTCMonth()] + ' ' + dd.getUTCDate();
+  }
+  shortDate(key) {
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'];
+    const dd = new Date(key + 'T12:00:00Z');
+    return MON[dd.getUTCMonth()] + ' ' + dd.getUTCDate();
+  }
+  flag(code, w) {
+    const d = this.state.d;
+    return 'https://flagcdn.com/w' + (w || 40) + '/' + d.TEAMS[code].flag + '.png';
+  }
+  initials(name) {
+    const parts = name.split(' ');
+    return (parts[0][0] + (parts[parts.length - 1][0] || '')).toUpperCase();
+  }
+  flagEl(iso, w, h, opacity) {
+    if (!iso) return null;
+    const size = w > 44 ? 160 : w > 22 ? 80 : 40;
+    const st = { width: w + 'px', height: h + 'px', borderRadius: w > 40 ? '4px' : '2px', objectFit: 'cover', flexGrow: 0, flexShrink: 0, flexBasis: w + 'px' };
+    if (opacity !== undefined) st.opacity = opacity;
+    return React.createElement('img', { src: 'https://flagcdn.com/w' + size + '/' + iso + '.png', alt: '', style: st });
+  }
+
+  det(m, i) {
+    const d = this.state.d;
+    const V = d.VENUES[m.v];
+    const C = d.COUNTRIES[V.country];
+    const RL = d.ROUND_LABELS[m.r];
+    const mkS = (side) => (i.goals || []).filter((g) => g[1] === side).map((g) => ({
+      t: g[2] + ' ' + g[0] + "'",
+      a: g[3] || '',
+      hasA: !!g[3],
+    }));
+    const sA = mkS(0), sB = mkS(1);
+    let status = i.kind === 'ft' ? 'Full time' : i.kind === 'live' ? 'Live · ' + i.minLabel : 'Upcoming';
+    const rd = m.r === 'GR' ? 'Group ' + m.g + ' · Matchday ' + m.md : RL;
+    const sim = i.kind === 'up' ? '' : ' · simulated result';
+    return {
+      statusLine: status + ' · ' + rd + ' · Match ' + m.n + sim,
+      hasScorers: sA.length + sB.length > 0,
+      scorersA: sA, scorersB: sB,
+      venueName: V.name,
+      venueCity: V.city + ' · ' + C.name,
+      cap: V.cap.toLocaleString('en-US'),
+      timeLocal: this.fmtLocalTime(m.utc),
+      timeVenue: this.fmtVenueTime(m.utc, V.tz),
+      city: V.city,
+    };
+  }
+
+  renderVals() {
+    const S = this.state;
+    const d = S.d;
+    const theme = this.props.theme ?? 'dark';
+    const textSize = this.props.textSize ?? 'standard';
+    const outage = this.props.liveOutage ?? false;
+    const tintKey = this.props.hostTint ?? 'loud';
+    const pct = { subtle: 5, standard: 9, loud: 17 }[tintKey] || 9;
+    const wide = S.w >= 860;
+    const useFull = S.w >= 980;
+    const layout = S.layout || (S.w >= 1000 ? 'calendar' : 'agenda');
+    const set = (o) => () => this.setState(o);
+
+    const base = {
+      theme, textSize, outage, wide,
+      isMatches: S.view === 'matches', isBracket: S.view === 'bracket', isStandings: S.view === 'standings', isStats: S.view === 'stats',
+      isAgenda: S.view === 'matches' && layout === 'agenda',
+      isCal: S.view === 'matches' && layout === 'calendar',
+      q: S.q, fGroup: S.fGroup, fMine: S.fMine,
+      onQ: (e) => this.setState({ q: e.target.value }),
+      onGroup: (e) => this.setState({ fGroup: e.target.value }),
+      onMine: () => this.setState({ fMine: !S.fMine }),
+      clearFilters: set({ q: '', fGroup: '', fCountry: '', fStage: '', fMine: false }),
+      closeDrawer: set({ drawer: null }),
+      drawerOpen: !!S.drawer,
+      drawerW: S.w < 560 ? '100vw' : '460px',
+      mineBdr: S.fMine ? 'var(--text2)' : 'var(--border)',
+      mineBg: S.fMine ? 'var(--surface2)' : 'var(--surface)',
+      mineC: S.fMine ? 'var(--text)' : 'var(--text3)',
+      anyFilter: !!(S.q || S.fGroup || S.fCountry || S.fStage || S.fMine),
+      tabs: [
+        { id: 'matches', label: 'Matches' },
+        { id: 'bracket', label: 'Bracket' },
+        { id: 'standings', label: 'Standings' },
+        { id: 'stats', label: 'Stats' },
+      ].map((t) => ({
+        ...t,
+        on: set({ view: t.id }),
+        cur: S.view === t.id ? 'page' : undefined,
+        c: S.view === t.id ? 'var(--text)' : 'var(--text3)',
+        b: S.view === t.id ? 'var(--text)' : 'transparent',
+      })),
+      laySegs: [
+        { id: 'agenda', label: 'Agenda' },
+        { id: 'calendar', label: 'Calendar' },
+      ].map((s) => ({
+        ...s,
+        on: set({ layout: s.id }),
+        bg: layout === s.id ? 'var(--raised)' : 'transparent',
+        c: layout === s.id ? 'var(--text)' : 'var(--text3)',
+      })),
+      monthSegs: [
+        { id: 6, label: 'June' },
+        { id: 7, label: 'July' },
+      ].map((s) => ({
+        ...s,
+        on: set({ month: s.id }),
+        bg: S.month === s.id ? 'var(--raised)' : 'transparent',
+        c: S.month === s.id ? 'var(--text)' : 'var(--text3)',
+      })),
+      countryChips: [
+        { k: 'mx', label: 'Mexico', dot: 'var(--mx)' },
+        { k: 'us', label: 'USA', dot: 'var(--us)' },
+        { k: 'ca', label: 'Canada', dot: 'var(--ca)' },
+      ].map((c) => {
+        const active = S.fCountry === c.k;
+        return {
+          ...c, active,
+          on: () => this.setState({ fCountry: active ? '' : c.k }),
+          bdr: active ? c.dot : 'var(--border)',
+          bg: active ? 'color-mix(in oklab, ' + c.dot + ' 14%, var(--surface))' : 'var(--surface)',
+          c: active ? 'var(--text)' : 'var(--text3)',
+        };
+      }),
+      stageChips: [
+        { k: 'GR', label: 'Group stage' },
+        { k: 'KO', label: 'Knockouts' },
+      ].map((c) => {
+        const active = S.fStage === c.k;
+        return {
+          ...c, active,
+          on: () => this.setState({ fStage: active ? '' : c.k }),
+          bdr: active ? 'var(--text2)' : 'var(--border)',
+          bg: active ? 'var(--surface2)' : 'var(--surface)',
+          c: active ? 'var(--text)' : 'var(--text3)',
+        };
+      }),
+      days: [], calCells: [], tables: [], scorers: [], groupGoals: [], statCards: [], brCols: [],
+      emptyAgenda: false, simLabel: '…', dr: {}, drTitle: '',
+      goToday: () => {},
+    };
+    if (!d) return base;
+
+    const now = this.now();
+    const todayKey = new Date(now - 4 * 3600000).toISOString().slice(0, 10);
+    const etD = new Date(now - 4 * 3600000);
+    base.simLabel = this.dayLabel(todayKey) + ' · ' + this.pad(etD.getUTCHours()) + ':' + this.pad(etD.getUTCMinutes()) + ' ET';
+
+    const infos = {};
+    d.MATCHES.forEach((m) => { infos[m.n] = this.info(m, now); });
+
+    // score-change flash tracking
+    d.MATCHES.forEach((m) => {
+      const i = infos[m.n];
+      if (i.kind === 'up') return;
+      const cur = i.a + '-' + i.b;
+      if (this._prev[m.n] !== undefined && this._prev[m.n] !== cur) this._flash[m.n] = Date.now() + 2600;
+      this._prev[m.n] = cur;
+    });
+
+    const ql = S.q.trim().toLowerCase();
+    const matchesText = (m) => {
+      if (!ql) return true;
+      const T = d.TEAMS;
+      if (m.a) {
+        return [m.a, m.b, T[m.a].name, T[m.b].name].some((x) => x.toLowerCase().includes(ql));
+      }
+      return ((m.pa || '') + ' ' + (m.pb || '')).toLowerCase().includes(ql);
+    };
+    const passes = (m) => {
+      if (S.fGroup && m.g !== S.fGroup) return false;
+      if (S.fCountry && d.VENUES[m.v].country !== S.fCountry) return false;
+      if (S.fStage === 'GR' && m.r !== 'GR') return false;
+      if (S.fStage === 'KO' && m.r === 'GR') return false;
+      if (S.fMine && !(m.a && (S.follows.includes(m.a) || S.follows.includes(m.b)))) return false;
+      return matchesText(m);
+    };
+    const fMatches = d.MATCHES.filter(passes);
+
+    const openTeam = (code) => () => this.setState({ drawer: { type: 'team', code } });
+
+    // ---- match view model ----
+    const mv = (m) => {
+      const i = infos[m.n];
+      const V = d.VENUES[m.v];
+      const C = d.COUNTRIES[V.country];
+      const hostVar = 'var(--' + V.country + ')';
+      const isLive = i.kind === 'live', isFT = i.kind === 'ft', isUp = i.kind === 'up';
+      const expanded = S.expanded === m.n;
+      const out = {
+        key: m.n,
+        isReal: !!m.a, isPh: !m.a,
+        isLive, isFT, isUp: isUp && !!m.a,
+        hasScore: !isUp && !!m.a,
+        bg: 'color-mix(in oklab, ' + hostVar + ' ' + pct + '%, var(--surface))',
+        bdr: isLive ? 'color-mix(in srgb, var(--live-badge) 60%, transparent)' : 'var(--border)',
+        minuteLabel: outage ? '—' : (i.minLabel || ''),
+        timeLocal: this.fmtLocalTime(m.utc),
+        venueChip: V.cityShort + ' · ' + C.short,
+        chipC: hostVar,
+        roundLabel: m.r === 'GR' ? 'GROUP ' + m.g + ' · MD' + m.md : d.ROUND_LABELS[m.r].toUpperCase() + ' · M' + m.n,
+        expanded,
+        toggle: () => this.setState({ expanded: expanded ? null : m.n }),
+        det: this.det(m, i),
+        phA: m.pa, phB: m.pb,
+      };
+      if (m.a) {
+        const A = d.TEAMS[m.a], B = d.TEAMS[m.b];
+        const winA = isFT && i.a > i.b, winB = isFT && i.b > i.a;
+        out.aName = useFull ? A.name : m.a;
+        out.bName = useFull ? B.name : m.b;
+        out.aFull = A.name; out.bFull = B.name;
+        out.aFlagEl = this.flagEl(A.flag, 22, 16, winB ? 0.55 : 1);
+        out.bFlagEl = this.flagEl(B.flag, 22, 16, winA ? 0.55 : 1);
+        out.aBtnFlagEl = this.flagEl(A.flag, 18, 13);
+        out.bBtnFlagEl = this.flagEl(B.flag, 18, 13);
+        out.aW = winA ? 800 : (winB ? 600 : 700);
+        out.bW = winB ? 800 : (winA ? 600 : 700);
+        out.aC = winA ? 'var(--win)' : (winB ? 'var(--text3)' : 'var(--text2)');
+        out.bC = winB ? 'var(--win)' : (winA ? 'var(--text3)' : 'var(--text2)');
+        out.aOp = winB ? 0.55 : 1;
+        out.bOp = winA ? 0.55 : 1;
+        out.score = i.a + '–' + i.b;
+        out.scoreC = isLive ? 'var(--win)' : 'var(--text)';
+        out.scoreAnim = Date.now() < (this._flash[m.n] || 0) ? 'scoreFlash 1.2s ease-out' : 'none';
+        out.triA = winA ? '◂' : '';
+        out.triB = winB ? '▸' : '';
+        out.starA = S.follows.includes(m.a) ? '★ ' : '';
+        out.starB = S.follows.includes(m.b) ? ' ★' : '';
+        out.openA = openTeam(m.a);
+        out.openB = openTeam(m.b);
+      }
+      return out;
+    };
+
+    // ---- agenda days ----
+    const byDay = {};
+    fMatches.forEach((m) => {
+      const k = this.dayKey(m);
+      (byDay[k] = byDay[k] || []).push(m);
+    });
+    const dayKeys = Object.keys(byDay).sort();
+    base.days = dayKeys.map((k) => {
+      const ms = byDay[k].sort((x, y) => Date.parse(x.utc) - Date.parse(y.utc));
+      const rounds = [...new Set(ms.map((m) => (m.r === 'GR' ? 'Group stage' : d.ROUND_LABELS[m.r])))];
+      return {
+        key: k,
+        label: this.dayLabel(k),
+        sub: ms.length + (ms.length === 1 ? ' match · ' : ' matches · ') + rounds.join(' · '),
+        isToday: k === todayKey,
+        matches: ms.map(mv),
+      };
+    });
+    base.emptyAgenda = base.days.length === 0;
+    base.goToday = () => {
+      if (layout === 'calendar') { this.setState({ month: todayKey.slice(5, 7) === '07' ? 7 : 6 }); return; }
+      const el = document.getElementById('day-' + todayKey);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 130, behavior: 'smooth' });
+    };
+
+    // ---- calendar ----
+    const mon = S.month;
+    const dim = mon === 6 ? 30 : 31;
+    const firstDow = new Date(Date.UTC(2026, mon - 1, 1)).getUTCDay();
+    const cells = [];
+    for (let b = 0; b < firstDow; b++) cells.push({ key: 'b' + b, num: '', bg: 'transparent', bdr: 'transparent', op: 1, chips: [] });
+    for (let day = 1; day <= dim; day++) {
+      const key = '2026-' + this.pad(mon) + '-' + this.pad(day);
+      const all = d.MATCHES.filter((m) => this.dayKey(m) === key);
+      const ms = all.filter(passes).sort((x, y) => Date.parse(x.utc) - Date.parse(y.utc));
+      const inT = key >= '2026-06-11' && key <= '2026-07-19';
+      const isToday = key === todayKey;
+      cells.push({
+        key, num: day,
+        isToday,
+        rest: inT && all.length === 0,
+        bg: inT ? 'var(--surface)' : 'transparent',
+        bdr: isToday ? 'var(--text3)' : (inT ? 'var(--border)' : 'transparent'),
+        numC: isToday ? 'var(--text)' : (inT ? 'var(--text3)' : 'var(--dim)'),
+        op: inT ? 1 : 0.5,
+        chips: ms.map((m) => {
+          const i = infos[m.n];
+          const V = d.VENUES[m.v];
+          const hostVar = 'var(--' + V.country + ')';
+          const live = i.kind === 'live';
+          const ch = {
+            key: m.n,
+            isReal: !!m.a, isPh: !m.a,
+            live,
+            bg: 'color-mix(in oklab, ' + hostVar + ' ' + Math.min(pct + 3, 22) + '%, var(--surface2))',
+            bdr: live ? 'color-mix(in srgb, var(--live-badge) 60%, transparent)' : 'color-mix(in srgb, ' + hostVar + ' 28%, var(--border))',
+            open: () => this.setState({ drawer: { type: 'match', n: m.n } }),
+          };
+          if (m.a) {
+            ch.grpLabel = m.r === 'GR' ? 'Group ' + m.g : d.ROUND_LABELS[m.r];
+            ch.aCode = m.a; ch.bCode = m.b;
+            ch.aFlagEl = this.flagEl(d.TEAMS[m.a].flag, 13, 10);
+            ch.bFlagEl = this.flagEl(d.TEAMS[m.b].flag, 13, 10);
+            ch.mid = i.kind === 'up' ? this.fmtLocalTime(m.utc) : i.a + '–' + i.b;
+            ch.midC = live ? 'var(--live)' : 'var(--text)';
+            ch.title = d.TEAMS[m.a].name + ' vs ' + d.TEAMS[m.b].name;
+          } else {
+            ch.label = d.ROUND_LABELS[m.r] + ' · M' + m.n;
+            ch.title = (m.pa || '') + ' vs ' + (m.pb || '');
+          }
+          return ch;
+        }),
+      });
+    }
+    while (cells.length % 7 !== 0) cells.push({ key: 'e' + cells.length, num: '', bg: 'transparent', bdr: 'transparent', op: 1, chips: [] });
+    base.calCells = cells;
+
+    // ---- bracket (classic knockout tree, ordered by who feeds whom) ----
+    const KO = {};
+    d.MATCHES.forEach((m) => { if (m.r !== 'GR') KO[m.n] = m; });
+    const feedOf = (s) => { const mt = /Match (\d+)/.exec(s || ''); return mt ? +mt[1] : null; };
+    const colsKO = { R32: [], R16: [], QF: [], SF: [], F: [] };
+    const walkKO = (n) => {
+      const m = KO[n];
+      if (!m) return;
+      if (colsKO[m.r]) colsKO[m.r].push(m);
+      if (m.r !== 'R32') { walkKO(feedOf(m.pa)); walkKO(feedOf(m.pb)); }
+    };
+    walkKO(104);
+    const shortenPh = (s) => (s || '')
+      .replace('Winners Group ', '1st Group ')
+      .replace('Runners-up Group ', '2nd Group ')
+      .replace('Winner of Match ', 'Winner M')
+      .replace('Loser of Match ', 'Loser M');
+    const mkKO = (m, tag) => {
+      const V = d.VENUES[m.v];
+      const C = d.COUNTRIES[V.country];
+      const hostVar = 'var(--' + V.country + ')';
+      const real = !!m.a;
+      return {
+        key: m.n, n: m.n, tag: tag || '',
+        date: this.shortDate(this.dayKey(m)) + ' · ' + this.fmtLocalTime(m.utc),
+        aLabel: real ? d.TEAMS[m.a].name : shortenPh(m.pa),
+        bLabel: real ? d.TEAMS[m.b].name : shortenPh(m.pb),
+        aFlagEl: real ? this.flagEl(d.TEAMS[m.a].flag, 18, 13) : null,
+        bFlagEl: real ? this.flagEl(d.TEAMS[m.b].flag, 18, 13) : null,
+        real, ph: !real,
+        bg: 'color-mix(in oklab, ' + hostVar + ' ' + pct + '%, var(--surface))',
+        venueChip: V.cityShort + ' · ' + C.short,
+        chipC: hostVar,
+        open: () => this.setState({ drawer: { type: 'match', n: m.n } }),
+      };
+    };
+    base.brCols = [
+      { key: 'R32', label: 'ROUND OF 32', ms: colsKO.R32.map((m) => mkKO(m)) },
+      { key: 'R16', label: 'ROUND OF 16', ms: colsKO.R16.map((m) => mkKO(m)) },
+      { key: 'QF', label: 'QUARTERFINALS', ms: colsKO.QF.map((m) => mkKO(m)) },
+      { key: 'SF', label: 'SEMIFINALS', ms: colsKO.SF.map((m) => mkKO(m)) },
+      { key: 'F', label: 'FINAL', ms: [mkKO(KO[104]), mkKO(KO[103], 'THIRD PLACE')] },
+    ];
+
+    // ---- standings ----
+    base.tables = d.GROUPS.map((g) => {
+      const codes = Object.keys(d.TEAMS).filter((c) => d.TEAMS[c].group === g);
+      const st = {};
+      codes.forEach((c) => { st[c] = { c, p: 0, w: 0, dr: 0, l: 0, gf: 0, ga: 0, pts: 0 }; });
+      let played = 0;
+      d.MATCHES.filter((m) => m.g === g).forEach((m) => {
+        const i = infos[m.n];
+        if (i.kind !== 'ft') return;
+        played++;
+        const a = st[m.a], b = st[m.b];
+        a.p++; b.p++; a.gf += i.a; a.ga += i.b; b.gf += i.b; b.ga += i.a;
+        if (i.a > i.b) { a.w++; b.l++; a.pts += 3; }
+        else if (i.a < i.b) { b.w++; a.l++; b.pts += 3; }
+        else { a.dr++; b.dr++; a.pts++; b.pts++; }
+      });
+      const rows = Object.values(st).sort((x, y) =>
+        y.pts - x.pts || (y.gf - y.ga) - (x.gf - x.ga) || y.gf - x.gf || d.TEAMS[x.c].name.localeCompare(d.TEAMS[y.c].name)
+      );
+      return {
+        g,
+        played: played + ' of 6 played',
+        rows: rows.map((r, idx) => ({
+          key: r.c,
+          pos: idx + 1,
+          flagEl: this.flagEl(d.TEAMS[r.c].flag, 19, 14),
+          name: d.TEAMS[r.c].name,
+          p: r.p, w: r.w, d: r.dr, l: r.l,
+          gd: (r.gf - r.ga > 0 ? '+' : '') + (r.gf - r.ga),
+          pts: r.pts,
+          bar: idx < 2 ? '3px solid var(--text2)' : (idx === 2 ? '3px dashed var(--dim)' : '3px solid transparent'),
+          open: openTeam(r.c),
+        })),
+      };
+    });
+
+    // ---- stats ----
+    const sc = {};
+    let totalGoals = 0, playedMatches = 0, biggest = null;
+    d.MATCHES.forEach((m) => {
+      const i = infos[m.n];
+      if (i.kind === 'up' || !m.a) return;
+      if (i.kind === 'ft') {
+        playedMatches++;
+        const diff = Math.abs(i.a - i.b);
+        if (diff > 0 && (!biggest || diff > biggest.diff || (diff === biggest.diff && i.a + i.b > biggest.tot))) {
+          biggest = { diff, tot: i.a + i.b, label: m.a + ' ' + i.a + '–' + i.b + ' ' + m.b, sub: this.shortDate(this.dayKey(m)) };
+        }
+      }
+      totalGoals += i.a + i.b;
+      i.goals.forEach((g) => {
+        const team = g[1] === 0 ? m.a : m.b;
+        const e = (sc[g[2]] = sc[g[2]] || { name: g[2], team, g: 0, a: 0 });
+        e.g++;
+        if (g[3]) {
+          const e2 = (sc[g[3]] = sc[g[3]] || { name: g[3], team, g: 0, a: 0 });
+          e2.a++;
+        }
+      });
+    });
+    base.scorers = Object.values(sc)
+      .sort((x, y) => y.g - x.g || y.a - x.a || x.name.localeCompare(y.name))
+      .slice(0, 10)
+      .map((s, idx) => ({
+        key: s.name,
+        rank: this.pad(idx + 1),
+        initials: this.initials(s.name),
+        name: s.name,
+        code: s.team,
+        flagEl: this.flagEl(d.TEAMS[s.team].flag, 14, 10),
+        g: s.g, a: s.a,
+      }));
+    const gg = d.GROUPS.map((g) => {
+      let n = 0;
+      d.MATCHES.filter((m) => m.g === g).forEach((m) => { const i = infos[m.n]; if (i.kind !== 'up') n += i.a + i.b; });
+      return { g, n };
+    });
+    const maxG = Math.max(1, ...gg.map((x) => x.n));
+    base.groupGoals = gg.map((x) => ({ key: x.g, g: x.g, n: x.n, w: Math.round((x.n / maxG) * 100) + '%' }));
+    base.statCards = [
+      { k: 'MATCHES PLAYED', v: String(playedMatches), sub: 'of 104 total' },
+      { k: 'GOALS', v: String(totalGoals), sub: playedMatches ? (totalGoals / Math.max(1, playedMatches)).toFixed(1) + ' per finished match' : 'tournament total' },
+      { k: 'BIGGEST WIN', v: biggest ? biggest.label : '—', sub: biggest ? biggest.sub + ' · simulated' : 'no results yet' },
+    ];
+
+    // ---- drawer ----
+    if (S.drawer && S.drawer.type === 'team') {
+      const code = S.drawer.code;
+      const T = d.TEAMS[code];
+      const following = S.follows.includes(code);
+      const squad = d.SQUADS[code];
+      const fx = d.MATCHES.filter((m) => m.a === code || m.b === code)
+        .sort((x, y) => Date.parse(x.utc) - Date.parse(y.utc))
+        .map((m) => {
+          const i = infos[m.n];
+          const home = m.a === code;
+          const opp = home ? m.b : m.a;
+          const gf = home ? i.a : i.b, ga = home ? i.b : i.a;
+          let mid, midC = 'var(--text)', res = '', resC = 'var(--text3)';
+          if (i.kind === 'up') { mid = this.fmtLocalTime(m.utc); midC = 'var(--text2)'; }
+          else if (i.kind === 'live') { mid = gf + '–' + ga + ' · ' + (outage ? 'live' : i.minLabel); midC = 'var(--live)'; }
+          else {
+            mid = gf + '–' + ga;
+            res = gf > ga ? 'W' : gf < ga ? 'L' : 'D';
+            resC = gf > ga ? 'var(--text)' : 'var(--text3)';
+          }
+          return {
+            key: m.n,
+            date: this.shortDate(this.dayKey(m)),
+            rd: m.r === 'GR' ? 'MD' + m.md : d.ROUND_LABELS[m.r],
+            opp: d.TEAMS[opp].name,
+            flagEl: this.flagEl(d.TEAMS[opp].flag, 18, 13),
+            mid, midC, res, resC,
+          };
+        });
+      const POS = { GK: 'GOALKEEPERS', DEF: 'DEFENDERS', MID: 'MIDFIELD', FWD: 'FORWARDS' };
+      base.drTitle = 'TEAM';
+      base.dr = {
+        isTeam: true,
+        flagEl: React.createElement('img', { src: 'https://flagcdn.com/w160/' + T.flag + '.png', alt: '', style: { width: '64px', height: '46px', borderRadius: '6px', objectFit: 'cover', border: '1px solid var(--border2)' } }),
+        name: T.name,
+        groupLabel: 'GROUP ' + T.group,
+        hostChip: T.host ? 'HOST' : '',
+        hostC: T.host ? 'var(--' + (code === 'MEX' ? 'mx' : code === 'USA' ? 'us' : 'ca') + ')' : 'var(--text3)',
+        following,
+        followLabel: following ? '★ Following' : '☆ Follow',
+        fBdr: following ? 'var(--text2)' : 'var(--border2)',
+        fBg: following ? 'var(--surface2)' : 'transparent',
+        fC: 'var(--text)',
+        toggleFollow: () => {
+          const next = following ? S.follows.filter((c) => c !== code) : [...S.follows, code];
+          this.setState({ follows: next });
+          try { localStorage.setItem('wc26-follows', JSON.stringify(next)); } catch (e) {}
+        },
+        hasSquad: !!squad,
+        noSquad: !squad,
+        coach: squad ? squad.coach : '',
+        posGroups: squad ? ['GK', 'DEF', 'MID', 'FWD'].map((p) => ({
+          key: p,
+          label: POS[p],
+          players: squad.players.filter((x) => x.pos === p).map((x) => ({
+            key: x.num,
+            num: x.num,
+            name: x.name,
+            cap: x.captain ? ' (C)' : '',
+            meta: x.age + ' y · ' + x.club,
+            photo: x.photo,
+            noPhoto: !x.photo,
+            initials: this.initials(x.name),
+            avBg: x.photo
+              ? 'repeating-linear-gradient(45deg, var(--surface2) 0 7px, var(--surface) 7px 14px)'
+              : 'var(--surface2)',
+          })),
+        })) : [],
+        fx,
+      };
+    } else if (S.drawer && S.drawer.type === 'match') {
+      const m = d.MATCHES.find((x) => x.n === S.drawer.n);
+      const i = infos[m.n];
+      const V = d.VENUES[m.v];
+      const det = this.det(m, i);
+      const hostVar = 'var(--' + V.country + ')';
+      base.drTitle = m.r === 'GR' ? 'GROUP ' + m.g + ' · MATCH ' + m.n : d.ROUND_LABELS[m.r].toUpperCase() + ' · MATCH ' + m.n;
+      base.dr = {
+        isMatch: true,
+        live: i.kind === 'live', ft: i.kind === 'ft', up: i.kind === 'up' || !m.a,
+        minute: outage ? '—' : i.minLabel,
+        hasScore: i.kind !== 'up' && !!m.a,
+        score: i.a + '–' + i.b,
+        kick: this.fmtLocalTime(m.utc),
+        bg: 'color-mix(in oklab, ' + hostVar + ' ' + pct + '%, var(--surface))',
+        bdr: i.kind === 'live' ? 'color-mix(in srgb, var(--live-badge) 60%, transparent)' : 'var(--border)',
+        aLabel: m.a ? d.TEAMS[m.a].name : m.pa,
+        bLabel: m.b ? d.TEAMS[m.b].name : m.pb,
+        aFlagEl: m.a ? this.flagEl(d.TEAMS[m.a].flag, 44, 32) : null,
+        bFlagEl: m.b ? this.flagEl(d.TEAMS[m.b].flag, 44, 32) : null,
+        aBtnFlagEl: m.a ? this.flagEl(d.TEAMS[m.a].flag, 18, 13) : null,
+        bBtnFlagEl: m.b ? this.flagEl(d.TEAMS[m.b].flag, 18, 13) : null,
+        noFlags: !m.a,
+        hasTeams: !!m.a,
+        openA: m.a ? openTeam(m.a) : null,
+        openB: m.b ? openTeam(m.b) : null,
+        statusLine: det.statusLine,
+        hasScorers: det.hasScorers,
+        scorersA: det.scorersA, scorersB: det.scorersB,
+        venueName: det.venueName, venueCity: det.venueCity, cap: det.cap,
+        timeLocal: det.timeLocal, timeVenue: det.timeVenue, city: det.city,
+      };
+    }
+
+    return base;
+  }
+}
+</script>
+</body>
+</html>
