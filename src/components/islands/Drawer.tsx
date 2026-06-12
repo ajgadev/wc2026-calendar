@@ -13,8 +13,10 @@ import {
   ESPN_SCOREBOARD,
   matchEspnEventToMatch,
   parseEspnCards,
+  parseEspnGoals,
   type CardEvent,
   type EspnEvent,
+  type GoalEvent,
   type MatchDetailsArchive,
 } from '../../lib/cards';
 import {
@@ -24,7 +26,7 @@ import {
   type MatchLineups,
   type PlacedPlayer,
 } from '../../lib/lineups';
-import type { Highlight, Match, Stadium } from '../../lib/types';
+import type { Goal, Highlight, Match, Stadium } from '../../lib/types';
 
 /**
  * Slide-over drawer for teams and matches. Statically rendered rows
@@ -91,15 +93,24 @@ async function findEspnEvent(m: Match, venueDay: string, fresh: boolean) {
   return null;
 }
 
-async function fetchCardsFor(m: Match, venueDay: string, live: boolean): Promise<CardEvent[]> {
+async function fetchEventDetailsFor(
+  m: Match,
+  venueDay: string,
+  live: boolean,
+): Promise<{ cards: CardEvent[]; goals: GoalEvent[] }> {
   const archive = await fetchMatchDetails();
   const archived = archive[String(m.n)];
-  if (archived) return archived.cards;
+  if (archived) return { cards: archived.cards, goals: archived.goals ?? [] };
   try {
     const hit = await findEspnEvent(m, venueDay, live);
-    if (hit) return parseEspnCards(hit.event, hit.homeIsA, hit.homeTeamId);
-  } catch { /* cards silently absent — never an error state */ }
-  return [];
+    if (hit) {
+      return {
+        cards: parseEspnCards(hit.event, hit.homeIsA, hit.homeTeamId),
+        goals: parseEspnGoals(hit.event, hit.homeIsA, hit.homeTeamId),
+      };
+    }
+  } catch { /* silently absent — never an error state */ }
+  return { cards: [], goals: [] };
 }
 
 /**
@@ -589,14 +600,26 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
   const [highlight, setHighlight] = useState<Highlight | null>(null);
   const [playerOpen, setPlayerOpen] = useState(false);
   const [cards, setCards] = useState<CardEvent[]>([]);
+  const [espnGoals, setEspnGoals] = useState<Goal[]>([]);
   const [lineups, setLineups] = useState<MatchLineups | null>(null);
   const [playerMeta, setPlayerMeta] = useState<Record<string, { num: number | null; photo: string | null }>>({});
+  const [liveTick, setLiveTick] = useState(0);
+
+  // while the drawer is open on a live match, refresh events every 60s
+  useEffect(() => {
+    if (dom.state !== 'live') return;
+    const t = setInterval(() => setLiveTick((x) => x + 1), 60_000);
+    return () => clearInterval(t);
+  }, [n, dom.state]);
 
   useEffect(() => {
     let alive = true;
-    setCards([]);
-    setLineups(null);
-    setPlayerMeta({});
+    if (liveTick === 0) {
+      setCards([]);
+      setEspnGoals([]);
+      setLineups(null);
+      setPlayerMeta({});
+    }
     if (!m) return;
     const started = dom.state !== 'up' || !!m.ft;
     const nearKickoff = Date.parse(m.utc) - Date.now() < 75 * 60_000; // lineups publish ~1h before
@@ -605,7 +628,18 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
       year: 'numeric', month: '2-digit', day: '2-digit', timeZone: v.timezone,
     }).format(new Date(m.utc));
     if (started) {
-      fetchCardsFor(m, venueDay, dom.state === 'live').then((c) => alive && setCards(c));
+      fetchEventDetailsFor(m, venueDay, dom.state === 'live').then((d) => {
+        if (!alive) return;
+        setCards(d.cards);
+        // normalize ESPN's shape to the static layer's Goal shape
+        setEspnGoals(d.goals.map((g) => ({
+          side: g.side,
+          name: g.player,
+          minute: g.minute,
+          ...(g.penalty ? { penalty: true } : {}),
+          ...(g.owngoal ? { owngoal: true } : {}),
+        })));
+      });
     }
     if (started || nearKickoff) {
       fetchLineupsFor(m, venueDay, dom.state === 'live' || (!started && nearKickoff)).then(
@@ -624,7 +658,7 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
       setPlayerMeta(map);
     });
     return () => { alive = false; };
-  }, [n, dom.state]);
+  }, [n, dom.state, liveTick]);
 
   const numFor = (player: string): number | null => playerMeta[normName(player)]?.num ?? null;
   const photoOf = (player: string): string | null => playerMeta[normName(player)]?.photo ?? null;
@@ -662,8 +696,11 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
   const B = m.b ? teams[m.b] : null;
   const state = m.ft ? 'ft' : dom.state;
   const score = m.ft ? `${m.ft[0]}–${m.ft[1]}` : dom.score;
-  const scorersA = (m.goals ?? []).filter((g) => g.side === 0);
-  const scorersB = (m.goals ?? []).filter((g) => g.side === 1);
+  // static layer first (openfootball, lands on the nightly rebuild);
+  // ESPN bridges the gap for live and just-finished matches
+  const goalEvents = m.goals?.length ? m.goals : espnGoals;
+  const scorersA = goalEvents.filter((g) => g.side === 0);
+  const scorersB = goalEvents.filter((g) => g.side === 1);
   const roundBit = m.stage === 'GR' ? `Group ${m.group} · Matchday ${m.md}` : stageLabels[m.stage];
   const countryName = { mx: 'Mexico', us: 'USA', ca: 'Canada' }[host];
 

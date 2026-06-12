@@ -38,6 +38,18 @@
     "type": "R"
    }
   ],
+  "goals": [
+   {
+    "minute": 9,
+    "side": 0,
+    "player": "Julián Quiñones"
+   },
+   {
+    "minute": 67,
+    "side": 0,
+    "player": "Raúl Jiménez"
+   }
+  ],
   "lineups": {
    "a": {
     "formation": "4-1-4-1",
@@ -203,6 +215,23 @@
     "side": 0,
     "player": "Lee Gi-Hyuk",
     "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 59,
+    "side": 1,
+    "player": "Ladislav Krejcí"
+   },
+   {
+    "minute": 67,
+    "side": 0,
+    "player": "Hwang In-Beom"
+   },
+   {
+    "minute": 80,
+    "side": 0,
+    "player": "Oh Hyeon-Gyu"
    }
   ],
   "lineups": {

@@ -21,8 +21,19 @@ export interface CardEvent {
   type: 'Y' | 'R' | 'YR';
 }
 
+export interface GoalEvent {
+  minute: number;
+  /** 0 = our match's team A, 1 = team B — the side credited with the goal */
+  side: 0 | 1;
+  player: string;
+  penalty?: boolean;
+  owngoal?: boolean;
+}
+
 export interface MatchDetail {
   cards: CardEvent[];
+  /** Scorers from ESPN — bridges the gap until openfootball's nightly data lands */
+  goals?: GoalEvent[];
   lineups?: import('./lineups').MatchLineups;
 }
 
@@ -115,6 +126,31 @@ export function parseEspnCards(event: EspnEvent, homeIsA: boolean, homeTeamId: s
     else if (c.type === 'R' && yellowed.has(c.player)) c.type = 'YR';
   }
   return out;
+}
+
+/**
+ * Extracts goal events from an ESPN event's details. Type texts seen:
+ * "Goal", "Goal - Header", "Goal - Volley", "Goal - Free-kick",
+ * "Penalty - Scored", "Own Goal". "Penalty - Missed" must not count.
+ */
+export function parseEspnGoals(event: EspnEvent, homeIsA: boolean, homeTeamId: string): GoalEvent[] {
+  const out: GoalEvent[] = [];
+  for (const d of event.competitions?.[0]?.details ?? []) {
+    const text = d.type?.text ?? '';
+    const isGoal = /^goal/i.test(text) || /penalty.*scored/i.test(text) || /own goal/i.test(text);
+    if (!isGoal) continue;
+    const minute = parseClock(d.clock?.displayValue);
+    const player = d.athletesInvolved?.[0]?.displayName ?? '';
+    if (minute === null || !player) continue;
+    out.push({
+      minute,
+      side: ((d.team?.id === homeTeamId) === homeIsA ? 0 : 1) as 0 | 1,
+      player,
+      ...(/penalty/i.test(text) ? { penalty: true } : {}),
+      ...(/own goal/i.test(text) ? { owngoal: true } : {}),
+    });
+  }
+  return out.sort((x, y) => x.minute - y.minute);
 }
 
 export function hasRedCard(detail: MatchDetail | undefined): boolean {
