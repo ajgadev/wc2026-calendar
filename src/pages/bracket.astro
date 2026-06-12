@@ -4,7 +4,11 @@ import Bracket from '../components/Bracket.astro';
 import LiveOverlay from '../components/islands/LiveOverlay';
 ---
 
-<Layout active="bracket" title="Bracket — MATCHDAY26 · World Cup 2026">
+<Layout
+  active="bracket"
+  title="Bracket — MATCHDAY26 · World Cup 2026"
+  description="The World Cup 2026 knockout bracket: Round of 32 to the Final at MetLife Stadium, July 19. Placeholders fill in live as the groups conclude."
+>
   <Bracket />
   <LiveOverlay client:idle />
 </Layout>

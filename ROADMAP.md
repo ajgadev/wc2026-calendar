@@ -5,21 +5,21 @@
 The static prerendered HTML is already crawler-friendly; these are the
 missing layers, roughly in impact order:
 
-- [ ] **Set `site` in `astro.config.mjs`** to `https://wc2026calendar.info`
+- [x] **Set `site` in `astro.config.mjs`** to `https://wc2026calendar.info`
       — prerequisite for canonicals, sitemap, and absolute OG URLs.
-- [ ] **Open Graph + Twitter cards** in `Layout.astro` (`og:title`,
+- [x] **Open Graph + Twitter cards** in `Layout.astro` (`og:title`,
       `og:description`, `og:url`, `og:image`, `twitter:card`). Add a static
       share image (1200×630) in the MATCHDAY26 brand style — dark pitch
       background, host-country bars, wordmark.
-- [ ] **Canonical URLs** per page (`<link rel="canonical">` from `site` +
+- [x] **Canonical URLs** per page (`<link rel="canonical">` from `site` +
       `Astro.url.pathname`).
-- [ ] **Sitemap + robots.txt** — `@astrojs/sitemap` integration (needs `site`),
+- [x] **Sitemap + robots.txt** — `@astrojs/sitemap` integration (needs `site`),
       plus a `public/robots.txt` pointing at the sitemap and allowing all.
-- [ ] **Structured data** — `SportsEvent` JSON-LD baked at build time: 104
+- [x] **Structured data** — `SportsEvent` JSON-LD baked at build time: 104
       events with teams, kickoff (`startDate`), and stadium (`location` with
       city/country). This is what qualifies match info for rich results.
       Use an `ItemList` on the index; consider `BreadcrumbList` on subpages.
-- [ ] **Per-page meta descriptions** — distinct copy for `/bracket`,
+- [x] **Per-page meta descriptions** — distinct copy for `/bracket`,
       `/standings`, `/stats` (currently all reuse the homepage default).
 - [ ] **Consider: per-match and per-team pages** (`/match/42`, `/team/GER`)
       — deep-linkable URLs are the biggest remaining SEO lever (one indexable

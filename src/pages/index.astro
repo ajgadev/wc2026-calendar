@@ -4,6 +4,44 @@ import AgendaList from '../components/AgendaList.astro';
 import CalendarGrid from '../components/CalendarGrid.astro';
 import FilterBar from '../components/islands/FilterBar';
 import LiveOverlay from '../components/islands/LiveOverlay';
+import { MATCHES, STAGE_LABELS } from '../data/schedule';
+import { TEAMS } from '../data/teams';
+import { STADIUMS, HOST_COUNTRIES } from '../data/stadiums';
+
+// SportsEvent structured data — all 104 matches, baked at build time.
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'FIFA World Cup 2026 — all matches',
+  numberOfItems: MATCHES.length,
+  itemListElement: MATCHES.map((m, i) => {
+    const v = STADIUMS[m.stadium];
+    const nameA = m.a ? TEAMS[m.a].name : m.pa;
+    const nameB = m.b ? TEAMS[m.b].name : m.pb;
+    const stageBit = m.stage === 'GR' ? `Group ${m.group}` : STAGE_LABELS[m.stage];
+    return {
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'SportsEvent',
+        name: `${nameA} vs ${nameB} — ${stageBit}`,
+        startDate: m.utc,
+        eventStatus: 'https://schema.org/EventScheduled',
+        location: {
+          '@type': 'Place',
+          name: v.name,
+          address: { '@type': 'PostalAddress', addressLocality: v.city, addressCountry: v.country },
+        },
+        ...(m.a && m.b
+          ? {
+              homeTeam: { '@type': 'SportsTeam', name: TEAMS[m.a].name },
+              awayTeam: { '@type': 'SportsTeam', name: TEAMS[m.b].name },
+            }
+          : {}),
+      },
+    };
+  }),
+}).replace(/</g, '\\u003c');
 ---
 
 <Layout active="matches">
@@ -15,6 +53,7 @@ import LiveOverlay from '../components/islands/LiveOverlay';
     <CalendarGrid />
   </div>
   <LiveOverlay client:idle />
+  <script type="application/ld+json" set:html={jsonLd} />
 
   <script>
     // Anchor today's section on load (agenda view), once today-marking ran.
