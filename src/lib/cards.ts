@@ -23,6 +23,7 @@ export interface CardEvent {
 
 export interface MatchDetail {
   cards: CardEvent[];
+  lineups?: import('./lineups').MatchLineups;
 }
 
 /** Archive shape: { [matchN]: MatchDetail } */

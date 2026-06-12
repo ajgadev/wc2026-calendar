@@ -37,7 +37,164 @@
     "player": "César Montes",
     "type": "R"
    }
-  ]
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Raúl Rangel",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Johan Vásquez",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "César Montes",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Érik Lira",
+      "jersey": "6",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Jesús Gallardo",
+      "jersey": "23",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Israel Reyes",
+      "jersey": "15",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Álvaro Fidalgo",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Brian Gutiérrez",
+      "jersey": "26",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Julián Quiñones",
+      "jersey": "16",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Roberto Alvarado",
+      "jersey": "25",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Raúl Jiménez",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Luis Chávez",
+     "Alexis Vega",
+     "Armando González",
+     "Gilberto Mora",
+     "Edson Álvarez"
+    ]
+   },
+   "b": {
+    "formation": "5-3-2",
+    "starters": [
+     {
+      "name": "Ronwen Williams",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Ime Okon",
+      "jersey": "21",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Mbekezeli Mbokazi",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Nkosinathi Sibisi",
+      "jersey": "19",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Aubrey Modiba",
+      "jersey": "6",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Khuliso Mudau",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Sphephelo Sithole",
+      "jersey": "13",
+      "pos": "CM",
+      "place": 8
+     },
+     {
+      "name": "Jayden Adams",
+      "jersey": "23",
+      "pos": "CM-L",
+      "place": 11
+     },
+     {
+      "name": "Teboho Mokoena",
+      "jersey": "4",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Lyle Foster",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Iqraam Rayners",
+      "jersey": "15",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Oswin Appollis",
+     "Themba Zwane",
+     "Thalente Mbatha",
+     "Evidence Makgopa"
+    ]
+   }
+  }
  },
  "2": {
   "cards": [
@@ -47,6 +204,163 @@
     "player": "Lee Gi-Hyuk",
     "type": "Y"
    }
-  ]
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Kim Seung-Gyu",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Kim Min-Jae",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Lee Gi-Hyuk",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Lee Han-Beom",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Paik Seung-Ho",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Hwang In-Beom",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Lee Tae-Seok",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Seol Young-Woo",
+      "jersey": "22",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Son Heung-Min",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Lee Jae-Sung",
+      "jersey": "10",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Lee Kang-In",
+      "jersey": "19",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Kim Jin-Gyu",
+     "Hwang Hee-Chan",
+     "Eom Ji-Sung",
+     "Park Jin-Seop",
+     "Oh Hyeon-Gyu"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Matej Kovár",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Robin Hranác",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Ladislav Krejcí",
+      "jersey": "7",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Stepán Chaloupek",
+      "jersey": "6",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Alexandr Sojka",
+      "jersey": "24",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Tomás Soucek",
+      "jersey": "22",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Jaroslav Zelený",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Vladimír Coufal",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Patrik Schick",
+      "jersey": "10",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Pavel Sulc",
+      "jersey": "15",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Lukás Provod",
+      "jersey": "17",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Adam Hlozek",
+     "Tomás Chorý",
+     "Mojmír Chytil",
+     "Michal Sadílek"
+    ]
+   }
+  }
  }
 }

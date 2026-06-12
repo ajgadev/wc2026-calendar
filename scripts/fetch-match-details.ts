@@ -21,6 +21,7 @@ const { MATCHES } = await import('../src/data/schedule');
 const { STADIUMS } = await import('../src/data/stadiums');
 const { venueDate } = await import('../src/lib/time');
 const { ESPN_SCOREBOARD, matchEspnEventToMatch, parseEspnCards } = await import('../src/lib/cards');
+const { ESPN_SUMMARY, parseEspnLineups } = await import('../src/lib/lineups');
 type Archive = import('../src/lib/cards').MatchDetailsArchive;
 type EspnEvent = import('../src/lib/cards').EspnEvent;
 
@@ -81,9 +82,18 @@ if (pending.length === 0) {
       const hit = matchEspnEventToMatch(event, [...remaining.values()]);
       if (!hit) continue;
       const cards = parseEspnCards(event, hit.homeIsA, hit.homeTeamId);
-      archive[String(hit.match.n)] = { cards };
+      // lineups + formations come from the per-match summary endpoint
+      let lineups = null;
+      if (event.id) {
+        const summary = await getJson<unknown>(`${ESPN_SUMMARY}?event=${event.id}`);
+        await sleep(600);
+        if (summary) lineups = parseEspnLineups(summary, hit.match.a!);
+      }
+      archive[String(hit.match.n)] = { cards, ...(lineups ? { lineups } : {}) };
       remaining.delete(hit.match.n);
-      console.log(`[cards] match ${hit.match.n} (${hit.match.a} v ${hit.match.b}): ${cards.length} cards`);
+      console.log(
+        `[cards] match ${hit.match.n} (${hit.match.a} v ${hit.match.b}): ${cards.length} cards, lineups ${lineups ? 'yes' : 'no'}`,
+      );
       // incremental write — progress survives a killed run
       mkdirSync(resolve(ROOT, 'public/data'), { recursive: true });
       writeFileSync(OUT, JSON.stringify(archive, null, 1));

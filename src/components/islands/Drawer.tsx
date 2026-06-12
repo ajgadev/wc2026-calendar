@@ -17,6 +17,13 @@ import {
   type EspnEvent,
   type MatchDetailsArchive,
 } from '../../lib/cards';
+import {
+  ESPN_SUMMARY,
+  layoutLineup,
+  parseEspnLineups,
+  type MatchLineups,
+  type PlacedPlayer,
+} from '../../lib/lineups';
 import type { Highlight, Match, Stadium } from '../../lib/types';
 
 /**
@@ -55,36 +62,73 @@ function fetchMatchDetails() {
  * in sessionStorage so each day is fetched at most once per session.
  * Live matches skip the session cache so cards keep arriving.
  */
+async function espnDayEvents(day: string, fresh: boolean): Promise<EspnEvent[]> {
+  const cacheKey = `wc26-espn-${day}`;
+  if (!fresh) {
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) return JSON.parse(cached);
+    } catch { /* ignore */ }
+  }
+  const res = await fetch(`${ESPN_SCOREBOARD}?dates=${day.replace(/-/g, '')}`);
+  if (!res.ok) return [];
+  const events = ((await res.json()) as { events?: EspnEvent[] | null }).events ?? [];
+  if (!fresh) {
+    try { sessionStorage.setItem(cacheKey, JSON.stringify(events)); } catch { /* ignore */ }
+  }
+  return events;
+}
+
+/** ESPN buckets by US-Eastern-ish dates — try venue date, then UTC date. */
+async function findEspnEvent(m: Match, venueDay: string, fresh: boolean) {
+  const days = [...new Set([venueDay, m.utc.slice(0, 10)])];
+  for (const day of days) {
+    for (const event of await espnDayEvents(day, fresh)) {
+      const hit = matchEspnEventToMatch(event, [m]);
+      if (hit) return { event, ...hit };
+    }
+  }
+  return null;
+}
+
 async function fetchCardsFor(m: Match, venueDay: string, live: boolean): Promise<CardEvent[]> {
   const archive = await fetchMatchDetails();
   const archived = archive[String(m.n)];
   if (archived) return archived.cards;
-
   try {
-    // ESPN buckets by US-Eastern-ish dates — try venue date, then UTC date
-    const days = [...new Set([venueDay, m.utc.slice(0, 10)])];
-    for (const day of days) {
-      const cacheKey = `wc26-espn-${day}`;
-      let events: EspnEvent[] | null = null;
-      if (!live) {
-        const cached = sessionStorage.getItem(cacheKey);
-        if (cached) events = JSON.parse(cached);
-      }
-      if (!events) {
-        const res = await fetch(`${ESPN_SCOREBOARD}?dates=${day.replace(/-/g, '')}`);
-        if (!res.ok) continue;
-        events = ((await res.json()) as { events?: EspnEvent[] | null }).events ?? [];
-        if (!live) {
-          try { sessionStorage.setItem(cacheKey, JSON.stringify(events)); } catch { /* ignore */ }
-        }
-      }
-      for (const event of events) {
-        const hit = matchEspnEventToMatch(event, [m]);
-        if (hit) return parseEspnCards(event, hit.homeIsA, hit.homeTeamId);
-      }
-    }
+    const hit = await findEspnEvent(m, venueDay, live);
+    if (hit) return parseEspnCards(hit.event, hit.homeIsA, hit.homeTeamId);
   } catch { /* cards silently absent — never an error state */ }
   return [];
+}
+
+/**
+ * Lineups: archive first; otherwise the ESPN summary endpoint —
+ * lineups publish ~1h before kickoff, so the drawer also asks for
+ * upcoming matches inside that window.
+ */
+async function fetchLineupsFor(m: Match, venueDay: string, fresh: boolean): Promise<MatchLineups | null> {
+  const archive = await fetchMatchDetails();
+  const archived = archive[String(m.n)];
+  if (archived?.lineups) return archived.lineups;
+  try {
+    const hit = await findEspnEvent(m, venueDay, fresh);
+    if (!hit?.event.id || !m.a) return null;
+    const cacheKey = `wc26-espn-sum-${hit.event.id}`;
+    if (!fresh) {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) return parseEspnLineups(JSON.parse(cached), m.a);
+    }
+    const res = await fetch(`${ESPN_SUMMARY}?event=${hit.event.id}`);
+    if (!res.ok) return null;
+    const summary = await res.json();
+    if (!fresh) {
+      try { sessionStorage.setItem(cacheKey, JSON.stringify({ rosters: summary.rosters })); } catch { /* ignore */ }
+    }
+    return parseEspnLineups(summary, m.a);
+  } catch {
+    return null; // lineups silently absent — never an error state
+  }
 }
 
 const normName = (s: string) =>
@@ -462,6 +506,80 @@ function RemindButton() {
   );
 }
 
+/* ---------- lineup pitch ---------- */
+
+const pitchLine = 'rgb(255 255 255 / 0.16)';
+
+function PlayerDot({ p, top, left, photo }: { p: PlacedPlayer; top: number; left: number; photo: string | null }) {
+  return (
+    <div
+      className="absolute flex w-[64px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[2px]"
+      style={{ top: `${top}%`, left: `${left}%` }}
+    >
+      <div className="relative">
+        <span className="flex size-[38px] items-center justify-center overflow-hidden rounded-full border" style={{ background: '#1E2530', borderColor: 'rgb(255 255 255 / 0.35)' }}>
+          {photo ? (
+            <img src={photo} alt="" loading="lazy" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).remove(); }} />
+          ) : (
+            <span className="disp text-[13px] font-black" style={{ color: 'rgb(255 255 255 / 0.75)' }}>{initials(p.name)}</span>
+          )}
+        </span>
+        <span className="disp tnum absolute -top-1 -right-2 rounded-[3px] px-[4px] text-[10px] font-black leading-[14px]" style={{ background: 'rgb(0 0 0 / 0.6)', color: '#fff' }}>
+          {p.jersey}
+        </span>
+      </div>
+      <span className="max-w-[64px] truncate text-center text-[9px] font-semibold leading-tight" style={{ color: 'rgb(255 255 255 / 0.92)', textShadow: '0 1px 2px rgb(0 0 0 / 0.7)' }}>
+        {p.name}
+      </span>
+    </div>
+  );
+}
+
+function Pitch({ lineups, nameA, nameB, photoOf }: { lineups: MatchLineups; nameA: string; nameB: string; photoOf: (name: string) => string | null }) {
+  const top = layoutLineup(lineups.a);
+  const bottom = layoutLineup(lineups.b);
+  const box = 'absolute border';
+  return (
+    <div className="flex flex-col gap-2">
+      <span className={microHead}>LINEUPS</span>
+      <div
+        className="relative w-full overflow-hidden rounded-(--radius-row) border border-border"
+        style={{ aspectRatio: '0.62', background: 'linear-gradient(180deg, #1A3A24 0%, #142C1C 50%, #1A3A24 100%)' }}
+      >
+        {/* pitch markings */}
+        <div className={box} style={{ inset: '1.5% 3%', borderColor: pitchLine, borderRadius: 4 }} />
+        <div className="absolute" style={{ top: '50%', left: '3%', right: '3%', borderTop: `1px solid ${pitchLine}` }} />
+        <div className="absolute rounded-full border" style={{ top: '50%', left: '50%', width: '24%', aspectRatio: '1', transform: 'translate(-50%,-50%)', borderColor: pitchLine }} />
+        <div className={box} style={{ top: '1.5%', left: '24%', width: '52%', height: '11%', borderColor: pitchLine, borderTop: 'none' }} />
+        <div className={box} style={{ top: '1.5%', left: '37%', width: '26%', height: '4.5%', borderColor: pitchLine, borderTop: 'none' }} />
+        <div className={box} style={{ bottom: '1.5%', left: '24%', width: '52%', height: '11%', borderColor: pitchLine, borderBottom: 'none' }} />
+        <div className={box} style={{ bottom: '1.5%', left: '37%', width: '26%', height: '4.5%', borderColor: pitchLine, borderBottom: 'none' }} />
+
+        {/* formation labels */}
+        <span className="disp absolute top-[2.5%] left-[5%] text-[10px] font-extrabold tracking-[0.06em]" style={{ color: 'rgb(255 255 255 / 0.85)' }}>
+          {nameA.toUpperCase()}{lineups.a.formation ? ` · ${lineups.a.formation}` : ''}
+        </span>
+        <span className="disp absolute bottom-[2.5%] left-[5%] text-[10px] font-extrabold tracking-[0.06em]" style={{ color: 'rgb(255 255 255 / 0.85)' }}>
+          {nameB.toUpperCase()}{lineups.b.formation ? ` · ${lineups.b.formation}` : ''}
+        </span>
+
+        {/* team A defends the top goal; team B mirrors from the bottom */}
+        {top.map((p) => (
+          <PlayerDot key={`a${p.place}${p.name}`} p={p} top={p.y * 0.42 + 5} left={p.x * 0.88 + 6} photo={photoOf(p.name)} />
+        ))}
+        {bottom.map((p) => (
+          <PlayerDot key={`b${p.place}${p.name}`} p={p} top={95 - p.y * 0.42} left={94 - p.x * 0.88} photo={photoOf(p.name)} />
+        ))}
+      </div>
+      {(lineups.a.subbedIn.length > 0 || lineups.b.subbedIn.length > 0) && (
+        <span className="t-micro leading-relaxed text-text-dim">
+          Subs used — {nameA}: {lineups.a.subbedIn.join(', ') || '—'} · {nameB}: {lineups.b.subbedIn.join(', ') || '—'}
+        </span>
+      )}
+    </div>
+  );
+}
+
 /* ---------- match drawer ---------- */
 
 function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => void }) {
@@ -471,33 +589,45 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
   const [highlight, setHighlight] = useState<Highlight | null>(null);
   const [playerOpen, setPlayerOpen] = useState(false);
   const [cards, setCards] = useState<CardEvent[]>([]);
-  const [shirtNums, setShirtNums] = useState<Record<string, number>>({});
+  const [lineups, setLineups] = useState<MatchLineups | null>(null);
+  const [playerMeta, setPlayerMeta] = useState<Record<string, { num: number | null; photo: string | null }>>({});
 
   useEffect(() => {
     let alive = true;
     setCards([]);
-    setShirtNums({});
-    if (!m || (!m.ft && dom.state === 'up')) return;
+    setLineups(null);
+    setPlayerMeta({});
+    if (!m) return;
+    const started = dom.state !== 'up' || !!m.ft;
+    const nearKickoff = Date.parse(m.utc) - Date.now() < 75 * 60_000; // lineups publish ~1h before
     const v = stadiums[m.stadium];
     const venueDay = new Intl.DateTimeFormat('en-CA', {
       year: 'numeric', month: '2-digit', day: '2-digit', timeZone: v.timezone,
     }).format(new Date(m.utc));
-    fetchCardsFor(m, venueDay, dom.state === 'live').then((c) => alive && setCards(c));
-    // kit numbers for scorers/cards lines, resolved by normalized name
+    if (started) {
+      fetchCardsFor(m, venueDay, dom.state === 'live').then((c) => alive && setCards(c));
+    }
+    if (started || nearKickoff) {
+      fetchLineupsFor(m, venueDay, dom.state === 'live' || (!started && nearKickoff)).then(
+        (l) => alive && setLineups(l),
+      );
+    }
+    // kit numbers + photos for scorer/card lines and the lineup pitch
     fetchPlayers().then((all) => {
       if (!alive) return;
-      const map: Record<string, number> = {};
+      const map: Record<string, { num: number | null; photo: string | null }> = {};
       for (const code of [m.a, m.b]) {
         for (const p of (code && all[code]) || []) {
-          if (p.shirtNumber != null) map[normName(p.name)] = p.shirtNumber;
+          map[normName(p.name)] = { num: p.shirtNumber, photo: p.photoUrl };
         }
       }
-      setShirtNums(map);
+      setPlayerMeta(map);
     });
     return () => { alive = false; };
   }, [n, dom.state]);
 
-  const numFor = (player: string): number | null => shirtNums[normName(player)] ?? null;
+  const numFor = (player: string): number | null => playerMeta[normName(player)]?.num ?? null;
+  const photoOf = (player: string): string | null => playerMeta[normName(player)]?.photo ?? null;
 
   useEffect(() => {
     let alive = true;
@@ -628,6 +758,9 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
           </div>
         </div>
       )}
+
+      {/* starting lineups on a pitch */}
+      {lineups && A && B && <Pitch lineups={lineups} nameA={A.name} nameB={B.name} photoOf={photoOf} />}
 
       {/* highlights — click-to-load facade; no YouTube script before click */}
       {highlight && (
