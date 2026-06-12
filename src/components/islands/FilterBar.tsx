@@ -86,7 +86,7 @@ function applyFilters(f: Filters, follows: string[]) {
 const seg =
   'focus-ring-surface min-h-[38px] rounded-md px-3.5 py-1.5 t-meta font-semibold';
 const pill =
-  'focus-ring inline-flex min-h-10 items-center gap-[7px] rounded-(--radius-pill) border px-[13px] py-1.5 t-meta font-semibold';
+  'focus-ring inline-flex min-h-10 shrink-0 items-center gap-[7px] rounded-(--radius-pill) border px-[13px] py-1.5 t-meta font-semibold whitespace-nowrap';
 
 export default function FilterBar({ showViewControls = true }: { showViewControls?: boolean }) {
   const [f, setF] = useState<Filters>({ q: '', group: '', country: '', stage: '', mine: false });
@@ -180,23 +180,24 @@ export default function FilterBar({ showViewControls = true }: { showViewControl
         </div>
       )}
 
+      {/* single scrollable row on phones; wraps from sm up */}
       <div
-        className="sticky top-0 z-30 flex flex-wrap items-center gap-2 border-b border-border px-0.5 py-2.5 backdrop-blur-[10px]"
+        className="no-scrollbar sticky top-0 z-30 flex flex-nowrap items-center gap-2 overflow-x-auto border-b border-border px-0.5 py-2.5 backdrop-blur-[10px] sm:flex-wrap sm:overflow-visible"
         style={{ background: 'color-mix(in srgb, var(--color-bg) 88%, transparent)' }}
       >
         <input
           type="search"
           value={f.q}
           onChange={(e) => update({ q: e.target.value })}
-          placeholder="Search team, city, stadium…"
+          placeholder="Search…"
           aria-label="Search matches"
-          className="focus-ring min-h-10 w-[190px] rounded-[9px] border border-border bg-surface px-3 py-1.5 t-meta text-text outline-none"
+          className="focus-ring min-h-10 w-[120px] shrink-0 rounded-[9px] border border-border bg-surface px-3 py-1.5 t-meta text-text outline-none sm:w-[190px]"
         />
         <select
           value={f.group}
           onChange={(e) => update({ group: e.target.value })}
           aria-label="Filter by group"
-          className="focus-ring min-h-10 rounded-[9px] border border-border bg-surface px-2.5 py-1.5 t-meta text-text outline-none"
+          className="focus-ring min-h-10 shrink-0 rounded-[9px] border border-border bg-surface px-2.5 py-1.5 t-meta text-text outline-none"
         >
           <option value="">All groups</option>
           {GROUPS.map((g) => (
@@ -259,7 +260,7 @@ export default function FilterBar({ showViewControls = true }: { showViewControl
           <button
             type="button"
             onClick={() => update({ q: '', group: '', country: '', stage: '', mine: false })}
-            className="focus-ring min-h-10 px-3 py-1.5 t-meta font-semibold text-text-3 underline underline-offset-[3px] hover:text-text"
+            className="focus-ring min-h-10 shrink-0 px-3 py-1.5 t-meta font-semibold whitespace-nowrap text-text-3 underline underline-offset-[3px] hover:text-text"
           >
             Clear
           </button>

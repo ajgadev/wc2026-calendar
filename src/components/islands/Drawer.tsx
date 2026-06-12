@@ -638,7 +638,7 @@ const pitchLine = 'rgb(255 255 255 / 0.16)';
 function PlayerDot({ p, top, left, photo }: { p: PlacedPlayer; top: number; left: number; photo: string | null }) {
   return (
     <div
-      className="absolute flex w-[64px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[2px]"
+      className="absolute flex w-[64px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[2px] max-[480px]:w-[54px]"
       style={{ top: `${top}%`, left: `${left}%` }}
     >
       <div className="relative">
@@ -653,7 +653,7 @@ function PlayerDot({ p, top, left, photo }: { p: PlacedPlayer; top: number; left
           {p.jersey}
         </span>
       </div>
-      <span className="max-w-[64px] truncate text-center text-[9px] font-semibold leading-tight" style={{ color: 'rgb(255 255 255 / 0.92)', textShadow: '0 1px 2px rgb(0 0 0 / 0.7)' }}>
+      <span className="max-w-[64px] truncate text-center text-[9px] font-semibold leading-tight max-[480px]:max-w-[54px] max-[480px]:text-[8px]" style={{ color: 'rgb(255 255 255 / 0.92)', textShadow: '0 1px 2px rgb(0 0 0 / 0.7)' }}>
         {p.name}
       </span>
     </div>

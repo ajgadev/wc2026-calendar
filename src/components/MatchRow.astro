@@ -52,7 +52,7 @@ const country = stadiumOf(m).country.toLowerCase();
   </span>
 
   <!-- teams + score -->
-  <span class="grid min-w-0 grow basis-[250px] grid-cols-[1fr_auto_1fr] items-center gap-2.5">
+  <span class="grid min-w-0 grow basis-[200px] grid-cols-[1fr_auto_1fr] items-center gap-2.5">
     <span class="flex min-w-0 items-center justify-end gap-[7px]">
       <span
         data-name-a
@@ -89,12 +89,13 @@ const country = stadiumOf(m).country.toLowerCase();
     </span>
   </span>
 
-  <!-- venue + round -->
-  <span class="ml-auto flex flex-col items-end gap-1">
-    <span class="flex items-center gap-1.5">
+  <!-- venue + round: stacked right column on desktop, one tidy meta
+       line under the teams on phones -->
+  <span class="ml-auto flex flex-col items-end gap-1 max-sm:ml-0 max-sm:w-full max-sm:flex-row max-sm:items-center max-sm:justify-between">
+    <span class="flex items-center gap-1.5 max-sm:order-2">
       {matchHasRed(m) && <span class="inline-block h-3 w-[9px] rounded-[2px]" style="background:#E5484D" title="Red card in this match"></span>}
       <span class:list={['host-chip t-micro rounded-(--radius-chip) px-[7px] py-[2px] font-semibold tracking-[0.05em] whitespace-nowrap', hostClass(m)]}>{venueChip(m)}</span>
     </span>
-    <span class="t-micro tracking-[0.06em] whitespace-nowrap text-text-dim">{roundLabel(m)}</span>
+    <span class="t-micro tracking-[0.06em] whitespace-nowrap text-text-dim max-sm:order-1">{roundLabel(m)}</span>
   </span>
 </button>

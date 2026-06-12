@@ -203,6 +203,10 @@ input::placeholder { color: var(--color-text-dim); }
 [data-date][data-is-today] .today-badge { display: inline-block; }
 [data-date][data-is-today] { scroll-margin-top: 130px; }
 
+/* Hidden scrollbars for horizontally scrolling control rows */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 /* Mobile bracket: one round per screen with scroll snap */
 .bracket-scroll {
   scroll-snap-type: x mandatory;
