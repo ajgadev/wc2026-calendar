@@ -141,6 +141,12 @@ const appData = JSON.stringify({
       document.querySelectorAll<HTMLElement>('[data-kick]').forEach((el) => {
         el.textContent = fmt(el.dataset.kick!);
       });
+      // date + time spans (bracket cards): venue date → viewer-local date
+      document.querySelectorAll<HTMLElement>('[data-kick-date]').forEach((el) => {
+        const iso = el.dataset.kickDate!;
+        const d = new Date(iso);
+        el.textContent = `${d.toLocaleString('en', { month: 'short' })} ${d.getDate()} · ${fmt(iso)}`;
+      });
       document.querySelectorAll<HTMLElement>('[data-tz-note]').forEach((el) => {
         el.textContent = 'your local time';
       });

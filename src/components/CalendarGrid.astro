@@ -49,7 +49,7 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
 ];
 ---
 
-<div class="overflow-x-auto pt-5">
+<div class="overflow-x-auto pt-5" data-calendar>
   <div class="flex min-w-[640px] flex-col gap-6">
     {months.map(({ month, label, cells }) => (
       <div class={`cal-month-${month} flex flex-col gap-2`}>
@@ -76,7 +76,7 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                   <span class="today-badge rounded-[3px] px-[5px] py-px text-[9px] font-bold tracking-[0.1em]" style="color: var(--color-bg); background: var(--color-text);">TODAY</span>
                 </div>
               )}
-              {c.rest && <span class="t-micro font-mono text-text-dim">rest day</span>}
+              {c.rest && <span data-rest-day class="t-micro font-mono text-text-dim">rest day</span>}
               {(c.matches ?? []).map((m) => {
                 const real = !!(m.a && m.b);
                 const state = stateOf(m);

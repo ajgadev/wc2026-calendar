@@ -56,7 +56,10 @@ const jsonLd = JSON.stringify({
   <script type="application/ld+json" set:html={jsonLd} />
 
   <script>
-    // Anchor today's section on load (agenda view), once today-marking ran.
+    import { relocalize } from '../lib/relocalize';
+    // Re-bucket day sections & calendar chips into the visitor's
+    // timezone (build groups by stadium-local date), then anchor today.
+    relocalize();
     requestAnimationFrame(() => {
       const today = document.querySelector('[data-day-section][data-is-today]');
       if (today && !location.search && innerWidth < 1000) {

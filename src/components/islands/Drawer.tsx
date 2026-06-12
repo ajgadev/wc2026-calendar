@@ -567,8 +567,15 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
   const [sdbTv, setSdbTv] = useState<SdbTvRow[]>([]);
 
   useEffect(() => {
-    setMarket(detectMarket(navigator.language || '') ?? 'US');
+    let saved: string | null = null;
+    try { saved = localStorage.getItem('wc26-market'); } catch { /* ignore */ }
+    setMarket(saved && BROADCAST_RIGHTS[saved] ? saved : detectMarket(navigator.language || '') ?? 'US');
   }, []);
+
+  const pickMarket = (v: string) => {
+    setMarket(v);
+    try { localStorage.setItem('wc26-market', v); } catch { /* ignore */ }
+  };
 
   useEffect(() => {
     let alive = true;
@@ -588,7 +595,7 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
         <span className={microHead}>WHERE TO WATCH</span>
         <select
           value={market}
-          onChange={(e) => setMarket(e.target.value)}
+          onChange={(e) => pickMarket(e.target.value)}
           aria-label="Country"
           className="focus-ring rounded-md border border-border bg-surface px-1.5 py-1 t-micro text-text-2 outline-none"
         >

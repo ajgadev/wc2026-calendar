@@ -104,13 +104,20 @@ export default function FilterBar({ showViewControls = true }: { showViewControl
     setMonth(root.dataset.month === '7' ? 7 : 6);
     applyFilters(init, follows.current);
     ready.current = true;
-    return onFollowsChange((next) => {
+    // the relocalize pass rebuilds day sections — re-apply filters after
+    const onRefilter = () => applyFilters(fromUrl(), follows.current);
+    window.addEventListener('wc26:refilter', onRefilter);
+    const offFollows = onFollowsChange((next) => {
       follows.current = next;
       setF((cur) => {
         if (cur.mine) applyFilters(cur, next);
         return cur;
       });
     });
+    return () => {
+      window.removeEventListener('wc26:refilter', onRefilter);
+      offFollows();
+    };
   }, []);
 
   const update = (patch: Partial<Filters>) => {
