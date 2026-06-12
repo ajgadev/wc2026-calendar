@@ -12,6 +12,7 @@ import { sportsDbNameFor } from '../../data/teamNames';
 import {
   ESPN_SCOREBOARD,
   matchEspnEventToMatch,
+  parseEspnBroadcasts,
   parseEspnCards,
   parseEspnGoals,
   type CardEvent,
@@ -19,6 +20,8 @@ import {
   type GoalEvent,
   type MatchDetailsArchive,
 } from '../../lib/cards';
+import { BROADCAST_RIGHTS, SDB_COUNTRY_NAMES, detectMarket } from '../../data/broadcasters';
+import { teamCodeFor } from '../../data/teamNames';
 import {
   ESPN_SUMMARY,
   layoutLineup,
@@ -517,6 +520,117 @@ function RemindButton() {
   );
 }
 
+/* ---------- where to watch ---------- */
+
+interface SdbTvRow { country: string; channel: string }
+
+/** Per-match channels by country from TheSportsDB (spotty but free). */
+async function fetchSdbTv(m: Match, venueDay: string): Promise<SdbTvRow[]> {
+  try {
+    const cacheKey = `wc26-sdbtv-${m.n}`;
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) return JSON.parse(cached);
+    // find TheSportsDB's event id for this match
+    let eventId: string | null = null;
+    for (const day of [...new Set([venueDay, m.utc.slice(0, 10)])]) {
+      const res = await fetch(`https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d=${day}&s=Soccer`);
+      if (!res.ok) continue;
+      const data = (await res.json()) as { events?: { idEvent?: string; strLeague?: string; strHomeTeam?: string; strAwayTeam?: string }[] | null };
+      for (const e of data.events ?? []) {
+        if (!/world cup/i.test(e.strLeague ?? '')) continue;
+        const home = teamCodeFor(e.strHomeTeam ?? '');
+        const away = teamCodeFor(e.strAwayTeam ?? '');
+        if ((home === m.a && away === m.b) || (home === m.b && away === m.a)) {
+          eventId = e.idEvent ?? null;
+          break;
+        }
+      }
+      if (eventId) break;
+    }
+    if (!eventId) return [];
+    const res = await fetch(`https://www.thesportsdb.com/api/v1/json/123/lookuptv.php?id=${eventId}`);
+    if (!res.ok) return [];
+    const data = (await res.json()) as { tvevent?: { strCountry?: string; strChannel?: string }[] | null };
+    const rows = (data.tvevent ?? [])
+      .filter((t) => t.strCountry && t.strChannel)
+      .map((t) => ({ country: t.strCountry!, channel: t.strChannel! }));
+    try { sessionStorage.setItem(cacheKey, JSON.stringify(rows)); } catch { /* ignore */ }
+    return rows;
+  } catch {
+    return [];
+  }
+}
+
+function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
+  const [market, setMarket] = useState<string>('');
+  const [usChannels, setUsChannels] = useState<{ name: string; stream: boolean }[]>([]);
+  const [sdbTv, setSdbTv] = useState<SdbTvRow[]>([]);
+
+  useEffect(() => {
+    setMarket(detectMarket(navigator.language || '') ?? 'US');
+  }, []);
+
+  useEffect(() => {
+    let alive = true;
+    findEspnEvent(m, venueDay, false)
+      .then((hit) => alive && hit && setUsChannels(parseEspnBroadcasts(hit.event)))
+      .catch(() => { /* silent */ });
+    fetchSdbTv(m, venueDay).then((rows) => alive && setSdbTv(rows));
+    return () => { alive = false; };
+  }, [m.n]);
+
+  const rights = BROADCAST_RIGHTS[market];
+  const sdbForMarket = sdbTv.filter((r) => r.country === SDB_COUNTRY_NAMES[market]);
+
+  return (
+    <div className={cardCls}>
+      <div className="flex items-center justify-between gap-2">
+        <span className={microHead}>WHERE TO WATCH</span>
+        <select
+          value={market}
+          onChange={(e) => setMarket(e.target.value)}
+          aria-label="Country"
+          className="focus-ring rounded-md border border-border bg-surface px-1.5 py-1 t-micro text-text-2 outline-none"
+        >
+          {Object.entries(BROADCAST_RIGHTS).map(([code, r]) => (
+            <option key={code} value={code}>{r.country}</option>
+          ))}
+        </select>
+      </div>
+
+      {market === 'US' && usChannels.length > 0 && (
+        <span className="t-meta text-text-2">
+          This match: {usChannels.map((c) => c.name + (c.stream ? ' (stream)' : '')).join(' · ')}
+        </span>
+      )}
+      {market !== 'US' && sdbForMarket.length > 0 && (
+        <span className="t-meta text-text-2">
+          This match: {[...new Set(sdbForMarket.map((r) => r.channel))].join(' · ')}
+        </span>
+      )}
+
+      {rights && (
+        <div className="flex flex-wrap gap-1.5">
+          {rights.broadcasters.map((b) => (
+            <span key={b.name} className="t-micro inline-flex items-center gap-1.5 rounded-(--radius-chip) border border-border px-2 py-1 text-text-3">
+              {b.name}
+              {b.free && <span className="rounded-[3px] px-1 font-bold tracking-[0.06em]" style={{ background: 'var(--color-host-mx)', color: '#08130D', fontSize: '9px' }}>FREE</span>}
+              {b.note && <span className="text-text-dim">· {b.note}</span>}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <span className="t-micro text-text-dim">
+        Rights as announced — confirm with local listings.{' '}
+        <a href="https://www.livesoccertv.com/competitions/international/world-cup/" target="_blank" rel="noopener noreferrer" className="text-text-3 underline underline-offset-2 hover:text-text">
+          Global listings ↗
+        </a>
+      </span>
+    </div>
+  );
+}
+
 /* ---------- lineup pitch ---------- */
 
 const pitchLine = 'rgb(255 255 255 / 0.16)';
@@ -856,6 +970,10 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
           <span className="disp t-team tnum font-extrabold text-text">{localTime(m.utc)} your time</span>
           <span className="t-meta tnum text-text-3">{venueLocalTime(m.utc, v.timezone)} in {v.city}</span>
         </div>
+        <WatchSection
+          m={m}
+          venueDay={new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: v.timezone }).format(new Date(m.utc))}
+        />
       </div>
 
       {/* team links */}

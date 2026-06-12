@@ -54,12 +54,19 @@ export interface EspnDetail {
   athletesInvolved?: { displayName?: string | null }[];
 }
 
+export interface EspnGeoBroadcast {
+  type?: { shortName?: string };
+  media?: { shortName?: string };
+  region?: string;
+}
+
 export interface EspnEvent {
   id?: string;
   status?: { type?: { name?: string } };
   competitions?: {
     competitors?: EspnCompetitor[];
     details?: EspnDetail[];
+    geoBroadcasts?: EspnGeoBroadcast[];
   }[];
 }
 
@@ -151,6 +158,21 @@ export function parseEspnGoals(event: EspnEvent, homeIsA: boolean, homeTeamId: s
     });
   }
   return out.sort((x, y) => x.minute - y.minute);
+}
+
+/** US per-match channels from ESPN (their geo data is US-only). */
+const ESPN_CHANNEL_NAMES: Record<string, string> = { Tele: 'Telemundo' };
+
+export function parseEspnBroadcasts(event: EspnEvent): { name: string; stream: boolean }[] {
+  const out: { name: string; stream: boolean }[] = [];
+  const seen = new Set<string>();
+  for (const b of event.competitions?.[0]?.geoBroadcasts ?? []) {
+    const short = b.media?.shortName;
+    if (!short || b.region !== 'us' || seen.has(short)) continue;
+    seen.add(short);
+    out.push({ name: ESPN_CHANNEL_NAMES[short] ?? short, stream: b.type?.shortName === 'STREAMING' });
+  }
+  return out;
 }
 
 export function hasRedCard(detail: MatchDetail | undefined): boolean {
