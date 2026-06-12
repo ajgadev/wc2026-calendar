@@ -63,6 +63,22 @@ export default function LiveOverlay() {
 
     const anyWindowOpen = (now: number) => matches.some((m) => inLiveWindow(m.utc, now));
 
+    // Results gap: between a match ending and the nightly rebuild, the
+    // static layer has no score and no live window is open. One
+    // catch-up fetch per page load patches recently finished matches.
+    let didCatchup = false;
+    let catchupTries = 0;
+    const needsCatchup = (now: number) =>
+      !didCatchup &&
+      catchupTries < 3 &&
+      matches.some(
+        (m) =>
+          m.a &&
+          !m.ft &&
+          Date.parse(m.utc) < now - 150 * 60_000 &&
+          now - Date.parse(m.utc) < 48 * 3600_000,
+      );
+
     const nextWindowStart = (now: number): number | null => {
       let best: number | null = null;
       for (const m of matches) {
@@ -82,23 +98,31 @@ export default function LiveOverlay() {
         schedule(POLL_MS);
         return;
       }
-      if (!anyWindowOpen(now)) {
+      const windowOpen = anyWindowOpen(now);
+      if (!windowOpen && !needsCatchup(now)) {
         setOutage(false);
         const next = nextWindowStart(now);
         schedule(next ? Math.min(next - now, 30 * 60_000) : null);
         return;
       }
       try {
-        const res = await fetch(`/api/live?dateFrom=${isoDay(-1)}&dateTo=${isoDay(1)}`);
+        const res = await fetch(`/api/live?dateFrom=${isoDay(-2)}&dateTo=${isoDay(1)}`);
         if (!res.ok) throw new Error(String(res.status));
         const live = (await res.json()) as LiveMatch[];
         patch(joinLive(matches, live));
         setOutage(false);
+        didCatchup = true;
         notifyFollowedKickoffs(now);
       } catch {
-        setOutage(true); // quiet note; static layer stays up
+        if (windowOpen) setOutage(true); // quiet note; static layer stays up
+        catchupTries++;
       }
-      schedule(POLL_MS);
+      if (windowOpen) {
+        schedule(POLL_MS);
+      } else {
+        const next = nextWindowStart(now);
+        schedule(needsCatchup(now) ? POLL_MS : next ? Math.min(next - now, 30 * 60_000) : null);
+      }
     };
 
     const schedule = (ms: number | null) => {

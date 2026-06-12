@@ -391,5 +391,209 @@
     ]
    }
   }
+ },
+ "3": {
+  "cards": [
+   {
+    "minute": 11,
+    "side": 0,
+    "player": "Alistair Johnston",
+    "type": "Y"
+   },
+   {
+    "minute": 45,
+    "side": 1,
+    "player": "Ermedin Demirovic",
+    "type": "Y"
+   },
+   {
+    "minute": 46,
+    "side": 1,
+    "player": "Jovo Lukic",
+    "type": "Y"
+   },
+   {
+    "minute": 53,
+    "side": 0,
+    "player": "Luc de Fougerolles",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Nikola Katic",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 21,
+    "side": 1,
+    "player": "Jovo Lukic"
+   },
+   {
+    "minute": 78,
+    "side": 0,
+    "player": "Cyle Larin"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Maxime Crépeau",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Derek Cornelius",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Luc de Fougerolles",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Richie Laryea",
+      "jersey": "22",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Alistair Johnston",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Stephen Eustáquio",
+      "jersey": "7",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Ismaël Koné",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Liam Millar",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Tajon Buchanan",
+      "jersey": "17",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Tani Oluwaseyi",
+      "jersey": "12",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Jonathan David",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Jacob Shaffelburg",
+     "Jonathan Osorio",
+     "Cyle Larin",
+     "Ali Ahmed",
+     "Promise David"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Nikola Vasilj",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Tarik Muharemovic",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nikola Katic",
+      "jersey": "18",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Sead Kolasinac",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Amar Dedic",
+      "jersey": "7",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ivan Basic",
+      "jersey": "13",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Benjamin Tahirovic",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Amar Memic",
+      "jersey": "15",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Esmir Bajraktarevic",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Jovo Lukic",
+      "jersey": "25",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Ermedin Demirovic",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Samed Bazdar",
+     "Armin Gigovic",
+     "Dzenis Burnic",
+     "Kerim Alajbegovic",
+     "Ivan Sunjic"
+    ]
+   }
+  }
  }
 }
