@@ -25,6 +25,11 @@ const SQUADS_CACHE = resolve(ROOT, 'src/data/generated/squads.json');
 const PLAYERS_OUT = resolve(ROOT, 'public/data/players.json');
 const UA = 'wc2026-calendar/1.0 (build-time photo pipeline; contact: site owner)';
 
+// Photo lookups stop (gracefully) past this budget so CI builds never
+// hang on upstream rate limits; whatever was found is kept and the next
+// daily rebuild continues from there.
+const DEADLINE = Date.now() + Number(process.env.PHOTO_TIME_BUDGET_MS ?? 6 * 60_000);
+
 interface FdPlayer { name: string; position: string | null; dateOfBirth: string | null; shirtNumber?: number | null }
 interface FdTeam { name: string; tla?: string; squad?: FdPlayer[]; coach?: { name?: string } }
 interface PlayerOut { name: string; position: string; shirtNumber: number | null; dob: string | null; photoUrl: string | null }
@@ -153,11 +158,17 @@ async function main() {
   }
 
   const out: Record<string, PlayerOut[]> = {};
+  let budgetWarned = false;
   for (const [code, team] of Object.entries(squads)) {
     const players: PlayerOut[] = [];
     for (const p of team.squad ?? []) {
       let photoUrl = knownPhoto.get(p.name) ?? null;
-      if (!knownPhoto.has(p.name) || photoUrl === null) {
+      const overBudget = Date.now() > DEADLINE;
+      if (overBudget && !budgetWarned) {
+        budgetWarned = true;
+        console.warn('[photos] time budget reached — keeping found photos, skipping further lookups');
+      }
+      if ((!knownPhoto.has(p.name) || photoUrl === null) && !overBudget) {
         photoUrl = (await wikipediaPhoto(p.name)) ?? (await sportsDbPhoto(p.name));
         await sleep(120);
       }
@@ -170,11 +181,12 @@ async function main() {
       });
     }
     out[code] = players;
+    for (const pl of players) knownPhoto.set(pl.name, pl.photoUrl);
     console.log(`[photos] ${code}: ${players.length} players, ${players.filter((x) => x.photoUrl).length} photos`);
+    // incremental write — progress survives a killed/timed-out build
+    mkdirSync(resolve(ROOT, 'public/data'), { recursive: true });
+    writeFileSync(PLAYERS_OUT, JSON.stringify({ ...previous, ...out }));
   }
-
-  mkdirSync(resolve(ROOT, 'public/data'), { recursive: true });
-  writeFileSync(PLAYERS_OUT, JSON.stringify(out));
   console.log(`[photos] wrote ${PLAYERS_OUT}`);
 }
 
