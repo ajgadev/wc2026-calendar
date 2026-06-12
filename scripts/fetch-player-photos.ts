@@ -135,6 +135,50 @@ async function sportsDbPhoto(name: string): Promise<string | null> {
   }
 }
 
+/**
+ * Kit numbers from Wikipedia's "2026 FIFA World Cup squads" page — the
+ * official FIFA lists (football-data.org's free tier returns null
+ * shirtNumbers for WC squads). One fetch covers all 48 teams: the REST
+ * HTML embeds each squad row's template params (`"no"`, `"name"`), and
+ * <h3 id="..."> headings scope them to a team.
+ */
+const normPlayer = (s: string) =>
+  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z ]/g, '').trim();
+
+async function fetchWikiNumbers(): Promise<Map<string, number>> {
+  const out = new Map<string, number>(); // "CODE|normalized name" → number
+  try {
+    const res = await fetch('https://en.wikipedia.org/api/rest_v1/page/html/2026_FIFA_World_Cup_squads', {
+      headers: { 'User-Agent': UA },
+    });
+    if (!res.ok) {
+      console.warn(`[numbers] WARNING: squads page ${res.status} — kit numbers skipped`);
+      return out;
+    }
+    const html = await res.text();
+    const token = /<h3 id="([^"]+)"|"no":\{"wt":"(\d+)"\},"pos":\{"wt":"[A-Z]+"\},"name":\{"wt":"(.*?)"\}/gs;
+    let team: string | null = null;
+    let m: RegExpExecArray | null;
+    while ((m = token.exec(html))) {
+      if (m[1]) {
+        team = teamCodeFor(m[1].replace(/_/g, ' ').replace(/\.[^.]*$/, ''));
+        continue;
+      }
+      if (!team || !m[2] || !m[3]) continue;
+      // "[[Page|Display]]" / "[[Name]]" / plain text → display name
+      const raw = m[3].replace(/\\"/g, '"');
+      const link = /\[\[(?:[^\]|]*\|)?([^\]|]+)\]\]/.exec(raw);
+      const name = (link ? link[1] : raw).trim();
+      if (name) out.set(`${team}|${normPlayer(name)}`, Number(m[2]));
+    }
+    const teams = new Set([...out.keys()].map((k) => k.split('|')[0]));
+    console.log(`[numbers] Wikipedia squads page: ${out.size} numbered players across ${teams.size} teams`);
+  } catch (e) {
+    console.warn(`[numbers] WARNING: ${(e as Error).message} — kit numbers skipped`);
+  }
+  return out;
+}
+
 const POSITION_MAP: Record<string, string> = {
   'Goalkeeper': 'GK',
   'Defence': 'DEF', 'Defender': 'DEF', 'Centre-Back': 'DEF', 'Left-Back': 'DEF', 'Right-Back': 'DEF',
@@ -163,6 +207,10 @@ async function main() {
     for (const p of list) knownPhoto.set(p.name, p.photoUrl);
   }
 
+  const wikiNumbers = await fetchWikiNumbers();
+  const numberFor = (code: string, name: string, fromApi: number | null): number | null =>
+    fromApi ?? wikiNumbers.get(`${code}|${normPlayer(name)}`) ?? null;
+
   const out: Record<string, PlayerOut[]> = {};
   let budgetWarned = false;
   for (const [code, team] of Object.entries(squads)) {
@@ -181,7 +229,7 @@ async function main() {
       players.push({
         name: p.name,
         position: POSITION_MAP[p.position ?? ''] ?? 'MID',
-        shirtNumber: p.shirtNumber ?? null,
+        shirtNumber: numberFor(code, p.name, p.shirtNumber ?? null),
         dob: p.dateOfBirth ?? null,
         photoUrl,
       });
