@@ -26,9 +26,12 @@ const PLAYERS_OUT = resolve(ROOT, 'public/data/players.json');
 const UA = 'wc2026-calendar/1.0 (build-time photo pipeline; contact: site owner)';
 
 // Photo lookups stop (gracefully) past this budget so CI builds never
-// hang on upstream rate limits; whatever was found is kept and the next
-// daily rebuild continues from there.
-const DEADLINE = Date.now() + Number(process.env.PHOTO_TIME_BUDGET_MS ?? 6 * 60_000);
+// hang on upstream rate limits; whatever was found is kept.
+// On Cloudflare Pages (CF_PAGES set) the budget defaults to 0: lookups
+// happen in the daily GitHub Action, which commits players.json back to
+// the repo — a fresh-cloned Pages build could never persist progress.
+const DEFAULT_BUDGET_MS = process.env.CF_PAGES ? 0 : 6 * 60_000;
+const DEADLINE = Date.now() + Number(process.env.PHOTO_TIME_BUDGET_MS ?? DEFAULT_BUDGET_MS);
 
 interface FdPlayer { name: string; position: string | null; dateOfBirth: string | null; shirtNumber?: number | null }
 interface FdTeam { name: string; tla?: string; squad?: FdPlayer[]; coach?: { name?: string } }

@@ -60,10 +60,14 @@ Key invariants:
 ## Deploying
 
 1. Cloudflare Pages → connect repo, build command `npm run build`, output `dist`.
-2. Set `FOOTBALL_DATA_TOKEN` (and optionally `YOUTUBE_API_KEY`) as encrypted env vars.
-3. Create a deploy hook and put its URL in the repo secret `CLOUDFLARE_DEPLOY_HOOK_URL`
-   — `.github/workflows/daily-rebuild.yml` triggers it daily at 06:15 UTC so finished
-   scores and resolved knockout teams flow into the static layer.
+2. Set `FOOTBALL_DATA_TOKEN` (and optionally `YOUTUBE_API_KEY`) as encrypted env vars
+   on the Pages project (used by the `/api/*` routes at runtime).
+3. Add the same two as **GitHub repo secrets**, plus `CLOUDFLARE_DEPLOY_HOOK_URL`
+   (Pages → Settings → Deploy hooks). `.github/workflows/daily-rebuild.yml` runs at
+   06:15 UTC: it refreshes the schedule, fetches squad photos & the highlight archive
+   (with rate-limit backoff and a 20-min budget), and commits the data back — that
+   commit triggers the Pages deploy. Photo lookups are skipped inside Pages builds
+   (`CF_PAGES` → budget 0): a fresh-cloned build can't persist progress, the Action can.
 
 ## Design
 

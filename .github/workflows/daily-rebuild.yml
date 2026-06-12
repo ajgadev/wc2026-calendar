@@ -1,17 +1,60 @@
-# Daily rebuild: refreshes the static layer (scores, resolved knockout
-# teams, squads, highlight archive) even if the live API is down.
-# Set CLOUDFLARE_DEPLOY_HOOK_URL in the repo secrets — Cloudflare Pages
-# → Settings → Builds & deployments → Deploy hooks.
+# Daily data refresh + rebuild.
+#
+# Photo/squad/highlight fetching runs HERE (not in the Cloudflare build):
+# progress is committed back to the repo so it accumulates across days —
+# a Pages build clones fresh and could never persist it. The commit
+# itself triggers the Cloudflare deploy via the git integration; when
+# nothing changed, the deploy hook fires instead so finished scores
+# still flow into the static layer.
+#
+# Repo secrets needed:
+#   FOOTBALL_DATA_TOKEN          (football-data.org)
+#   YOUTUBE_API_KEY              (optional — highlight archive)
+#   CLOUDFLARE_DEPLOY_HOOK_URL   (Pages → Settings → Deploy hooks)
 name: daily-rebuild
 on:
   schedule:
     - cron: '15 6 * * *' # 06:15 UTC, after the previous night's results land
   workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
-  trigger-pages-build:
+  refresh-data:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Cloudflare Pages deploy hook
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Refresh schedule, squads, photos and highlights
+        env:
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          PHOTO_TIME_BUDGET_MS: '1200000' # 20 min — plenty of room for 429 backoffs
+        run: |
+          npx tsx scripts/refresh-schedule.ts
+          npx tsx scripts/fetch-player-photos.ts
+          npx tsx scripts/fetch-highlights.ts
+      - name: Commit refreshed data (triggers the Pages deploy)
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add src/data/vendor src/data/generated public/data
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No data changes today."
+          else
+            git commit -m "data: daily refresh (schedule, photos, highlights)"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Trigger Pages deploy hook (only when nothing was committed)
+        if: steps.commit.outputs.changed == 'false'
         run: curl -fsS -X POST "$DEPLOY_HOOK"
         env:
           DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}
