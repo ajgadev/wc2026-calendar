@@ -3,4 +3,5 @@
 # environment variables in the Pages dashboard, never here.
 name = "wc-2026-calendar"
 compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./dist"

@@ -70,31 +70,52 @@ async function loadSquads(token: string | undefined): Promise<Record<string, FdT
   return byCode;
 }
 
+/** Throttled fetch with 429/403 backoff — Wikipedia rate-limits bursts. */
+let throttleUntil = 0;
+async function politeFetch(url: string): Promise<Response | null> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const wait = throttleUntil - Date.now();
+    if (wait > 0) await sleep(wait);
+    try {
+      const res = await fetch(url, { headers: { 'User-Agent': UA } });
+      if (res.status === 429 || res.status === 403) {
+        const retryAfter = Number(res.headers.get('Retry-After')) || 8 * (attempt + 1);
+        console.warn(`[photos] rate-limited (${res.status}) — backing off ${retryAfter}s`);
+        throttleUntil = Date.now() + retryAfter * 1000;
+        continue;
+      }
+      return res;
+    } catch { /* network blip — retry */ }
+    await sleep(1000);
+  }
+  return null;
+}
+
 async function wikipediaPhoto(name: string): Promise<string | null> {
   for (const title of [name, `${name} (footballer)`]) {
     const url =
       'https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&piprop=thumbnail&pithumbsize=400&format=json&redirects=1&titles=' +
       encodeURIComponent(title);
-    try {
-      const res = await fetch(url, { headers: { 'User-Agent': UA } });
-      if (!res.ok) continue;
-      const data = (await res.json()) as { query?: { pages?: Record<string, { thumbnail?: { source?: string } }> } };
-      const pages = Object.values(data.query?.pages ?? {});
-      const src = pages[0]?.thumbnail?.source;
-      if (src) return src;
-    } catch { /* try next */ }
-    await sleep(220); // ~5 req/s, politely
+    const res = await politeFetch(url);
+    if (res?.ok) {
+      try {
+        const data = (await res.json()) as { query?: { pages?: Record<string, { thumbnail?: { source?: string } }> } };
+        const pages = Object.values(data.query?.pages ?? {});
+        const src = pages[0]?.thumbnail?.source;
+        if (src) return src;
+      } catch { /* malformed — try next title */ }
+    }
+    await sleep(250); // ~4 req/s, politely
   }
   return null;
 }
 
 async function sportsDbPhoto(name: string): Promise<string | null> {
   try {
-    const res = await fetch(
+    const res = await politeFetch(
       `https://www.thesportsdb.com/api/v1/json/123/searchplayers.php?p=${encodeURIComponent(name)}`,
-      { headers: { 'User-Agent': UA } },
     );
-    if (!res.ok) return null;
+    if (!res?.ok) return null;
     const data = (await res.json()) as { player?: { strSport?: string; strCutout?: string; strThumb?: string }[] };
     const p = (data.player ?? []).find((x) => x.strSport === 'Soccer');
     return p?.strCutout || p?.strThumb || null;
