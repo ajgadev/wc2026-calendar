@@ -27,10 +27,13 @@ const UA = 'wc2026-calendar/1.0 (build-time photo pipeline; contact: site owner)
 
 // Photo lookups stop (gracefully) past this budget so CI builds never
 // hang on upstream rate limits; whatever was found is kept.
-// On Cloudflare Pages (CF_PAGES set) the budget defaults to 0: lookups
-// happen in the daily GitHub Action, which commits players.json back to
-// the repo — a fresh-cloned Pages build could never persist progress.
-const DEFAULT_BUDGET_MS = process.env.CF_PAGES ? 0 : 6 * 60_000;
+// In shared CI (Cloudflare Pages/Workers Builds, or any env with CI set)
+// the budget defaults to 0: lookups happen in the daily GitHub Action —
+// which sets PHOTO_TIME_BUDGET_MS explicitly and commits players.json
+// back to the repo. A fresh-cloned deploy build could never persist
+// progress, so fetching there is wasted time.
+const IN_CI = !!(process.env.CF_PAGES || process.env.WORKERS_CI || process.env.CI);
+const DEFAULT_BUDGET_MS = IN_CI ? 0 : 6 * 60_000;
 const DEADLINE = Date.now() + Number(process.env.PHOTO_TIME_BUDGET_MS ?? DEFAULT_BUDGET_MS);
 
 interface FdPlayer { name: string; position: string | null; dateOfBirth: string | null; shirtNumber?: number | null }

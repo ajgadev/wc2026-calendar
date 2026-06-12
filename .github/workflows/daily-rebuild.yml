@@ -53,8 +53,13 @@ jobs:
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
-      - name: Trigger Pages deploy hook (only when nothing was committed)
+      - name: Trigger deploy hook (only when nothing was committed)
         if: steps.commit.outputs.changed == 'false'
-        run: curl -fsS -X POST "$DEPLOY_HOOK"
+        run: |
+          if [ -n "$DEPLOY_HOOK" ]; then
+            curl -fsS -X POST "$DEPLOY_HOOK"
+          else
+            echo "No deploy hook configured — skipping (commits trigger deploys anyway)."
+          fi
         env:
           DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}
