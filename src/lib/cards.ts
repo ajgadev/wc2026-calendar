@@ -1,14 +1,15 @@
 import { teamCodeFor } from '../data/teamNames';
 
 /**
- * Yellow/red cards from TheSportsDB match timelines — the one free
- * source that has them (football-data.org keeps bookings behind the
- * paid tier; openfootball has goals only).
+ * Yellow/red cards from ESPN's public scoreboard JSON (no key, CORS
+ * open). Chosen after auditing the alternatives: football-data.org
+ * keeps bookings behind the paid tier, API-Football's free plan
+ * excludes season 2026, and TheSportsDB timelines proved incomplete
+ * (1 of 3 red cards in the opener).
  *
  * Shared by the build-time archiver (scripts/fetch-match-details.ts,
  * runs in the daily Action and commits matchDetails.json) and the
- * match drawer's browser fallback for matches not yet archived
- * (TheSportsDB allows CORS).
+ * match drawer's browser fallback for matches not yet archived.
  */
 
 export interface CardEvent {
@@ -27,21 +28,30 @@ export interface MatchDetail {
 /** Archive shape: { [matchN]: MatchDetail } */
 export type MatchDetailsArchive = Record<string, MatchDetail>;
 
-export interface SdbEvent {
-  idEvent: string;
-  strHomeTeam?: string | null;
-  strAwayTeam?: string | null;
-  strLeague?: string | null;
-  dateEvent?: string | null;
+/* ---- ESPN scoreboard shapes (the fields we read) ---- */
+
+export interface EspnCompetitor {
+  homeAway?: 'home' | 'away';
+  team?: { id?: string; displayName?: string | null };
 }
 
-export interface SdbTimelineEntry {
-  strTimeline?: string | null;
-  strTimelineDetail?: string | null;
-  strHome?: string | null;
-  strPlayer?: string | null;
-  intTime?: string | number | null;
+export interface EspnDetail {
+  type?: { text?: string | null };
+  clock?: { displayValue?: string | null };
+  team?: { id?: string };
+  athletesInvolved?: { displayName?: string | null }[];
 }
+
+export interface EspnEvent {
+  id?: string;
+  status?: { type?: { name?: string } };
+  competitions?: {
+    competitors?: EspnCompetitor[];
+    details?: EspnDetail[];
+  }[];
+}
+
+export const ESPN_SCOREBOARD = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard';
 
 export interface CardJoinableMatch {
   n: number;
@@ -50,43 +60,60 @@ export interface CardJoinableMatch {
 }
 
 /**
- * Finds the TheSportsDB event for one of our matches (same day, both
- * team names resolve to the same FIFA codes, either orientation).
+ * Finds the ESPN event for one of our matches: both competitor names
+ * resolve to the same FIFA codes, either orientation.
  */
-export function matchEventToMatch(
-  event: SdbEvent,
+export function matchEspnEventToMatch(
+  event: EspnEvent,
   matches: CardJoinableMatch[],
-): { match: CardJoinableMatch; swapped: boolean } | null {
-  if (event.strLeague && !/world cup/i.test(event.strLeague)) return null;
-  const home = teamCodeFor(event.strHomeTeam ?? '');
-  const away = teamCodeFor(event.strAwayTeam ?? '');
-  if (!home || !away) return null;
+): { match: CardJoinableMatch; homeIsA: boolean; homeTeamId: string } | null {
+  const comp = event.competitions?.[0];
+  const home = comp?.competitors?.find((c) => c.homeAway === 'home');
+  const away = comp?.competitors?.find((c) => c.homeAway === 'away');
+  const homeCode = teamCodeFor(home?.team?.displayName ?? '');
+  const awayCode = teamCodeFor(away?.team?.displayName ?? '');
+  const homeTeamId = home?.team?.id;
+  if (!homeCode || !awayCode || !homeTeamId) return null;
   for (const m of matches) {
     if (!m.a || !m.b) continue;
-    if (m.a === home && m.b === away) return { match: m, swapped: false };
-    if (m.a === away && m.b === home) return { match: m, swapped: true };
+    if (m.a === homeCode && m.b === awayCode) return { match: m, homeIsA: true, homeTeamId };
+    if (m.a === awayCode && m.b === homeCode) return { match: m, homeIsA: false, homeTeamId };
   }
   return null;
 }
 
-/** Extracts card events from a timeline; `swapped` flips home/away → A/B. */
-export function parseTimelineCards(timeline: SdbTimelineEntry[], swapped: boolean): CardEvent[] {
+/** "90'+2'" → 92, "49'" → 49 */
+function parseClock(v: string | null | undefined): number | null {
+  const m = /^(\d+)'(?:\s*\+\s*(\d+)'?)?/.exec((v ?? '').trim());
+  return m ? Number(m[1]) + Number(m[2] ?? 0) : null;
+}
+
+/** Extracts card events from an ESPN event's details. */
+export function parseEspnCards(event: EspnEvent, homeIsA: boolean, homeTeamId: string): CardEvent[] {
   const out: CardEvent[] = [];
-  for (const t of timeline) {
-    if (!/card/i.test(t.strTimeline ?? '')) continue;
-    const detail = t.strTimelineDetail ?? '';
-    const type: CardEvent['type'] = /second/i.test(detail) ? 'YR' : /red/i.test(detail) ? 'R' : 'Y';
-    const isHome = t.strHome === 'Yes';
-    const minute = parseInt(String(t.intTime ?? ''), 10);
-    if (!t.strPlayer || Number.isNaN(minute)) continue;
+  for (const d of event.competitions?.[0]?.details ?? []) {
+    const text = d.type?.text ?? '';
+    const isYellow = /yellow/i.test(text);
+    const isRed = /red/i.test(text);
+    if (!isYellow && !isRed) continue;
+    const minute = parseClock(d.clock?.displayValue);
+    const player = d.athletesInvolved?.[0]?.displayName ?? '';
+    if (minute === null || !player) continue;
     out.push({
       minute,
-      side: (isHome !== swapped ? 0 : 1) as 0 | 1,
-      player: t.strPlayer,
-      type,
+      side: ((d.team?.id === homeTeamId) === homeIsA ? 0 : 1) as 0 | 1,
+      player,
+      type: isRed ? 'R' : 'Y',
     });
   }
-  return out.sort((x, y) => x.minute - y.minute);
+  out.sort((x, y) => x.minute - y.minute);
+  // a red preceded by a yellow for the same player = second yellow
+  const yellowed = new Set<string>();
+  for (const c of out) {
+    if (c.type === 'Y') yellowed.add(c.player);
+    else if (c.type === 'R' && yellowed.has(c.player)) c.type = 'YR';
+  }
+  return out;
 }
 
 export function hasRedCard(detail: MatchDetail | undefined): boolean {

@@ -10,13 +10,12 @@ import {
 import { matchVideoToMatch } from '../../lib/highlights';
 import { sportsDbNameFor } from '../../data/teamNames';
 import {
-  hasRedCard,
-  matchEventToMatch,
-  parseTimelineCards,
+  ESPN_SCOREBOARD,
+  matchEspnEventToMatch,
+  parseEspnCards,
   type CardEvent,
+  type EspnEvent,
   type MatchDetailsArchive,
-  type SdbEvent,
-  type SdbTimelineEntry,
 } from '../../lib/cards';
 import type { Highlight, Match, Stadium } from '../../lib/types';
 
@@ -52,54 +51,37 @@ function fetchMatchDetails() {
 /**
  * Cards for one match: the committed archive first; for matches the
  * daily Action hasn't covered yet (just finished / in play), fall back
- * to TheSportsDB directly from the browser (CORS-friendly), cached in
- * sessionStorage so each day/event is fetched at most once per session.
+ * to ESPN's scoreboard directly from the browser (CORS open), cached
+ * in sessionStorage so each day is fetched at most once per session.
+ * Live matches skip the session cache so cards keep arriving.
  */
-async function fetchCardsFor(m: Match, venueDay: string): Promise<CardEvent[]> {
+async function fetchCardsFor(m: Match, venueDay: string, live: boolean): Promise<CardEvent[]> {
   const archive = await fetchMatchDetails();
   const archived = archive[String(m.n)];
   if (archived) return archived.cards;
 
   try {
-    // most reliable first: league recent results, then both candidate days
-    const sources = [
-      `https://www.thesportsdb.com/api/v1/json/123/eventspastleague.php?id=4429`,
-      `https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d=${venueDay}&s=Soccer`,
-      `https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d=${m.utc.slice(0, 10)}&s=Soccer`,
-    ];
-    let hit: { event: SdbEvent; swapped: boolean } | null = null;
-    for (const url of sources) {
-      const cacheKey = `wc26-sdb-${url.slice(-40)}`;
-      let events: SdbEvent[] | null = null;
-      const cached = sessionStorage.getItem(cacheKey);
-      if (cached) events = JSON.parse(cached);
+    // ESPN buckets by US-Eastern-ish dates — try venue date, then UTC date
+    const days = [...new Set([venueDay, m.utc.slice(0, 10)])];
+    for (const day of days) {
+      const cacheKey = `wc26-espn-${day}`;
+      let events: EspnEvent[] | null = null;
+      if (!live) {
+        const cached = sessionStorage.getItem(cacheKey);
+        if (cached) events = JSON.parse(cached);
+      }
       if (!events) {
-        const res = await fetch(url);
+        const res = await fetch(`${ESPN_SCOREBOARD}?dates=${day.replace(/-/g, '')}`);
         if (!res.ok) continue;
-        const data = (await res.json()) as { events?: SdbEvent[] | null };
-        events = (data.events ?? []).filter((e) => /world cup/i.test(e.strLeague ?? ''));
-        try { sessionStorage.setItem(cacheKey, JSON.stringify(events)); } catch { /* ignore */ }
+        events = ((await res.json()) as { events?: EspnEvent[] | null }).events ?? [];
+        if (!live) {
+          try { sessionStorage.setItem(cacheKey, JSON.stringify(events)); } catch { /* ignore */ }
+        }
       }
       for (const event of events) {
-        const found = matchEventToMatch(event, [m]);
-        if (found) { hit = { event, swapped: found.swapped }; break; }
+        const hit = matchEspnEventToMatch(event, [m]);
+        if (hit) return parseEspnCards(event, hit.homeIsA, hit.homeTeamId);
       }
-      if (hit) break;
-    }
-    if (hit) {
-      const event = hit.event;
-      const tlKey = `wc26-sdb-tl-${event.idEvent}`;
-      const cachedTl = sessionStorage.getItem(tlKey);
-      let timeline: SdbTimelineEntry[];
-      if (cachedTl) {
-        timeline = JSON.parse(cachedTl);
-      } else {
-        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/123/lookuptimeline.php?id=${event.idEvent}`);
-        if (!res.ok) return [];
-        timeline = ((await res.json()) as { timeline?: SdbTimelineEntry[] | null }).timeline ?? [];
-        try { sessionStorage.setItem(tlKey, JSON.stringify(timeline)); } catch { /* ignore */ }
-      }
-      return parseTimelineCards(timeline, hit.swapped);
     }
   } catch { /* cards silently absent — never an error state */ }
   return [];
@@ -500,7 +482,7 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
     const venueDay = new Intl.DateTimeFormat('en-CA', {
       year: 'numeric', month: '2-digit', day: '2-digit', timeZone: v.timezone,
     }).format(new Date(m.utc));
-    fetchCardsFor(m, venueDay).then((c) => alive && setCards(c));
+    fetchCardsFor(m, venueDay, dom.state === 'live').then((c) => alive && setCards(c));
     // kit numbers for scorers/cards lines, resolved by normalized name
     fetchPlayers().then((all) => {
       if (!alive) return;

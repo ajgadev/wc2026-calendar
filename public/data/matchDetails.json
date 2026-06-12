@@ -18,10 +18,35 @@
     "side": 1,
     "player": "Sphephelo Sithole",
     "type": "R"
+   },
+   {
+    "minute": 74,
+    "side": 1,
+    "player": "Nkosinathi Sibisi",
+    "type": "Y"
+   },
+   {
+    "minute": 84,
+    "side": 1,
+    "player": "Themba Zwane",
+    "type": "R"
+   },
+   {
+    "minute": 92,
+    "side": 0,
+    "player": "César Montes",
+    "type": "R"
    }
   ]
  },
  "2": {
-  "cards": []
+  "cards": [
+   {
+    "minute": 96,
+    "side": 0,
+    "player": "Lee Gi-Hyuk",
+    "type": "Y"
+   }
+  ]
  }
 }
