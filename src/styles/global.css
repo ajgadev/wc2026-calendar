@@ -245,6 +245,17 @@ input::placeholder { color: var(--color-text-dim); }
 }
 .bracket-col { scroll-snap-align: start; }
 
+/* Bracket view switch: Tree (symmetric wallchart) vs Columns (linear).
+   "auto" lets the breakpoint decide — tree on desktop, columns on phones. */
+[data-brmode="tree"] .brview-columns { display: none; }
+[data-brmode="columns"] .brview-tree { display: none; }
+@media (max-width: 999px) {
+  [data-brmode="auto"] .brview-tree { display: none; }
+}
+@media (min-width: 1000px) {
+  [data-brmode="auto"] .brview-columns { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; scroll-behavior: auto !important; }
 }
