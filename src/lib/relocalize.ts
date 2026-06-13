@@ -86,6 +86,7 @@ export function relocalize(): void {
   /* ---- calendar chips ---- */
   const calendar = document.querySelector<HTMLElement>('[data-calendar]');
   if (calendar) {
+    const touched = new Set<HTMLElement>();
     for (const chip of [...calendar.querySelectorAll<HTMLElement>('[data-match]')]) {
       const utc = utcByN.get(Number(chip.dataset.n));
       if (!utc) continue;
@@ -96,7 +97,16 @@ export function relocalize(): void {
       if (target) {
         target.querySelector('[data-rest-day]')?.remove();
         target.append(chip);
+        touched.add(cell);
+        touched.add(target);
       }
+    }
+    // re-sort every cell that gained or lost a chip, by kickoff time
+    for (const cell of touched) {
+      const chips = [...cell.querySelectorAll<HTMLElement>('[data-match]')].sort(
+        (a, b) => Date.parse(utcByN.get(Number(a.dataset.n))!) - Date.parse(utcByN.get(Number(b.dataset.n))!),
+      );
+      chips.forEach((c) => cell.appendChild(c));
     }
   }
 
