@@ -97,7 +97,7 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                     data-search={searchText(m)}
                     title={real ? `${m.a} vs ${m.b}` : `${m.pa} vs ${m.pb}`}
                     class:list={[
-                      'focus-ring live-border tinted-chip box-border flex min-h-[44px] w-full min-w-0 flex-col items-stretch justify-center gap-1 overflow-hidden rounded-[7px] border px-1.5 py-[5px] hover:border-border-strong',
+                      'focus-ring live-border tinted-chip box-border flex min-h-[44px] w-full min-w-0 flex-col items-stretch justify-center gap-1 rounded-[7px] border px-1.5 py-[5px] hover:border-border-strong',
                       hostClass(m),
                     ]}
                   >
@@ -121,11 +121,11 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                             <span class:list={['w-score disp t-time font-black tnum', winB ? 'text-win' : 'text-text-2']} data-score-away>{state === 'ft' ? fb : ''}</span>
                           </span>
                         </span>
-                        <span class="flex w-full items-center gap-1 text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">
+                        <span class="flex w-full items-center gap-1 overflow-hidden text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">
                           <span class="w-live live-dot size-1.5 shrink-0 rounded-full" style="background: var(--color-live-badge);"></span>
                           <span class="w-up disp text-[10px] font-bold text-text-2 tnum" data-kick={m.utc}>{venueKick(m)}</span>
-                          <span>{groupCaption(m)}</span>
-                          {matchHasRed(m) && <span class="inline-block h-2 w-1.5 rounded-[1px]" style="background:#E5484D" title="Red card in this match"></span>}
+                          <span class="truncate">{groupCaption(m)}</span>
+                          {matchHasRed(m) && <span class="inline-block h-2 w-1.5 shrink-0 rounded-[1px]" style="background:#E5484D" title="Red card in this match"></span>}
                         </span>
                       </>
                     ) : (
