@@ -78,6 +78,13 @@ const appData = JSON.stringify({
   <body>
     <script type="application/json" id="wc-data" set:html={appData} />
 
+    <!-- tri-host stripe (Mexico · USA · Canada) — same motif as the share card -->
+    <div class="flex h-1 w-full" aria-hidden="true">
+      <span class="flex-1 bg-host-mx"></span>
+      <span class="flex-1 bg-host-us"></span>
+      <span class="flex-1 bg-host-ca"></span>
+    </div>
+
     <div class="mx-auto max-w-[1280px] px-4 pb-20">
       <!-- outage banner (toggled by the LiveOverlay island) -->
       <div
@@ -90,26 +97,40 @@ const appData = JSON.stringify({
         <span class="t-meta text-text-2"><strong class="text-text">Live updates unavailable.</strong> Showing the schedule's last known scores.</span>
       </div>
 
-      <header class="flex flex-wrap items-center gap-x-[22px] gap-y-3 px-0.5 pt-[18px] pb-3.5">
-        <a href="/" class="focus-ring flex flex-col gap-[3px] no-underline rounded-md">
-          <span class="disp t-h1 font-black leading-none tracking-[0.03em] text-text">MATCHDAY<span class="text-live">26</span></span>
-          <span class="font-mono t-micro tracking-[0.06em] text-text-dim">WORLD CUP LIVE CALENDAR · JUN 11 – JUL 19</span>
-        </a>
-        <div class="hidden items-center gap-3.5 px-1 min-[860px]:flex">
-          <span class="t-micro inline-flex items-center gap-1.5 font-semibold tracking-[0.06em] text-text-3"><span class="size-2 rounded-[2px] bg-host-mx"></span>MEXICO</span>
-          <span class="t-micro inline-flex items-center gap-1.5 font-semibold tracking-[0.06em] text-text-3"><span class="size-2 rounded-[2px] bg-host-us"></span>USA</span>
-          <span class="t-micro inline-flex items-center gap-1.5 font-semibold tracking-[0.06em] text-text-3"><span class="size-2 rounded-[2px] bg-host-ca"></span>CANADA</span>
+      <header class="flex flex-col gap-3 px-0.5 pt-3.5 pb-3.5">
+        <div class="flex items-center justify-between gap-3">
+          <a href="/" class="focus-ring rounded-md no-underline">
+            <span class="disp font-black leading-none tracking-[0.03em] text-text" style="font-size: 18px;">MATCHDAY<span class="text-live">26</span></span>
+          </a>
+          <span data-live-summary class="t-micro font-mono text-text-dim"></span>
         </div>
-        <span data-live-summary class="t-micro ml-auto font-mono text-text-dim"></span>
+
+        <a href="/" class="focus-ring -my-0.5 block rounded-md no-underline">
+          <h1 class="disp m-0 font-black leading-none tracking-[0.01em] text-text" style="font-size: clamp(28px, 9vw, 40px);">WORLD CUP <span class="text-live">2026</span></h1>
+        </a>
+
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span class="inline-flex items-center gap-2 font-semibold text-text-2" style="font-size: 12.5px;">
+            <img src="https://flagcdn.com/w40/mx.png" alt="" width="22" height="15" class="rounded-[2px] object-cover" />Mexico
+          </span>
+          <span class="inline-flex items-center gap-2 font-semibold text-text-2" style="font-size: 12.5px;">
+            <img src="https://flagcdn.com/w40/us.png" alt="" width="22" height="15" class="rounded-[2px] object-cover" />USA
+          </span>
+          <span class="inline-flex items-center gap-2 font-semibold text-text-2" style="font-size: 12.5px;">
+            <img src="https://flagcdn.com/w40/ca.png" alt="" width="22" height="15" class="rounded-[2px] object-cover" />Canada
+          </span>
+        </div>
+
+        <span class="font-mono t-micro tracking-[0.06em] text-text-dim">48 TEAMS · 104 MATCHES · JUN 11 – JUL 19</span>
       </header>
 
-      <nav aria-label="Sections" class="flex gap-1 border-b border-border">
+      <nav aria-label="Sections" class="no-scrollbar flex gap-1 overflow-x-auto border-b border-border">
         {tabs.map((t) => (
           <a
             href={t.href}
             aria-current={active === t.id ? 'page' : undefined}
             class:list={[
-              'focus-ring -mb-px flex min-h-[44px] items-center rounded-t-md border-b-2 px-4 py-2 font-display font-bold tracking-[0.02em] no-underline t-body hover:text-text',
+              'focus-ring -mb-px flex min-h-[44px] shrink-0 items-center rounded-t-md border-b-2 px-4 py-2 font-display font-bold tracking-[0.02em] no-underline t-body hover:text-text',
               active === t.id ? 'border-text text-text' : 'border-transparent text-text-3',
             ]}
           >
