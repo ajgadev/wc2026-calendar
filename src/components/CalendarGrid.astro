@@ -50,7 +50,7 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
 ---
 
 <div class="overflow-x-auto pt-5" data-calendar>
-  <div class="flex min-w-[640px] flex-col gap-6">
+  <div class="flex min-w-[812px] flex-col gap-6">
     {months.map(({ month, label, cells }) => (
       <div class={`cal-month-${month} flex flex-col gap-2`}>
         <h2 class="disp t-time m-0 font-black tracking-[0.06em] text-text-3">{label}</h2>
@@ -81,6 +81,8 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                 const real = !!(m.a && m.b);
                 const state = stateOf(m);
                 const [fa, fb] = m.ft ?? [0, 0];
+                const winA = state === 'ft' && fa > fb;
+                const winB = state === 'ft' && fb > fa;
                 return (
                   <button
                     type="button"
@@ -95,28 +97,39 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                     data-search={searchText(m)}
                     title={real ? `${m.a} vs ${m.b}` : `${m.pa} vs ${m.pb}`}
                     class:list={[
-                      'focus-ring live-border tinted-chip box-border flex min-h-[44px] w-full min-w-0 flex-col items-center justify-center gap-[2px] overflow-hidden rounded-[7px] border px-1.5 py-[5px] hover:border-border-strong',
+                      'focus-ring live-border tinted-chip box-border flex min-h-[44px] w-full min-w-0 flex-col items-stretch justify-center gap-1 overflow-hidden rounded-[7px] border px-1.5 py-[5px] hover:border-border-strong',
                       hostClass(m),
                     ]}
                   >
                     {real ? (
                       <>
-                        <span class="flex min-w-0 items-center gap-[5px]">
-                          <img src={flagSrc(m.a!)} alt="" width="13" height="10" loading="lazy" class="h-[10px] w-[13px] shrink-0 rounded-[2px] object-cover" />
-                          <span class="disp t-micro font-bold text-text-2">{m.a}</span>
-                          <span class="w-score disp t-meta font-black whitespace-nowrap text-text score-slot rounded-sm px-0.5"><span data-score>{state === 'ft' ? `${fa}–${fb}` : ''}</span></span>
-                          <span class="w-up disp t-meta font-black whitespace-nowrap text-text" data-kick={m.utc}>{venueKick(m)}</span>
-                          <span class="disp t-micro font-bold text-text-2">{m.b}</span>
-                          <img src={flagSrc(m.b!)} alt="" width="13" height="10" loading="lazy" class="h-[10px] w-[13px] shrink-0 rounded-[2px] object-cover" />
-                          <span class="w-live live-dot size-1.5 shrink-0 rounded-full" style="background: var(--color-live-badge);"></span>
+                        {/* mini scorecard: one team per row so flags + codes stay
+                            legible on phones; score digit (or nothing) on the right */}
+                        <span class="score-slot flex w-full flex-col gap-[3px] rounded-sm">
+                          <span class="grid grid-cols-[1fr_auto] items-center gap-1">
+                            <span class="flex min-w-0 items-center gap-1.5">
+                              <img src={flagSrc(m.a!)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
+                              <span class:list={['disp t-micro truncate', winA ? 'font-extrabold text-win' : winB ? 'font-semibold text-text-3' : 'font-bold text-text-2']}>{m.a}</span>
+                            </span>
+                            <span class:list={['w-score disp t-time font-black tnum', winA ? 'text-win' : 'text-text-2']} data-score-home>{state === 'ft' ? fa : ''}</span>
+                          </span>
+                          <span class="grid grid-cols-[1fr_auto] items-center gap-1">
+                            <span class="flex min-w-0 items-center gap-1.5">
+                              <img src={flagSrc(m.b!)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
+                              <span class:list={['disp t-micro truncate', winB ? 'font-extrabold text-win' : winA ? 'font-semibold text-text-3' : 'font-bold text-text-2']}>{m.b}</span>
+                            </span>
+                            <span class:list={['w-score disp t-time font-black tnum', winB ? 'text-win' : 'text-text-2']} data-score-away>{state === 'ft' ? fb : ''}</span>
+                          </span>
                         </span>
-                        <span class="flex items-center gap-1 text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">
-                          {groupCaption(m)}
+                        <span class="flex w-full items-center gap-1 text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">
+                          <span class="w-live live-dot size-1.5 shrink-0 rounded-full" style="background: var(--color-live-badge);"></span>
+                          <span class="w-up disp text-[10px] font-bold text-text-2 tnum" data-kick={m.utc}>{venueKick(m)}</span>
+                          <span>{groupCaption(m)}</span>
                           {matchHasRed(m) && <span class="inline-block h-2 w-1.5 rounded-[1px]" style="background:#E5484D" title="Red card in this match"></span>}
                         </span>
                       </>
                     ) : (
-                      <span class="t-micro truncate font-mono whitespace-nowrap text-text-3">{groupCaption(m)} · M{m.n}</span>
+                      <span class="t-micro w-full truncate font-mono whitespace-nowrap text-text-3">{groupCaption(m)} · M{m.n}</span>
                     )}
                   </button>
                 );

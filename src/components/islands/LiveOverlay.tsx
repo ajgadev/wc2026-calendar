@@ -29,9 +29,12 @@ function patch(statuses: LiveStatus[]) {
     for (const el of els) {
       el.dataset.state = isLive ? 'live' : 'ft';
       el.querySelectorAll<HTMLElement>('[data-minute]').forEach((n) => { n.textContent = minute; });
+      // combined score (agenda rows) + split per-team scores (calendar chips)
       el.querySelectorAll<HTMLElement>('[data-score]').forEach((n) => {
         if (score && n.textContent !== score) n.textContent = score;
       });
+      if (s.home !== null) el.querySelectorAll<HTMLElement>('[data-score-home]').forEach((n) => { n.textContent = String(s.home); });
+      if (s.away !== null) el.querySelectorAll<HTMLElement>('[data-score-away]').forEach((n) => { n.textContent = String(s.away); });
       if (score && prevScores.get(s.n) !== undefined && prevScores.get(s.n) !== score) {
         // the one allowed effect besides the LIVE pulse: a brief flash
         el.querySelectorAll<HTMLElement>('.score-slot').forEach((slot) => {
