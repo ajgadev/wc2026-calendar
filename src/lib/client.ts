@@ -52,10 +52,20 @@ export function onFollowsChange(fn: Listener): () => void {
   return () => listeners.delete(fn);
 }
 
-/** Star markers on match rows: patches [data-star-team] slots in place. */
+/**
+ * Highlights matches involving a followed team across every view —
+ * toggles `.followed-match` on each `[data-match]` element (CSS draws a
+ * gold corner star + ring), and keeps the inline name star in agenda
+ * rows so you can see which side is yours.
+ */
 export function applyFollowStars(follows: string[]): void {
+  const set = new Set(follows);
+  document.querySelectorAll<HTMLElement>('[data-match][data-teams]').forEach((el) => {
+    const teams = (el.dataset.teams ?? '').split(' ').filter(Boolean);
+    el.classList.toggle('followed-match', teams.some((t) => set.has(t)));
+  });
   document.querySelectorAll<HTMLElement>('[data-star-team]').forEach((el) => {
-    el.textContent = follows.includes(el.dataset.starTeam!) ? '★ ' : '';
+    el.textContent = set.has(el.dataset.starTeam!) ? '★ ' : '';
   });
 }
 

@@ -595,5 +595,230 @@
     ]
    }
   }
+ },
+ "4": {
+  "cards": [
+   {
+    "minute": 10,
+    "side": 1,
+    "player": "Juan Jose Cáceres",
+    "type": "Y"
+   },
+   {
+    "minute": 53,
+    "side": 1,
+    "player": "Miguel Almirón",
+    "type": "Y"
+   },
+   {
+    "minute": 59,
+    "side": 0,
+    "player": "Tyler Adams",
+    "type": "Y"
+   },
+   {
+    "minute": 79,
+    "side": 1,
+    "player": "Diego Gómez",
+    "type": "Y"
+   },
+   {
+    "minute": 88,
+    "side": 1,
+    "player": "Alex Arce",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Júnior Alonso",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 7,
+    "side": 0,
+    "player": "Damián Bobadilla",
+    "owngoal": true
+   },
+   {
+    "minute": 31,
+    "side": 0,
+    "player": "Folarin Balogun"
+   },
+   {
+    "minute": 50,
+    "side": 0,
+    "player": "Folarin Balogun"
+   },
+   {
+    "minute": 73,
+    "side": 1,
+    "player": "Maurício"
+   },
+   {
+    "minute": 98,
+    "side": 0,
+    "player": "Giovanni Reyna"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Matt Freese",
+      "jersey": "24",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Tim Ream",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Chris Richards",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Antonee Robinson",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Alex Freeman",
+      "jersey": "16",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Weston McKennie",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Malik Tillman",
+      "jersey": "17",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Tyler Adams",
+      "jersey": "4",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Folarin Balogun",
+      "jersey": "20",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Christian Pulisic",
+      "jersey": "10",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Sergiño Dest",
+      "jersey": "2",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Sebastian Berhalter",
+     "Ricardo Pepi",
+     "Giovanni Reyna",
+     "Timothy Weah"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Orlando Gil",
+      "jersey": "12",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Omar Alderete",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Gustavo Gómez",
+      "jersey": "15",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Júnior Alonso",
+      "jersey": "6",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Juan Jose Cáceres",
+      "jersey": "4",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Damián Bobadilla",
+      "jersey": "16",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Andrés Cubas",
+      "jersey": "14",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Miguel Almirón",
+      "jersey": "10",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Diego Gómez",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Julio Enciso",
+      "jersey": "19",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Antonio Sanabria",
+      "jersey": "9",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Alex Arce",
+     "Alejandro Romero Gamarra",
+     "Ramón Sosa",
+     "Maurício",
+     "Gustavo Velázquez"
+    ]
+   }
+  }
  }
 }

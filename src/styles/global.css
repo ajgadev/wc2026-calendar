@@ -33,6 +33,7 @@
   --color-live-ink: #1A1206;
   --color-win: #FFFFFF;
   --color-focus: #8AB8FF;
+  --color-follow: #F5C84B;       /* followed-team star + ring (gold, distinct from live amber) */
 
   /* ---- Type ---- */
   --font-display: "Archivo", sans-serif;
@@ -89,6 +90,7 @@
   --color-live: #8F5B00;
   --color-win: #000000;
   --color-focus: #2563C7;
+  --color-follow: #B8860B;
 }
 
 /* ---- Text-size preference (Tweaks bar) ---- */
@@ -202,6 +204,27 @@ input::placeholder { color: var(--color-text-dim); }
 [data-date] .today-badge { display: none; }
 [data-date][data-is-today] .today-badge { display: inline-block; }
 [data-date][data-is-today] { scroll-margin-top: 130px; }
+
+/* Followed-team matches: gold corner star + inset ring, consistent
+   across agenda rows, calendar chips, and bracket cards. The ring is
+   inset so overflow:hidden chips don't clip it; the star sits in the
+   left padding gutter (state/date content starts further right). */
+.followed-match {
+  position: relative;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--color-follow) 80%, transparent);
+}
+.followed-match::before {
+  content: '★';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  z-index: 2;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--color-follow);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.65);
+  pointer-events: none;
+}
 
 /* Hidden scrollbars for horizontally scrolling control rows */
 .no-scrollbar { scrollbar-width: none; }

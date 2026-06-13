@@ -167,6 +167,8 @@ const appData = JSON.stringify({
       import { applyFollowStars, getFollows, onFollowsChange } from '../lib/client';
       applyFollowStars(getFollows());
       onFollowsChange(applyFollowStars);
+      // relocalize rebuilds/moves match elements — re-mark after it runs
+      window.addEventListener('wc26:refilter', () => applyFollowStars(getFollows()));
     </script>
   </body>
 </html>

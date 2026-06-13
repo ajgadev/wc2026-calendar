@@ -618,13 +618,30 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
 
       {rights && (
         <div className="flex flex-wrap gap-1.5">
-          {rights.broadcasters.map((b) => (
-            <span key={b.name} className="t-micro inline-flex items-center gap-1.5 rounded-(--radius-chip) border border-border px-2 py-1 text-text-3">
-              {b.name}
-              {b.free && <span className="rounded-[3px] px-1 font-bold tracking-[0.06em]" style={{ background: 'var(--color-host-mx)', color: '#08130D', fontSize: '9px' }}>FREE</span>}
-              {b.note && <span className="text-text-dim">· {b.note}</span>}
-            </span>
-          ))}
+          {rights.broadcasters.map((b) => {
+            const inner = (
+              <>
+                {b.name}
+                {b.free && <span className="rounded-[3px] px-1 font-bold tracking-[0.06em]" style={{ background: 'var(--color-host-mx)', color: '#08130D', fontSize: '9px' }}>FREE</span>}
+                {b.note && <span className="text-text-dim">· {b.note}</span>}
+                {b.url && <span className="text-text-2">↗</span>}
+              </>
+            );
+            const cls = 't-micro inline-flex min-h-[30px] items-center gap-1.5 rounded-(--radius-chip) border px-2 py-1';
+            return b.url ? (
+              <a
+                key={b.name}
+                href={b.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`focus-ring ${cls} border-border-strong text-text-2 hover:border-text-3 hover:text-text`}
+              >
+                {inner}
+              </a>
+            ) : (
+              <span key={b.name} className={`${cls} border-border text-text-3`}>{inner}</span>
+            );
+          })}
         </div>
       )}
 
@@ -917,9 +934,6 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
         </div>
       )}
 
-      {/* starting lineups on a pitch */}
-      {lineups && A && B && <Pitch lineups={lineups} nameA={A.name} nameB={B.name} photoOf={photoOf} />}
-
       {/* highlights — click-to-load facade; no YouTube script before click */}
       {highlight && (
         <div className="flex flex-col gap-2">
@@ -956,6 +970,9 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
           <span className="t-micro text-text-dim">May be geo-restricted outside DACH — the YouTube link always works as fallback.</span>
         </div>
       )}
+
+      {/* starting lineups on a pitch */}
+      {lineups && A && B && <Pitch lineups={lineups} nameA={A.name} nameB={B.name} photoOf={photoOf} />}
 
       {/* venue + kickoff */}
       <div className="flex flex-col gap-2.5">
