@@ -820,5 +820,582 @@
     ]
    }
   }
+ },
+ "5": {
+  "cards": [
+   {
+    "minute": 16,
+    "side": 0,
+    "player": "Mahmoud Abunada",
+    "type": "Y"
+   },
+   {
+    "minute": 17,
+    "side": 1,
+    "player": "Breel Embolo",
+    "type": "R"
+   },
+   {
+    "minute": 23,
+    "side": 0,
+    "player": "Jassem Gaber",
+    "type": "Y"
+   },
+   {
+    "minute": 42,
+    "side": 1,
+    "player": "Denis Zakaria",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 17,
+    "side": 1,
+    "player": "Breel Embolo",
+    "penalty": true
+   },
+   {
+    "minute": 94,
+    "side": 0,
+    "player": "Miro Muheim",
+    "owngoal": true
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Mahmoud Abunada",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Boualem Khoukhi",
+      "jersey": "16",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pedro Miguel",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Homam Ahmed",
+      "jersey": "14",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Ayoub Al-Oui",
+      "jersey": "13",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Assim Madibo",
+      "jersey": "23",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Issa Laye",
+      "jersey": "4",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Jassem Gaber",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Yusuf Abdurisag",
+      "jersey": "15",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Akram Afif",
+      "jersey": "11",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Edmílson Junior",
+      "jersey": "8",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Hassan Al-Haydos",
+     "Mohamed Manai",
+     "Ahmed Fathy",
+     "Ahmed Alaaeldin",
+     "Karim Boudiaf"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Gregor Kobel",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Manuel Akanji",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nico Elvedi",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ricardo Rodríguez",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Denis Zakaria",
+      "jersey": "6",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Granit Xhaka",
+      "jersey": "10",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Remo Freuler",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Michel Aebischer",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Breel Embolo",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Rubén Vargas",
+      "jersey": "17",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Dan Ndoye",
+      "jersey": "11",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Miro Muheim",
+     "Fabian Rieder",
+     "Zeki Amdouni",
+     "Johan Manzambi",
+     "Ardon Jashari"
+    ]
+   }
+  }
+ },
+ "6": {
+  "cards": [
+   {
+    "minute": 37,
+    "side": 0,
+    "player": "Casemiro",
+    "type": "Y"
+   },
+   {
+    "minute": 43,
+    "side": 0,
+    "player": "Roger Ibañez",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 21,
+    "side": 1,
+    "player": "Ismael Saibari"
+   },
+   {
+    "minute": 32,
+    "side": 0,
+    "player": "Vinícius Júnior"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Alisson Becker",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Gabriel Magalhães",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Marquinhos",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Douglas Santos",
+      "jersey": "16",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Roger Ibañez",
+      "jersey": "24",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Raphinha",
+      "jersey": "11",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Bruno Guimarães",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Casemiro",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Igor Thiago",
+      "jersey": "25",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Vinícius Júnior",
+      "jersey": "7",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Lucas Paquetá",
+      "jersey": "20",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Matheus Cunha",
+     "Fabinho",
+     "Luiz Henrique",
+     "Danilo",
+     "Danilo Santos"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Yassine Bounou",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Chadi Riad",
+      "jersey": "18",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Issa Diop",
+      "jersey": "14",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Noussair Mazraoui",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Achraf Hakimi",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Azzedine Ounahi",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Ayyoub Bouaddi",
+      "jersey": "6",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Neil El Aynaoui",
+      "jersey": "24",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Ismael Saibari",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Bilal El Khannouss",
+      "jersey": "23",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Brahim Díaz",
+      "jersey": "10",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Chemsdine Talbi",
+     "Soufiane Rahimi",
+     "Ayoube Amaimouni",
+     "Samir El Mourabet",
+     "Anass Salah-Eddine"
+    ]
+   }
+  }
+ },
+ "7": {
+  "cards": [
+   {
+    "minute": 39,
+    "side": 0,
+    "player": "Jean-Ricner Bellegarde",
+    "type": "Y"
+   },
+   {
+    "minute": 46,
+    "side": 1,
+    "player": "Aaron Hickey",
+    "type": "Y"
+   },
+   {
+    "minute": 91,
+    "side": 1,
+    "player": "Findlay Curtis",
+    "type": "Y"
+   },
+   {
+    "minute": 95,
+    "side": 1,
+    "player": "Kenny McLean",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 28,
+    "side": 1,
+    "player": "John McGinn"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Johny Placide",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Hannes Delcroix",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ricardo Adé",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Martin Expérience",
+      "jersey": "8",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Carlens Arcus",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jean-Ricner Bellegarde",
+      "jersey": "10",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Danley Jean Jacques",
+      "jersey": "17",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Ruben Providence",
+      "jersey": "15",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Louicius Deedson",
+      "jersey": "11",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Wilson Isidor",
+      "jersey": "18",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Frantzdy Pierrot",
+      "jersey": "20",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Josué Casimir",
+     "Lenny Joseph",
+     "Yassin Fortuné"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Angus Gunn",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Jack Hendry",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Grant Hanley",
+      "jersey": "5",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Andy Robertson",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Aaron Hickey",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Lewis Ferguson",
+      "jersey": "19",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Scott McTominay",
+      "jersey": "4",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "John McGinn",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Ben Gannon-Doak",
+      "jersey": "17",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Ché Adams",
+      "jersey": "10",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Lawrence Shankland",
+      "jersey": "20",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Nathan Patterson",
+     "Ryan Christie",
+     "Lyndon Dykes",
+     "Kenny McLean",
+     "Findlay Curtis"
+    ]
+   }
+  }
  }
 }
