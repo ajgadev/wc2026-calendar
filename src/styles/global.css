@@ -169,6 +169,56 @@ input::placeholder { color: var(--color-text-dim); }
 .live-dot { animation: live-pulse 1.6s ease-in-out infinite; }
 .score-flash { animation: score-flash 1.2s ease-out 1; }
 
+/* ---- Goal toasts (created by the LiveOverlay island on a score change) ---- */
+#wc-toasts {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50; /* above the drawer (z-41) */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(340px, calc(100vw - 32px));
+  pointer-events: none;
+}
+@media (max-width: 560px) {
+  #wc-toasts { left: 16px; right: 16px; max-width: none; }
+}
+.goal-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 13px;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-left: 3px solid var(--color-live);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.45);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+.goal-toast.is-in { opacity: 1; transform: translateY(0); }
+.goal-toast__flag { width: 26px; height: auto; border-radius: 2px; flex: none; }
+.goal-toast__title {
+  font-family: var(--font-display);
+  font-size: var(--text-micro);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-live);
+}
+.goal-toast__body {
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--color-text);
+}
+@media (prefers-reduced-motion: reduce) {
+  .goal-toast { transition: opacity 0.25s ease-out; transform: none; }
+  .goal-toast.is-in { transform: none; }
+}
+
 /* ---- View switching (no-JS safe) ----
    data-layout="auto" lets the breakpoint decide: agenda on mobile,
    calendar on desktop. JS toggles set "agenda" / "calendar" explicitly. */

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { appData, getFollows } from '../../lib/client';
+import { appData, flagUrl, getFollows } from '../../lib/client';
 import { joinLive, type LiveStatus } from '../../lib/merge';
 import { inLiveWindow } from '../../lib/time';
 import type { LiveMatch } from '../../lib/types';
@@ -16,6 +16,66 @@ import type { LiveMatch } from '../../lib/types';
 
 const POLL_MS = 60_000;
 const prevScores = new Map<number, string>();
+
+/** Match-number → team codes + display names, built once from the data blob. */
+let lookup: { teams: Map<number, { a?: string; b?: string }>; names: Record<string, { name: string; flag: string }> } | null = null;
+function lookups() {
+  if (!lookup) {
+    const { matches, teams } = appData();
+    lookup = {
+      teams: new Map(matches.map((m) => [m.n, { a: m.a, b: m.b }])),
+      names: Object.fromEntries(Object.entries(teams).map(([c, t]) => [c, { name: t.name, flag: t.flag }])),
+    };
+  }
+  return lookup;
+}
+
+function toastHost(): HTMLElement {
+  let host = document.getElementById('wc-toasts');
+  if (!host) {
+    host = document.createElement('div');
+    host.id = 'wc-toasts';
+    host.setAttribute('aria-live', 'polite');
+    document.body.appendChild(host);
+  }
+  return host;
+}
+
+/** In-page toast when a side's tally goes up. Tap to dismiss; auto-clears. */
+function goalToast(code: string, score: string, minute: string) {
+  const team = lookups().names[code];
+  const host = toastHost();
+  const el = document.createElement('div');
+  el.className = 'goal-toast';
+  el.setAttribute('role', 'status');
+
+  if (team?.flag) {
+    const img = document.createElement('img');
+    img.className = 'goal-toast__flag';
+    img.src = flagUrl(team.flag, 40);
+    img.alt = '';
+    el.appendChild(img);
+  }
+  const text = document.createElement('div');
+  const title = document.createElement('div');
+  title.className = 'goal-toast__title';
+  title.textContent = minute ? `GOAL · ${minute}` : 'GOAL';
+  const body = document.createElement('div');
+  body.className = 'goal-toast__body';
+  body.textContent = `${team?.name ?? code} · ${score}`;
+  text.append(title, body);
+  el.appendChild(text);
+
+  host.appendChild(el);
+  requestAnimationFrame(() => el.classList.add('is-in'));
+
+  const dismiss = () => {
+    el.classList.remove('is-in');
+    setTimeout(() => el.remove(), 300);
+  };
+  el.addEventListener('click', dismiss);
+  setTimeout(dismiss, 6000);
+}
 
 function patch(statuses: LiveStatus[]) {
   for (const s of statuses) {
@@ -42,6 +102,18 @@ function patch(statuses: LiveStatus[]) {
           void slot.offsetWidth; // restart the animation
           slot.classList.add('score-flash');
         });
+      }
+    }
+    // goal toast — fire once per scoreline change, after a known prior score
+    // (skips the first sighting of a match, so a page load mid-match is quiet)
+    const prev = prevScores.get(s.n);
+    if (score && prev !== undefined && prev !== score) {
+      const [ph, pa] = prev.split('–').map(Number);
+      const scoredSide = s.home !== null && s.home > ph ? 0 : s.away !== null && s.away > pa ? 1 : -1;
+      if (scoredSide >= 0) {
+        const m = lookups().teams.get(s.n);
+        const code = scoredSide === 0 ? m?.a : m?.b;
+        if (code) goalToast(code, score, minute);
       }
     }
     if (score) prevScores.set(s.n, score);
