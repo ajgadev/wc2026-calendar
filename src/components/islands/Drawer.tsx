@@ -20,7 +20,7 @@ import {
   type GoalEvent,
   type MatchDetailsArchive,
 } from '../../lib/cards';
-import { BROADCAST_RIGHTS, SDB_COUNTRY_NAMES, detectMarket } from '../../data/broadcasters';
+import { BROADCAST_RIGHTS, DE_MATCH_FTA, SDB_COUNTRY_NAMES, detectMarket } from '../../data/broadcasters';
 import { teamCodeFor } from '../../data/teamNames';
 import {
   ESPN_SUMMARY,
@@ -589,6 +589,8 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
   const rights = BROADCAST_RIGHTS[market];
   const sdbForMarket = sdbTv.filter((r) => r.country === SDB_COUNTRY_NAMES[market]);
   const hasSelectedFree = !!rights?.broadcasters.some((b) => b.free && b.coverage === 'selected');
+  // Germany: definitive per-match free/paid verdict where we've confirmed it
+  const deVerdict = market === 'DE' ? DE_MATCH_FTA[m.n] ?? null : null;
 
   return (
     <div className={cardCls}>
@@ -611,13 +613,34 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
           This match: {usChannels.map((c) => c.name + (c.stream ? ' (stream)' : '')).join(' · ')}
         </span>
       )}
-      {market !== 'US' && sdbForMarket.length > 0 && (
+      {market !== 'US' && !deVerdict && sdbForMarket.length > 0 && (
         <span className="t-meta text-text-2">
           This match: {[...new Set(sdbForMarket.map((r) => r.channel))].join(' · ')}
         </span>
       )}
 
-      {rights && (
+      {/* Germany — confirmed per-match verdict (overrides the generic chips) */}
+      {deVerdict === 'magenta' && (
+        <span className="t-meta text-text-2">
+          This match: <strong className="text-text">MagentaTV only</strong> — paid; not on ARD/ZDF free TV.
+        </span>
+      )}
+      {deVerdict && deVerdict !== 'magenta' && (
+        <span className="t-meta inline-flex flex-wrap items-center gap-1.5 text-text-2">
+          This match:
+          <span className="rounded-[3px] px-1 font-bold tracking-[0.06em]" style={{ background: 'var(--color-host-mx)', color: '#08130D', fontSize: '9px' }}>FREE</span>
+          {deVerdict === 'ARD' ? (
+            <a href="https://www.sportschau.de/" target="_blank" rel="noopener noreferrer" className="focus-ring text-text hover:underline">on ARD ↗</a>
+          ) : deVerdict === 'ZDF' ? (
+            <a href="https://www.zdf.de/live-tv" target="_blank" rel="noopener noreferrer" className="focus-ring text-text hover:underline">on ZDF ↗</a>
+          ) : (
+            <span className="text-text">on ARD / ZDF</span>
+          )}
+          <span className="text-text-dim">· also MagentaTV</span>
+        </span>
+      )}
+
+      {!deVerdict && rights && (
         <div className="flex flex-wrap gap-1.5">
           {rights.broadcasters.map((b) => {
             const inner = (
@@ -652,7 +675,7 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
         </div>
       )}
 
-      {hasSelectedFree && (
+      {!deVerdict && hasSelectedFree && (
         <span className="t-micro text-text-dim">
           <span style={{ color: 'var(--color-host-mx)' }}>FREE*</span> = only selected matches; which channel carries this one varies — check the per-match listing above, or a paid rights holder covers every match.
         </span>

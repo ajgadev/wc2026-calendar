@@ -109,6 +109,43 @@ export const BROADCAST_RIGHTS: Record<string, MarketRights> = {
   },
 };
 
+/**
+ * Germany per-match free-to-air map for WC2026. MagentaTV carries all
+ * 104; ARD/ZDF air a 60-match free subset (30 each), the other 44 are
+ * MagentaTV-exclusive (paid). Keyed by our stable match number:
+ *   'ARD' | 'ZDF' — confirmed free on that channel
+ *   'free'        — confirmed free-to-air, channel not pinned
+ *   'magenta'     — MagentaTV-exclusive (paid; not on ARD/ZDF)
+ * Only VERIFIED matches are listed (~55 of 104); anything absent falls
+ * back to the generic market chips (so we never guess "free"). The free
+ * entries are cross-confirmed from sportschau's "60 Livestreams" + match
+ * schedule (audio-stream / live-ticker ≠ free TV video); exclusives from
+ * sport1.de + heise.de. Most knockout exclusives aren't announced yet —
+ * fill them in here as they are. Confirm with local listings.
+ */
+export type DeFta = 'ARD' | 'ZDF' | 'free' | 'magenta';
+export const DE_MATCH_FTA: Record<number, DeFta> = {
+  // ---- Free-to-air on ARD ----
+  9: 'ARD', // Germany–Curaçao
+  56: 'ARD', // Ecuador–Germany
+  19: 'ARD', 29: 'ARD', 31: 'ARD', 39: 'ARD', 41: 'ARD', 42: 'ARD',
+  45: 'ARD', 46: 'ARD', 48: 'ARD', 49: 'ARD', 58: 'ARD', 60: 'ARD', 63: 'ARD',
+  // ---- Free-to-air on ZDF ----
+  1: 'ZDF', // opening match (Mexico–South Africa)
+  34: 'ZDF', // Germany–Ivory Coast
+  104: 'ZDF', // final
+  20: 'ZDF', 21: 'ZDF', 22: 'ZDF', 25: 'ZDF', 27: 'ZDF', 33: 'ZDF', 35: 'ZDF',
+  38: 'ZDF', 44: 'ZDF', 52: 'ZDF', 61: 'ZDF', 68: 'ZDF', 69: 'ZDF', 71: 'ZDF',
+  // ---- Free-to-air, channel not yet pinned ----
+  101: 'free', 102: 'free', // both semifinals
+  // ---- MagentaTV-exclusive (paid; not on ARD/ZDF) ----
+  2: 'magenta', 4: 'magenta', 8: 'magenta', 10: 'magenta', 12: 'magenta',
+  17: 'magenta', 18: 'magenta', 23: 'magenta', 24: 'magenta', 26: 'magenta',
+  28: 'magenta', 30: 'magenta', 32: 'magenta', 36: 'magenta', 37: 'magenta',
+  40: 'magenta', 43: 'magenta', 47: 'magenta', 51: 'magenta', 59: 'magenta',
+  103: 'magenta', // third-place playoff
+};
+
 /** Our market codes → TheSportsDB's country labels in lookuptv. */
 export const SDB_COUNTRY_NAMES: Record<string, string> = {
   US: 'United States',
