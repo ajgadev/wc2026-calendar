@@ -112,8 +112,10 @@ export function parseEspnCards(event: EspnEvent, homeIsA: boolean, homeTeamId: s
   const out: CardEvent[] = [];
   for (const d of event.competitions?.[0]?.details ?? []) {
     const text = d.type?.text ?? '';
-    const isYellow = /yellow/i.test(text);
-    const isRed = /red/i.test(text);
+    // Require "card" — ESPN sends "Yellow Card"/"Red Card". A bare /red/i
+    // also matches "Penalty - Sco(red)", tagging every penalty as a red card.
+    const isYellow = /yellow card/i.test(text);
+    const isRed = /red card/i.test(text);
     if (!isYellow && !isRed) continue;
     const minute = parseClock(d.clock?.displayValue);
     const player = d.athletesInvolved?.[0]?.displayName ?? '';

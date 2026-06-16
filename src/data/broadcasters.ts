@@ -14,6 +14,14 @@ export interface Broadcaster {
   free: boolean;
   stream?: boolean;
   note?: string;
+  /**
+   * Match coverage. 'all' = carries every match (a free 'all' channel
+   * guarantees THIS match is free). 'selected' = only a curated subset,
+   * so a free badge must NOT imply this specific match. Undefined is
+   * treated as 'all' for paid channels (badge unaffected) but the UI
+   * only shows a solid FREE badge for free + 'all'.
+   */
+  coverage?: 'all' | 'selected';
   /** Watch URL — set for free platforms with an open web player */
   url?: string;
 }
@@ -27,24 +35,24 @@ export const BROADCAST_RIGHTS: Record<string, MarketRights> = {
   US: {
     country: 'United States',
     broadcasters: [
-      { name: 'FOX / FS1', free: true, note: 'English, FOX over-the-air' },
-      { name: 'Tubi', free: true, stream: true, note: 'all matches, ad-supported', url: 'https://tubitv.com/' },
-      { name: 'Telemundo', free: true, note: 'Spanish, over-the-air' },
+      { name: 'Tubi', free: true, stream: true, coverage: 'all', note: 'all matches, ad-supported', url: 'https://tubitv.com/' },
+      { name: 'FOX / FS1', free: true, coverage: 'selected', note: 'English, FOX over-the-air' },
+      { name: 'Telemundo', free: true, coverage: 'selected', note: 'Spanish, over-the-air' },
       { name: 'Peacock', free: false, stream: true },
     ],
   },
   MX: {
     country: 'Mexico',
     broadcasters: [
-      { name: 'Canal 5 (tv azteca en vivo)', free: true, stream: true, url: 'https://www.tudn.com/' },
-      { name: 'TV Azteca Deportes', free: true, stream: true, url: 'https://www.aztecadeportes.com/en-vivo' },
+      { name: 'Canal 5 (tv azteca en vivo)', free: true, stream: true, coverage: 'selected', url: 'https://www.tudn.com/' },
+      { name: 'TV Azteca Deportes', free: true, stream: true, coverage: 'selected', url: 'https://www.aztecadeportes.com/en-vivo' },
       { name: 'ViX', free: false, stream: true },
     ],
   },
   CA: {
     country: 'Canada',
     broadcasters: [
-      { name: 'CTV', free: true, stream: true, url: 'https://www.ctv.ca/live' },
+      { name: 'CTV', free: true, stream: true, coverage: 'selected', url: 'https://www.ctv.ca/live' },
       { name: 'TSN', free: false, note: 'English' },
       { name: 'RDS', free: false, note: 'French' },
     ],
@@ -52,51 +60,51 @@ export const BROADCAST_RIGHTS: Record<string, MarketRights> = {
   GB: {
     country: 'United Kingdom',
     broadcasters: [
-      { name: 'BBC iPlayer', free: true, stream: true, url: 'https://www.bbc.co.uk/iplayer' },
-      { name: 'ITVX', free: true, stream: true, url: 'https://www.itv.com/watch' },
+      { name: 'BBC iPlayer', free: true, stream: true, coverage: 'selected', url: 'https://www.bbc.co.uk/iplayer' },
+      { name: 'ITVX', free: true, stream: true, coverage: 'selected', url: 'https://www.itv.com/watch' },
     ],
   },
   DE: {
     country: 'Germany',
     broadcasters: [
-      { name: 'ARD Sportschau', free: true, stream: true, note: 'most matches', url: 'https://www.sportschau.de/' },
-      { name: 'ZDF', free: true, stream: true, url: 'https://www.zdf.de/live-tv' },
-      { name: 'MagentaTV', free: false, stream: true, note: 'all 104 matches' },
+      { name: 'MagentaTV', free: false, stream: true, coverage: 'all', note: 'all 104 matches' },
+      { name: 'ARD Sportschau', free: true, stream: true, coverage: 'selected', note: 'selected matches', url: 'https://www.sportschau.de/' },
+      { name: 'ZDF', free: true, stream: true, coverage: 'selected', note: 'selected matches', url: 'https://www.zdf.de/live-tv' },
     ],
   },
   ES: {
     country: 'Spain',
     broadcasters: [
-      { name: 'RTVE Play', free: true, stream: true, url: 'https://www.rtve.es/play/' },
+      { name: 'RTVE Play', free: true, stream: true, coverage: 'selected', url: 'https://www.rtve.es/play/' },
     ],
   },
   FR: {
     country: 'France',
     broadcasters: [
-      { name: 'TF1+', free: true, stream: true, note: 'selected matches', url: 'https://www.tf1.fr/' },
-      { name: '6play (M6)', free: true, stream: true, note: 'selected matches', url: 'https://www.6play.fr/' },
-      { name: 'beIN Sports', free: false, note: 'all matches' },
+      { name: 'beIN Sports', free: false, coverage: 'all', note: 'all matches' },
+      { name: 'TF1+', free: true, stream: true, coverage: 'selected', note: 'selected matches', url: 'https://www.tf1.fr/' },
+      { name: '6play (M6)', free: true, stream: true, coverage: 'selected', note: 'selected matches', url: 'https://www.6play.fr/' },
     ],
   },
   BR: {
     country: 'Brazil',
     broadcasters: [
-      { name: 'CazéTV (YouTube)', free: true, stream: true, url: 'https://www.youtube.com/@CazeTV' },
-      { name: 'TV Globo', free: true },
+      { name: 'CazéTV (YouTube)', free: true, stream: true, coverage: 'all', note: 'all matches', url: 'https://www.youtube.com/@CazeTV' },
+      { name: 'TV Globo', free: true, coverage: 'selected' },
       { name: 'SporTV / Globoplay', free: false },
     ],
   },
   AR: {
     country: 'Argentina',
     broadcasters: [
-      { name: 'Telefe', free: true, stream: true, note: 'selected matches', url: 'https://mitelefe.com/vivo' },
+      { name: 'Telefe', free: true, stream: true, coverage: 'selected', note: 'selected matches', url: 'https://mitelefe.com/vivo' },
       { name: 'TyC Sports', free: false },
     ],
   },
   NL: {
     country: 'Netherlands',
     broadcasters: [
-      { name: 'NPO Start (NPO 1)', free: true, stream: true, url: 'https://npo.nl/start/live' },
+      { name: 'NPO Start (NPO 1)', free: true, stream: true, coverage: 'all', url: 'https://npo.nl/start/live' },
     ],
   },
 };

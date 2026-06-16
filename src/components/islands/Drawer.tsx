@@ -588,6 +588,7 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
 
   const rights = BROADCAST_RIGHTS[market];
   const sdbForMarket = sdbTv.filter((r) => r.country === SDB_COUNTRY_NAMES[market]);
+  const hasSelectedFree = !!rights?.broadcasters.some((b) => b.free && b.coverage === 'selected');
 
   return (
     <div className={cardCls}>
@@ -622,7 +623,13 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
             const inner = (
               <>
                 {b.name}
-                {b.free && <span className="rounded-[3px] px-1 font-bold tracking-[0.06em]" style={{ background: 'var(--color-host-mx)', color: '#08130D', fontSize: '9px' }}>FREE</span>}
+                {b.free && (b.coverage === 'selected' ? (
+                  // free, but only a subset of matches — don't imply THIS match is free
+                  <span className="rounded-[3px] border px-1 font-bold tracking-[0.06em]" style={{ borderColor: 'var(--color-host-mx)', color: 'var(--color-host-mx)', fontSize: '9px' }}>FREE*</span>
+                ) : (
+                  // carries every match — this match is free here
+                  <span className="rounded-[3px] px-1 font-bold tracking-[0.06em]" style={{ background: 'var(--color-host-mx)', color: '#08130D', fontSize: '9px' }}>FREE</span>
+                ))}
                 {b.note && <span className="text-text-dim">· {b.note}</span>}
                 {b.url && <span className="text-text-2">↗</span>}
               </>
@@ -643,6 +650,12 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
             );
           })}
         </div>
+      )}
+
+      {hasSelectedFree && (
+        <span className="t-micro text-text-dim">
+          <span style={{ color: 'var(--color-host-mx)' }}>FREE*</span> = only selected matches; which channel carries this one varies — check the per-match listing above, or a paid rights holder covers every match.
+        </span>
       )}
 
       <span className="t-micro text-text-dim">
