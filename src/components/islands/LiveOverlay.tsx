@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { ESPN_SCOREBOARD, matchEspnEventToMatch } from '../../lib/cards';
 import { appData, flagUrl, getFollows } from '../../lib/client';
 import { joinLive, type LiveStatus } from '../../lib/merge';
 import { inLiveWindow } from '../../lib/time';
@@ -16,6 +17,35 @@ import type { LiveMatch } from '../../lib/types';
 
 const POLL_MS = 60_000;
 const prevScores = new Map<number, string>();
+
+/**
+ * Live match minute, sourced from ESPN — football-data's WC feed sends
+ * `minute: null` for every match, so the score updates but the clock
+ * never does. ESPN's scoreboard carries an authoritative displayClock
+ * ("67'", "90'+3'") and state ('pre' | 'in' | 'post'). Keyless, CORS-open.
+ * Returns match-number → clock text for matches currently in play.
+ */
+async function fetchEspnMinutes(
+  matches: { n: number; a?: string; b?: string }[],
+): Promise<Map<number, string>> {
+  const out = new Map<number, string>();
+  try {
+    const res = await fetch(ESPN_SCOREBOARD);
+    if (!res.ok) return out;
+    const data = (await res.json()) as { events?: Record<string, unknown>[] };
+    for (const ev of data.events ?? []) {
+      const st = (ev as { competitions?: { status?: { type?: { state?: string; name?: string }; displayClock?: string } }[] })
+        .competitions?.[0]?.status;
+      const state = st?.type?.state;
+      if (state === 'pre' || state === 'post') continue; // only in-progress / halftime
+      // matchEspnEventToMatch reads competitors/team codes off the raw event
+      const hit = matchEspnEventToMatch(ev as Parameters<typeof matchEspnEventToMatch>[0], matches);
+      if (!hit) continue;
+      out.set(hit.match.n, /half/i.test(st?.type?.name ?? '') ? 'HT' : st?.displayClock ?? '');
+    }
+  } catch { /* ESPN optional — football-data still drives score + state */ }
+  return out;
+}
 
 /** Match-number → team codes + display names, built once from the data blob. */
 let lookup: { teams: Map<number, { a?: string; b?: string }>; names: Record<string, { name: string; flag: string }> } | null = null;
@@ -77,7 +107,7 @@ function goalToast(code: string, score: string, minute: string) {
   setTimeout(dismiss, 6000);
 }
 
-function patch(statuses: LiveStatus[]) {
+function patch(statuses: LiveStatus[], minutes?: Map<number, string>) {
   for (const s of statuses) {
     const els = document.querySelectorAll<HTMLElement>(`[data-match][data-n="${s.n}"]`);
     if (!els.length) continue;
@@ -85,7 +115,8 @@ function patch(statuses: LiveStatus[]) {
     const isFt = s.status === 'FINISHED' || s.status === 'AWARDED';
     if (!isLive && !isFt) continue; // SCHEDULED/TIMED/POSTPONED/SUSPENDED → keep "upcoming"
     const score = s.home !== null && s.away !== null ? `${s.home}–${s.away}` : '';
-    const minute = s.status === 'PAUSED' ? 'HT' : s.minute != null ? `${s.minute}'` : '';
+    // ESPN clock first (football-data has none); HT for paused; else blank
+    const minute = isFt ? '' : minutes?.get(s.n) ?? (s.status === 'PAUSED' ? 'HT' : s.minute != null ? `${s.minute}'` : '');
     for (const el of els) {
       el.dataset.state = isLive ? 'live' : 'ft';
       el.querySelectorAll<HTMLElement>('[data-minute]').forEach((n) => { n.textContent = minute; });
@@ -184,7 +215,11 @@ export default function LiveOverlay() {
         const res = await fetch(`/api/live?dateFrom=${isoDay(-2)}&dateTo=${isoDay(1)}`);
         if (!res.ok) throw new Error(String(res.status));
         const live = (await res.json()) as LiveMatch[];
-        patch(joinLive(matches, live));
+        const statuses = joinLive(matches, live);
+        // pull the live clock from ESPN only when something is actually in play
+        const anyLive = statuses.some((s) => s.status === 'IN_PLAY' || s.status === 'PAUSED');
+        const minutes = anyLive ? await fetchEspnMinutes(matches) : undefined;
+        patch(statuses, minutes);
         setOutage(false);
         didCatchup = true;
         notifyFollowedKickoffs(now);

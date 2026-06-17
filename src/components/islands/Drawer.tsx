@@ -770,7 +770,20 @@ function Pitch({ lineups, nameA, nameB, photoOf }: { lineups: MatchLineups; name
 function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => void }) {
   const { matches, teams, stadiums, stageLabels } = appData();
   const m = matches.find((x) => x.n === n);
-  const dom = domMatchState(n);
+  // LiveOverlay patches the static rows imperatively (data-state/score/minute);
+  // mirror those into state so the open drawer reacts to kickoff, goals, the
+  // running clock, and full-time — not just whatever was on screen when it opened.
+  const [dom, setDom] = useState(() => domMatchState(n));
+  useEffect(() => {
+    setDom(domMatchState(n));
+    const id = setInterval(() => {
+      const next = domMatchState(n);
+      setDom((prev) =>
+        prev.state !== next.state || prev.score !== next.score || prev.minute !== next.minute ? next : prev,
+      );
+    }, 3000);
+    return () => clearInterval(id);
+  }, [n]);
   const [highlight, setHighlight] = useState<Highlight | null>(null);
   const [playerOpen, setPlayerOpen] = useState(false);
   const [cards, setCards] = useState<CardEvent[]>([]);
@@ -861,7 +874,7 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
       }
     })();
     return () => { alive = false; };
-  }, [n]);
+  }, [n, dom.state]);
 
   if (!m) return null;
   const v = stadiums[m.stadium];
