@@ -72,6 +72,29 @@
    "time": "12:00 UTC-4",
    "team1": "Czech Republic",
    "team2": "South Africa",
+   "score": {
+    "ft": [
+     1,
+     1
+    ],
+    "ht": [
+     1,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Michal Sadílek",
+     "minute": "6"
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Teboho Mokoena",
+     "minute": "83",
+     "penalty": true
+    }
+   ],
    "group": "Group A",
    "ground": "Atlanta"
   },
@@ -81,6 +104,23 @@
    "time": "19:00 UTC-6",
    "team1": "Mexico",
    "team2": "South Korea",
+   "score": {
+    "ft": [
+     1,
+     0
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Luis Romo",
+     "minute": "50"
+    }
+   ],
+   "goals2": [],
    "group": "Group A",
    "ground": "Guadalajara (Zapopan)"
   },
@@ -171,6 +211,41 @@
    "time": "12:00 UTC-7",
    "team1": "Switzerland",
    "team2": "Bosnia & Herzegovina",
+   "score": {
+    "ft": [
+     4,
+     1
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Johan Manzambi",
+     "minute": "74"
+    },
+    {
+     "name": "Rubén Vargas",
+     "minute": "84"
+    },
+    {
+     "name": "Johan Manzambi",
+     "minute": "90"
+    },
+    {
+     "name": "Granit Xhaka",
+     "minute": "90+7",
+     "penalty": true
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Ermin Mahmic",
+     "minute": "90+3"
+    }
+   ],
    "group": "Group B",
    "ground": "Los Angeles (Inglewood)"
   },
@@ -180,6 +255,44 @@
    "time": "15:00 UTC-7",
    "team1": "Canada",
    "team2": "Qatar",
+   "score": {
+    "ft": [
+     6,
+     0
+    ],
+    "ht": [
+     3,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Cyle Larin",
+     "minute": "16"
+    },
+    {
+     "name": "Jonathan David",
+     "minute": "29"
+    },
+    {
+     "name": "Jonathan David",
+     "minute": "45+3"
+    },
+    {
+     "name": "Nathan Saliba",
+     "minute": "64"
+    },
+    {
+     "name": "Mohamed Manai",
+     "minute": "75",
+     "owngoal": true
+    },
+    {
+     "name": "Jonathan David",
+     "minute": "90+2"
+    }
+   ],
+   "goals2": [],
    "group": "Group B",
    "ground": "Vancouver"
   },
