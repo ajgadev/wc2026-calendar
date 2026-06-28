@@ -249,6 +249,14 @@ input::placeholder { color: var(--color-text-dim); }
 /* live rows/chips get the amber border (state beyond color: badge + minute) */
 [data-state="live"].live-border { border-color: color-mix(in srgb, var(--color-live-badge) 60%, transparent) !important; }
 
+/* ---- Bracket slot results ----
+   Each knockout slot carries data-result="won|lost". Server bakes it from
+   the static layer; the LiveBracket island sets it as results land. Drives
+   the loser dim + winner emphasis uniformly across both bracket layouts. */
+[data-slot][data-result="lost"] { opacity: 0.55; }
+[data-slot][data-result="won"] [data-slot-label] { color: var(--color-win); font-weight: 800; }
+[data-slot][data-result="won"] [data-slot-score] { color: var(--color-win); }
+
 /* TODAY badge shows only on the actual today (set client-side; the
    build bakes an approximation for no-JS visitors) */
 [data-date] .today-badge { display: none; }

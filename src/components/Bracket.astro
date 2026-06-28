@@ -25,7 +25,7 @@ function slot(m: Match, side: 'a' | 'b') {
   const [fa, fb] = m.ft ?? [-1, -1];
   const won = m.ft ? (side === 'a' ? fa > fb : fb > fa) : false;
   const lost = m.ft ? (side === 'a' ? fa < fb : fb < fa) : false;
-  return { code, label: code ? TEAMS[code].name : shortPlaceholder(ph ?? ''), score: m.ft ? (side === 'a' ? fa : fb) : null, won, lost };
+  return { side, code, label: code ? TEAMS[code].name : shortPlaceholder(ph ?? ''), score: m.ft ? (side === 'a' ? fa : fb) : null, won, lost };
 }
 
 // ---- tree column layout ----
@@ -135,7 +135,7 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
                     </div>
                     <button
                       type="button"
-                      data-match data-n={f.n} data-open-match={f.n} data-state={stateOf(f)} data-stage="F"
+                      data-match data-n={f.n} data-open-match={f.n} data-state={stateOf(f)} data-stage="F" data-flagsize="md"
                       data-country={stadiumOf(f).country.toLowerCase()} data-teams={[f.a, f.b].filter(Boolean).join(' ')} data-search={searchText(f)}
                       class:list={['focus-ring live-border tinted box-border flex w-full flex-col gap-[7px] rounded-xl border px-3 py-3', hostClass(f)]}
                       style="border-color:color-mix(in srgb, var(--color-live) 55%, transparent);box-shadow:0 0 22px color-mix(in srgb, var(--color-live) 12%, transparent)"
@@ -145,12 +145,12 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
                         <span class:list={['host-chip rounded-(--radius-chip) px-[5px] py-px text-[9.5px] font-semibold whitespace-nowrap', hostClass(f)]}>{venueChip(f)}</span>
                       </span>
                       {[slot(f, 'a'), slot(f, 'b')].map((s) => (
-                        <span class="flex min-w-0 items-center gap-[7px]">
+                        <span data-slot={s.side} data-result={s.won ? 'won' : s.lost ? 'lost' : ''} class="flex min-w-0 items-center gap-[7px]">
                           {s.code
-                            ? <img src={flagSrc(s.code)} alt="" width="18" height="13" loading="lazy" class:list={['h-[13px] w-[18px] shrink-0 rounded-[2px] object-cover', s.lost ? 'opacity-55' : '']} />
-                            : <span class="box-border h-[13px] w-[18px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
-                          <span class:list={['t-meta truncate font-bold', s.lost ? 'text-text-dim' : 'text-text']}>{s.label}</span>
-                          {s.score !== null && <span class="disp t-meta ml-auto font-black tnum text-text">{s.score}</span>}
+                            ? <img data-flag src={flagSrc(s.code)} alt="" width="18" height="13" loading="lazy" class="h-[13px] w-[18px] shrink-0 rounded-[2px] object-cover" />
+                            : <span data-flag class="box-border h-[13px] w-[18px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
+                          <span data-slot-label class="t-meta truncate font-bold text-text">{s.label}</span>
+                          <span data-slot-score class="disp t-meta ml-auto font-black tnum text-text">{s.score ?? ''}</span>
                         </span>
                       ))}
                     </button>
@@ -180,7 +180,7 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
                   <div class="flex items-center px-[5px]" style="flex:1 1 0">
                     <button
                       type="button"
-                      data-match data-n={m.n} data-open-match={m.n} data-state={stateOf(m)} data-stage={m.stage}
+                      data-match data-n={m.n} data-open-match={m.n} data-state={stateOf(m)} data-stage={m.stage} data-flagsize="sm"
                       data-country={stadiumOf(m).country.toLowerCase()} data-teams={[m.a, m.b].filter(Boolean).join(' ')} data-search={searchText(m)}
                       title={m.a && m.b ? `${TEAMS[m.a].name} vs ${TEAMS[m.b].name}` : `${m.pa} vs ${m.pb}`}
                       class:list={[treeCardCls, hostClass(m)]}
@@ -190,12 +190,12 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
                         <span class:list={['host-chip rounded-(--radius-chip) px-1 py-px text-[9px] font-semibold whitespace-nowrap', hostClass(m)]}>{venueChip(m)}</span>
                       </span>
                       {[{ s: a, key: 'home' }, { s: b, key: 'away' }].map(({ s, key }) => (
-                        <span class="flex min-w-0 items-center gap-1.5">
+                        <span data-slot={s.side} data-result={s.won ? 'won' : s.lost ? 'lost' : ''} class="flex min-w-0 items-center gap-1.5">
                           {s.code
-                            ? <img src={flagSrc(s.code)} alt="" width="16" height="12" loading="lazy" class:list={['h-3 w-4 shrink-0 rounded-[2px] object-cover', s.lost ? 'opacity-55' : '']} />
-                            : <span class="box-border h-3 w-4 shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
-                          <span class:list={['t-micro truncate whitespace-nowrap font-bold', s.lost ? 'text-text-3' : 'text-text-2']}>{s.label}</span>
-                          <span class:list={['w-score disp ml-auto t-micro font-black tnum', s.lost ? 'text-text-3' : 'text-text-2']} {...{ [`data-score-${key}`]: true }}>{m.ft ? s.score : ''}</span>
+                            ? <img data-flag src={flagSrc(s.code)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
+                            : <span data-flag class="box-border h-3 w-4 shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
+                          <span data-slot-label class="t-micro truncate whitespace-nowrap font-bold text-text-2">{s.label}</span>
+                          <span data-slot-score class="w-score disp ml-auto t-micro font-black tnum text-text-2" {...{ [`data-score-${key}`]: true }}>{m.ft ? s.score : ''}</span>
                         </span>
                       ))}
                     </button>
@@ -238,7 +238,7 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
               return (
                 <button
                   type="button"
-                  data-match data-n={m.n} data-open-match={m.n} data-state={stateOf(m)} data-stage={m.stage}
+                  data-match data-n={m.n} data-open-match={m.n} data-state={stateOf(m)} data-stage={m.stage} data-flagsize="md"
                   data-country={stadiumOf(m).country.toLowerCase()} data-teams={[m.a, m.b].filter(Boolean).join(' ')} data-search={searchText(m)}
                   class:list={['focus-ring live-border tinted box-border flex w-full flex-col gap-1.5 rounded-[9px] border border-border px-[11px] py-[9px] hover:border-border-strong', hostClass(m)]}
                 >
@@ -248,14 +248,12 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
                   </span>
                   {m.stage === '3RD' && <span class="text-[9px] font-bold tracking-[0.12em] text-text-3">THIRD PLACE</span>}
                   {[a, b].map((s) => (
-                    <span class="flex w-full min-w-0 items-center gap-[7px]">
+                    <span data-slot={s.side} data-result={s.won ? 'won' : s.lost ? 'lost' : ''} class="flex w-full min-w-0 items-center gap-[7px]">
                       {s.code
-                        ? <img src={flagSrc(s.code)} alt="" width="18" height="13" loading="lazy" class:list={['h-[13px] w-[18px] shrink-0 rounded-[2px] object-cover', s.lost ? 'opacity-55' : '']} />
-                        : <span class="box-border h-[13px] w-[18px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
-                      <span class:list={['t-micro truncate whitespace-nowrap', s.won ? 'font-extrabold text-win' : s.lost ? 'font-semibold text-text-dim' : 'font-semibold text-text-2']}>
-                        {s.label}{s.won ? ' ▸' : ''}
-                      </span>
-                      {s.score !== null && <span class="disp t-meta ml-auto font-black tnum" class:list={[s.won ? 'text-win' : 'text-text-3']}>{s.score}</span>}
+                        ? <img data-flag src={flagSrc(s.code)} alt="" width="18" height="13" loading="lazy" class="h-[13px] w-[18px] shrink-0 rounded-[2px] object-cover" />
+                        : <span data-flag class="box-border h-[13px] w-[18px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
+                      <span data-slot-label class="t-micro truncate whitespace-nowrap font-semibold text-text-2">{s.label}</span>
+                      <span data-slot-score class="disp t-meta ml-auto font-black tnum text-text-3">{s.score ?? ''}</span>
                     </span>
                   ))}
                 </button>

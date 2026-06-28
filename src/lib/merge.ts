@@ -14,6 +14,8 @@ export interface LiveStatus {
   minute: number | null;
   home: number | null;
   away: number | null;
+  /** knockout decider, oriented to the static match's a/b sides */
+  winner?: 'a' | 'b' | null;
 }
 
 export interface JoinableMatch {
@@ -47,12 +49,17 @@ export function joinLive(staticMatches: JoinableMatch[], live: LiveMatch[]): Liv
     const m = direct ?? flipped;
     if (!m) continue;
     const swap = !!flipped;
+    const winner =
+      lm.winner === 'HOME_TEAM' ? (swap ? 'b' : 'a')
+      : lm.winner === 'AWAY_TEAM' ? (swap ? 'a' : 'b')
+      : null;
     out.push({
       n: m.n,
       status: lm.status,
       minute: lm.minute,
       home: swap ? lm.score.fullTime.away : lm.score.fullTime.home,
       away: swap ? lm.score.fullTime.home : lm.score.fullTime.away,
+      winner,
     });
   }
   return out;

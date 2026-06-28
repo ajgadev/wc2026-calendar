@@ -43,7 +43,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
         minute?: number | null;
         homeTeam: { name: string };
         awayTeam: { name: string };
-        score: LiveMatch['score'];
+        score: LiveMatch['score'] & { winner?: LiveMatch['winner'] };
       }[];
     };
     const slim: LiveMatch[] = (data.matches ?? []).map((m) => ({
@@ -52,6 +52,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
       minute: m.minute ?? null,
       homeTeam: m.homeTeam?.name ?? '',
       awayTeam: m.awayTeam?.name ?? '',
+      winner: m.score?.winner ?? null,
       score: {
         fullTime: m.score?.fullTime ?? { home: null, away: null },
         halfTime: m.score?.halfTime ?? { home: null, away: null },

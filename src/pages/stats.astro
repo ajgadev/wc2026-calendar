@@ -1,6 +1,7 @@
 ---
 import Layout from '../components/Layout.astro';
 import ScorersTable from '../components/islands/ScorersTable';
+import LiveStats from '../components/islands/LiveStats';
 import { MATCHES } from '../data/schedule';
 import { GROUPS, TEAMS } from '../data/teams';
 import { computeStats } from '../lib/stats';
@@ -11,13 +12,15 @@ const stats = computeStats(MATCHES, GROUPS);
 const maxGroupGoals = Math.max(1, ...stats.goalsByGroup.map((g) => g.goals));
 
 const cards = [
-  { k: 'MATCHES PLAYED', v: String(stats.playedMatches), sub: 'of 104 total' },
+  { key: 'matches', k: 'MATCHES PLAYED', v: String(stats.playedMatches), sub: 'of 104 total' },
   {
+    key: 'goals',
     k: 'GOALS',
     v: String(stats.totalGoals),
     sub: stats.playedMatches ? `${stats.goalsPerMatch.toFixed(1)} per finished match` : 'tournament total',
   },
   {
+    key: 'biggestwin',
     k: 'BIGGEST WIN',
     v: stats.biggestWin?.label ?? '—',
     sub: stats.biggestWin ? shortDate(stats.biggestWin.date) : 'no results yet',
@@ -39,14 +42,14 @@ const cards = [
     <div class="flex flex-col gap-4">
       <div class="rounded-(--radius-card) border border-border bg-surface p-4">
         <div class="disp t-team px-0.5 pb-3 font-black tracking-[0.05em] text-text">GOALS BY GROUP</div>
-        <div class="flex flex-col gap-2">
+        <div data-goals-by-group class="flex flex-col gap-2">
           {stats.goalsByGroup.map((g) => (
-            <div class="grid grid-cols-[20px_1fr_28px] items-center gap-2.5">
+            <div data-gbg={g.group} class="grid grid-cols-[20px_1fr_28px] items-center gap-2.5">
               <span class="disp t-meta font-extrabold text-text-3">{g.group}</span>
               <span class="block h-2.5 overflow-hidden rounded-(--radius-pill) bg-surface-2">
-                <span class="block h-full rounded-(--radius-pill) bg-text-3" style={`width:${Math.round((g.goals / maxGroupGoals) * 100)}%`}></span>
+                <span data-gbg-bar class="block h-full rounded-(--radius-pill) bg-text-3" style={`width:${Math.round((g.goals / maxGroupGoals) * 100)}%`}></span>
               </span>
-              <span class="t-meta tnum text-right text-text-2">{g.goals}</span>
+              <span data-gbg-count class="t-meta tnum text-right text-text-2">{g.goals}</span>
             </div>
           ))}
         </div>
@@ -54,35 +57,34 @@ const cards = [
 
       <div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3">
         {cards.map((c) => (
-          <div class="flex flex-col gap-1 rounded-(--radius-card) border border-border bg-surface p-3.5">
+          <div data-stat-card={c.key} class="flex flex-col gap-1 rounded-(--radius-card) border border-border bg-surface p-3.5">
             <span class="t-micro font-bold tracking-[0.12em] text-text-dim">{c.k}</span>
-            <span class="disp t-h1 tnum font-black text-text">{c.v}</span>
-            <span class="t-micro text-text-3">{c.sub}</span>
+            <span data-stat-value class="disp t-h1 tnum font-black text-text">{c.v}</span>
+            <span data-stat-sub class="t-micro text-text-3">{c.sub}</span>
           </div>
         ))}
       </div>
 
-      {stats.cleanSheets.length > 0 && (
-        <div class="rounded-(--radius-card) border border-border bg-surface p-4">
-          <div class="disp t-team px-0.5 pb-3 font-black tracking-[0.05em] text-text">CLEAN SHEETS</div>
-          <div class="flex flex-col">
-            {stats.cleanSheets.map((c) => (
-              <button type="button" data-open-team={c.team} class="focus-ring-surface grid min-h-[44px] grid-cols-[minmax(0,1fr)_32px] items-center gap-2 border-t border-border px-1 py-1 hover:bg-surface-2">
-                <span class="flex min-w-0 items-center gap-[7px]">
-                  <img src={flagSrc(c.team)} alt="" width="19" height="14" loading="lazy" class="h-3.5 w-[19px] shrink-0 rounded-[2px] object-cover" />
-                  <span class="disp t-meta truncate font-bold text-text-2">{TEAMS[c.team]?.name ?? c.team}</span>
-                </span>
-                <span class="disp t-time tnum text-center font-black text-text">{c.count}</span>
-              </button>
-            ))}
-          </div>
+      <div data-clean-sheets-card hidden={stats.cleanSheets.length === 0} class="rounded-(--radius-card) border border-border bg-surface p-4">
+        <div class="disp t-team px-0.5 pb-3 font-black tracking-[0.05em] text-text">CLEAN SHEETS</div>
+        <div data-clean-sheets class="flex flex-col">
+          {stats.cleanSheets.map((c) => (
+            <button type="button" data-open-team={c.team} class="focus-ring-surface grid min-h-[44px] grid-cols-[minmax(0,1fr)_32px] items-center gap-2 border-t border-border px-1 py-1 hover:bg-surface-2">
+              <span class="flex min-w-0 items-center gap-[7px]">
+                <img src={flagSrc(c.team)} alt="" width="19" height="14" loading="lazy" class="h-3.5 w-[19px] shrink-0 rounded-[2px] object-cover" />
+                <span class="disp t-meta truncate font-bold text-text-2">{TEAMS[c.team]?.name ?? c.team}</span>
+              </span>
+              <span class="disp t-time tnum text-center font-black text-text">{c.count}</span>
+            </button>
+          ))}
         </div>
-      )}
+      </div>
 
       <div class="t-micro px-0.5 leading-relaxed text-text-dim">
-        Scorer feed: football-data.org (10-minute cache). Everything else is computed locally from results.
-        No possession, shots or xG — no free source covers WC 2026 for those.
+        Scorer feed: football-data.org (10-minute cache). Everything else is computed locally from results,
+        updated within ~1 min of full-time. No possession, shots or xG — no free source covers WC 2026 for those.
       </div>
     </div>
   </div>
+  <LiveStats client:idle />
 </Layout>

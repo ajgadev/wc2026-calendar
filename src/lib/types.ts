@@ -74,6 +74,8 @@ export interface LiveMatch {
   minute: number | null;
   homeTeam: string;
   awayTeam: string;
+  /** Knockout decider — set even when fullTime is level (extra time / penalties) */
+  winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null;
   score: {
     fullTime: { home: number | null; away: number | null };
     halfTime: { home: number | null; away: number | null };

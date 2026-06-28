@@ -16,15 +16,15 @@ const tables = GROUPS.map((g) => {
   <div class="flex flex-wrap items-center gap-4 px-0.5">
     <span class="t-micro inline-flex items-center gap-2 text-text-3"><span class="h-[3px] w-3.5 rounded-[2px] bg-text-2"></span>Top two advance</span>
     <span class="t-micro inline-flex items-center gap-2 text-text-3"><span class="w-3.5 border-t-[3px] border-dashed border-text-dim"></span>Third — best 8 of 12 advance</span>
-    <span class="t-micro ml-auto text-text-dim">Computed locally from finished results · refreshed by the daily rebuild</span>
+    <span class="t-micro ml-auto text-text-dim">Computed locally from finished results · updates within ~1 min of full-time</span>
   </div>
 
   <div class="grid grid-cols-[repeat(auto-fill,minmax(310px,1fr))] gap-3.5">
     {tables.map((t) => (
-      <div class="flex flex-col gap-1.5 rounded-(--radius-card) border border-border bg-surface px-3.5 pt-3.5 pb-2">
+      <div data-standings-group={t.g} class="flex flex-col gap-1.5 rounded-(--radius-card) border border-border bg-surface px-3.5 pt-3.5 pb-2">
         <div class="flex items-baseline justify-between px-0.5 pb-1">
           <span class="disp t-team font-black tracking-[0.05em] text-text">GROUP {t.g}</span>
-          <span class="t-micro text-text-dim">{t.played} of 6 played</span>
+          <span data-played class="t-micro text-text-dim">{t.played} of 6 played</span>
         </div>
         <div class="t-micro grid grid-cols-[18px_minmax(0,1fr)_repeat(4,24px)_32px_32px] gap-1 px-1.5 font-bold tracking-[0.06em] text-text-dim">
           <span></span><span></span>
@@ -35,22 +35,23 @@ const tables = GROUPS.map((g) => {
           <button
             type="button"
             data-open-team={r.code}
+            data-row
             class:list={[
               'focus-ring-surface tnum grid min-h-[44px] grid-cols-[18px_minmax(0,1fr)_repeat(4,24px)_32px_32px] items-center gap-1 rounded-(--radius-chip) px-1.5 py-1 hover:bg-surface-2',
               idx < 2 ? 'border-l-[3px] border-solid border-text-2' : idx === 2 ? 'border-l-[3px] border-dashed border-text-dim' : 'border-l-[3px] border-solid border-transparent',
             ]}
           >
-            <span class="t-micro text-text-dim">{idx + 1}</span>
+            <span data-rank class="t-micro text-text-dim">{idx + 1}</span>
             <span class="flex min-w-0 items-center gap-[7px]">
               <img src={flagSrc(r.code)} alt="" width="19" height="14" loading="lazy" class="h-3.5 w-[19px] shrink-0 rounded-[2px] object-cover" />
               <span class="disp t-meta truncate font-bold text-text-2">{TEAMS[r.code].name}</span>
             </span>
-            <span class="t-meta text-center text-text-3">{r.p}</span>
-            <span class="t-meta text-center text-text-3">{r.w}</span>
-            <span class="t-meta text-center text-text-3">{r.d}</span>
-            <span class="t-meta text-center text-text-3">{r.l}</span>
-            <span class="t-meta text-center text-text-3">{r.gd > 0 ? `+${r.gd}` : r.gd}</span>
-            <span class="disp t-meta text-center font-extrabold text-text">{r.pts}</span>
+            <span data-cell="p" class="t-meta text-center text-text-3">{r.p}</span>
+            <span data-cell="w" class="t-meta text-center text-text-3">{r.w}</span>
+            <span data-cell="d" class="t-meta text-center text-text-3">{r.d}</span>
+            <span data-cell="l" class="t-meta text-center text-text-3">{r.l}</span>
+            <span data-cell="gd" class="t-meta text-center text-text-3">{r.gd > 0 ? `+${r.gd}` : r.gd}</span>
+            <span data-cell="pts" class="disp t-meta text-center font-extrabold text-text">{r.pts}</span>
           </button>
         ))}
       </div>

@@ -2,6 +2,7 @@
 import Layout from '../components/Layout.astro';
 import Bracket from '../components/Bracket.astro';
 import LiveOverlay from '../components/islands/LiveOverlay';
+import LiveBracket from '../components/islands/LiveBracket';
 ---
 
 <Layout
@@ -11,4 +12,5 @@ import LiveOverlay from '../components/islands/LiveOverlay';
 >
   <Bracket />
   <LiveOverlay client:idle />
+  <LiveBracket client:idle />
 </Layout>

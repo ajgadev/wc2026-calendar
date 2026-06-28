@@ -1,6 +1,7 @@
 ---
 import Layout from '../components/Layout.astro';
 import Standings from '../components/Standings.astro';
+import LiveStandings from '../components/islands/LiveStandings';
 ---
 
 <Layout
@@ -9,4 +10,5 @@ import Standings from '../components/Standings.astro';
   description="Live group tables for all 12 World Cup 2026 groups (A–L): points, goal difference and qualification zones — top two plus the best eight third-placed teams advance."
 >
   <Standings />
+  <LiveStandings client:idle />
 </Layout>
