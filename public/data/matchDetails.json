@@ -3854,5 +3854,10125 @@
     ]
    }
   }
+ },
+ "21": {
+  "cards": [
+   {
+    "minute": 13,
+    "side": 0,
+    "player": "Bernardo Silva",
+    "type": "Y"
+   },
+   {
+    "minute": 32,
+    "side": 1,
+    "player": "Chancel Mbemba",
+    "type": "Y"
+   },
+   {
+    "minute": 88,
+    "side": 0,
+    "player": "Nélson Semedo",
+    "type": "Y"
+   },
+   {
+    "minute": 92,
+    "side": 0,
+    "player": "Tomás Araújo",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 6,
+    "side": 0,
+    "player": "João Neves"
+   },
+   {
+    "minute": 50,
+    "side": 1,
+    "player": "Yoane Wissa"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Diogo Costa",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Renato Veiga",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Tomás Araújo",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nuno Mendes",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "João Cancelo",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Bruno Fernandes",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Vitinha ",
+      "jersey": "23",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "João Neves",
+      "jersey": "15",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Cristiano Ronaldo",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Pedro Neto",
+      "jersey": "18",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Bernardo Silva",
+      "jersey": "10",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Francisco Conceição",
+     "Nélson Semedo",
+     "Gonçalo Ramos",
+     "Rafael Leão"
+    ]
+   },
+   "b": {
+    "formation": "5-3-2",
+    "starters": [
+     {
+      "name": "Lionel Mpasi",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Axel Tuanzebe",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Steve Kapuadi",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Chancel Mbemba",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Arthur Masuaku",
+      "jersey": "26",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Aaron Wan-Bissaka",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Samuel Moutoussamy",
+      "jersey": "8",
+      "pos": "CM",
+      "place": 8
+     },
+     {
+      "name": "Edo Kayembe",
+      "jersey": "25",
+      "pos": "CM-L",
+      "place": 11
+     },
+     {
+      "name": "Ngal'ayel Mukau",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Cédric Bakambu",
+      "jersey": "17",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Yoane Wissa",
+      "jersey": "20",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Joris Kayembe",
+     "Gédéon Kalulu",
+     "Simon Banza",
+     "Noah Sadiki",
+     "Charles Pickel"
+    ]
+   }
+  }
+ },
+ "22": {
+  "cards": [],
+  "goals": [
+   {
+    "minute": 12,
+    "side": 0,
+    "player": "Harry Kane",
+    "penalty": true
+   },
+   {
+    "minute": 36,
+    "side": 1,
+    "player": "Martin Baturina"
+   },
+   {
+    "minute": 42,
+    "side": 0,
+    "player": "Harry Kane"
+   },
+   {
+    "minute": 47,
+    "side": 0,
+    "player": "Jude Bellingham"
+   },
+   {
+    "minute": 50,
+    "side": 1,
+    "player": "Petar Musa"
+   },
+   {
+    "minute": 85,
+    "side": 0,
+    "player": "Marcus Rashford"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Jordan Pickford",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "John Stones",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ezri Konsa",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nico O'Reilly",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Reece James",
+      "jersey": "24",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jude Bellingham",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Declan Rice",
+      "jersey": "4",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Elliot Anderson",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Harry Kane",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Anthony Gordon",
+      "jersey": "18",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Noni Madueke",
+      "jersey": "20",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Morgan Rogers",
+     "Djed Spence",
+     "Marc Guéhi",
+     "Marcus Rashford",
+     "Bukayo Saka"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Dominik Livakovic",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Luka Vuskovic",
+      "jersey": "22",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Josko Gvardiol",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Josip Sutalo",
+      "jersey": "6",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Mario Pasalic",
+      "jersey": "15",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Luka Modric",
+      "jersey": "10",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Ivan Perisic",
+      "jersey": "14",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Josip Stanisic",
+      "jersey": "2",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Petar Musa",
+      "jersey": "26",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Martin Baturina",
+      "jersey": "16",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Petar Sucic",
+      "jersey": "17",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Nikola Vlasic",
+     "Mateo Kovacic",
+     "Igor Matanovic",
+     "Andrej Kramaric",
+     "Marco Pasalic"
+    ]
+   }
+  }
+ },
+ "23": {
+  "cards": [
+   {
+    "minute": 16,
+    "side": 0,
+    "player": "Caleb Yirenkyi",
+    "type": "Y"
+   },
+   {
+    "minute": 72,
+    "side": 1,
+    "player": "César Blackman",
+    "type": "Y"
+   },
+   {
+    "minute": 99,
+    "side": 1,
+    "player": "Carlos Harvey",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 95,
+    "side": 0,
+    "player": "Caleb Yirenkyi"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-1-1",
+    "starters": [
+     {
+      "name": "Lawrence Ati Zigi",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Jerome Opoku",
+      "jersey": "18",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Jonas Adjetey",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Gideon Mensah",
+      "jersey": "14",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Marvin Senaya",
+      "jersey": "26",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Elisha Owusu",
+      "jersey": "15",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Caleb Yirenkyi",
+      "jersey": "3",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Antoine Semenyo",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Ernest Nuamah",
+      "jersey": "24",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Jordan Ayew",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Kamaldeen Sulemana",
+      "jersey": "22",
+      "pos": "RCF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Prince Adu",
+     "Benjamin Asare",
+     "Brandon Thomas-Asante",
+     "Fatawu Issahaku",
+     "Kwasi Sibo"
+    ]
+   },
+   "b": {
+    "formation": "3-4-3",
+    "starters": [
+     {
+      "name": "Orlando Mosquera",
+      "jersey": "22",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "José Córdoba",
+      "jersey": "3",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Andrés Andrade",
+      "jersey": "16",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Jiovany Ramos",
+      "jersey": "13",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Édgar Yoel Bárcenas",
+      "jersey": "11",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Carlos Harvey",
+      "jersey": "14",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "César Blackman",
+      "jersey": "2",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Amir Murillo",
+      "jersey": "23",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Cecilio Waterman",
+      "jersey": "18",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "José Luis Rodríguez",
+      "jersey": "7",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Cristian Martínez",
+      "jersey": "6",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Azarias Londoño",
+     "Ismael Díaz",
+     "José Fajardo",
+     "Aníbal Godoy"
+    ]
+   }
+  }
+ },
+ "24": {
+  "cards": [
+   {
+    "minute": 7,
+    "side": 1,
+    "player": "Johan Mojica",
+    "type": "Y"
+   },
+   {
+    "minute": 34,
+    "side": 0,
+    "player": "Abdukodir Khusanov",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 40,
+    "side": 1,
+    "player": "Daniel Muñoz"
+   },
+   {
+    "minute": 60,
+    "side": 0,
+    "player": "Abbosbek Fayzullaev"
+   },
+   {
+    "minute": 65,
+    "side": 1,
+    "player": "Luis Díaz"
+   },
+   {
+    "minute": 99,
+    "side": 1,
+    "player": "Jáminton Campaz"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Utkir Yusupov",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Abdulla Abdullaev",
+      "jersey": "18",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Rustam Ashurmatov",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Abdukodir Khusanov",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Otabek Shukurov",
+      "jersey": "7",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Akmal Mozgovoy",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Sherzod Nasrullaev",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Behruzjon Karimov",
+      "jersey": "24",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Eldor Shomurodov",
+      "jersey": "14",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Oston Urunov",
+      "jersey": "11",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Abbosbek Fayzullaev",
+      "jersey": "22",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Farrukh Sayfiev",
+     "Azizbek Amonov",
+     "Jakhongir Urozov",
+     "Dostonbek Khamdamov",
+     "Igor Sergeev"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Camilo Vargas",
+      "jersey": "12",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Jhon Lucumí",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Davinson Sánchez",
+      "jersey": "23",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Johan Mojica",
+      "jersey": "17",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Daniel Muñoz",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jefferson Lerma",
+      "jersey": "16",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Jhon Arias",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Gustavo Puerta",
+      "jersey": "14",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Luis Suárez",
+      "jersey": "25",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Luis Díaz",
+      "jersey": "7",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "James Rodríguez",
+      "jersey": "10",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Jáminton Campaz",
+     "Kevin Castaño",
+     "Andrés Gómez",
+     "Richard Ríos",
+     "Cucho Hernández"
+    ]
+   }
+  }
+ },
+ "25": {
+  "cards": [
+   {
+    "minute": 33,
+    "side": 1,
+    "player": "Teboho Mokoena",
+    "type": "Y"
+   },
+   {
+    "minute": 40,
+    "side": 1,
+    "player": "Thalente Mbatha",
+    "type": "Y"
+   },
+   {
+    "minute": 75,
+    "side": 0,
+    "player": "Ladislav Krejcí",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 6,
+    "side": 0,
+    "player": "Michal Sadílek"
+   },
+   {
+    "minute": 83,
+    "side": 1,
+    "player": "Teboho Mokoena",
+    "penalty": true
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-5-2",
+    "starters": [
+     {
+      "name": "Matej Kovár",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Robin Hranác",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Ladislav Krejcí",
+      "jersey": "7",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Tomás Holes",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Michal Sadílek",
+      "jersey": "18",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Vladimír Darida",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Lukás Cerv",
+      "jersey": "12",
+      "pos": "AM",
+      "place": 11
+     },
+     {
+      "name": "Alexandr Sojka",
+      "jersey": "24",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Vladimír Coufal",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Adam Hlozek",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Patrik Schick",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Jaroslav Zelený",
+     "Lukás Provod",
+     "Tomás Soucek",
+     "David Zima",
+     "Pavel Sulc"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Ronwen Williams",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Mbekezeli Mbokazi",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ime Okon",
+      "jersey": "21",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Aubrey Modiba",
+      "jersey": "6",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Khuliso Mudau",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Teboho Mokoena",
+      "jersey": "4",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Jayden Adams",
+      "jersey": "23",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Thalente Mbatha",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Iqraam Rayners",
+      "jersey": "15",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Oswin Appollis",
+      "jersey": "7",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Thapelo Maseko",
+      "jersey": "12",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Kamogelo Sebelebele",
+     "Evidence Makgopa",
+     "Relebohile Mofokeng"
+    ]
+   }
+  }
+ },
+ "26": {
+  "cards": [
+   {
+    "minute": 59,
+    "side": 1,
+    "player": "Amar Dedic",
+    "type": "Y"
+   },
+   {
+    "minute": 61,
+    "side": 1,
+    "player": "Edin Dzeko",
+    "type": "Y"
+   },
+   {
+    "minute": 65,
+    "side": 0,
+    "player": "Nico Elvedi",
+    "type": "Y"
+   },
+   {
+    "minute": 80,
+    "side": 1,
+    "player": "Tarik Muharemovic",
+    "type": "R"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 74,
+    "side": 0,
+    "player": "Johan Manzambi"
+   },
+   {
+    "minute": 84,
+    "side": 0,
+    "player": "Rubén Vargas"
+   },
+   {
+    "minute": 90,
+    "side": 0,
+    "player": "Johan Manzambi"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Ermin Mahmic"
+   },
+   {
+    "minute": 97,
+    "side": 0,
+    "player": "Granit Xhaka",
+    "penalty": true
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-1-2",
+    "starters": [
+     {
+      "name": "Gregor Kobel",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Manuel Akanji",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nico Elvedi",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ricardo Rodríguez",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Silvan Widmer",
+      "jersey": "3",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Dan Ndoye",
+      "jersey": "11",
+      "pos": "M",
+      "place": 10
+     },
+     {
+      "name": "Granit Xhaka",
+      "jersey": "10",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Fabian Rieder",
+      "jersey": "22",
+      "pos": "AM",
+      "place": 8
+     },
+     {
+      "name": "Remo Freuler",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Michel Aebischer",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Breel Embolo",
+      "jersey": "7",
+      "pos": "CF-R",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Djibril Sow",
+     "Luca Jaquez",
+     "Cedric Itten",
+     "Rubén Vargas",
+     "Johan Manzambi"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Nikola Vasilj",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Tarik Muharemovic",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nikola Katic",
+      "jersey": "18",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Sead Kolasinac",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Amar Dedic",
+      "jersey": "7",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ivan Sunjic",
+      "jersey": "14",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Benjamin Tahirovic",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Kerim Alajbegovic",
+      "jersey": "19",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Amar Memic",
+      "jersey": "15",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Edin Dzeko",
+      "jersey": "11",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Ermedin Demirovic",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Ermin Mahmic",
+     "Ivan Basic",
+     "Amir Hadziahmetovic",
+     "Jovo Lukic",
+     "Esmir Bajraktarevic"
+    ]
+   }
+  }
+ },
+ "27": {
+  "cards": [
+   {
+    "minute": 9,
+    "side": 0,
+    "player": "Derek Cornelius",
+    "type": "Y"
+   },
+   {
+    "minute": 33,
+    "side": 1,
+    "player": "Homam Ahmed",
+    "type": "R"
+   },
+   {
+    "minute": 53,
+    "side": 1,
+    "player": "Assim Madibo",
+    "type": "R"
+   },
+   {
+    "minute": 62,
+    "side": 1,
+    "player": "Ahmed Fathy",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 16,
+    "side": 0,
+    "player": "Cyle Larin"
+   },
+   {
+    "minute": 29,
+    "side": 0,
+    "player": "Jonathan David"
+   },
+   {
+    "minute": 48,
+    "side": 0,
+    "player": "Jonathan David"
+   },
+   {
+    "minute": 64,
+    "side": 0,
+    "player": "Nathan Saliba"
+   },
+   {
+    "minute": 75,
+    "side": 0,
+    "player": "Mohamed Manai",
+    "owngoal": true
+   },
+   {
+    "minute": 92,
+    "side": 0,
+    "player": "Jonathan David"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Maxime Crépeau",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Derek Cornelius",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Luc de Fougerolles",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Richie Laryea",
+      "jersey": "22",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Alistair Johnston",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Stephen Eustáquio",
+      "jersey": "7",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Ismaël Koné",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Ali Ahmed",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Tajon Buchanan",
+      "jersey": "17",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Cyle Larin",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Jonathan David",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Tani Oluwaseyi",
+     "Niko Sigur",
+     "Moïse Bombito",
+     "Jacob Shaffelburg",
+     "Nathan Saliba"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Mahmoud Abunada",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Boualem Khoukhi",
+      "jersey": "16",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pedro Miguel",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Homam Ahmed",
+      "jersey": "14",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Ayoub Al-Oui",
+      "jersey": "13",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Assim Madibo",
+      "jersey": "23",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Issa Laye",
+      "jersey": "4",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Jassem Gaber",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Yusuf Abdurisag",
+      "jersey": "15",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Akram Afif",
+      "jersey": "11",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Edmílson Junior",
+      "jersey": "8",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Mohamed Manai",
+     "Lucas Mendes",
+     "Sultan Al-Brake",
+     "Al-Hashmi Al-Hussain",
+     "Ahmed Fathy"
+    ]
+   }
+  }
+ },
+ "28": {
+  "cards": [
+   {
+    "minute": 4,
+    "side": 1,
+    "player": "Lee Kang-In",
+    "type": "Y"
+   },
+   {
+    "minute": 58,
+    "side": 1,
+    "player": "Paik Seung-Ho",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 50,
+    "side": 0,
+    "player": "Luis Romo"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Raúl Rangel",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Johan Vásquez",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Edson Álvarez",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Jesús Gallardo",
+      "jersey": "23",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jorge Sánchez",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Érik Lira",
+      "jersey": "6",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Luis Romo",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Brian Gutiérrez",
+      "jersey": "26",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Raúl Jiménez",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Julián Quiñones",
+      "jersey": "16",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Roberto Alvarado",
+      "jersey": "25",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Obed Vargas",
+     "Santiago Gimenez",
+     "Israel Reyes",
+     "César Huerta",
+     "Orbelín Pineda"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Kim Seung-Gyu",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Kim Min-Jae",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Lee Gi-Hyuk",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Lee Han-Beom",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Paik Seung-Ho",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Hwang In-Beom",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Seol Young-Woo",
+      "jersey": "22",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Kim Moon-Hwan",
+      "jersey": "15",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Son Heung-Min",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Lee Jae-Sung",
+      "jersey": "10",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Lee Kang-In",
+      "jersey": "19",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Oh Hyeon-Gyu",
+     "Eom Ji-Sung",
+     "Hwang Hee-Chan",
+     "Cho Gue-Sung",
+     "Yang Hyun-Jun"
+    ]
+   }
+  }
+ },
+ "29": {
+  "cards": [
+   {
+    "minute": 16,
+    "side": 1,
+    "player": "Jordan Bos",
+    "type": "Y"
+   },
+   {
+    "minute": 32,
+    "side": 1,
+    "player": "Alessandro Circati",
+    "type": "Y"
+   },
+   {
+    "minute": 56,
+    "side": 0,
+    "player": "Antonee Robinson",
+    "type": "Y"
+   },
+   {
+    "minute": 88,
+    "side": 1,
+    "player": "Harry Souttar",
+    "type": "Y"
+   },
+   {
+    "minute": 89,
+    "side": 0,
+    "player": "Folarin Balogun",
+    "type": "Y"
+   },
+   {
+    "minute": 89,
+    "side": 1,
+    "player": "Jacob Italiano",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 0,
+    "player": "Chris Richards",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 11,
+    "side": 0,
+    "player": "Cameron Burgess",
+    "owngoal": true
+   },
+   {
+    "minute": 43,
+    "side": 0,
+    "player": "Alex Freeman"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-5-2",
+    "starters": [
+     {
+      "name": "Matt Freese",
+      "jersey": "24",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Chris Richards",
+      "jersey": "3",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Tim Ream",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Alex Freeman",
+      "jersey": "16",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Malik Tillman",
+      "jersey": "17",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Weston McKennie",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Tyler Adams",
+      "jersey": "4",
+      "pos": "AM",
+      "place": 11
+     },
+     {
+      "name": "Antonee Robinson",
+      "jersey": "5",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Sergiño Dest",
+      "jersey": "2",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Ricardo Pepi",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Folarin Balogun",
+      "jersey": "20",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Giovanni Reyna",
+     "Joe Scally",
+     "Sebastian Berhalter",
+     "Auston Trusty",
+     "Haji Wright"
+    ]
+   },
+   "b": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Patrick Beach",
+      "jersey": "18",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Harry Souttar",
+      "jersey": "19",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Cameron Burgess",
+      "jersey": "21",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Alessandro Circati",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Jordan Bos",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jacob Italiano",
+      "jersey": "4",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Paul Okon-Engstler",
+      "jersey": "24",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Aiden O'Neill",
+      "jersey": "13",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Nishan Velupillay",
+      "jersey": "23",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Mathew Leckie",
+      "jersey": "7",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Mohamed Toure",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Connor Metcalfe",
+     "Jason Geria",
+     "Nestory Irankunda",
+     "Jackson Irvine",
+     "Cristian Volpato"
+    ]
+   }
+  }
+ },
+ "30": {
+  "cards": [
+   {
+    "minute": 23,
+    "side": 1,
+    "player": "Issa Diop",
+    "type": "Y"
+   },
+   {
+    "minute": 65,
+    "side": 0,
+    "player": "Andy Robertson",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 2,
+    "side": 1,
+    "player": "Ismael Saibari"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-1-1",
+    "starters": [
+     {
+      "name": "Angus Gunn",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Jack Hendry",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Grant Hanley",
+      "jersey": "5",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Andy Robertson",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Nathan Patterson",
+      "jersey": "22",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Lewis Ferguson",
+      "jersey": "19",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Ryan Christie",
+      "jersey": "11",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Kieran Tierney",
+      "jersey": "6",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "John McGinn",
+      "jersey": "7",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Ché Adams",
+      "jersey": "10",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Scott McTominay",
+      "jersey": "4",
+      "pos": "RCF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Anthony Ralston",
+     "Kenny McLean",
+     "Ben Gannon-Doak",
+     "Ross Stewart",
+     "Lyndon Dykes"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Yassine Bounou",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Chadi Riad",
+      "jersey": "18",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Issa Diop",
+      "jersey": "14",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Noussair Mazraoui",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Achraf Hakimi",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Azzedine Ounahi",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Neil El Aynaoui",
+      "jersey": "24",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Ayyoub Bouaddi",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Ismael Saibari",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Bilal El Khannouss",
+      "jersey": "23",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Brahim Díaz",
+      "jersey": "10",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Ayoube Amaimouni",
+     "Chemsdine Talbi",
+     "Samir El Mourabet",
+     "Soufiane Rahimi"
+    ]
+   }
+  }
+ },
+ "31": {
+  "cards": [
+   {
+    "minute": 4,
+    "side": 1,
+    "player": "Carlens Arcus",
+    "type": "Y"
+   },
+   {
+    "minute": 49,
+    "side": 1,
+    "player": "Frantzdy Pierrot",
+    "type": "Y"
+   },
+   {
+    "minute": 65,
+    "side": 0,
+    "player": "Douglas Santos",
+    "type": "Y"
+   },
+   {
+    "minute": 72,
+    "side": 1,
+    "player": "Danley Jean Jacques",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 23,
+    "side": 0,
+    "player": "Matheus Cunha"
+   },
+   {
+    "minute": 36,
+    "side": 0,
+    "player": "Matheus Cunha"
+   },
+   {
+    "minute": 48,
+    "side": 0,
+    "player": "Vinícius Júnior"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Alisson Becker",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Gabriel Magalhães",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Marquinhos",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Douglas Santos",
+      "jersey": "16",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Danilo",
+      "jersey": "13",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Casemiro",
+      "jersey": "5",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Lucas Paquetá",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Bruno Guimarães",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Matheus Cunha",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Vinícius Júnior",
+      "jersey": "7",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Raphinha ",
+      "jersey": "11",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Gabriel Martinelli",
+     "Rayan",
+     "Endrick",
+     "Danilo Santos",
+     "Éderson"
+    ]
+   },
+   "b": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Johny Placide",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Ricardo Adé",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Hannes Delcroix",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Jean-Kévin Duverne",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Martin Expérience",
+      "jersey": "8",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Carlens Arcus",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jean-Ricner Bellegarde",
+      "jersey": "10",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Danley Jean Jacques",
+      "jersey": "17",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Ruben Providence",
+      "jersey": "15",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Josué Casimir",
+      "jersey": "21",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Frantzdy Pierrot",
+      "jersey": "20",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Lenny Joseph",
+     "Wilson Isidor",
+     "Louicius Deedson",
+     "Derrick Etienne Jr.",
+     "Dominique Simon"
+    ]
+   }
+  }
+ },
+ "32": {
+  "cards": [
+   {
+    "minute": 4,
+    "side": 1,
+    "player": "Matías Galarza",
+    "type": "Y"
+   },
+   {
+    "minute": 48,
+    "side": 1,
+    "player": "Miguel Almirón",
+    "type": "R"
+   },
+   {
+    "minute": 71,
+    "side": 0,
+    "player": "Eren Elmali",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 2,
+    "side": 1,
+    "player": "Matías Galarza"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Ugurcan Çakir",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Abdülkerim Bardakçi",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Merih Demiral",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ferdi Kadioglu",
+      "jersey": "20",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Mert Müldür",
+      "jersey": "18",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Arda Güler",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Ismail Yüksek",
+      "jersey": "16",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Hakan Çalhanoglu",
+      "jersey": "10",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Kerem Aktürkoglu",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Kenan Yildiz",
+      "jersey": "11",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Yunus Akgün",
+      "jersey": "19",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Can Uzun",
+     "Deniz Gül",
+     "Eren Elmali",
+     "Baris Alper Yilmaz",
+     "Orkun Kökçü"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Orlando Gil",
+      "jersey": "12",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Omar Alderete",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Gustavo Gómez",
+      "jersey": "15",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Júnior Alonso",
+      "jersey": "6",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Juan Jose Cáceres",
+      "jersey": "4",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Diego Gómez",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Andrés Cubas",
+      "jersey": "14",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Matías Galarza",
+      "jersey": "23",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Miguel Almirón",
+      "jersey": "10",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Julio Enciso",
+      "jersey": "19",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Isidro Pitta",
+      "jersey": "25",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Damián Bobadilla",
+     "Alexandro Maidana",
+     "José Canale",
+     "Gabriel Ávalos",
+     "Gustavo Velázquez"
+    ]
+   }
+  }
+ },
+ "33": {
+  "cards": [
+   {
+    "minute": 53,
+    "side": 1,
+    "player": "Gabriel Gudmundsson",
+    "type": "Y"
+   },
+   {
+    "minute": 75,
+    "side": 1,
+    "player": "Yasin Ayari",
+    "type": "Y"
+   },
+   {
+    "minute": 80,
+    "side": 1,
+    "player": "Lucas Bergvall",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 5,
+    "side": 0,
+    "player": "Brian Brobbey"
+   },
+   {
+    "minute": 17,
+    "side": 0,
+    "player": "Brian Brobbey"
+   },
+   {
+    "minute": 47,
+    "side": 0,
+    "player": "Cody Gakpo"
+   },
+   {
+    "minute": 54,
+    "side": 0,
+    "player": "Cody Gakpo"
+   },
+   {
+    "minute": 59,
+    "side": 1,
+    "player": "Anthony Elanga"
+   },
+   {
+    "minute": 89,
+    "side": 0,
+    "player": "Crysencio Summerville"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Bart Verbruggen",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Virgil van Dijk",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Jan Paul van Hecke",
+      "jersey": "6",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Micky van de Ven",
+      "jersey": "15",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Denzel Dumfries",
+      "jersey": "22",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Frenkie de Jong",
+      "jersey": "21",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Tijjani Reijnders",
+      "jersey": "14",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Ryan Gravenberch",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Brian Brobbey",
+      "jersey": "19",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Cody Gakpo",
+      "jersey": "11",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Donyell Malen",
+      "jersey": "18",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Crysencio Summerville",
+     "Guus Til",
+     "Teun Koopmeiners",
+     "Noa Lang",
+     "Memphis Depay"
+    ]
+   },
+   "b": {
+    "formation": "3-1-4-2",
+    "starters": [
+     {
+      "name": "Kristoffer Nordfeldt",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Isak Hien",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 4
+     },
+     {
+      "name": "Victor Lindelöf",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Gustaf Lagerbielke",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Jesper Karlström",
+      "jersey": "16",
+      "pos": "SW",
+      "place": 8
+     },
+     {
+      "name": "Yasin Ayari",
+      "jersey": "18",
+      "pos": "CM-L",
+      "place": 11
+     },
+     {
+      "name": "Benjamin Nygren",
+      "jersey": "10",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Gabriel Gudmundsson",
+      "jersey": "5",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Alexander Bernhardsson",
+      "jersey": "21",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Alexander Isak",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 10
+     },
+     {
+      "name": "Viktor Gyökeres",
+      "jersey": "17",
+      "pos": "CF-R",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Taha Ali",
+     "Anthony Elanga",
+     "Elliot Stroud",
+     "Lucas Bergvall",
+     "Besfort Zeneli"
+    ]
+   }
+  }
+ },
+ "34": {
+  "cards": [],
+  "goals": [
+   {
+    "minute": 30,
+    "side": 1,
+    "player": "Franck Kessié"
+   },
+   {
+    "minute": 68,
+    "side": 0,
+    "player": "Deniz Undav"
+   },
+   {
+    "minute": 94,
+    "side": 0,
+    "player": "Deniz Undav"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Manuel Neuer",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Nico Schlotterbeck",
+      "jersey": "15",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Jonathan Tah",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nathaniel Brown",
+      "jersey": "18",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Joshua Kimmich",
+      "jersey": "6",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jamal Musiala",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Aleksandar Pavlovic",
+      "jersey": "5",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Felix Nmecha",
+      "jersey": "23",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Kai Havertz",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Florian Wirtz",
+      "jersey": "17",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Leroy Sané",
+      "jersey": "19",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Deniz Undav",
+     "Nadiem Amiri",
+     "Jamie Leweling",
+     "Leon Goretzka",
+     "Antonio Rüdiger"
+    ]
+   },
+   "b": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Yahia Fofana",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Emmanuel Agbadou",
+      "jersey": "20",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Odilon Kossounou",
+      "jersey": "7",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ibrahim Sangaré",
+      "jersey": "18",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Ghislain Konan",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Wilfried Singo",
+      "jersey": "5",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Christ Inao Oulaï",
+      "jersey": "26",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Franck Kessié",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Yan Diomande",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Amad Diallo",
+      "jersey": "15",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Ange-Yoan Bonny",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Nicolas Pépé",
+     "Guela Doué",
+     "Simon Adingra",
+     "Seko Fofana",
+     "Evann Guessand"
+    ]
+   }
+  }
+ },
+ "35": {
+  "cards": [
+   {
+    "minute": 38,
+    "side": 0,
+    "player": "Jordy Alcívar",
+    "type": "Y"
+   },
+   {
+    "minute": 39,
+    "side": 1,
+    "player": "Leandro Bacuna",
+    "type": "Y"
+   },
+   {
+    "minute": 53,
+    "side": 1,
+    "player": "Juninho Bacuna",
+    "type": "Y"
+   },
+   {
+    "minute": 56,
+    "side": 1,
+    "player": "Livano Comenencia",
+    "type": "Y"
+   },
+   {
+    "minute": 75,
+    "side": 1,
+    "player": "Juriën Gaari",
+    "type": "Y"
+   },
+   {
+    "minute": 91,
+    "side": 1,
+    "player": "Gervane Kastaneer",
+    "type": "Y"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-1-4-2",
+    "starters": [
+     {
+      "name": "Hernán Galíndez",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Willian Pacho",
+      "jersey": "6",
+      "pos": "CD",
+      "place": 4
+     },
+     {
+      "name": "Piero Hincapié",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Alan Franco",
+      "jersey": "21",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Jordy Alcívar",
+      "jersey": "5",
+      "pos": "SW",
+      "place": 8
+     },
+     {
+      "name": "Moisés Caicedo",
+      "jersey": "23",
+      "pos": "CM-L",
+      "place": 11
+     },
+     {
+      "name": "Pedro Vite",
+      "jersey": "15",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Pervis Estupiñán",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "John Yeboah",
+      "jersey": "9",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Enner Valencia",
+      "jersey": "13",
+      "pos": "CF-L",
+      "place": 10
+     },
+     {
+      "name": "Gonzalo Plata",
+      "jersey": "19",
+      "pos": "CF-R",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Kevin Rodríguez",
+     "Jordy Caicedo",
+     "Nilson Angulo",
+     "Ángelo Preciado"
+    ]
+   },
+   "b": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Eloy Room",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Armando Obispo",
+      "jersey": "18",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Sherel Floranus",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Juriën Gaari",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Deveron Fonville",
+      "jersey": "24",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Joshua Brenet",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Leandro Bacuna",
+      "jersey": "10",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Livano Comenencia",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Juninho Bacuna",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Tahith Chong",
+      "jersey": "21",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Jürgen Locadia",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Kenji Gorré",
+     "Jearl Margaritha",
+     "Godfried Roemeratoe",
+     "Roshon van Eijma",
+     "Gervane Kastaneer"
+    ]
+   }
+  }
+ },
+ "36": {
+  "cards": [],
+  "goals": [
+   {
+    "minute": 4,
+    "side": 1,
+    "player": "Daichi Kamada"
+   },
+   {
+    "minute": 31,
+    "side": 1,
+    "player": "Ayase Ueda"
+   },
+   {
+    "minute": 69,
+    "side": 1,
+    "player": "Junya Ito"
+   },
+   {
+    "minute": 83,
+    "side": 1,
+    "player": "Ayase Ueda"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Aymen Dahmen",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Montassar Talbi",
+      "jersey": "3",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Omar Rekik",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Dylan Bronn",
+      "jersey": "6",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Ellyes Skhiri",
+      "jersey": "17",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Anis Slimane",
+      "jersey": "25",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Ali Abdi",
+      "jersey": "2",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Yan Valery",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Sebastian Tounekti",
+      "jersey": "26",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Hannibal Mejbri",
+      "jersey": "10",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Elias Saad",
+      "jersey": "8",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Ismaël Gharbi",
+     "Firas Chaouat",
+     "Rani Khedira",
+     "Elias Achouri",
+     "Mohamed Amine Ben Hamida"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Zion Suzuki",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Kou Itakura",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Hiroki Ito",
+      "jersey": "21",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Takehiro Tomiyasu",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Ao Tanaka",
+      "jersey": "7",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Kaishu Sano",
+      "jersey": "24",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Keito Nakamura",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Ritsu Doan",
+      "jersey": "10",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Ayase Ueda",
+      "jersey": "18",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Daichi Kamada",
+      "jersey": "15",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Junya Ito",
+      "jersey": "14",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Ayumu Seko",
+     "Yuito Suzuki",
+     "Junnosuke Suzuki",
+     "Keisuke Goto",
+     "Yukinari Sugawara"
+    ]
+   }
+  }
+ },
+ "37": {
+  "cards": [
+   {
+    "minute": 30,
+    "side": 1,
+    "player": "Salem Al-Dawsari",
+    "type": "Y"
+   },
+   {
+    "minute": 60,
+    "side": 1,
+    "player": "Mohamed Kanno",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 10,
+    "side": 0,
+    "player": "Lamine Yamal"
+   },
+   {
+    "minute": 21,
+    "side": 0,
+    "player": "Mikel Oyarzabal"
+   },
+   {
+    "minute": 24,
+    "side": 0,
+    "player": "Mikel Oyarzabal"
+   },
+   {
+    "minute": 49,
+    "side": 0,
+    "player": "Hassan Al-Tambakti",
+    "owngoal": true
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Unai Simón",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Aymeric Laporte",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pau Cubarsí",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Marc Cucurella",
+      "jersey": "24",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Pedro Porro",
+      "jersey": "12",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Rodri ",
+      "jersey": "16",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Pedri ",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Dani Olmo",
+      "jersey": "10",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Mikel Oyarzabal",
+      "jersey": "21",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Álex Baena",
+      "jersey": "15",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Lamine Yamal",
+      "jersey": "19",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Ferran Torres",
+     "Mikel Merino",
+     "Fabián Ruiz",
+     "Yéremy Pino",
+     "Nico Williams"
+    ]
+   },
+   "b": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Mohammed Al-Owais",
+      "jersey": "21",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Ali Lajami",
+      "jersey": "3",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Hassan Al-Tambakti",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Abdulelah Al-Amri",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Moteb Al-Harbi",
+      "jersey": "24",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Saud Abdulhamid",
+      "jersey": "12",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Nasser Al-Dawsari",
+      "jersey": "6",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Abdullah Al-Khaibari",
+      "jersey": "15",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Salem Al-Dawsari",
+      "jersey": "10",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Musab Al-Juwayr",
+      "jersey": "7",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Feras Al-Brikan",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Abdullah Al-Hamdan",
+     "Ala Al-Hajji",
+     "Mohammed Abu Al-Shamat",
+     "Khalid Al-Ghannam",
+     "Mohamed Kanno"
+    ]
+   }
+  }
+ },
+ "38": {
+  "cards": [
+   {
+    "minute": 3,
+    "side": 0,
+    "player": "Romelu Lukaku",
+    "type": "Y"
+   },
+   {
+    "minute": 33,
+    "side": 1,
+    "player": "Saeid Ezatolahi",
+    "type": "Y"
+   },
+   {
+    "minute": 66,
+    "side": 0,
+    "player": "Nathan Ngoy",
+    "type": "R"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Thibaut Courtois",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Brandon Mechele",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nathan Ngoy",
+      "jersey": "25",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Maxim De Cuyper",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Thomas Meunier",
+      "jersey": "15",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Kevin De Bruyne",
+      "jersey": "7",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Youri Tielemans",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Nicolas Raskin",
+      "jersey": "23",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Romelu Lukaku",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Leandro Trossard",
+      "jersey": "10",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Alexis Saelemaekers",
+      "jersey": "22",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Arthur Theate",
+     "Hans Vanaken",
+     "Timothy Castagne",
+     "Dodi Lukébakio",
+     "Matias Fernandez-Pardo"
+    ]
+   },
+   "b": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Alireza Beiranvand",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Shoja Khalilzadeh",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Ali Nemati",
+      "jersey": "19",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Hossein Kanani",
+      "jersey": "13",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Ehsan Hajsafi",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Saleh Hardani",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Saeid Ezatolahi",
+      "jersey": "6",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Saman Ghoddos",
+      "jersey": "14",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Mohammad Mohebbi",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Ramin Rezaeian",
+      "jersey": "23",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Mehdi Taremi",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Shahriyar Moghanloo",
+     "Alireza Jahanbakhsh",
+     "Amirhossein Hosseinzadeh",
+     "Mehdi Torabi",
+     "Milad Mohammadi"
+    ]
+   }
+  }
+ },
+ "39": {
+  "cards": [
+   {
+    "minute": 5,
+    "side": 1,
+    "player": "Sidny Lopes Cabral",
+    "type": "Y"
+   },
+   {
+    "minute": 20,
+    "side": 0,
+    "player": "Rodrigo Bentancur",
+    "type": "Y"
+   },
+   {
+    "minute": 58,
+    "side": 0,
+    "player": "Mathías Olivera",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Diney Borges",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 21,
+    "side": 1,
+    "player": "Kevin Pina"
+   },
+   {
+    "minute": 44,
+    "side": 0,
+    "player": "Maxi Araújo"
+   },
+   {
+    "minute": 51,
+    "side": 0,
+    "player": "Agustín Canobbio"
+   },
+   {
+    "minute": 61,
+    "side": 1,
+    "player": "Hélio Varela"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Fernando Muslera",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Mathías Olivera",
+      "jersey": "16",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Sebastián Cáceres",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Manuel Ugarte",
+      "jersey": "5",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Juan Manuel Sanabria",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Guillermo Varela",
+      "jersey": "13",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Federico Valverde",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Rodrigo Bentancur",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Maxi Araújo",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Agustín Canobbio",
+      "jersey": "14",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Federico Viñas",
+      "jersey": "21",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Nicolás de la Cruz",
+     "Brian Rodríguez",
+     "Darwin Núñez"
+    ]
+   },
+   "b": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Vozinha",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Diney Borges",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pico Lopes",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Kevin Pina",
+      "jersey": "6",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Sidny Lopes Cabral",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Steven Moreira",
+      "jersey": "22",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jamiro Monteiro",
+      "jersey": "10",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Telmo Arcanjo",
+      "jersey": "18",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Garry Rodrigues",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Ryan Mendes",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Gilson Benchimol",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Deroy Duarte",
+     "Yannick Semedo",
+     "Nuno da Costa",
+     "Laros Duarte",
+     "Hélio Varela"
+    ]
+   }
+  }
+ },
+ "40": {
+  "cards": [
+   {
+    "minute": 17,
+    "side": 1,
+    "player": "Mohanad Lashin",
+    "type": "Y"
+   },
+   {
+    "minute": 20,
+    "side": 0,
+    "player": "Sarpreet Singh",
+    "type": "Y"
+   },
+   {
+    "minute": 34,
+    "side": 0,
+    "player": "Callum McCowatt",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 15,
+    "side": 0,
+    "player": "Finn Surman"
+   },
+   {
+    "minute": 58,
+    "side": 1,
+    "player": "Mostafa Zico"
+   },
+   {
+    "minute": 67,
+    "side": 1,
+    "player": "Mohamed Salah"
+   },
+   {
+    "minute": 82,
+    "side": 1,
+    "player": "Trézéguet"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Max Crocombe",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Michael Boxall",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Finn Surman",
+      "jersey": "16",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Liberato Cacace",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Tim Payne",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Sarpreet Singh",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Marko Stamenic",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Joe Bell",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Chris Wood",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Elijah Just",
+      "jersey": "11",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Callum McCowatt",
+      "jersey": "20",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Francis de Vries",
+     "Ryan Thomas",
+     "Ben Old",
+     "Tyler Bindon",
+     "Jesse Randall"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Mostafa Shoubir",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Hamdy Fathy",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Yasser Ibrahim",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ahmed Fatouh",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Mohamed Hany",
+      "jersey": "3",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Mohamed Salah",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Mohanad Lashin",
+      "jersey": "17",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Marawan Attia",
+      "jersey": "19",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Omar Marmoush",
+      "jersey": "22",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Emam Ashour",
+      "jersey": "8",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Mostafa Zico",
+      "jersey": "11",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Mohamed Abdelmoneim",
+     "Hossam Abdelmaguid",
+     "Zizo",
+     "Ramy Rabia",
+     "Trézéguet",
+     "Hamza Abdelkarim"
+    ]
+   }
+  }
+ },
+ "41": {
+  "cards": [
+   {
+    "minute": 40,
+    "side": 1,
+    "player": "Stefan Posch",
+    "type": "Y"
+   },
+   {
+    "minute": 76,
+    "side": 0,
+    "player": "Facundo Medina",
+    "type": "Y"
+   },
+   {
+    "minute": 76,
+    "side": 1,
+    "player": "Konrad Laimer",
+    "type": "Y"
+   },
+   {
+    "minute": 92,
+    "side": 0,
+    "player": "Leandro Paredes",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 38,
+    "side": 0,
+    "player": "Lionel Messi"
+   },
+   {
+    "minute": 95,
+    "side": 0,
+    "player": "Lionel Messi"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Emiliano Martínez",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Lisandro Martínez",
+      "jersey": "6",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Cristian Romero",
+      "jersey": "13",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Facundo Medina",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Nahuel Molina",
+      "jersey": "26",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Enzo Fernández",
+      "jersey": "24",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Alexis Mac Allister",
+      "jersey": "20",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Thiago Almada",
+      "jersey": "16",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Rodrigo De Paul",
+      "jersey": "7",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Lautaro Martínez",
+      "jersey": "22",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Lionel Messi",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Julián Álvarez",
+     "Leandro Paredes",
+     "Nico González",
+     "Nicolás Otamendi",
+     "Nicolás Tagliafico"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Alexander Schlager",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "David Alaba",
+      "jersey": "8",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Kevin Danso",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Konrad Laimer",
+      "jersey": "20",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Stefan Posch",
+      "jersey": "5",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Paul Wanner",
+      "jersey": "24",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Xaver Schlager",
+      "jersey": "4",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Nicolas Seiwald",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Michael Gregoritsch",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Marcel Sabitzer",
+      "jersey": "9",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Romano Schmid",
+      "jersey": "18",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Carney Chukwuemeka",
+     "Marco Friedl",
+     "Alexander Prass",
+     "Patrick Wimmer",
+     "Marko Arnautovic"
+    ]
+   }
+  }
+ },
+ "42": {
+  "cards": [
+   {
+    "minute": 6,
+    "side": 1,
+    "player": "Amir Al-Ammari",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 14,
+    "side": 0,
+    "player": "Kylian Mbappé"
+   },
+   {
+    "minute": 54,
+    "side": 0,
+    "player": "Kylian Mbappé"
+   },
+   {
+    "minute": 66,
+    "side": 0,
+    "player": "Ousmane Dembélé"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Mike Maignan",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "William Saliba",
+      "jersey": "17",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Dayot Upamecano",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Lucas Digne",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jules Koundé",
+      "jersey": "5",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Michael Olise",
+      "jersey": "11",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Adrien Rabiot",
+      "jersey": "14",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Manu Koné",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Kylian Mbappé",
+      "jersey": "10",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Bradley Barcola",
+      "jersey": "12",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Ousmane Dembélé",
+      "jersey": "7",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Malo Gusto",
+     "Rayan Cherki",
+     "Désiré Doué",
+     "Marcus Thuram",
+     "Maghnes Akliouche"
+    ]
+   },
+   "b": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Ahmed Basil",
+      "jersey": "22",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Akam Hashim",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Zaid Tahseen",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Amir Al-Ammari",
+      "jersey": "16",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Merchas Doski",
+      "jersey": "23",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Hussein Ali",
+      "jersey": "3",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Zidane Iqbal",
+      "jersey": "14",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Zaid Ismael",
+      "jersey": "24",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Ibrahim Bayesh",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Ahmed Qasim",
+      "jersey": "11",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Aymen Hussein",
+      "jersey": "18",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Ali Al-Hamadi",
+     "Marko Farji",
+     "Rebin Sulaka",
+     "Youssef Amyn",
+     "Aimar Sher"
+    ]
+   }
+  }
+ },
+ "43": {
+  "cards": [],
+  "goals": [
+   {
+    "minute": 43,
+    "side": 0,
+    "player": "Marcus Holmgren Pedersen"
+   },
+   {
+    "minute": 48,
+    "side": 0,
+    "player": "Erling Haaland"
+   },
+   {
+    "minute": 53,
+    "side": 1,
+    "player": "Ismaïla Sarr"
+   },
+   {
+    "minute": 58,
+    "side": 0,
+    "player": "Erling Haaland"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Ismaïla Sarr"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Ørjan Nyland",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Torbjørn Heggem",
+      "jersey": "17",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Kristoffer Ajer",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "David Møller Wolfe",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Julian Ryerson",
+      "jersey": "26",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Sander Berge",
+      "jersey": "8",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Fredrik Aursnes",
+      "jersey": "14",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Martin Ødegaard",
+      "jersey": "10",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Erling Haaland",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Antonio Nusa",
+      "jersey": "20",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Alexander Sørloth",
+      "jersey": "7",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Patrick Berg",
+     "Andreas Schjelderup",
+     "Marcus Holmgren Pedersen",
+     "Leo Østigard",
+     "Oscar Bobb"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Édouard Mendy",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Moussa Niakhaté",
+      "jersey": "19",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Kalidou Koulibaly",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "El Hadji Malick Diouf",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Krépin Diatta",
+      "jersey": "15",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Lamine Camara",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Pape Gueye",
+      "jersey": "26",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Idrissa Gueye",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Nicolas Jackson",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Sadio Mané",
+      "jersey": "10",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Ismaïla Sarr",
+      "jersey": "18",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Pape Matar Sarr",
+     "Ismail Jakobs",
+     "Pathé Ciss",
+     "Ibrahim Mbaye",
+     "Mory Diaw"
+    ]
+   }
+  }
+ },
+ "44": {
+  "cards": [
+   {
+    "minute": 44,
+    "side": 1,
+    "player": "Ramiz Zerrouki",
+    "type": "Y"
+   },
+   {
+    "minute": 64,
+    "side": 0,
+    "player": "Husam Abu Dahab",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 36,
+    "side": 0,
+    "player": "Nizar Al-Rashdan"
+   },
+   {
+    "minute": 69,
+    "side": 1,
+    "player": "Nadhir Benbouali"
+   },
+   {
+    "minute": 82,
+    "side": 1,
+    "player": "Amine Gouiri"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Yazeed Abulaila",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Yazan Al-Arab",
+      "jersey": "5",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Husam Abu Dahab",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Abdallah Nasib",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Noor Al-Rawabdeh",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Nizar Al-Rashdan",
+      "jersey": "21",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Mohannad Abu Taha",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Ehsan Haddad",
+      "jersey": "23",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Mousa Al-Tamari",
+      "jersey": "10",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Mahmoud Al-Mardi",
+      "jersey": "13",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Ali Olwan",
+      "jersey": "9",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Mohammad Abu Hasheesh",
+     "Saleem Obaid",
+     "Mohammed Abu Zraiq",
+     "Ali Azaizeh",
+     "Odeh Fakhoury"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Luca Zidane",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Ramy Bensebaini",
+      "jersey": "21",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Aïssa Mandi",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Rayan Aït-Nouri",
+      "jersey": "15",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Rafik Belghali",
+      "jersey": "17",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ibrahim Maza",
+      "jersey": "22",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Ramiz Zerrouki",
+      "jersey": "6",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Hicham Boudaoui",
+      "jersey": "14",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Amine Gouiri",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Farès Chaïbi",
+      "jersey": "10",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Riyad Mahrez",
+      "jersey": "7",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Zineddine Belaïd",
+     "Anis Hadj Moussa",
+     "Jaouen Hadjam",
+     "Nabil Bentaleb",
+     "Nadhir Benbouali"
+    ]
+   }
+  }
+ },
+ "45": {
+  "cards": [
+   {
+    "minute": 14,
+    "side": 1,
+    "player": "Odiljon Xamrobekov",
+    "type": "Y"
+   },
+   {
+    "minute": 68,
+    "side": 0,
+    "player": "Renato Veiga",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 6,
+    "side": 0,
+    "player": "Cristiano Ronaldo"
+   },
+   {
+    "minute": 17,
+    "side": 0,
+    "player": "Nuno Mendes"
+   },
+   {
+    "minute": 39,
+    "side": 0,
+    "player": "Cristiano Ronaldo"
+   },
+   {
+    "minute": 60,
+    "side": 0,
+    "player": "Abduvohid Nematov",
+    "owngoal": true
+   },
+   {
+    "minute": 87,
+    "side": 0,
+    "player": "Rafael Leão"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Diogo Costa",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Renato Veiga",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Rúben Dias",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nuno Mendes",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "João Cancelo",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Bruno Fernandes",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Vitinha ",
+      "jersey": "23",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "João Neves",
+      "jersey": "15",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Cristiano Ronaldo",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "João Félix",
+      "jersey": "11",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Pedro Neto",
+      "jersey": "18",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Nélson Semedo",
+     "Bernardo Silva",
+     "Francisco Trincão",
+     "Rafael Leão",
+     "Francisco Conceição"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Abduvohid Nematov",
+      "jersey": "12",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Abdulla Abdullaev",
+      "jersey": "18",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Rustam Ashurmatov",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Abdukodir Khusanov",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Otabek Shukurov",
+      "jersey": "7",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Odiljon Xamrobekov",
+      "jersey": "9",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Sherzod Nasrullaev",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Behruzjon Karimov",
+      "jersey": "24",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Eldor Shomurodov",
+      "jersey": "14",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Abbosbek Fayzullaev",
+      "jersey": "22",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Azizjon Ganiev",
+      "jersey": "19",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Khojiakbar Alijonov",
+     "Igor Sergeev",
+     "Ruslanbek Jiyanov",
+     "Akmal Mozgovoy",
+     "Sherzod Esanov"
+    ]
+   }
+  }
+ },
+ "46": {
+  "cards": [
+   {
+    "minute": 41,
+    "side": 0,
+    "player": "Declan Rice",
+    "type": "Y"
+   },
+   {
+    "minute": 60,
+    "side": 1,
+    "player": "Iñaki Williams",
+    "type": "Y"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Jordan Pickford",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Marc Guéhi",
+      "jersey": "6",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ezri Konsa",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Djed Spence",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Reece James",
+      "jersey": "24",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jude Bellingham",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Declan Rice",
+      "jersey": "4",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Elliot Anderson",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Harry Kane",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Anthony Gordon",
+      "jersey": "18",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Noni Madueke",
+      "jersey": "20",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Morgan Rogers",
+     "Eberechi Eze",
+     "Marcus Rashford",
+     "Nico O'Reilly",
+     "Bukayo Saka"
+    ]
+   },
+   "b": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Benjamin Asare",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Jerome Opoku",
+      "jersey": "18",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Jonas Adjetey",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Thomas Partey",
+      "jersey": "5",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Gideon Mensah",
+      "jersey": "14",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Marvin Senaya",
+      "jersey": "26",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Kwasi Sibo",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Caleb Yirenkyi",
+      "jersey": "3",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Antoine Semenyo",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Iñaki Williams",
+      "jersey": "19",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Jordan Ayew",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Prince Adu",
+     "Kojo Peprah Oppong",
+     "Baba Rahman",
+     "Fatawu Issahaku"
+    ]
+   }
+  }
+ },
+ "47": {
+  "cards": [
+   {
+    "minute": 61,
+    "side": 0,
+    "player": "Édgar Yoel Bárcenas",
+    "type": "Y"
+   },
+   {
+    "minute": 92,
+    "side": 1,
+    "player": "Petar Sucic",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 54,
+    "side": 1,
+    "player": "Ante Budimir"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Orlando Mosquera",
+      "jersey": "22",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "José Córdoba",
+      "jersey": "3",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Andrés Andrade",
+      "jersey": "16",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Jiovany Ramos",
+      "jersey": "13",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "César Blackman",
+      "jersey": "2",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Amir Murillo",
+      "jersey": "23",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Édgar Yoel Bárcenas",
+      "jersey": "11",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Carlos Harvey",
+      "jersey": "14",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "José Luis Rodríguez",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Cristian Martínez",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "José Fajardo",
+      "jersey": "17",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Éric Davis",
+     "Tomás Rodríguez",
+     "Cecilio Waterman",
+     "Azarias Londoño"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Dominik Livakovic",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Marin Pongracic",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Josip Sutalo",
+      "jersey": "6",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Josko Gvardiol",
+      "jersey": "4",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Josip Stanisic",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Martin Baturina",
+      "jersey": "16",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Mateo Kovacic",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Luka Modric",
+      "jersey": "10",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Petar Musa",
+      "jersey": "26",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Ivan Perisic",
+      "jersey": "14",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Marco Pasalic",
+      "jersey": "24",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Ante Budimir",
+     "Petar Sucic",
+     "Andrej Kramaric",
+     "Mario Pasalic",
+     "Luka Sucic"
+    ]
+   }
+  }
+ },
+ "48": {
+  "cards": [
+   {
+    "minute": 56,
+    "side": 0,
+    "player": "Jhon Lucumí",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Charles Pickel",
+    "type": "Y"
+   },
+   {
+    "minute": 94,
+    "side": 0,
+    "player": "Jefferson Lerma",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 76,
+    "side": 0,
+    "player": "Daniel Muñoz"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Camilo Vargas",
+      "jersey": "12",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Jhon Lucumí",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Davinson Sánchez",
+      "jersey": "23",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Johan Mojica",
+      "jersey": "17",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Daniel Muñoz",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jefferson Lerma",
+      "jersey": "16",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Jhon Arias",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Gustavo Puerta",
+      "jersey": "14",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Luis Suárez",
+      "jersey": "25",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Luis Díaz",
+      "jersey": "7",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "James Rodríguez",
+      "jersey": "10",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Jhon Córdoba",
+     "Juan Fernando Quintero",
+     "Richard Ríos"
+    ]
+   },
+   "b": {
+    "formation": "5-3-2",
+    "starters": [
+     {
+      "name": "Lionel Mpasi",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Axel Tuanzebe",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Steve Kapuadi",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Chancel Mbemba",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Arthur Masuaku",
+      "jersey": "26",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Aaron Wan-Bissaka",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Samuel Moutoussamy",
+      "jersey": "8",
+      "pos": "CM",
+      "place": 8
+     },
+     {
+      "name": "Edo Kayembe",
+      "jersey": "25",
+      "pos": "CM-L",
+      "place": 11
+     },
+     {
+      "name": "Ngal'ayel Mukau",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Yoane Wissa",
+      "jersey": "20",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Cédric Bakambu",
+      "jersey": "17",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Joris Kayembe",
+     "Nathanaël Mbuku",
+     "Noah Sadiki",
+     "Charles Pickel",
+     "Simon Banza"
+    ]
+   }
+  }
+ },
+ "49": {
+  "cards": [
+   {
+    "minute": 32,
+    "side": 1,
+    "player": "Cyle Larin",
+    "type": "Y"
+   },
+   {
+    "minute": 32,
+    "side": 0,
+    "player": "Granit Xhaka",
+    "type": "Y"
+   },
+   {
+    "minute": 87,
+    "side": 1,
+    "player": "Liam Millar",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 46,
+    "side": 0,
+    "player": "Rubén Vargas"
+   },
+   {
+    "minute": 57,
+    "side": 0,
+    "player": "Johan Manzambi"
+   },
+   {
+    "minute": 76,
+    "side": 1,
+    "player": "Promise David"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Gregor Kobel",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Manuel Akanji",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nico Elvedi",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ricardo Rodríguez",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Luca Jaquez",
+      "jersey": "25",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Johan Manzambi",
+      "jersey": "9",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Granit Xhaka",
+      "jersey": "10",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Remo Freuler",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Breel Embolo",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Rubén Vargas",
+      "jersey": "17",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Djibril Sow",
+      "jersey": "15",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Silvan Widmer",
+     "Dan Ndoye",
+     "Cedric Itten",
+     "Michel Aebischer",
+     "Christian Fassnacht"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Maxime Crépeau",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Derek Cornelius",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Luc de Fougerolles",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Richie Laryea",
+      "jersey": "22",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Alistair Johnston",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Mathieu Choinière",
+      "jersey": "6",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Nathan Saliba",
+      "jersey": "25",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Ali Ahmed",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Tajon Buchanan",
+      "jersey": "17",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Cyle Larin",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Jonathan David",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Tani Oluwaseyi",
+     "Jacob Shaffelburg",
+     "Stephen Eustáquio",
+     "Liam Millar",
+     "Promise David"
+    ]
+   }
+  }
+ },
+ "50": {
+  "cards": [
+   {
+    "minute": 78,
+    "side": 1,
+    "player": "Ahmed Fathy",
+    "type": "Y"
+   },
+   {
+    "minute": 82,
+    "side": 0,
+    "player": "Ermin Mahmic",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 29,
+    "side": 0,
+    "player": "Kerim Alajbegovic"
+   },
+   {
+    "minute": 34,
+    "side": 0,
+    "player": "Mahmoud Abunada",
+    "owngoal": true
+   },
+   {
+    "minute": 42,
+    "side": 1,
+    "player": "Hassan Al-Haydos"
+   },
+   {
+    "minute": 80,
+    "side": 0,
+    "player": "Ermin Mahmic"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Nikola Vasilj",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Stjepan Radeljic",
+      "jersey": "21",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nikola Katic",
+      "jersey": "18",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Sead Kolasinac",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Arjan Malic",
+      "jersey": "24",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ivan Sunjic",
+      "jersey": "14",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Ivan Basic",
+      "jersey": "13",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Kerim Alajbegovic",
+      "jersey": "19",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Esmir Bajraktarevic",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Edin Dzeko",
+      "jersey": "11",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Ermedin Demirovic",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Benjamin Tahirovic",
+     "Dennis Hadzikadunic",
+     "Dzenis Burnic",
+     "Ermin Mahmic",
+     "Amar Memic"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Mahmoud Abunada",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Issa Laye",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Boualem Khoukhi",
+      "jersey": "16",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Sultan Al-Brake",
+      "jersey": "18",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Pedro Miguel",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ahmed Fathy",
+      "jersey": "20",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Karim Boudiaf",
+      "jersey": "12",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Jassem Gaber",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Akram Afif",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Hassan Al-Haydos",
+      "jersey": "10",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Edmílson Junior",
+      "jersey": "8",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Mohamed Manai",
+     "Ahmed Al-Ganehi",
+     "Ahmed Alaaeldin",
+     "Abdulaziz Hatem",
+     "Almoez Ali"
+    ]
+   }
+  }
+ },
+ "51": {
+  "cards": [
+   {
+    "minute": 62,
+    "side": 1,
+    "player": "Danilo",
+    "type": "Y"
+   },
+   {
+    "minute": 82,
+    "side": 1,
+    "player": "Fabinho",
+    "type": "Y"
+   },
+   {
+    "minute": 89,
+    "side": 0,
+    "player": "Ryan Christie",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 7,
+    "side": 1,
+    "player": "Vinícius Júnior"
+   },
+   {
+    "minute": 48,
+    "side": 1,
+    "player": "Vinícius Júnior"
+   },
+   {
+    "minute": 60,
+    "side": 1,
+    "player": "Matheus Cunha"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Angus Gunn",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Scott McKenna",
+      "jersey": "26",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Jack Hendry",
+      "jersey": "13",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Andy Robertson",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Nathan Patterson",
+      "jersey": "22",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Scott McTominay",
+      "jersey": "4",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Kenny McLean",
+      "jersey": "23",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Lewis Ferguson",
+      "jersey": "19",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Lawrence Shankland",
+      "jersey": "20",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "John McGinn",
+      "jersey": "7",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Ben Gannon-Doak",
+      "jersey": "17",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Ché Adams",
+     "Anthony Ralston",
+     "Ryan Christie",
+     "Kieran Tierney",
+     "Findlay Curtis"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Alisson Becker",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Gabriel Magalhães",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Marquinhos",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Douglas Santos",
+      "jersey": "16",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Danilo",
+      "jersey": "13",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Casemiro",
+      "jersey": "5",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Lucas Paquetá",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Bruno Guimarães",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Matheus Cunha",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Vinícius Júnior",
+      "jersey": "7",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Rayan",
+      "jersey": "26",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Fabinho",
+     "Neymar",
+     "Endrick",
+     "Gabriel Martinelli",
+     "Alex Sandro"
+    ]
+   }
+  }
+ },
+ "52": {
+  "cards": [
+   {
+    "minute": 79,
+    "side": 1,
+    "player": "Johny Placide",
+    "type": "Y"
+   },
+   {
+    "minute": 80,
+    "side": 1,
+    "player": "Duckens Nazon",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Josué Casimir",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 10,
+    "side": 1,
+    "player": "Yassine Bounou",
+    "owngoal": true
+   },
+   {
+    "minute": 39,
+    "side": 0,
+    "player": "Achraf Hakimi"
+   },
+   {
+    "minute": 43,
+    "side": 1,
+    "player": "Wilson Isidor"
+   },
+   {
+    "minute": 46,
+    "side": 0,
+    "player": "Ismael Saibari"
+   },
+   {
+    "minute": 78,
+    "side": 0,
+    "player": "Soufiane Rahimi"
+   },
+   {
+    "minute": 89,
+    "side": 0,
+    "player": "Gessime Yassine"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Yassine Bounou",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Chadi Riad",
+      "jersey": "18",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Redouane Halhal",
+      "jersey": "25",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Anass Salah-Eddine",
+      "jersey": "26",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Achraf Hakimi",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ismael Saibari",
+      "jersey": "11",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Sofyan Amrabat",
+      "jersey": "4",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Neil El Aynaoui",
+      "jersey": "24",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Ayoub El Kaabi",
+      "jersey": "20",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Bilal El Khannouss",
+      "jersey": "23",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Brahim Díaz",
+      "jersey": "10",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Gessime Yassine",
+     "Noussair Mazraoui",
+     "Samir El Mourabet",
+     "Soufiane Rahimi",
+     "Azzedine Ounahi"
+    ]
+   },
+   "b": {
+    "formation": "4-4-1-1",
+    "starters": [
+     {
+      "name": "Johny Placide",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Hannes Delcroix",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ricardo Adé",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Martin Expérience",
+      "jersey": "8",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jean-Kévin Duverne",
+      "jersey": "22",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jean-Ricner Bellegarde",
+      "jersey": "10",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Danley Jean Jacques",
+      "jersey": "17",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Ruben Providence",
+      "jersey": "15",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Josué Casimir",
+      "jersey": "21",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Lenny Joseph",
+      "jersey": "16",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Wilson Isidor",
+      "jersey": "18",
+      "pos": "RCF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Dominique Simon",
+     "Duckens Nazon",
+     "Carlens Arcus",
+     "Louicius Deedson",
+     "Frantzdy Pierrot"
+    ]
+   }
+  }
+ },
+ "53": {
+  "cards": [
+   {
+    "minute": 64,
+    "side": 1,
+    "player": "Edson Álvarez",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 55,
+    "side": 1,
+    "player": "Mateo Chávez"
+   },
+   {
+    "minute": 61,
+    "side": 1,
+    "player": "Julián Quiñones"
+   },
+   {
+    "minute": 94,
+    "side": 1,
+    "player": "Álvaro Fidalgo"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Matej Kovár",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Robin Hranác",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Ladislav Krejcí",
+      "jersey": "7",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Tomás Holes",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Michal Sadílek",
+      "jersey": "18",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Lukás Cerv",
+      "jersey": "12",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "David Doudera",
+      "jersey": "21",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Vladimír Coufal",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Adam Hlozek",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Denis Visinský",
+      "jersey": "26",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Pavel Sulc",
+      "jersey": "15",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Lukás Provod",
+     "Tomás Chorý",
+     "Patrik Schick",
+     "Tomás Soucek",
+     "Alexandr Sojka"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Raúl Rangel",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Israel Reyes",
+      "jersey": "15",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "César Montes",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Mateo Chávez",
+      "jersey": "20",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jorge Sánchez",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Edson Álvarez",
+      "jersey": "4",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Luis Romo",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Gilberto Mora",
+      "jersey": "19",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Guillermo Martínez",
+      "jersey": "22",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Julián Quiñones",
+      "jersey": "16",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Roberto Alvarado",
+      "jersey": "25",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Jesús Gallardo",
+     "Guillermo Ochoa",
+     "Obed Vargas",
+     "Álvaro Fidalgo",
+     "Santiago Gimenez"
+    ]
+   }
+  }
+ },
+ "54": {
+  "cards": [
+   {
+    "minute": 73,
+    "side": 0,
+    "player": "Aubrey Modiba",
+    "type": "Y"
+   },
+   {
+    "minute": 79,
+    "side": 1,
+    "player": "Cho Gue-Sung",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 63,
+    "side": 0,
+    "player": "Thapelo Maseko"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Ronwen Williams",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Mbekezeli Mbokazi",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ime Okon",
+      "jersey": "21",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Aubrey Modiba",
+      "jersey": "6",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Khuliso Mudau",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Relebohile Mofokeng",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Sphephelo Sithole",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Thalente Mbatha",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Evidence Makgopa",
+      "jersey": "17",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Oswin Appollis",
+      "jersey": "7",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Thapelo Maseko",
+      "jersey": "12",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Tshepang Moremi",
+     "Jayden Adams",
+     "Iqraam Rayners"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Kim Seung-Gyu",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Kim Min-Jae",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Lee Gi-Hyuk",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Lee Han-Beom",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Hwang In-Beom",
+      "jersey": "6",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Paik Seung-Ho",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Lee Tae-Seok",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Seol Young-Woo",
+      "jersey": "22",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Oh Hyeon-Gyu",
+      "jersey": "18",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Hwang Hee-Chan",
+      "jersey": "11",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Lee Kang-In",
+      "jersey": "19",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Kim Jin-Gyu",
+     "Jens Castrop",
+     "Cho Gue-Sung",
+     "Park Jin-Seop",
+     "Son Heung-Min"
+    ]
+   }
+  }
+ },
+ "55": {
+  "cards": [
+   {
+    "minute": 35,
+    "side": 1,
+    "player": "Nicolas Pépé",
+    "type": "Y"
+   },
+   {
+    "minute": 75,
+    "side": 0,
+    "player": "Juninho Bacuna",
+    "type": "Y"
+   },
+   {
+    "minute": 83,
+    "side": 0,
+    "player": "Gervane Kastaneer",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 7,
+    "side": 1,
+    "player": "Nicolas Pépé"
+   },
+   {
+    "minute": 64,
+    "side": 1,
+    "player": "Nicolas Pépé"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Eloy Room",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Armando Obispo",
+      "jersey": "18",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Deveron Fonville",
+      "jersey": "24",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Juriën Gaari",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Sherel Floranus",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Joshua Brenet",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Leandro Bacuna",
+      "jersey": "10",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Livano Comenencia",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Juninho Bacuna",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Tahith Chong",
+      "jersey": "21",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Jürgen Locadia",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Brandley Kuwas",
+     "Jeremy Antonisse",
+     "Shurandy Sambo",
+     "Gervane Kastaneer",
+     "Tyrese Noslin"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Yahia Fofana",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Ousmane Diomande",
+      "jersey": "2",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Odilon Kossounou",
+      "jersey": "7",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Christopher Operi",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Guela Doué",
+      "jersey": "17",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Nicolas Pépé",
+      "jersey": "19",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Franck Kessié",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Ibrahim Sangaré",
+      "jersey": "18",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Ange-Yoan Bonny",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Yan Diomande",
+      "jersey": "11",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Amad Diallo",
+      "jersey": "15",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Christ Inao Oulaï",
+     "Jean Michaël Seri",
+     "Bazoumana Touré",
+     "Oumar Diakité",
+     "Elye Wahi"
+    ]
+   }
+  }
+ },
+ "56": {
+  "cards": [
+   {
+    "minute": 43,
+    "side": 0,
+    "player": "Piero Hincapié",
+    "type": "Y"
+   },
+   {
+    "minute": 44,
+    "side": 1,
+    "player": "Aleksandar Pavlovic",
+    "type": "Y"
+   },
+   {
+    "minute": 50,
+    "side": 0,
+    "player": "Alan Franco",
+    "type": "Y"
+   },
+   {
+    "minute": 89,
+    "side": 0,
+    "player": "Gonzalo Plata",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 2,
+    "side": 1,
+    "player": "Leroy Sané"
+   },
+   {
+    "minute": 9,
+    "side": 0,
+    "player": "Nilson Angulo"
+   },
+   {
+    "minute": 77,
+    "side": 0,
+    "player": "Gonzalo Plata"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Hernán Galíndez",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Willian Pacho",
+      "jersey": "6",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Joel Ordóñez",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Piero Hincapié",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Alan Franco",
+      "jersey": "21",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Pedro Vite",
+      "jersey": "15",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Moisés Caicedo",
+      "jersey": "23",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Nilson Angulo",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "John Yeboah",
+      "jersey": "9",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Enner Valencia",
+      "jersey": "13",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Gonzalo Plata",
+      "jersey": "19",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Ángelo Preciado",
+     "Félix Torres",
+     "Pervis Estupiñán",
+     "Jordy Caicedo",
+     "Kevin Rodríguez"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Manuel Neuer",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Jonathan Tah",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Antonio Rüdiger",
+      "jersey": "2",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Joshua Kimmich",
+      "jersey": "6",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Aleksandar Pavlovic",
+      "jersey": "5",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Felix Nmecha",
+      "jersey": "23",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "David Raum",
+      "jersey": "22",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Leroy Sané",
+      "jersey": "19",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Kai Havertz",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Florian Wirtz",
+      "jersey": "17",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Jamal Musiala",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Deniz Undav",
+     "Malick Thiaw",
+     "Pascal Gross",
+     "Maximilian Beier",
+     "Angelo Stiller"
+    ]
+   }
+  }
+ },
+ "57": {
+  "cards": [
+   {
+    "minute": 32,
+    "side": 1,
+    "player": "Isak Hien",
+    "type": "Y"
+   },
+   {
+    "minute": 77,
+    "side": 0,
+    "player": "Shogo Taniguchi",
+    "type": "Y"
+   },
+   {
+    "minute": 85,
+    "side": 1,
+    "player": "Viktor Gyökeres",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 56,
+    "side": 0,
+    "player": "Daizen Maeda"
+   },
+   {
+    "minute": 62,
+    "side": 1,
+    "player": "Anthony Elanga"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Zion Suzuki",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Kou Itakura",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Hiroki Ito",
+      "jersey": "21",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Ayumu Seko",
+      "jersey": "20",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Daichi Kamada",
+      "jersey": "15",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Ao Tanaka",
+      "jersey": "7",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Keito Nakamura",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Yukinari Sugawara",
+      "jersey": "2",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Ayase Ueda",
+      "jersey": "18",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Daizen Maeda",
+      "jersey": "11",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Ritsu Doan",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Junya Ito",
+     "Koki Ogawa",
+     "Yuto Nagatomo",
+     "Tsuyoshi Watanabe",
+     "Shogo Taniguchi"
+    ]
+   },
+   "b": {
+    "formation": "3-4-3",
+    "starters": [
+     {
+      "name": "Jacob Widell Zetterström",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Isak Hien",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Gabriel Gudmundsson",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Gustaf Lagerbielke",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Yasin Ayari",
+      "jersey": "18",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Victor Lindelöf",
+      "jersey": "3",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Elliot Stroud",
+      "jersey": "24",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Alexander Bernhardsson",
+      "jersey": "21",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Viktor Gyökeres",
+      "jersey": "17",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Alexander Isak",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Anthony Elanga",
+      "jersey": "11",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Lucas Bergvall",
+     "Daniel Svensson",
+     "Benjamin Nygren",
+     "Ken Sema",
+     "Carl Starfelt"
+    ]
+   }
+  }
+ },
+ "58": {
+  "cards": [],
+  "goals": [
+   {
+    "minute": 3,
+    "side": 1,
+    "player": "Ellyes Skhiri",
+    "owngoal": true
+   },
+   {
+    "minute": 7,
+    "side": 1,
+    "player": "Brian Brobbey"
+   },
+   {
+    "minute": 54,
+    "side": 0,
+    "player": "Hazem Mastouri"
+   },
+   {
+    "minute": 62,
+    "side": 1,
+    "player": "Jan Paul van Hecke"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Aymen Dahmen",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Ellyes Skhiri",
+      "jersey": "17",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Mohamed Amine Ben Hamida",
+      "jersey": "21",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Montassar Talbi",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Ali Abdi",
+      "jersey": "2",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Yan Valery",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Rani Khedira",
+      "jersey": "13",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Ismaël Gharbi",
+      "jersey": "11",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Hannibal Mejbri",
+      "jersey": "10",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Anis Slimane",
+      "jersey": "25",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Hazem Mastouri",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Elias Achouri",
+     "Sebastian Tounekti",
+     "Mohamed Hadj Mahmoud",
+     "Firas Chaouat",
+     "Mortadha Ben Ouanes"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Bart Verbruggen",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Virgil van Dijk",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Jan Paul van Hecke",
+      "jersey": "6",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nathan Aké",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Denzel Dumfries",
+      "jersey": "22",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Frenkie de Jong",
+      "jersey": "21",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Tijjani Reijnders",
+      "jersey": "14",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Ryan Gravenberch",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Brian Brobbey",
+      "jersey": "19",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Cody Gakpo",
+      "jersey": "11",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Donyell Malen",
+      "jersey": "18",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Memphis Depay",
+     "Justin Kluivert",
+     "Crysencio Summerville",
+     "Teun Koopmeiners",
+     "Noa Lang"
+    ]
+   }
+  }
+ },
+ "59": {
+  "cards": [
+   {
+    "minute": 19,
+    "side": 1,
+    "player": "Sebastian Berhalter",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 3,
+    "side": 1,
+    "player": "Auston Trusty"
+   },
+   {
+    "minute": 10,
+    "side": 0,
+    "player": "Arda Güler"
+   },
+   {
+    "minute": 31,
+    "side": 0,
+    "player": "Baris Alper Yilmaz"
+   },
+   {
+    "minute": 49,
+    "side": 1,
+    "player": "Sebastian Berhalter"
+   },
+   {
+    "minute": 98,
+    "side": 0,
+    "player": "Kaan Ayhan"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Ugurcan Çakir",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Ozan Kabak",
+      "jersey": "15",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Abdülkerim Bardakçi",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Zeki Çelik",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Orkun Kökçü",
+      "jersey": "6",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Salih Özcan",
+      "jersey": "5",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Eren Elmali",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Oguz Aydin",
+      "jersey": "24",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Baris Alper Yilmaz",
+      "jersey": "21",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Kenan Yildiz",
+      "jersey": "11",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Arda Güler",
+      "jersey": "8",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Kaan Ayhan",
+     "Irfan Can Kahveci",
+     "Mert Müldür",
+     "Can Uzun",
+     "Çaglar Söyüncü"
+    ]
+   },
+   "b": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Matt Turner",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Mark McKenzie",
+      "jersey": "22",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Miles Robinson",
+      "jersey": "12",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Auston Trusty",
+      "jersey": "6",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Joe Scally",
+      "jersey": "23",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Sebastian Berhalter",
+      "jersey": "14",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Giovanni Reyna",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Weston McKennie",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Ricardo Pepi",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Timothy Weah",
+      "jersey": "21",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Brenden Aaronson",
+      "jersey": "11",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Malik Tillman",
+     "Christian Pulisic",
+     "Alejandro Zendejas",
+     "Sergiño Dest",
+     "Alex Freeman"
+    ]
+   }
+  }
+ },
+ "60": {
+  "cards": [
+   {
+    "minute": 46,
+    "side": 1,
+    "player": "Jackson Irvine",
+    "type": "Y"
+   },
+   {
+    "minute": 77,
+    "side": 0,
+    "player": "Diego Gómez",
+    "type": "Y"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "5-3-2",
+    "starters": [
+     {
+      "name": "Orlando Gil",
+      "jersey": "12",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Gustavo Gómez",
+      "jersey": "15",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Omar Alderete",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Gustavo Velázquez",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Alexandro Maidana",
+      "jersey": "26",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Juan Jose Cáceres",
+      "jersey": "4",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Andrés Cubas",
+      "jersey": "14",
+      "pos": "CM",
+      "place": 8
+     },
+     {
+      "name": "Matías Galarza",
+      "jersey": "23",
+      "pos": "CM-L",
+      "place": 11
+     },
+     {
+      "name": "Diego Gómez",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Julio Enciso",
+      "jersey": "19",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Gabriel Ávalos",
+      "jersey": "21",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Damián Bobadilla",
+     "Alex Arce",
+     "Júnior Alonso",
+     "José Canale",
+     "Maurício"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Patrick Beach",
+      "jersey": "18",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Harry Souttar",
+      "jersey": "19",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Lucas Herrington",
+      "jersey": "25",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Alessandro Circati",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Jackson Irvine",
+      "jersey": "22",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Aiden O'Neill",
+      "jersey": "13",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Aziz Behich",
+      "jersey": "16",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Jordan Bos",
+      "jersey": "5",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Nestory Irankunda",
+      "jersey": "17",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Connor Metcalfe",
+      "jersey": "8",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Cristian Volpato",
+      "jersey": "20",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Paul Okon-Engstler",
+     "Tete Yengi",
+     "Ajdin Hrustic"
+    ]
+   }
+  }
+ },
+ "61": {
+  "cards": [
+   {
+    "minute": 10,
+    "side": 0,
+    "player": "Patrick Berg",
+    "type": "Y"
+   },
+   {
+    "minute": 74,
+    "side": 1,
+    "player": "Aurélien Tchouaméni",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 7,
+    "side": 1,
+    "player": "Ousmane Dembélé"
+   },
+   {
+    "minute": 20,
+    "side": 1,
+    "player": "Ousmane Dembélé"
+   },
+   {
+    "minute": 21,
+    "side": 0,
+    "player": "Thelo Aasgaard"
+   },
+   {
+    "minute": 32,
+    "side": 1,
+    "player": "Ousmane Dembélé"
+   },
+   {
+    "minute": 94,
+    "side": 1,
+    "player": "Désiré Doué"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Egil Selvik",
+      "jersey": "13",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Leo Østigard",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Henrik Falchener",
+      "jersey": "25",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Fredrik André Bjørkan",
+      "jersey": "15",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Fredrik Aursnes",
+      "jersey": "14",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Patrick Berg",
+      "jersey": "6",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Thelo Aasgaard",
+      "jersey": "19",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Kristian Thorstvedt",
+      "jersey": "18",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Jørgen Strand Larsen",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Andreas Schjelderup",
+      "jersey": "21",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Oscar Bobb",
+      "jersey": "22",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Sondre Langas",
+     "Marcus Holmgren Pedersen",
+     "Jens Petter Hauge",
+     "Antonio Nusa",
+     "Morten Thorsby"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Mike Maignan",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Maxence Lacroix",
+      "jersey": "26",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Dayot Upamecano",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Theo Hernández",
+      "jersey": "19",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jules Koundé",
+      "jersey": "5",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Michael Olise",
+      "jersey": "11",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Manu Koné",
+      "jersey": "6",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Aurélien Tchouaméni",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Kylian Mbappé",
+      "jersey": "10",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Désiré Doué",
+      "jersey": "20",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Ousmane Dembélé",
+      "jersey": "7",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Bradley Barcola",
+     "Malo Gusto",
+     "Jean-Philippe Mateta",
+     "Rayan Cherki",
+     "Ibrahima Konaté"
+    ]
+   }
+  }
+ },
+ "62": {
+  "cards": [
+   {
+    "minute": 13,
+    "side": 1,
+    "player": "Rebin Sulaka",
+    "type": "R"
+   },
+   {
+    "minute": 18,
+    "side": 0,
+    "player": "Abdoulaye Seck",
+    "type": "Y"
+   },
+   {
+    "minute": 75,
+    "side": 1,
+    "player": "Amir Al-Ammari",
+    "type": "Y"
+   },
+   {
+    "minute": 81,
+    "side": 0,
+    "player": "Pape Gueye",
+    "type": "Y"
+   },
+   {
+    "minute": 90,
+    "side": 1,
+    "player": "Merchas Doski",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 4,
+    "side": 0,
+    "player": "Habib Diarra"
+   },
+   {
+    "minute": 56,
+    "side": 0,
+    "player": "Ismaïla Sarr"
+   },
+   {
+    "minute": 59,
+    "side": 0,
+    "player": "Pape Gueye"
+   },
+   {
+    "minute": 71,
+    "side": 0,
+    "player": "Pape Gueye"
+   },
+   {
+    "minute": 82,
+    "side": 0,
+    "player": "Iliman Ndiaye"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Mory Diaw",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Moussa Niakhaté",
+      "jersey": "19",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Abdoulaye Seck",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ismail Jakobs",
+      "jersey": "14",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Krépin Diatta",
+      "jersey": "15",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Idrissa Gueye",
+      "jersey": "5",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Lamine Camara",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Habib Diarra",
+      "jersey": "21",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Ismaïla Sarr",
+      "jersey": "18",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Sadio Mané",
+      "jersey": "10",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "Ibrahim Mbaye",
+      "jersey": "20",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Nicolas Jackson",
+     "Assane Diao",
+     "Pape Gueye",
+     "Iliman Ndiaye",
+     "Pathé Ciss"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Ahmed Basil",
+      "jersey": "22",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Akam Hashim",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Rebin Sulaka",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Merchas Doski",
+      "jersey": "23",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Frans Putros",
+      "jersey": "26",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ali Jasim",
+      "jersey": "17",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Amir Al-Ammari",
+      "jersey": "16",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Zidane Iqbal",
+      "jersey": "14",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Ali Al-Hamadi",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Ibrahim Bayesh",
+      "jersey": "8",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Ahmed Qasim",
+      "jersey": "11",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Kevin Yakob",
+     "Jalal Hassan",
+     "Munaf Younus",
+     "Ahmed Maknazi",
+     "Ali Yousif"
+    ]
+   }
+  }
+ },
+ "63": {
+  "cards": [
+   {
+    "minute": 4,
+    "side": 1,
+    "player": "Saud Abdulhamid",
+    "type": "Y"
+   },
+   {
+    "minute": 8,
+    "side": 0,
+    "player": "Wagner Pina",
+    "type": "Y"
+   },
+   {
+    "minute": 67,
+    "side": 1,
+    "player": "Nasser Al-Dawsari",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Feras Al-Brikan",
+    "type": "Y"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Vozinha",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Diney Borges",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pico Lopes",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Kevin Pina",
+      "jersey": "6",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "João Paulo",
+      "jersey": "8",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Wagner Pina",
+      "jersey": "24",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jamiro Monteiro",
+      "jersey": "10",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Deroy Duarte",
+      "jersey": "14",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Willy Semedo",
+      "jersey": "17",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Ryan Mendes",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Dailon Livramento",
+      "jersey": "19",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Garry Rodrigues",
+     "Nuno da Costa",
+     "Hélio Varela",
+     "Laros Duarte",
+     "Steven Moreira"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Mohammed Al-Owais",
+      "jersey": "21",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Hassan Al-Tambakti",
+      "jersey": "5",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Abdulelah Al-Amri",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nawaf Boushal",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Saud Abdulhamid",
+      "jersey": "12",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Nasser Al-Dawsari",
+      "jersey": "6",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Abdullah Al-Khaibari",
+      "jersey": "15",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Salem Al-Dawsari",
+      "jersey": "10",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Sultan Mandash",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Mohamed Kanno",
+      "jersey": "23",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Feras Al-Brikan",
+      "jersey": "9",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Ali Lajami",
+     "Moteb Al-Harbi",
+     "Mohammed Abu Al-Shamat",
+     "Musab Al-Juwayr",
+     "Abdullah Al-Hamdan"
+    ]
+   }
+  }
+ },
+ "64": {
+  "cards": [
+   {
+    "minute": 46,
+    "side": 1,
+    "player": "Álex Baena",
+    "type": "Y"
+   },
+   {
+    "minute": 54,
+    "side": 0,
+    "player": "Juan Manuel Sanabria",
+    "type": "Y"
+   },
+   {
+    "minute": 58,
+    "side": 0,
+    "player": "Guillermo Varela",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 0,
+    "player": "Nicolás de la Cruz",
+    "type": "Y"
+   },
+   {
+    "minute": 95,
+    "side": 0,
+    "player": "Agustín Canobbio",
+    "type": "R"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 42,
+    "side": 1,
+    "player": "Álex Baena"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Fernando Muslera",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Mathías Olivera",
+      "jersey": "16",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Sebastián Cáceres",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Manuel Ugarte",
+      "jersey": "5",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Juan Manuel Sanabria",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Guillermo Varela",
+      "jersey": "13",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Federico Valverde",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Rodrigo Bentancur",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Maxi Araújo",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Agustín Canobbio",
+      "jersey": "14",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Darwin Núñez",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Federico Viñas",
+     "Brian Rodríguez",
+     "Nicolás de la Cruz",
+     "Sergio Rochet"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Unai Simón",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Aymeric Laporte",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pau Cubarsí",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Marc Cucurella",
+      "jersey": "24",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Marcos Llorente",
+      "jersey": "5",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Mikel Merino",
+      "jersey": "6",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Rodri",
+      "jersey": "16",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Pedri ",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Mikel Oyarzabal",
+      "jersey": "21",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Álex Baena",
+      "jersey": "15",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Lamine Yamal",
+      "jersey": "19",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Yéremy Pino",
+     "Nico Williams",
+     "Dani Olmo",
+     "Ferran Torres",
+     "Fabián Ruiz"
+    ]
+   }
+  }
+ },
+ "65": {
+  "cards": [
+   {
+    "minute": 19,
+    "side": 1,
+    "player": "Hossein Kanani",
+    "type": "Y"
+   },
+   {
+    "minute": 20,
+    "side": 0,
+    "player": "Mahmoud Saber",
+    "type": "Y"
+   },
+   {
+    "minute": 42,
+    "side": 0,
+    "player": "Yasser Ibrahim",
+    "type": "Y"
+   },
+   {
+    "minute": 43,
+    "side": 1,
+    "player": "Ali Nemati",
+    "type": "Y"
+   },
+   {
+    "minute": 79,
+    "side": 1,
+    "player": "Saeid Ezatolahi",
+    "type": "Y"
+   },
+   {
+    "minute": 92,
+    "side": 0,
+    "player": "Mohanad Lashin",
+    "type": "Y"
+   },
+   {
+    "minute": 94,
+    "side": 1,
+    "player": "Shoja Khalilzadeh",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 5,
+    "side": 0,
+    "player": "Mahmoud Saber"
+   },
+   {
+    "minute": 14,
+    "side": 1,
+    "player": "Ramin Rezaeian"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Mostafa Shoubir",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Mohamed Abdelmoneim",
+      "jersey": "6",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ramy Rabia",
+      "jersey": "5",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ahmed Fatouh",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Mohamed Hany",
+      "jersey": "3",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Mohamed Salah",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Mahmoud Saber",
+      "jersey": "21",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Mohanad Lashin",
+      "jersey": "17",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Mostafa Zico",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Trézéguet",
+      "jersey": "7",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Emam Ashour",
+      "jersey": "8",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Hamza Abdelkarim",
+     "Omar Marmoush",
+     "Marawan Attia",
+     "Zizo",
+     "Yasser Ibrahim"
+    ]
+   },
+   "b": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Alireza Beiranvand",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Shoja Khalilzadeh",
+      "jersey": "4",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Ali Nemati",
+      "jersey": "19",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Hossein Kanani",
+      "jersey": "13",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Milad Mohammadi",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Ramin Rezaeian",
+      "jersey": "23",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Saeid Ezatolahi",
+      "jersey": "6",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Mohammad Ghorbani",
+      "jersey": "21",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Mohammad Mohebbi",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Saman Ghoddos",
+      "jersey": "14",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Mehdi Taremi",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Saleh Hardani",
+     "Alireza Jahanbakhsh",
+     "Shahriyar Moghanloo"
+    ]
+   }
+  }
+ },
+ "66": {
+  "cards": [
+   {
+    "minute": 46,
+    "side": 0,
+    "player": "Marko Stamenic",
+    "type": "Y"
+   },
+   {
+    "minute": 56,
+    "side": 0,
+    "player": "Elijah Just",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 28,
+    "side": 1,
+    "player": "Leandro Trossard"
+   },
+   {
+    "minute": 50,
+    "side": 1,
+    "player": "Leandro Trossard"
+   },
+   {
+    "minute": 66,
+    "side": 1,
+    "player": "Kevin De Bruyne"
+   },
+   {
+    "minute": 84,
+    "side": 0,
+    "player": "Elijah Just"
+   },
+   {
+    "minute": 86,
+    "side": 1,
+    "player": "Romelu Lukaku"
+   },
+   {
+    "minute": 94,
+    "side": 1,
+    "player": "Alexis Saelemaekers"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Max Crocombe",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Tyler Bindon",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Finn Surman",
+      "jersey": "16",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Liberato Cacace",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Tim Payne",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ryan Thomas",
+      "jersey": "23",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Marko Stamenic",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Joe Bell",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Chris Wood",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Elijah Just",
+      "jersey": "11",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Sarpreet Singh",
+      "jersey": "10",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Callum McCowatt",
+     "Michael Boxall",
+     "Francis de Vries",
+     "Jesse Randall",
+     "Ben Old"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Thibaut Courtois",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Arthur Theate",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Brandon Mechele",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Maxim De Cuyper",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Timothy Castagne",
+      "jersey": "21",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Kevin De Bruyne",
+      "jersey": "7",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Hans Vanaken",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Youri Tielemans",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Charles De Ketelaere",
+      "jersey": "17",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Leandro Trossard",
+      "jersey": "10",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Jérémy Doku",
+      "jersey": "11",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Alexis Saelemaekers",
+     "Matias Fernandez-Pardo",
+     "Nicolas Raskin",
+     "Romelu Lukaku",
+     "Amadou Onana"
+    ]
+   }
+  }
+ },
+ "67": {
+  "cards": [
+   {
+    "minute": 53,
+    "side": 0,
+    "player": "José Fajardo",
+    "type": "Y"
+   },
+   {
+    "minute": 60,
+    "side": 1,
+    "player": "Jarell Quansah",
+    "type": "Y"
+   },
+   {
+    "minute": 84,
+    "side": 0,
+    "player": "Andrés Andrade",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 62,
+    "side": 1,
+    "player": "Jude Bellingham"
+   },
+   {
+    "minute": 67,
+    "side": 1,
+    "player": "Harry Kane"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "5-4-1",
+    "starters": [
+     {
+      "name": "Orlando Mosquera",
+      "jersey": "22",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "José Córdoba",
+      "jersey": "3",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Andrés Andrade",
+      "jersey": "16",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Fidel Escobar",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Jorge Gutiérrez",
+      "jersey": "26",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Amir Murillo",
+      "jersey": "23",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Édgar Yoel Bárcenas",
+      "jersey": "11",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Carlos Harvey",
+      "jersey": "14",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "José Luis Rodríguez",
+      "jersey": "7",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Cristian Martínez",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Tomás Rodríguez",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Ismael Díaz",
+     "Alberto Quintero",
+     "Éric Davis",
+     "Azarias Londoño",
+     "José Fajardo"
+    ]
+   },
+   "b": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Jordan Pickford",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Marc Guéhi",
+      "jersey": "6",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ezri Konsa",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Elliot Anderson",
+      "jersey": "8",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Nico O'Reilly",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jarell Quansah",
+      "jersey": "26",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jude Bellingham",
+      "jersey": "10",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Morgan Rogers",
+      "jersey": "17",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Marcus Rashford",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Bukayo Saka",
+      "jersey": "7",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Harry Kane",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Noni Madueke",
+     "Djed Spence",
+     "Eberechi Eze",
+     "Ollie Watkins",
+     "Jordan Henderson"
+    ]
+   }
+  }
+ },
+ "68": {
+  "cards": [
+   {
+    "minute": 68,
+    "side": 0,
+    "player": "Ivan Perisic",
+    "type": "Y"
+   },
+   {
+    "minute": 94,
+    "side": 1,
+    "player": "Kojo Peprah Oppong",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 31,
+    "side": 0,
+    "player": "Petar Sucic"
+   },
+   {
+    "minute": 73,
+    "side": 1,
+    "player": "Derrick Luckassen"
+   },
+   {
+    "minute": 83,
+    "side": 0,
+    "player": "Nikola Vlasic"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Dominik Livakovic",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Marin Pongracic",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Josip Sutalo",
+      "jersey": "6",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Ivan Perisic",
+      "jersey": "14",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Josip Stanisic",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Petar Sucic",
+      "jersey": "17",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Mateo Kovacic",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Luka Modric",
+      "jersey": "10",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Ante Budimir",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Martin Baturina",
+      "jersey": "16",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Nikola Vlasic",
+      "jersey": "13",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Mario Pasalic",
+     "Marco Pasalic",
+     "Igor Matanovic",
+     "Josko Gvardiol"
+    ]
+   },
+   "b": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Benjamin Asare",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Derrick Luckassen",
+      "jersey": "23",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Jonas Adjetey",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Thomas Partey",
+      "jersey": "5",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Gideon Mensah",
+      "jersey": "14",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Marvin Senaya",
+      "jersey": "26",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Kwasi Sibo",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Elisha Owusu",
+      "jersey": "15",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Kamaldeen Sulemana",
+      "jersey": "22",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Antoine Semenyo",
+      "jersey": "11",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Jordan Ayew",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Brandon Thomas-Asante",
+     "Caleb Yirenkyi",
+     "Fatawu Issahaku",
+     "Kojo Peprah Oppong",
+     "Ernest Nuamah"
+    ]
+   }
+  }
+ },
+ "69": {
+  "cards": [
+   {
+    "minute": 86,
+    "side": 0,
+    "player": "Gustavo Puerta",
+    "type": "Y"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-3-3",
+    "starters": [
+     {
+      "name": "Camilo Vargas",
+      "jersey": "12",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Jhon Lucumí",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Davinson Sánchez",
+      "jersey": "23",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Deiver Machado",
+      "jersey": "22",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Santiago Arias",
+      "jersey": "4",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jefferson Lerma",
+      "jersey": "16",
+      "pos": "CM",
+      "place": 4
+     },
+     {
+      "name": "Gustavo Puerta",
+      "jersey": "14",
+      "pos": "LM",
+      "place": 8
+     },
+     {
+      "name": "Jhon Arias",
+      "jersey": "11",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Jhon Córdoba",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Luis Díaz",
+      "jersey": "7",
+      "pos": "LF",
+      "place": 11
+     },
+     {
+      "name": "James Rodríguez",
+      "jersey": "10",
+      "pos": "RF",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Daniel Muñoz",
+     "Luis Suárez",
+     "Kevin Castaño",
+     "Juan Fernando Quintero",
+     "Richard Ríos"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Diogo Costa",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Renato Veiga",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Rúben Dias",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nuno Mendes",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "João Cancelo",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Bruno Fernandes",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Vitinha ",
+      "jersey": "23",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Rúben Neves",
+      "jersey": "21",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Cristiano Ronaldo",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "João Félix",
+      "jersey": "11",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Pedro Neto",
+      "jersey": "18",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "João Neves",
+     "Rafael Leão",
+     "Samú Costa",
+     "Diogo Dalot",
+     "Matheus Nunes"
+    ]
+   }
+  }
+ },
+ "70": {
+  "cards": [
+   {
+    "minute": 21,
+    "side": 0,
+    "player": "Noah Sadiki",
+    "type": "Y"
+   },
+   {
+    "minute": 43,
+    "side": 1,
+    "player": "Abdukodir Khusanov",
+    "type": "Y"
+   },
+   {
+    "minute": 48,
+    "side": 1,
+    "player": "Sherzod Nasrullaev",
+    "type": "Y"
+   },
+   {
+    "minute": 50,
+    "side": 0,
+    "player": "Nathanaël Mbuku",
+    "type": "Y"
+   },
+   {
+    "minute": 62,
+    "side": 0,
+    "player": "Samuel Moutoussamy",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 10,
+    "side": 1,
+    "player": "Eldor Shomurodov"
+   },
+   {
+    "minute": 68,
+    "side": 0,
+    "player": "Yoane Wissa",
+    "penalty": true
+   },
+   {
+    "minute": 78,
+    "side": 0,
+    "player": "Fiston Mayele"
+   },
+   {
+    "minute": 91,
+    "side": 0,
+    "player": "Yoane Wissa"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Lionel Mpasi",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Axel Tuanzebe",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Chancel Mbemba",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Arthur Masuaku",
+      "jersey": "26",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Aaron Wan-Bissaka",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Noah Sadiki",
+      "jersey": "14",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Samuel Moutoussamy",
+      "jersey": "8",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Brian Cipenga",
+      "jersey": "9",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Nathanaël Mbuku",
+      "jersey": "7",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Yoane Wissa",
+      "jersey": "20",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Cédric Bakambu",
+      "jersey": "17",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Ngal'ayel Mukau",
+     "Fiston Mayele",
+     "Joris Kayembe",
+     "Meschack Elia",
+     "Théo Bongonda"
+    ]
+   },
+   "b": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Abduvohid Nematov",
+      "jersey": "12",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Abdukodir Khusanov",
+      "jersey": "2",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Jakhongir Urozov",
+      "jersey": "26",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Rustam Ashurmatov",
+      "jersey": "5",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Otabek Shukurov",
+      "jersey": "7",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Akmal Mozgovoy",
+      "jersey": "6",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Sherzod Nasrullaev",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Khojiakbar Alijonov",
+      "jersey": "3",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Eldor Shomurodov",
+      "jersey": "14",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Abbosbek Fayzullaev",
+      "jersey": "22",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Dostonbek Khamdamov",
+      "jersey": "17",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Azizjon Ganiev",
+     "Oston Urunov",
+     "Jamshid Iskanderov",
+     "Igor Sergeev",
+     "Odiljon Xamrobekov"
+    ]
+   }
+  }
+ },
+ "71": {
+  "cards": [
+   {
+    "minute": 11,
+    "side": 1,
+    "player": "Marko Arnautovic",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 28,
+    "side": 1,
+    "player": "Marko Arnautovic"
+   },
+   {
+    "minute": 45,
+    "side": 0,
+    "player": "Rafik Belghali"
+   },
+   {
+    "minute": 55,
+    "side": 1,
+    "player": "Marcel Sabitzer"
+   },
+   {
+    "minute": 60,
+    "side": 0,
+    "player": "Riyad Mahrez"
+   },
+   {
+    "minute": 93,
+    "side": 0,
+    "player": "Riyad Mahrez"
+   },
+   {
+    "minute": 96,
+    "side": 1,
+    "player": "Sasa Kalajdzic"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Oussama Benbot",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Ramy Bensebaini",
+      "jersey": "21",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Aïssa Mandi",
+      "jersey": "2",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Jaouen Hadjam",
+      "jersey": "13",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Rafik Belghali",
+      "jersey": "17",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Ibrahim Maza",
+      "jersey": "22",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Nabil Bentaleb",
+      "jersey": "19",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Farès Chaïbi",
+      "jersey": "10",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Amine Gouiri",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Houssem Aouar",
+      "jersey": "8",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Riyad Mahrez",
+      "jersey": "7",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Rayan Aït-Nouri",
+     "Samir Chergui",
+     "Farès Ghedjemis",
+     "Zineddine Belaïd"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Alexander Schlager",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "David Alaba",
+      "jersey": "8",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Philipp Lienhart",
+      "jersey": "15",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Phillipp Mwene",
+      "jersey": "16",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Stefan Posch",
+      "jersey": "5",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Romano Schmid",
+      "jersey": "18",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Xaver Schlager",
+      "jersey": "4",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Nicolas Seiwald",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Marko Arnautovic",
+      "jersey": "7",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Marcel Sabitzer",
+      "jersey": "9",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Konrad Laimer",
+      "jersey": "20",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Florian Grillitsch",
+     "Kevin Danso",
+     "Sasa Kalajdzic",
+     "Michael Gregoritsch",
+     "Paul Wanner"
+    ]
+   }
+  }
+ },
+ "72": {
+  "cards": [
+   {
+    "minute": 17,
+    "side": 0,
+    "player": "Mohannad Abu Taha",
+    "type": "Y"
+   },
+   {
+    "minute": 64,
+    "side": 0,
+    "player": "Yazan Al-Arab",
+    "type": "Y"
+   },
+   {
+    "minute": 94,
+    "side": 0,
+    "player": "Mohammed Abu Zraiq",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 19,
+    "side": 1,
+    "player": "Giovani Lo Celso"
+   },
+   {
+    "minute": 31,
+    "side": 1,
+    "player": "Lautaro Martínez",
+    "penalty": true
+   },
+   {
+    "minute": 55,
+    "side": 0,
+    "player": "Mousa Al-Tamari"
+   },
+   {
+    "minute": 80,
+    "side": 1,
+    "player": "Lionel Messi"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "3-4-2-1",
+    "starters": [
+     {
+      "name": "Yazeed Abulaila",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Yazan Al-Arab",
+      "jersey": "5",
+      "pos": "CD",
+      "place": 5
+     },
+     {
+      "name": "Husam Abu Dahab",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 4
+     },
+     {
+      "name": "Abdallah Nasib",
+      "jersey": "3",
+      "pos": "CD-R",
+      "place": 6
+     },
+     {
+      "name": "Noor Al-Rawabdeh",
+      "jersey": "8",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Nizar Al-Rashdan",
+      "jersey": "21",
+      "pos": "CM-R",
+      "place": 7
+     },
+     {
+      "name": "Mohannad Abu Taha",
+      "jersey": "20",
+      "pos": "LM",
+      "place": 3
+     },
+     {
+      "name": "Ehsan Haddad",
+      "jersey": "23",
+      "pos": "RM",
+      "place": 2
+     },
+     {
+      "name": "Odeh Fakhoury",
+      "jersey": "11",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Ali Olwan",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 11
+     },
+     {
+      "name": "Ali Azaizeh",
+      "jersey": "24",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Mousa Al-Tamari",
+     "Mohammed Abu Zraiq",
+     "Saleem Obaid",
+     "Mahmoud Al-Mardi",
+     "Amer Jamous"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Emiliano Martínez",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Marcos Senesi",
+      "jersey": "2",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nicolás Otamendi",
+      "jersey": "19",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nicolás Tagliafico",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Exequiel Palacios",
+      "jersey": "14",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Leandro Paredes",
+      "jersey": "5",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Nico Paz",
+      "jersey": "18",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Giovani Lo Celso",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Giuliano Simeone",
+      "jersey": "17",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Julián Álvarez",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Lautaro Martínez",
+      "jersey": "22",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Alexis Mac Allister",
+     "Lionel Messi",
+     "Valentín Barco",
+     "José Manuel López",
+     "Thiago Almada"
+    ]
+   }
+  }
  }
 }
