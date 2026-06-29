@@ -13974,5 +13974,184 @@
     ]
    }
   }
+ },
+ "73": {
+  "cards": [
+   {
+    "minute": 54,
+    "side": 1,
+    "player": "Nathan Saliba",
+    "type": "Y"
+   },
+   {
+    "minute": 67,
+    "side": 1,
+    "player": "Niko Sigur",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 92,
+    "side": 1,
+    "player": "Stephen Eustáquio"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Ronwen Williams",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Mbekezeli Mbokazi",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Ime Okon",
+      "jersey": "21",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Aubrey Modiba",
+      "jersey": "6",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Khuliso Mudau",
+      "jersey": "20",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Relebohile Mofokeng",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Sphephelo Sithole",
+      "jersey": "13",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Teboho Mokoena",
+      "jersey": "4",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Evidence Makgopa",
+      "jersey": "17",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Oswin Appollis",
+      "jersey": "7",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Thapelo Maseko",
+      "jersey": "12",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Iqraam Rayners",
+     "Tshepang Moremi",
+     "Thalente Mbatha"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Maxime Crépeau",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Derek Cornelius",
+      "jersey": "13",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Moïse Bombito",
+      "jersey": "15",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Richie Laryea",
+      "jersey": "22",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Alistair Johnston",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Stephen Eustáquio",
+      "jersey": "7",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Nathan Saliba",
+      "jersey": "25",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Liam Millar",
+      "jersey": "11",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Tajon Buchanan",
+      "jersey": "17",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Tani Oluwaseyi",
+      "jersey": "12",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Jonathan David",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Jacob Shaffelburg",
+     "Promise David",
+     "Luc de Fougerolles",
+     "Niko Sigur",
+     "Alphonso Davies"
+    ]
+   }
+  }
  }
 }
