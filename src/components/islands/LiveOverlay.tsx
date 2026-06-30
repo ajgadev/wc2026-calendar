@@ -115,14 +115,23 @@ function patch(statuses: LiveStatus[], minutes?: Map<number, string>) {
     const isFt = s.status === 'FINISHED' || s.status === 'AWARDED';
     if (!isLive && !isFt) continue; // SCHEDULED/TIMED/POSTPONED/SUSPENDED → keep "upcoming"
     const score = s.home !== null && s.away !== null ? `${s.home}–${s.away}` : '';
+    // Knockout decider: the feed names a winner even when full time is
+    // level (a penalty shootout). Mark the winning side so the static
+    // bold/dim/arrow CSS fires, and flag the level scoreline as "pens"
+    // (the actual tally lands with the nightly rebuild).
+    const win = isFt ? s.winner ?? null : null;
+    const pensLevel = !!win && s.home !== null && s.home === s.away;
+    const scoreText = pensLevel ? `${score} pens` : score;
     // ESPN clock first (football-data has none); HT for paused; else blank
     const minute = isFt ? '' : minutes?.get(s.n) ?? (s.status === 'PAUSED' ? 'HT' : s.minute != null ? `${s.minute}'` : '');
     for (const el of els) {
       el.dataset.state = isLive ? 'live' : 'ft';
+      if (win) el.dataset.win = win;
+      else delete el.dataset.win;
       el.querySelectorAll<HTMLElement>('[data-minute]').forEach((n) => { n.textContent = minute; });
       // combined score (agenda rows) + split per-team scores (calendar chips)
       el.querySelectorAll<HTMLElement>('[data-score]').forEach((n) => {
-        if (score && n.textContent !== score) n.textContent = score;
+        if (scoreText && n.textContent !== scoreText) n.textContent = scoreText;
       });
       if (s.home !== null) el.querySelectorAll<HTMLElement>('[data-score-home]').forEach((n) => { n.textContent = String(s.home); });
       if (s.away !== null) el.querySelectorAll<HTMLElement>('[data-score-away]').forEach((n) => { n.textContent = String(s.away); });

@@ -29,6 +29,7 @@ import {
   type MatchLineups,
   type PlacedPlayer,
 } from '../../lib/lineups';
+import { decideMatch } from '../../lib/result';
 import type { Goal, Highlight, Match, Stadium } from '../../lib/types';
 
 /**
@@ -246,7 +247,8 @@ function domMatchState(n: number) {
   const state = (row?.dataset.state ?? 'up') as 'up' | 'live' | 'ft';
   const score = row?.querySelector('[data-score]')?.textContent || null;
   const minute = row?.querySelector('[data-minute]')?.textContent || null;
-  return { state, score, minute };
+  const win = (row?.dataset.win as 'a' | 'b' | undefined) ?? null;
+  return { state, score, minute, win };
 }
 
 const cardCls = 'flex flex-col gap-1 rounded-(--radius-row) border border-border px-3.5 py-3';
@@ -779,7 +781,7 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
     const id = setInterval(() => {
       const next = domMatchState(n);
       setDom((prev) =>
-        prev.state !== next.state || prev.score !== next.score || prev.minute !== next.minute ? next : prev,
+        prev.state !== next.state || prev.score !== next.score || prev.minute !== next.minute || prev.win !== next.win ? next : prev,
       );
     }, 3000);
     return () => clearInterval(id);
@@ -882,7 +884,15 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
   const A = m.a ? teams[m.a] : null;
   const B = m.b ? teams[m.b] : null;
   const state = m.ft ? 'ft' : dom.state;
-  const score = m.ft ? `${m.ft[0]}–${m.ft[1]}` : dom.score;
+  // big hero number stays the level score; the shootout reads on its own
+  // caption line just below
+  const score = m.ft ? `${m.ft[0]}–${m.ft[1]}` : dom.score ? dom.score.replace(/\s+pens$/, '') : null;
+  const result = m.ft ? decideMatch(m) : null;
+  const winSide = result?.win ?? (state === 'ft' ? dom.win : null);
+  const wentToPens = !!winSide && (!!m.pens || /\bpens\b/.test(dom.score ?? ''));
+  const winName = winSide === 'a' ? (A?.name ?? m.pa) : winSide === 'b' ? (B?.name ?? m.pb) : null;
+  const pensCaption =
+    wentToPens && winName ? `${winName} won ${m.pens ? `${m.pens[0]}–${m.pens[1]} ` : ''}on penalties` : null;
   // static layer first (openfootball, lands on the nightly rebuild);
   // ESPN bridges the gap for live and just-finished matches
   const goalEvents = m.goals?.length ? m.goals : espnGoals;
@@ -929,6 +939,9 @@ function MatchDrawer({ n, openTeam }: { n: number; openTeam: (code: string) => v
             <span className="disp t-meta text-center font-bold text-text-2">{B ? B.name : m.pb}</span>
           </span>
         </div>
+        {pensCaption && (
+          <span className="t-meta text-center font-bold text-win">{pensCaption}</span>
+        )}
         <span className="t-micro text-center font-mono tracking-[0.06em] text-text-dim">
           {(state === 'ft' ? 'Full time' : state === 'live' ? `Live${dom.minute ? ` · ${dom.minute}` : ''}` : 'Upcoming')} · {roundBit} · Match {m.n}
         </span>

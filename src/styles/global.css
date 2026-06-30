@@ -257,6 +257,23 @@ input::placeholder { color: var(--color-text-dim); }
 [data-slot][data-result="won"] [data-slot-label] { color: var(--color-win); font-weight: 800; }
 [data-slot][data-result="won"] [data-slot-score] { color: var(--color-win); }
 
+/* ---- Decided-match winner emphasis ----
+   Agenda rows + calendar chips carry data-win="a|b" once a match is
+   decided. Server bakes it from the static layer (penalty shootouts
+   included, where full time is level); LiveOverlay sets it from the live
+   feed's winner. Same bold-winner / dim-loser / arrow treatment the
+   inline classes gave a clear scoreline, but it now works on a 1–1 that
+   was settled on pens. The arrows are CSS so the live patch only has to
+   flip one attribute. */
+[data-win] :is([data-name-a], [data-name-b], [data-code-a], [data-code-b]) { font-weight: 600; color: var(--color-text-3); }
+[data-win="a"] :is([data-name-a], [data-code-a]),
+[data-win="b"] :is([data-name-b], [data-code-b]) { font-weight: 800; color: var(--color-win); }
+[data-win="a"] [data-score-home], [data-win="b"] [data-score-away] { color: var(--color-win); }
+[data-win="a"] [data-score-away], [data-win="b"] [data-score-home] { color: var(--color-text-3); }
+[data-win="a"] [data-flag-b], [data-win="b"] [data-flag-a] { opacity: 0.55; }
+[data-win="a"] [data-arr-a]::before { content: "◂"; }
+[data-win="b"] [data-arr-b]::before { content: "▸"; }
+
 /* TODAY badge shows only on the actual today (set client-side; the
    build bakes an approximation for no-JS visitors) */
 [data-date] .today-badge { display: none; }

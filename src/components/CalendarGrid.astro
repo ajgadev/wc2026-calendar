@@ -7,6 +7,7 @@
  */
 import { MATCHES, TOURNAMENT_START, TOURNAMENT_END } from '../data/schedule';
 import { stadiumOf, flagSrc, groupCaption, hostClass, matchDayKey, matchHasRed, searchText, stateOf, venueKick } from '../lib/view';
+import { decideMatch } from '../lib/result';
 import type { Match } from '../lib/types';
 
 const byDay = new Map<string, Match[]>();
@@ -81,8 +82,7 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                 const real = !!(m.a && m.b);
                 const state = stateOf(m);
                 const [fa, fb] = m.ft ?? [0, 0];
-                const winA = state === 'ft' && fa > fb;
-                const winB = state === 'ft' && fb > fa;
+                const result = decideMatch(m);
                 return (
                   <button
                     type="button"
@@ -90,6 +90,7 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                     data-n={m.n}
                     data-open-match={m.n}
                     data-state={state}
+                    data-win={state === 'ft' && result.win ? result.win : undefined}
                     data-group={m.group ?? ''}
                     data-stage={m.stage}
                     data-country={stadiumOf(m).country.toLowerCase()}
@@ -108,17 +109,17 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                         <span class="score-slot flex w-full flex-col gap-[3px] rounded-sm">
                           <span class="grid grid-cols-[1fr_auto] items-center gap-1">
                             <span class="flex min-w-0 items-center gap-1.5">
-                              <img src={flagSrc(m.a!)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
-                              <span class:list={['disp t-micro truncate', winA ? 'font-extrabold text-win' : winB ? 'font-semibold text-text-3' : 'font-bold text-text-2']}>{m.a}</span>
+                              <img data-flag-a src={flagSrc(m.a!)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
+                              <span data-code-a class="disp t-micro truncate font-bold text-text-2">{m.a}</span>
                             </span>
-                            <span class:list={['w-score disp t-time font-black tnum', winA ? 'text-win' : 'text-text-2']} data-score-home>{state === 'ft' ? fa : ''}</span>
+                            <span class="w-score disp t-time font-black tnum text-text-2" data-score-home>{state === 'ft' ? fa : ''}</span>
                           </span>
                           <span class="grid grid-cols-[1fr_auto] items-center gap-1">
                             <span class="flex min-w-0 items-center gap-1.5">
-                              <img src={flagSrc(m.b!)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
-                              <span class:list={['disp t-micro truncate', winB ? 'font-extrabold text-win' : winA ? 'font-semibold text-text-3' : 'font-bold text-text-2']}>{m.b}</span>
+                              <img data-flag-b src={flagSrc(m.b!)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
+                              <span data-code-b class="disp t-micro truncate font-bold text-text-2">{m.b}</span>
                             </span>
-                            <span class:list={['w-score disp t-time font-black tnum', winB ? 'text-win' : 'text-text-2']} data-score-away>{state === 'ft' ? fb : ''}</span>
+                            <span class="w-score disp t-time font-black tnum text-text-2" data-score-away>{state === 'ft' ? fb : ''}</span>
                           </span>
                         </span>
                         <span class="flex w-full items-center gap-1 overflow-hidden text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">

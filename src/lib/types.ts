@@ -32,6 +32,8 @@ export interface Match {
   stadium: string;
   /** Final score when the static layer has one */
   ft?: [number, number];
+  /** Penalty-shootout tally [a, b] when a level full time was decided on pens */
+  pens?: [number, number];
   goals?: Goal[];
 }
 

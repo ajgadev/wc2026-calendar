@@ -14,6 +14,7 @@ import { TEAMS } from '../data/teams';
 import { buildBracket, buildBracketTree, shortPlaceholder } from '../lib/bracket';
 import { shortDate, dayLabel } from '../lib/time';
 import { stadiumOf, flagSrc, hostClass, matchDayKey, stateOf, venueChip, venueKick, searchText } from '../lib/view';
+import { decide } from '../lib/result';
 import type { Match } from '../lib/types';
 
 const { columns, thirdPlace } = buildBracket(MATCHES);
@@ -23,8 +24,11 @@ function slot(m: Match, side: 'a' | 'b') {
   const code = side === 'a' ? m.a : m.b;
   const ph = side === 'a' ? m.pa : m.pb;
   const [fa, fb] = m.ft ?? [-1, -1];
-  const won = m.ft ? (side === 'a' ? fa > fb : fb > fa) : false;
-  const lost = m.ft ? (side === 'a' ? fa < fb : fb < fa) : false;
+  // decide() resolves the winner from the pen tally too, so a level full
+  // time settled on penalties still highlights the side that advanced
+  const d = m.ft ? decide(m.ft, m.pens ?? null) : null;
+  const won = d ? d.win === side : false;
+  const lost = d ? d.win !== null && d.win !== side : false;
   return { side, code, label: code ? TEAMS[code].name : shortPlaceholder(ph ?? ''), score: m.ft ? (side === 'a' ? fa : fb) : null, won, lost };
 }
 

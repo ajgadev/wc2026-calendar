@@ -136,6 +136,7 @@ function normalize(): Match[] {
       utc: parseKickoff(of.date, of.time),
       stadium: stadiumIdFor(of.ground),
       ...(of.score?.ft ? { ft: of.score.ft } : {}),
+      ...(of.score?.p ? { pens: of.score.p } : {}),
     };
     const goals = parseGoals(of);
     if (goals) m.goals = goals;

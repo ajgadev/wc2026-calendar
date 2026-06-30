@@ -7,6 +7,7 @@
 import { TEAMS } from '../data/teams';
 import { stadiumOf } from '../lib/view';
 import { flagSrc, hostClass, matchHasRed, roundLabel, searchText, stateOf, venueChip, venueKick } from '../lib/view';
+import { decideMatch } from '../lib/result';
 import type { Match } from '../lib/types';
 
 interface Props {
@@ -16,9 +17,7 @@ interface Props {
 const { match: m } = Astro.props;
 const real = !!(m.a && m.b);
 const state = stateOf(m);
-const [fa, fb] = m.ft ?? [0, 0];
-const winA = state === 'ft' && fa > fb;
-const winB = state === 'ft' && fb > fa;
+const result = decideMatch(m);
 const A = m.a ? TEAMS[m.a] : null;
 const B = m.b ? TEAMS[m.b] : null;
 const country = stadiumOf(m).country.toLowerCase();
@@ -30,6 +29,7 @@ const country = stadiumOf(m).country.toLowerCase();
   data-n={m.n}
   data-open-match={m.n}
   data-state={state}
+  data-win={state === 'ft' && result.win ? result.win : undefined}
   data-group={m.group ?? ''}
   data-stage={m.stage}
   data-country={country}
@@ -54,34 +54,28 @@ const country = stadiumOf(m).country.toLowerCase();
   <!-- teams + score -->
   <span class="grid min-w-0 grow basis-[200px] grid-cols-[1fr_auto_1fr] items-center gap-2.5">
     <span class="flex min-w-0 items-center justify-end gap-[7px]">
-      <span
-        data-name-a
-        class:list={['disp t-team truncate', winA ? 'font-extrabold text-win' : winB ? 'font-semibold text-text-3' : 'font-bold text-text-2']}
-      >
+      <span data-name-a class="disp t-team truncate font-bold text-text-2">
         {m.a && <span data-star-team={m.a}></span>}
         <span class="max-[979px]:hidden">{A ? A.name : m.pa}</span>
         <span class="min-[980px]:hidden">{A ? m.a : m.pa}</span>
       </span>
       {A
-        ? <img src={flagSrc(m.a!)} alt="" width="22" height="16" loading="lazy" class="w-[22px] h-4 shrink-0 rounded-[2px] object-cover" style={winB ? 'opacity:.55' : undefined} />
+        ? <img data-flag-a src={flagSrc(m.a!)} alt="" width="22" height="16" loading="lazy" class="w-[22px] h-4 shrink-0 rounded-[2px] object-cover" />
         : <span class="box-border h-4 w-[22px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
     </span>
 
     <span class="w-score disp t-score score-slot inline-flex items-center gap-[5px] rounded-md px-1.5 font-black text-text">
-      <span class="text-[11px] text-text-2">{winA ? '◂' : ''}</span>
-      <span data-score>{state === 'ft' ? `${fa}–${fb}` : ''}</span>
-      <span class="text-[11px] text-text-2">{winB ? '▸' : ''}</span>
+      <span class="text-[11px] text-text-2" data-arr-a></span>
+      <span data-score>{state === 'ft' ? result.scoreText : ''}</span>
+      <span class="text-[11px] text-text-2" data-arr-b></span>
     </span>
     <span class="w-vs t-meta px-2 text-text-3">vs</span>
 
     <span class="flex min-w-0 items-center gap-[7px]">
       {B
-        ? <img src={flagSrc(m.b!)} alt="" width="22" height="16" loading="lazy" class="w-[22px] h-4 shrink-0 rounded-[2px] object-cover" style={winA ? 'opacity:.55' : undefined} />
+        ? <img data-flag-b src={flagSrc(m.b!)} alt="" width="22" height="16" loading="lazy" class="w-[22px] h-4 shrink-0 rounded-[2px] object-cover" />
         : <span class="box-border h-4 w-[22px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
-      <span
-        data-name-b
-        class:list={['disp t-team truncate', winB ? 'font-extrabold text-win' : winA ? 'font-semibold text-text-3' : 'font-bold text-text-2']}
-      >
+      <span data-name-b class="disp t-team truncate font-bold text-text-2">
         <span class="max-[979px]:hidden">{B ? B.name : m.pb}</span>
         <span class="min-[980px]:hidden">{B ? m.b : m.pb}</span>
         {m.b && <span data-star-team={m.b}></span>}
