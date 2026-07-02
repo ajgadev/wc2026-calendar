@@ -4,21 +4,23 @@
  *  - Tree: symmetric two-wing chart with CSS connector lines converging
  *    on a glowing Final in the centre, third place beneath. Default on
  *    desktop.
- *  - Columns: linear R32→Final list, one round per screen on mobile
- *    with scroll-snap + round tabs. Default on phones.
+ *  - Radial: interactive circular bracket — R32 on the outer ring, lines
+ *    converging inward through R16/QF/SF to the Final + trophy at the
+ *    centre. Default on phones. Follow the line inward; tap any node for
+ *    match details.
  * Both derive from the schedule's W{n} references (lib/bracket), so
  * resolved teams fill in on rebuild with zero code changes.
  */
-import { MATCHES, STAGE_LABELS } from '../data/schedule';
+import { MATCHES } from '../data/schedule';
 import { TEAMS } from '../data/teams';
-import { buildBracket, buildBracketTree, shortPlaceholder } from '../lib/bracket';
-import { shortDate, dayLabel } from '../lib/time';
+import { buildBracketTree, shortPlaceholder, type BracketHalf } from '../lib/bracket';
+import { dayLabel, shortDate } from '../lib/time';
 import { stadiumOf, flagSrc, hostClass, matchDayKey, stateOf, venueChip, venueKick, searchText } from '../lib/view';
-import { decide } from '../lib/result';
+import { decide, penCell } from '../lib/result';
 import type { Match } from '../lib/types';
 
-const { columns, thirdPlace } = buildBracket(MATCHES);
 const tree = buildBracketTree(MATCHES);
+const thirdPlace = tree.thirdPlace;
 
 function slot(m: Match, side: 'a' | 'b') {
   const code = side === 'a' ? m.a : m.b;
@@ -29,7 +31,10 @@ function slot(m: Match, side: 'a' | 'b') {
   const d = m.ft ? decide(m.ft, m.pens ?? null) : null;
   const won = d ? d.win === side : false;
   const lost = d ? d.win !== null && d.win !== side : false;
-  return { side, code, label: code ? TEAMS[code].name : shortPlaceholder(ph ?? ''), score: m.ft ? (side === 'a' ? fa : fb) : null, won, lost };
+  const num = m.ft ? (side === 'a' ? fa : fb) : null;
+  const pen = m.pens ? (side === 'a' ? m.pens[0] : m.pens[1]) : null;
+  // score cell carries the shootout tally in parens — "1 (4)"
+  return { side, code, label: code ? TEAMS[code].name : shortPlaceholder(ph ?? ''), score: num, scoreText: num === null ? '' : penCell(num, pen), won, lost };
 }
 
 // ---- tree column layout ----
@@ -80,13 +85,82 @@ function connectorUnit(side: 'left' | 'right', straight?: boolean): string[] {
 }
 
 const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-col gap-[5px] rounded-[9px] border border-border px-[9px] py-2 hover:border-border-strong';
+
+// ---- radial layout ----
+// Every match is a node placed on a concentric ring (R32 outermost →
+// Final at the centre). A match's angle is the midpoint of its two
+// feeders' angles, so connector curves converge inward like a bracket.
+type Ring = 'R32' | 'R16' | 'QF' | 'SF';
+const RING_R: Record<Ring, number> = { R32: 0.41, R16: 0.31, QF: 0.205, SF: 0.11 };
+const A0 = -84, A1 = 84; // right-wing angular span (deg; 0°=east, clockwise = down)
+const rad = (deg: number) => (deg * Math.PI) / 180;
+
+/** Angle (deg) for every match in a half, feeders averaged bottom-up. */
+function halfAngles(half: BracketHalf): Map<number, number> {
+  const ang = new Map<number, number>();
+  const n = half.R32.length || 1;
+  half.R32.forEach((m, i) => ang.set(m.n, A0 + ((i + 0.5) * (A1 - A0)) / n));
+  // parent angle = midpoint of its two feeders (falls back to whichever
+  // feeder resolved, so a missing edge degrades instead of breaking)
+  const avg = (a: Match | undefined, b: Match | undefined): number | null => {
+    const xs = [a, b].map((m) => (m ? ang.get(m.n) : undefined)).filter((v): v is number => v != null);
+    return xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : null;
+  };
+  const set = (m: Match, v: number | null) => { if (v != null) ang.set(m.n, v); };
+  half.R16.forEach((m, i) => set(m, avg(half.R32[2 * i], half.R32[2 * i + 1])));
+  half.QF.forEach((m, i) => set(m, avg(half.R16[2 * i], half.R16[2 * i + 1])));
+  half.SF.forEach((m, i) => set(m, avg(half.QF[2 * i], half.QF[2 * i + 1])));
+  return ang;
+}
+
+interface RNode { m: Match; ring: Ring; x: number; y: number; }
+const rNodes: RNode[] = [];
+const rPos = new Map<number, { x: number; y: number }>();
+const CENTER = { x: 0.5, y: 0.5 };
+
+for (const [half, mirror] of [[tree.left, true], [tree.right, false]] as const) {
+  const ang = halfAngles(half);
+  const place = (list: Match[], ring: Ring) => {
+    for (const m of list) {
+      const base = ang.get(m.n);
+      if (base == null) continue; // unplaceable (lost edge) — skip rather than NaN
+      const deg = mirror ? 180 - base : base;
+      const p = { x: 0.5 + RING_R[ring] * Math.cos(rad(deg)), y: 0.5 + RING_R[ring] * Math.sin(rad(deg)) };
+      rNodes.push({ m, ring, x: p.x, y: p.y });
+      rPos.set(m.n, p);
+    }
+  };
+  place(half.R32, 'R32'); place(half.R16, 'R16'); place(half.QF, 'QF'); place(half.SF, 'SF');
+}
+if (tree.final) rPos.set(tree.final.n, CENTER);
+
+// Connector curves: child → parent, control point pulled toward centre.
+const rEdges: string[] = [];
+const link = (childN: number | undefined, parent: { x: number; y: number } | undefined) => {
+  if (childN == null || !parent) return;
+  const c = rPos.get(childN);
+  if (!c) return;
+  const mx = (c.x + parent.x) / 2 + (0.5 - (c.x + parent.x) / 2) * 0.45;
+  const my = (c.y + parent.y) / 2 + (0.5 - (c.y + parent.y) / 2) * 0.45;
+  rEdges.push(`M${(c.x * 1000).toFixed(1)} ${(c.y * 1000).toFixed(1)} Q${(mx * 1000).toFixed(1)} ${(my * 1000).toFixed(1)} ${(parent.x * 1000).toFixed(1)} ${(parent.y * 1000).toFixed(1)}`);
+};
+for (const half of [tree.left, tree.right]) {
+  half.R16.forEach((m, i) => { const p = rPos.get(m.n); link(half.R32[2 * i]?.n, p); link(half.R32[2 * i + 1]?.n, p); });
+  half.QF.forEach((m, i) => { const p = rPos.get(m.n); link(half.R16[2 * i]?.n, p); link(half.R16[2 * i + 1]?.n, p); });
+  half.SF.forEach((m, i) => { const p = rPos.get(m.n); link(half.QF[2 * i]?.n, p); link(half.QF[2 * i + 1]?.n, p); });
+  if (tree.final) link(half.SF[0]?.n, CENTER);
+}
+
+const rFlag = 'h-[22px] w-[22px] shrink-0 rounded-full object-cover';
+const rFlagPh = 'box-border h-[22px] w-[22px] shrink-0 rounded-full border border-dashed border-border-strong';
+const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
 ---
 
 <div class="pt-4" data-brmode="auto" data-bracket-root>
   <!-- toggle + caption -->
   <div class="flex flex-wrap items-center gap-x-4 gap-y-3 px-0.5 pb-3.5">
     <div role="group" aria-label="Bracket layout" class="inline-flex gap-0.5 rounded-[9px] border border-border bg-surface p-[3px]">
-      {(['tree', 'columns'] as const).map((mode) => (
+      {(['tree', 'radial'] as const).map((mode) => (
         <button
           type="button"
           data-brset={mode}
@@ -154,7 +228,7 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
                             ? <img data-flag src={flagSrc(s.code)} alt="" width="18" height="13" loading="lazy" class="h-[13px] w-[18px] shrink-0 rounded-[2px] object-cover" />
                             : <span data-flag class="box-border h-[13px] w-[18px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
                           <span data-slot-label class="t-meta truncate font-bold text-text">{s.label}</span>
-                          <span data-slot-score class="disp t-meta ml-auto font-black tnum text-text">{s.score ?? ''}</span>
+                          <span data-slot-score class="disp t-meta ml-auto font-black tnum text-text">{s.scoreText}</span>
                         </span>
                       ))}
                     </button>
@@ -199,7 +273,7 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
                             ? <img data-flag src={flagSrc(s.code)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
                             : <span data-flag class="box-border h-3 w-4 shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
                           <span data-slot-label class="t-micro truncate whitespace-nowrap font-bold text-text-2">{s.label}</span>
-                          <span data-slot-score class="w-score disp ml-auto t-micro font-black tnum text-text-2" {...{ [`data-score-${key}`]: true }}>{m.ft ? s.score : ''}</span>
+                          <span data-slot-score class="w-score disp ml-auto t-micro font-black tnum text-text-2" {...{ [`data-score-${key}`]: true }}>{s.scoreText}</span>
                         </span>
                       ))}
                     </button>
@@ -213,65 +287,97 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
     </div>
   </div>
 
-  <!-- ============ COLUMNS ============ -->
-  <div class="brview-columns">
-    <div class="mb-3 flex gap-1.5 overflow-x-auto min-[1100px]:hidden" data-round-tabs>
-      {columns.map((col) => (
-        <a
-          href={`#round-${col.stage}`}
-          data-round-tab={col.stage}
-          class="focus-ring t-micro shrink-0 rounded-(--radius-pill) border border-border bg-surface px-3 py-2 font-bold tracking-[0.06em] whitespace-nowrap text-text-3 no-underline aria-[current]:border-border-strong aria-[current]:bg-raised aria-[current]:text-text"
-        >
-          {col.stage === 'F' ? 'Final' : col.stage}
-        </a>
-      ))}
+  <!-- ============ RADIAL ============ -->
+  <div class="brview-radial">
+    <div class="radial-stage" data-radial>
+      <!-- connector curves, child → parent, converging on the centre -->
+      <svg viewBox="0 0 1000 1000" class="pointer-events-none absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        {rEdges.map((d) => <path d={d} fill="none" stroke="var(--color-border)" stroke-width="1.4" stroke-linecap="round" />)}
+      </svg>
+
+      <!-- centre: trophy + the Final -->
+      {tree.final && (() => {
+        const f = tree.final;
+        return (
+          <div class="radial-final" style={`left:${pct(0.5)};top:${pct(0.5)}`}>
+            <span class="radial-trophy" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 4h10v4a5 5 0 0 1-10 0V4Z" />
+                <path d="M7 6H4.5v.8A3 3 0 0 0 7 10M17 6h2.5v.8A3 3 0 0 1 17 10" />
+                <path d="M12 13v3.5M9.5 20h5M10.5 16.5h3" />
+              </svg>
+            </span>
+            <span class="disp text-[10px] font-black tracking-[0.2em] text-live">FINAL</span>
+            <button
+              type="button"
+              data-match data-n={f.n} data-open-match={f.n} data-state={stateOf(f)} data-stage="F" data-flagsize="circle"
+              data-country={stadiumOf(f).country.toLowerCase()} data-teams={[f.a, f.b].filter(Boolean).join(' ')} data-search={searchText(f)}
+              title={f.a && f.b ? `${TEAMS[f.a].name} vs ${TEAMS[f.b].name}` : `${f.pa} vs ${f.pb}`}
+              aria-label={f.a && f.b ? `Final: ${TEAMS[f.a].name} vs ${TEAMS[f.b].name}` : `Final: ${f.pa} vs ${f.pb}`}
+              class:list={['radial-node radial-node--final focus-ring live-border', hostClass(f)]}
+            >
+              {[slot(f, 'a'), slot(f, 'b')].map((s) => (
+                <span data-slot={s.side} data-result={s.won ? 'won' : s.lost ? 'lost' : ''} class="rn-row">
+                  {s.code
+                    ? <img data-flag src={flagSrc(s.code)} alt="" width="22" height="22" loading="lazy" class={rFlag} />
+                    : <span data-flag class={rFlagPh}></span>}
+                  <span data-slot-score class="rn-score">{s.scoreText}</span>
+                </span>
+              ))}
+            </button>
+            <span class="text-[8.5px] tracking-[0.04em] whitespace-nowrap text-text-dim"><span data-kick-date={f.utc}>{dayLabel(matchDayKey(f))} · {stadiumOf(f).cityShort}</span></span>
+          </div>
+        );
+      })()}
+
+      <!-- match nodes on the rings -->
+      {rNodes.map(({ m, ring, x, y }) => {
+        const a = slot(m, 'a');
+        const b = slot(m, 'b');
+        return (
+          <button
+            type="button"
+            data-match data-n={m.n} data-open-match={m.n} data-state={stateOf(m)} data-stage={m.stage} data-flagsize="circle"
+            data-country={stadiumOf(m).country.toLowerCase()} data-teams={[m.a, m.b].filter(Boolean).join(' ')} data-search={searchText(m)}
+            title={m.a && m.b ? `${TEAMS[m.a].name} vs ${TEAMS[m.b].name}` : `${m.pa} vs ${m.pb}`}
+            aria-label={m.a && m.b ? `${TEAMS[m.a].name} vs ${TEAMS[m.b].name}` : `${m.pa} vs ${m.pb}`}
+            class:list={[`radial-node rn-${ring.toLowerCase()} focus-ring live-border`, hostClass(m)]}
+            style={`left:${pct(x)};top:${pct(y)}`}
+          >
+            {[a, b].map((s) => (
+              <span data-slot={s.side} data-result={s.won ? 'won' : s.lost ? 'lost' : ''} class="rn-row">
+                {s.code
+                  ? <img data-flag src={flagSrc(s.code)} alt="" width="22" height="22" loading="lazy" class={rFlag} />
+                  : <span data-flag class={rFlagPh}></span>}
+                <span data-slot-score class="rn-score">{s.scoreText}</span>
+              </span>
+            ))}
+            <span class="rn-date"><span data-kick-date={m.utc}>{shortDate(matchDayKey(m))} · {venueKick(m)}</span></span>
+          </button>
+        );
+      })}
     </div>
 
-    <div class="bracket-scroll flex items-stretch gap-4 overflow-x-auto pb-2" data-bracket>
-      {columns.map((col) => (
-        <div
-          id={`round-${col.stage}`}
-          data-round={col.stage}
-          class="bracket-col flex w-[86vw] shrink-0 flex-col gap-2.5 min-[1100px]:w-auto min-[1100px]:min-w-0 min-[1100px]:flex-1 min-[1100px]:shrink"
+    <p class="mt-1 text-center t-micro text-text-dim">Follow the line inward. Tap any node for match details.</p>
+
+    {thirdPlace && (
+      <div class="mt-2.5 flex justify-center">
+        <button
+          type="button"
+          data-match data-n={thirdPlace.n} data-open-match={thirdPlace.n} data-state={stateOf(thirdPlace)} data-stage="3RD"
+          data-country={stadiumOf(thirdPlace).country.toLowerCase()} data-teams={[thirdPlace.a, thirdPlace.b].filter(Boolean).join(' ')} data-search={searchText(thirdPlace)}
+          class="focus-ring box-border inline-flex items-center gap-2 rounded-(--radius-pill) border border-dashed border-border-strong bg-surface px-3.5 py-2 hover:border-text-3"
         >
-          <div class="disp t-meta px-0.5 font-black tracking-[0.06em] text-text-3">{col.label}</div>
-          <div class="flex flex-1 flex-col justify-around gap-2">
-            {[...col.matches, ...(col.stage === 'F' && thirdPlace ? [thirdPlace] : [])].map((m) => {
-              const a = slot(m, 'a');
-              const b = slot(m, 'b');
-              return (
-                <button
-                  type="button"
-                  data-match data-n={m.n} data-open-match={m.n} data-state={stateOf(m)} data-stage={m.stage} data-flagsize="md"
-                  data-country={stadiumOf(m).country.toLowerCase()} data-teams={[m.a, m.b].filter(Boolean).join(' ')} data-search={searchText(m)}
-                  class:list={['focus-ring live-border tinted box-border flex w-full flex-col gap-1.5 rounded-[9px] border border-border px-[11px] py-[9px] hover:border-border-strong', hostClass(m)]}
-                >
-                  <span class="flex w-full items-center justify-between gap-1.5">
-                    <span class="font-mono text-[9.5px] whitespace-nowrap text-text-dim">M{m.n} · <span data-kick-date={m.utc}>{shortDate(matchDayKey(m))} · {venueKick(m)}</span></span>
-                    <span class:list={['host-chip rounded-(--radius-chip) px-[5px] py-px text-[9.5px] font-semibold tracking-[0.04em] whitespace-nowrap', hostClass(m)]}>{venueChip(m)}</span>
-                  </span>
-                  {m.stage === '3RD' && <span class="text-[9px] font-bold tracking-[0.12em] text-text-3">THIRD PLACE</span>}
-                  {[a, b].map((s) => (
-                    <span data-slot={s.side} data-result={s.won ? 'won' : s.lost ? 'lost' : ''} class="flex w-full min-w-0 items-center gap-[7px]">
-                      {s.code
-                        ? <img data-flag src={flagSrc(s.code)} alt="" width="18" height="13" loading="lazy" class="h-[13px] w-[18px] shrink-0 rounded-[2px] object-cover" />
-                        : <span data-flag class="box-border h-[13px] w-[18px] shrink-0 rounded-[2px] border border-dashed border-border-strong"></span>}
-                      <span data-slot-label class="t-micro truncate whitespace-nowrap font-semibold text-text-2">{s.label}</span>
-                      <span data-slot-score class="disp t-meta ml-auto font-black tnum text-text-3">{s.score ?? ''}</span>
-                    </span>
-                  ))}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-    </div>
+          <span class="text-[9px] font-bold tracking-[0.12em] text-text-3">3RD PLACE · M{thirdPlace.n}</span>
+          <span class="t-micro truncate text-text-2">{slot(thirdPlace, 'a').label} · {slot(thirdPlace, 'b').label}</span>
+        </button>
+      </div>
+    )}
   </div>
 </div>
 
 <script>
-  // ---- Tree/Columns toggle (persisted) ----
+  // ---- Tree/Radial toggle (persisted) ----
   const root = document.querySelector<HTMLElement>('[data-bracket-root]');
   if (root) {
     const segs = root.querySelectorAll<HTMLElement>('[data-brset]');
@@ -284,30 +390,13 @@ const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-c
     };
     let saved: string | null = null;
     try { saved = localStorage.getItem('wc26-brmode'); } catch { /* ignore */ }
-    // reflect the effective mode (saved, else the breakpoint default)
-    apply(saved ?? (window.matchMedia('(min-width: 1000px)').matches ? 'tree' : 'columns'));
+    if (saved === 'columns') saved = 'radial'; // migrate the retired layout
+    // radial is the default everywhere (fits without horizontal scroll)
+    apply(saved ?? 'radial');
     segs.forEach((s) => s.addEventListener('click', () => {
       const mode = s.dataset.brset!;
       apply(mode);
       try { localStorage.setItem('wc26-brmode', mode); } catch { /* ignore */ }
     }));
-  }
-
-  // ---- Columns "you are here": mark + snap to the round in progress ----
-  const WINDOWS: [string, string, string][] = [
-    ['R32', '2026-06-28', '2026-07-03'],
-    ['R16', '2026-07-04', '2026-07-07'],
-    ['QF', '2026-07-08', '2026-07-11'],
-    ['SF', '2026-07-12', '2026-07-17'],
-    ['F', '2026-07-18', '2026-07-19'],
-  ];
-  const today = new Date().toISOString().slice(0, 10);
-  let current = WINDOWS.find(([, from, to]) => today >= from && today <= to)?.[0];
-  if (!current && today > '2026-07-19') current = 'F';
-  if (!current) current = 'R32';
-  document.querySelector(`[data-round-tab="${current}"]`)?.setAttribute('aria-current', 'true');
-  if (window.innerWidth < 1100 && current !== 'R32') {
-    document.getElementById(`round-${current}`)?.scrollIntoView({ inline: 'start', block: 'nearest' });
-    window.scrollTo({ top: 0 });
   }
 </script>

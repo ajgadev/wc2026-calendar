@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { appData, flagUrl } from '../../lib/client';
 import { startLivePoll } from '../../lib/livePoll';
 import { joinLive } from '../../lib/merge';
+import { penCell } from '../../lib/result';
 import { computeGroupTable } from '../../lib/standings';
 import type { LiveMatch, Match } from '../../lib/types';
 
@@ -27,6 +28,8 @@ type Resolved = {
   b?: string;
   state: 'up' | 'live' | 'ft';
   score: [number, number] | null;
+  /** shootout tally [a, b] when the static layer has it (nightly rebuild) */
+  pens: [number, number] | null;
   /** winning side once finished, for emphasis */
   won: Side | null;
 };
@@ -39,6 +42,7 @@ interface Resolver {
   codeB: Map<number, string>;
   finalScore: Map<number, [number, number]>;
   liveScore: Map<number, [number, number]>;
+  pens: Map<number, [number, number]>;
   state: Map<number, 'up' | 'live' | 'ft'>;
   winnerSide: Map<number, Side>;
 }
@@ -66,6 +70,7 @@ function resolveBracket(
     codeB: new Map(),
     finalScore: new Map(),
     liveScore: new Map(),
+    pens: new Map(),
     state: new Map(),
     winnerSide: new Map(),
   };
@@ -73,6 +78,7 @@ function resolveBracket(
   for (const m of matches) {
     if (m.a) r.codeA.set(m.n, m.a);
     if (m.b) r.codeB.set(m.n, m.b);
+    if (m.pens) r.pens.set(m.n, m.pens);
     if (m.ft) {
       r.finalScore.set(m.n, m.ft);
       r.state.set(m.n, 'ft');
@@ -155,7 +161,7 @@ function resolveBracket(
     if (state === 'ft') {
       won = r.winnerSide.get(m.n) ?? (score && score[0] !== score[1] ? (score[0] > score[1] ? 'a' : 'b') : null);
     }
-    out.set(m.n, { a: r.codeA.get(m.n), b: r.codeB.get(m.n), state, score, won });
+    out.set(m.n, { a: r.codeA.get(m.n), b: r.codeB.get(m.n), state, score, pens: r.pens.get(m.n) ?? null, won });
   }
   return out;
 }
@@ -165,6 +171,8 @@ function resolveBracket(
 const FLAG_CLS: Record<string, string> = {
   sm: 'h-3 w-4 shrink-0 rounded-[2px] object-cover',
   md: 'h-[13px] w-[18px] shrink-0 rounded-[2px] object-cover',
+  // radial bracket: cropped circular flags that survive live re-patching
+  circle: 'h-[22px] w-[22px] shrink-0 rounded-full object-cover',
 };
 
 function ensureFlag(row: HTMLElement, flagIso: string, size: string) {
@@ -185,7 +193,7 @@ function ensureFlag(row: HTMLElement, flagIso: string, size: string) {
   el.replaceWith(img);
 }
 
-function patchSlot(btn: HTMLElement, side: Side, code: string | undefined, score: number | null, result: '' | 'won' | 'lost', teams: ReturnType<typeof appData>['teams']) {
+function patchSlot(btn: HTMLElement, side: Side, code: string | undefined, score: number | null, pen: number | null, result: '' | 'won' | 'lost', teams: ReturnType<typeof appData>['teams']) {
   const row = btn.querySelector<HTMLElement>(`[data-slot="${side}"]`);
   if (!row) return;
   if (row.dataset.result !== result) row.dataset.result = result;
@@ -196,7 +204,7 @@ function patchSlot(btn: HTMLElement, side: Side, code: string | undefined, score
     if (team) ensureFlag(row, team.flag, btn.dataset.flagsize ?? 'md');
   }
   const scoreEl = row.querySelector<HTMLElement>('[data-slot-score]');
-  const text = score !== null ? String(score) : '';
+  const text = score !== null ? penCell(score, pen) : '';
   if (scoreEl && scoreEl.textContent !== text) scoreEl.textContent = text;
 }
 
@@ -216,7 +224,7 @@ export default function LiveBracket() {
     const render = (live: LiveMatch[]) => {
       const resolved = resolveBracket(matches, live, codesByGroup, nameOf);
       const sig = JSON.stringify(
-        [...resolved.entries()].map(([n, v]) => [n, v.a ?? '', v.b ?? '', v.state, v.score?.join('-') ?? '', v.won ?? '']),
+        [...resolved.entries()].map(([n, v]) => [n, v.a ?? '', v.b ?? '', v.state, v.score?.join('-') ?? '', v.pens?.join('-') ?? '', v.won ?? '']),
       );
       if (sig === lastSig) return;
       lastSig = sig;
@@ -225,8 +233,8 @@ export default function LiveBracket() {
         const btns = document.querySelectorAll<HTMLElement>(`[data-match][data-n="${n}"]`);
         for (const btn of btns) {
           if (btn.dataset.state !== v.state) btn.dataset.state = v.state;
-          patchSlot(btn, 'a', v.a, v.score ? v.score[0] : null, v.won === 'a' ? 'won' : v.won === 'b' ? 'lost' : '', teams);
-          patchSlot(btn, 'b', v.b, v.score ? v.score[1] : null, v.won === 'b' ? 'won' : v.won === 'a' ? 'lost' : '', teams);
+          patchSlot(btn, 'a', v.a, v.score ? v.score[0] : null, v.pens ? v.pens[0] : null, v.won === 'a' ? 'won' : v.won === 'b' ? 'lost' : '', teams);
+          patchSlot(btn, 'b', v.b, v.score ? v.score[1] : null, v.pens ? v.pens[1] : null, v.won === 'b' ? 'won' : v.won === 'a' ? 'lost' : '', teams);
         }
       }
     };

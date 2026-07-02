@@ -41,3 +41,12 @@ export function decide(
 export function decideMatch(m: Match): Decided {
   return m.ft ? decide(m.ft, m.pens ?? null) : { win: null, pens: false, scoreText: '' };
 }
+
+/**
+ * One team's score cell for the per-row layouts (calendar chips, bracket
+ * slots): the full-time goals with the shootout tally in parentheses
+ * when there is one — "1 (4)" — else just the goals — "1".
+ */
+export function penCell(goals: number, pen: number | null | undefined): string {
+  return pen != null ? `${goals} (${pen})` : `${goals}`;
+}

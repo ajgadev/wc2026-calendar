@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { ESPN_SCOREBOARD, matchEspnEventToMatch } from '../../lib/cards';
 import { appData, flagUrl, getFollows } from '../../lib/client';
 import { joinLive, type LiveStatus } from '../../lib/merge';
+import { decide, penCell } from '../../lib/result';
 import { inLiveWindow } from '../../lib/time';
 import type { LiveMatch } from '../../lib/types';
 
@@ -48,12 +49,17 @@ async function fetchEspnMinutes(
 }
 
 /** Match-number → team codes + display names, built once from the data blob. */
-let lookup: { teams: Map<number, { a?: string; b?: string }>; names: Record<string, { name: string; flag: string }> } | null = null;
+let lookup: {
+  teams: Map<number, { a?: string; b?: string }>;
+  pens: Map<number, [number, number]>;
+  names: Record<string, { name: string; flag: string }>;
+} | null = null;
 function lookups() {
   if (!lookup) {
     const { matches, teams } = appData();
     lookup = {
       teams: new Map(matches.map((m) => [m.n, { a: m.a, b: m.b }])),
+      pens: new Map(matches.filter((m) => m.pens).map((m) => [m.n, m.pens!])),
       names: Object.fromEntries(Object.entries(teams).map(([c, t]) => [c, { name: t.name, flag: t.flag }])),
     };
   }
@@ -116,12 +122,14 @@ function patch(statuses: LiveStatus[], minutes?: Map<number, string>) {
     if (!isLive && !isFt) continue; // SCHEDULED/TIMED/POSTPONED/SUSPENDED → keep "upcoming"
     const score = s.home !== null && s.away !== null ? `${s.home}–${s.away}` : '';
     // Knockout decider: the feed names a winner even when full time is
-    // level (a penalty shootout). Mark the winning side so the static
-    // bold/dim/arrow CSS fires, and flag the level scoreline as "pens"
-    // (the actual tally lands with the nightly rebuild).
-    const win = isFt ? s.winner ?? null : null;
-    const pensLevel = !!win && s.home !== null && s.home === s.away;
-    const scoreText = pensLevel ? `${score} pens` : score;
+    // level (a penalty shootout). At full time fold it into the scoreline —
+    // the static pen tally gives "1–1 (4–3p)", else the live winner gives
+    // "1–1 pens" — and mark the winning side so the bold/dim/arrow CSS
+    // fires. The tally itself lands with the nightly rebuild.
+    const staticPens = lookups().pens.get(s.n) ?? null;
+    const decided = isFt && s.home !== null && s.away !== null ? decide([s.home, s.away], staticPens, s.winner) : null;
+    const win = decided?.win ?? null;
+    const scoreText = decided ? decided.scoreText : score;
     // ESPN clock first (football-data has none); HT for paused; else blank
     const minute = isFt ? '' : minutes?.get(s.n) ?? (s.status === 'PAUSED' ? 'HT' : s.minute != null ? `${s.minute}'` : '');
     for (const el of els) {
@@ -133,8 +141,8 @@ function patch(statuses: LiveStatus[], minutes?: Map<number, string>) {
       el.querySelectorAll<HTMLElement>('[data-score]').forEach((n) => {
         if (scoreText && n.textContent !== scoreText) n.textContent = scoreText;
       });
-      if (s.home !== null) el.querySelectorAll<HTMLElement>('[data-score-home]').forEach((n) => { n.textContent = String(s.home); });
-      if (s.away !== null) el.querySelectorAll<HTMLElement>('[data-score-away]').forEach((n) => { n.textContent = String(s.away); });
+      if (s.home !== null) el.querySelectorAll<HTMLElement>('[data-score-home]').forEach((n) => { n.textContent = penCell(s.home!, staticPens?.[0]); });
+      if (s.away !== null) el.querySelectorAll<HTMLElement>('[data-score-away]').forEach((n) => { n.textContent = penCell(s.away!, staticPens?.[1]); });
       if (score && prevScores.get(s.n) !== undefined && prevScores.get(s.n) !== score) {
         // the one allowed effect besides the LIVE pulse: a brief flash
         el.querySelectorAll<HTMLElement>('.score-slot').forEach((slot) => {

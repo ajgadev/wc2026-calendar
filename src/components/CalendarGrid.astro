@@ -7,7 +7,7 @@
  */
 import { MATCHES, TOURNAMENT_START, TOURNAMENT_END } from '../data/schedule';
 import { stadiumOf, flagSrc, groupCaption, hostClass, matchDayKey, matchHasRed, searchText, stateOf, venueKick } from '../lib/view';
-import { decideMatch } from '../lib/result';
+import { decideMatch, penCell } from '../lib/result';
 import type { Match } from '../lib/types';
 
 const byDay = new Map<string, Match[]>();
@@ -112,14 +112,14 @@ const months: { month: 6 | 7; label: string; cells: Cell[] }[] = [
                               <img data-flag-a src={flagSrc(m.a!)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
                               <span data-code-a class="disp t-micro truncate font-bold text-text-2">{m.a}</span>
                             </span>
-                            <span class="w-score disp t-time font-black tnum text-text-2" data-score-home>{state === 'ft' ? fa : ''}</span>
+                            <span class="w-score disp t-time font-black tnum text-text-2" data-score-home>{state === 'ft' ? penCell(fa, m.pens?.[0]) : ''}</span>
                           </span>
                           <span class="grid grid-cols-[1fr_auto] items-center gap-1">
                             <span class="flex min-w-0 items-center gap-1.5">
                               <img data-flag-b src={flagSrc(m.b!)} alt="" width="16" height="12" loading="lazy" class="h-3 w-4 shrink-0 rounded-[2px] object-cover" />
                               <span data-code-b class="disp t-micro truncate font-bold text-text-2">{m.b}</span>
                             </span>
-                            <span class="w-score disp t-time font-black tnum text-text-2" data-score-away>{state === 'ft' ? fb : ''}</span>
+                            <span class="w-score disp t-time font-black tnum text-text-2" data-score-away>{state === 'ft' ? penCell(fb, m.pens?.[1]) : ''}</span>
                           </span>
                         </span>
                         <span class="flex w-full items-center gap-1 overflow-hidden text-[9px] font-semibold tracking-[0.08em] whitespace-nowrap text-text-3">

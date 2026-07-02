@@ -314,21 +314,107 @@ input::placeholder { color: var(--color-text-dim); }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-/* Mobile bracket: one round per screen with scroll snap */
-.bracket-scroll {
-  scroll-snap-type: x mandatory;
-}
-.bracket-col { scroll-snap-align: start; }
+/* Bracket view switch: Tree (symmetric wallchart) vs Radial (circular).
+   Radial is the default at every width — it fits the viewport with no
+   horizontal scroll. Tree stays one toggle away (and does scroll). */
+[data-brmode="tree"] .brview-radial { display: none; }
+[data-brmode="radial"] .brview-tree { display: none; }
+[data-brmode="auto"] .brview-tree { display: none; }
 
-/* Bracket view switch: Tree (symmetric wallchart) vs Columns (linear).
-   "auto" lets the breakpoint decide — tree on desktop, columns on phones. */
-[data-brmode="tree"] .brview-columns { display: none; }
-[data-brmode="columns"] .brview-tree { display: none; }
-@media (max-width: 999px) {
-  [data-brmode="auto"] .brview-tree { display: none; }
+/* ---- Radial bracket ----
+   Every match is an absolutely-positioned node on a concentric ring
+   (R32 outermost → Final at the centre); an SVG behind them draws the
+   converging connector curves. Nodes keep the same [data-slot]/[data-flag]/
+   [data-slot-score]/[data-result] hooks as the tree, so LiveBracket patches
+   both layouts and the winner-emphasis CSS below applies uniformly. */
+.radial-stage {
+  position: relative;
+  width: min(94vw, 860px);
+  aspect-ratio: 1;
+  margin-inline: auto;
 }
-@media (min-width: 1000px) {
-  [data-brmode="auto"] .brview-columns { display: none; }
+.radial-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 3px 5px;
+  border-radius: 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+  z-index: 2;
+}
+.rn-date {
+  margin-top: 1px;
+  font-size: 8px;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--color-text-dim);
+}
+.radial-node:hover,
+.radial-node:focus-visible {
+  transform: translate(-50%, -50%) scale(1.14);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  z-index: 8;
+}
+.rn-row { display: flex; align-items: center; gap: 5px; }
+.rn-score {
+  min-width: 7px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  font-size: 10.5px;
+  line-height: 1;
+  color: var(--color-text-2);
+}
+/* winner ring on the advancing side's flag (loser row dims via the shared
+   [data-result="lost"] rule, score recolours via [data-result="won"]) */
+.radial-node [data-result="won"] [data-flag] {
+  box-shadow: 0 0 0 1.5px var(--color-win);
+}
+
+/* centre cluster: trophy, FINAL label, the Final node, date */
+.radial-final {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 9;
+}
+.radial-trophy {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  color: var(--color-live);
+  border: 1px solid color-mix(in srgb, var(--color-live) 55%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--color-live) 16%, transparent);
+  background: var(--color-surface);
+}
+/* the Final flows inside the centre cluster, so it is not ring-positioned */
+.radial-node--final {
+  position: static;
+  transform: none;
+  border-color: color-mix(in srgb, var(--color-live) 55%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--color-live) 12%, transparent);
+}
+.radial-node--final:hover,
+.radial-node--final:focus-visible { transform: scale(1.06); }
+
+/* phones: shrink the ring nodes so the dense outer arcs stop colliding
+   (the final cluster keeps its size as the centrepiece) */
+@media (max-width: 560px) {
+  .radial-node:not(.radial-node--final) { transform: translate(-50%, -50%) scale(0.76); }
+  .radial-node:not(.radial-node--final):hover,
+  .radial-node:not(.radial-node--final):focus-visible { transform: translate(-50%, -50%) scale(0.88); }
+  .rn-date { font-size: 7.5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
