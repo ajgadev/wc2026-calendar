@@ -13,9 +13,9 @@
  */
 import { MATCHES } from '../data/schedule';
 import { TEAMS } from '../data/teams';
-import { buildBracketTree, shortPlaceholder, type BracketHalf } from '../lib/bracket';
-import { dayLabel, shortDate } from '../lib/time';
-import { stadiumOf, flagSrc, hostClass, matchDayKey, stateOf, venueChip, venueKick, searchText } from '../lib/view';
+import { buildBracketTree, shortPlaceholder } from '../lib/bracket';
+import { dayLabel } from '../lib/time';
+import { stadiumOf, flagSrc, hostClass, matchDayKey, stateOf, venueChip, searchText } from '../lib/view';
 import { decide, penCell } from '../lib/result';
 import type { Match } from '../lib/types';
 
@@ -86,65 +86,84 @@ function connectorUnit(side: 'left' | 'right', straight?: boolean): string[] {
 
 const treeCardCls = 'focus-ring live-border tinted box-border flex w-full flex-col gap-[5px] rounded-[9px] border border-border px-[9px] py-2 hover:border-border-strong';
 
-// ---- radial layout ----
-// Every match is a node placed on a concentric ring (R32 outermost →
-// Final at the centre). A match's angle is the midpoint of its two
-// feeders' angles, so connector curves converge inward like a bracket.
+// ---- radial layout (full-circle wallchart) ----
+// The 16 Round-of-32 matches tile ONE evenly-spaced ring — the right half
+// of the draw fills the east arc, the left half the west — so the ring is
+// continuous with no empty poles. Each parent match sits at the midpoint
+// of its two feeders' angles, so R16 → QF → SF land at the centre of their
+// arc and the Final lands dead centre, feeders arriving from opposite
+// sides. Every match renders as its two circular team badges; winners
+// reappear one ring inward, exactly like a printed wallchart bent into a
+// circle.
 type Ring = 'R32' | 'R16' | 'QF' | 'SF';
-const RING_R: Record<Ring, number> = { R32: 0.41, R16: 0.31, QF: 0.205, SF: 0.11 };
-const A0 = -84, A1 = 84; // right-wing angular span (deg; 0°=east, clockwise = down)
+const RING_R: Record<Ring, number> = { R32: 0.43, R16: 0.325, QF: 0.22, SF: 0.118 };
 const rad = (deg: number) => (deg * Math.PI) / 180;
 
-/** Angle (deg) for every match in a half, feeders averaged bottom-up. */
-function halfAngles(half: BracketHalf): Map<number, number> {
-  const ang = new Map<number, number>();
-  const n = half.R32.length || 1;
-  half.R32.forEach((m, i) => ang.set(m.n, A0 + ((i + 0.5) * (A1 - A0)) / n));
-  // parent angle = midpoint of its two feeders (falls back to whichever
-  // feeder resolved, so a missing edge degrades instead of breaking)
-  const avg = (a: Match | undefined, b: Match | undefined): number | null => {
-    const xs = [a, b].map((m) => (m ? ang.get(m.n) : undefined)).filter((v): v is number => v != null);
-    return xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : null;
-  };
-  const set = (m: Match, v: number | null) => { if (v != null) ang.set(m.n, v); };
-  half.R16.forEach((m, i) => set(m, avg(half.R32[2 * i], half.R32[2 * i + 1])));
-  half.QF.forEach((m, i) => set(m, avg(half.R16[2 * i], half.R16[2 * i + 1])));
-  half.SF.forEach((m, i) => set(m, avg(half.QF[2 * i], half.QF[2 * i + 1])));
-  return ang;
+// A match whose winner is decided lights its outgoing connector gold, so
+// the advancing paths trace inward toward the Final like the wallchart.
+const decidedN = new Set<number>();
+for (const m of MATCHES) {
+  if (m.stage === 'GR' || !m.ft) continue;
+  if (decide(m.ft, m.pens ?? null).win) decidedN.add(m.n);
 }
 
-interface RNode { m: Match; ring: Ring; x: number; y: number; }
+// One global angle per match. R32 is a single ring split into two
+// contiguous halves; the right half is centred on 0° (east), the left on
+// 180° (west), so the two finalists converge on the centre head-on.
+const rAng = new Map<number, number>();
+{
+  const order = [...tree.right.R32, ...tree.left.R32];
+  const N = order.length || 1;
+  const STEP = 360 / N;
+  const START = -((N / 2 - 1) / 2) * STEP; // right half's centre → 0°
+  order.forEach((m, i) => rAng.set(m.n, START + i * STEP));
+  // feeders within a half are always adjacent, so a plain mean is the arc
+  // midpoint (no circular-wrap needed); a lost edge degrades to one feeder.
+  const avg = (a?: Match, b?: Match): number | null => {
+    const xs = [a, b].map((m) => (m ? rAng.get(m.n) : undefined)).filter((v): v is number => v != null);
+    return xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : null;
+  };
+  const set = (m: Match, v: number | null) => { if (v != null) rAng.set(m.n, v); };
+  for (const half of [tree.right, tree.left]) {
+    half.R16.forEach((m, i) => set(m, avg(half.R32[2 * i], half.R32[2 * i + 1])));
+    half.QF.forEach((m, i) => set(m, avg(half.R16[2 * i], half.R16[2 * i + 1])));
+    half.SF.forEach((m, i) => set(m, avg(half.QF[2 * i], half.QF[2 * i + 1])));
+  }
+}
+
+interface RNode { m: Match; ring: Ring; deg: number; x: number; y: number; }
 const rNodes: RNode[] = [];
 const rPos = new Map<number, { x: number; y: number }>();
 const CENTER = { x: 0.5, y: 0.5 };
 
-for (const [half, mirror] of [[tree.left, true], [tree.right, false]] as const) {
-  const ang = halfAngles(half);
-  const place = (list: Match[], ring: Ring) => {
-    for (const m of list) {
-      const base = ang.get(m.n);
-      if (base == null) continue; // unplaceable (lost edge) — skip rather than NaN
-      const deg = mirror ? 180 - base : base;
-      const p = { x: 0.5 + RING_R[ring] * Math.cos(rad(deg)), y: 0.5 + RING_R[ring] * Math.sin(rad(deg)) };
-      rNodes.push({ m, ring, x: p.x, y: p.y });
-      rPos.set(m.n, p);
-    }
-  };
+const place = (list: Match[], ring: Ring) => {
+  for (const m of list) {
+    const deg = rAng.get(m.n);
+    if (deg == null) continue; // unplaceable (lost edge) — skip rather than NaN
+    const p = { x: 0.5 + RING_R[ring] * Math.cos(rad(deg)), y: 0.5 + RING_R[ring] * Math.sin(rad(deg)) };
+    rNodes.push({ m, ring, deg, x: p.x, y: p.y });
+    rPos.set(m.n, p);
+  }
+};
+for (const half of [tree.right, tree.left]) {
   place(half.R32, 'R32'); place(half.R16, 'R16'); place(half.QF, 'QF'); place(half.SF, 'SF');
 }
 if (tree.final) rPos.set(tree.final.n, CENTER);
 
 // Connector curves: child → parent, control point pulled toward centre.
-const rEdges: string[] = [];
+const rEdges: { d: string; hot: boolean }[] = [];
 const link = (childN: number | undefined, parent: { x: number; y: number } | undefined) => {
   if (childN == null || !parent) return;
   const c = rPos.get(childN);
   if (!c) return;
-  const mx = (c.x + parent.x) / 2 + (0.5 - (c.x + parent.x) / 2) * 0.45;
-  const my = (c.y + parent.y) / 2 + (0.5 - (c.y + parent.y) / 2) * 0.45;
-  rEdges.push(`M${(c.x * 1000).toFixed(1)} ${(c.y * 1000).toFixed(1)} Q${(mx * 1000).toFixed(1)} ${(my * 1000).toFixed(1)} ${(parent.x * 1000).toFixed(1)} ${(parent.y * 1000).toFixed(1)}`);
+  const mx = (c.x + parent.x) / 2 + (0.5 - (c.x + parent.x) / 2) * 0.5;
+  const my = (c.y + parent.y) / 2 + (0.5 - (c.y + parent.y) / 2) * 0.5;
+  rEdges.push({
+    d: `M${(c.x * 1000).toFixed(1)} ${(c.y * 1000).toFixed(1)} Q${(mx * 1000).toFixed(1)} ${(my * 1000).toFixed(1)} ${(parent.x * 1000).toFixed(1)} ${(parent.y * 1000).toFixed(1)}`,
+    hot: decidedN.has(childN),
+  });
 };
-for (const half of [tree.left, tree.right]) {
+for (const half of [tree.right, tree.left]) {
   half.R16.forEach((m, i) => { const p = rPos.get(m.n); link(half.R32[2 * i]?.n, p); link(half.R32[2 * i + 1]?.n, p); });
   half.QF.forEach((m, i) => { const p = rPos.get(m.n); link(half.R16[2 * i]?.n, p); link(half.R16[2 * i + 1]?.n, p); });
   half.SF.forEach((m, i) => { const p = rPos.get(m.n); link(half.QF[2 * i]?.n, p); link(half.QF[2 * i + 1]?.n, p); });
@@ -174,8 +193,12 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
   </div>
 
   <!-- ============ TREE ============ -->
-  <div class="brview-tree overflow-x-auto pb-2.5">
-    <div class="flex flex-col gap-1.5" style="min-width:max-content">
+  <!-- The wallchart is laid out at a fixed natural width; a scaler shrinks
+       the whole thing to fit the column so the full bracket is visible with
+       no horizontal scroll (falls back to scroll if scaling isn't wired). -->
+  <div class="brview-tree overflow-x-auto pb-2.5" data-tree-scaler>
+    <div class="flex flex-col gap-1.5" data-tree-inner style="width:max-content;transform-origin:top left">
+
       <!-- header labels aligned to columns -->
       <div class="flex items-end">
         {treeCols.map((col) => (
@@ -292,7 +315,8 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
     <div class="radial-stage" data-radial>
       <!-- connector curves, child → parent, converging on the centre -->
       <svg viewBox="0 0 1000 1000" class="pointer-events-none absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        {rEdges.map((d) => <path d={d} fill="none" stroke="var(--color-border)" stroke-width="1.4" stroke-linecap="round" />)}
+        {rEdges.filter((e) => !e.hot).map((e) => <path d={e.d} fill="none" stroke="var(--color-border)" stroke-width="1.3" stroke-linecap="round" />)}
+        {rEdges.filter((e) => e.hot).map((e) => <path d={e.d} fill="none" stroke="var(--color-win)" stroke-width="2" stroke-linecap="round" opacity="0.85" />)}
       </svg>
 
       <!-- centre: trophy + the Final -->
@@ -330,7 +354,7 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
         );
       })()}
 
-      <!-- match nodes on the rings -->
+      <!-- match nodes on the rings: two circular team badges, winner ringed -->
       {rNodes.map(({ m, ring, x, y }) => {
         const a = slot(m, 'a');
         const b = slot(m, 'b');
@@ -341,18 +365,16 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
             data-country={stadiumOf(m).country.toLowerCase()} data-teams={[m.a, m.b].filter(Boolean).join(' ')} data-search={searchText(m)}
             title={m.a && m.b ? `${TEAMS[m.a].name} vs ${TEAMS[m.b].name}` : `${m.pa} vs ${m.pb}`}
             aria-label={m.a && m.b ? `${TEAMS[m.a].name} vs ${TEAMS[m.b].name}` : `${m.pa} vs ${m.pb}`}
-            class:list={[`radial-node rn-${ring.toLowerCase()} focus-ring live-border`, hostClass(m)]}
+            class:list={[`rnode rnode--${ring.toLowerCase()} focus-ring live-border`, hostClass(m)]}
             style={`left:${pct(x)};top:${pct(y)}`}
           >
             {[a, b].map((s) => (
-              <span data-slot={s.side} data-result={s.won ? 'won' : s.lost ? 'lost' : ''} class="rn-row">
+              <span data-slot={s.side} data-result={s.won ? 'won' : s.lost ? 'lost' : ''} class="rnode__slot">
                 {s.code
                   ? <img data-flag src={flagSrc(s.code)} alt="" width="22" height="22" loading="lazy" class={rFlag} />
                   : <span data-flag class={rFlagPh}></span>}
-                <span data-slot-score class="rn-score">{s.scoreText}</span>
               </span>
             ))}
-            <span class="rn-date"><span data-kick-date={m.utc}>{shortDate(matchDayKey(m))} · {venueKick(m)}</span></span>
           </button>
         );
       })}
@@ -381,18 +403,37 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
   const root = document.querySelector<HTMLElement>('[data-bracket-root]');
   if (root) {
     const segs = root.querySelectorAll<HTMLElement>('[data-brset]');
+
+    // Fit the fixed-width tree into the available column so the whole
+    // bracket shows without a horizontal scroll. Never upscales past 1:1.
+    const scaler = root.querySelector<HTMLElement>('[data-tree-scaler]');
+    const inner = root.querySelector<HTMLElement>('[data-tree-inner]');
+    const fitTree = () => {
+      if (!scaler || !inner) return;
+      if (root.dataset.brmode !== 'tree') { scaler.style.height = ''; return; }
+      inner.style.transform = 'none'; // measure natural size unscaled
+      const avail = scaler.clientWidth;
+      const natural = inner.scrollWidth;
+      const s = natural > 0 ? Math.min(1, avail / natural) : 1;
+      inner.style.transform = `scale(${s})`;
+      scaler.style.height = `${inner.offsetHeight * s}px`;
+      scaler.style.overflowX = s < 1 ? 'hidden' : 'auto';
+    };
+
     const apply = (mode: string) => {
       root.dataset.brmode = mode;
       segs.forEach((s) => {
         if (s.dataset.brset === mode) s.setAttribute('aria-current', 'true');
         else s.removeAttribute('aria-current');
       });
+      fitTree();
     };
+    window.addEventListener('resize', fitTree);
     let saved: string | null = null;
     try { saved = localStorage.getItem('wc26-brmode'); } catch { /* ignore */ }
     if (saved === 'columns') saved = 'radial'; // migrate the retired layout
     // radial is the default everywhere (fits without horizontal scroll)
-    apply(saved ?? 'radial');
+    apply(new URLSearchParams(location.search).get('brmode') ?? saved ?? 'radial');
     segs.forEach((s) => s.addEventListener('click', () => {
       const mode = s.dataset.brset!;
       apply(mode);

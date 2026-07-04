@@ -135,7 +135,10 @@ function normalize(): Match[] {
       rawB: of.team2,
       utc: parseKickoff(of.date, of.time),
       stadium: stadiumIdFor(of.ground),
-      ...(of.score?.ft ? { ft: of.score.ft } : {}),
+      // Final score is the score after extra time when a knockout went there
+      // (`et` already includes the regulation goals), else the 90-minute `ft`.
+      // Using `ft` alone would show Argentina 1–1 for a match that finished 3–2 a.e.t.
+      ...((of.score?.et ?? of.score?.ft) ? { ft: (of.score.et ?? of.score.ft) } : {}),
       ...(of.score?.p ? { pens: of.score.p } : {}),
     };
     const goals = parseGoals(of);

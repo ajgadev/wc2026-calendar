@@ -329,7 +329,9 @@ input::placeholder { color: var(--color-text-dim); }
    both layouts and the winner-emphasis CSS below applies uniformly. */
 .radial-stage {
   position: relative;
-  width: min(94vw, 860px);
+  /* tied to the container (not vw) so the outer badges never bleed past the
+     padded column and clip on narrow screens */
+  width: min(100%, 760px);
   aspect-ratio: 1;
   margin-inline: auto;
 }
@@ -377,6 +379,45 @@ input::placeholder { color: var(--color-text-dim); }
   box-shadow: 0 0 0 1.5px var(--color-win);
 }
 
+/* ---- Ring match node: two circular team badges ----
+   A match on a ring is just its two flag badges side by side (the winner
+   ringed, the loser dimmed) — no card, no inline score, so the circle
+   reads as a clean flag wallchart. Full match detail is one tap away in
+   the drawer. Keeps the [data-slot]/[data-flag]/[data-result] hooks so
+   LiveBracket patches it exactly like the tree. */
+.rnode {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  border: 1px solid transparent;
+  transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+  z-index: 2;
+}
+.rnode:hover,
+.rnode:focus-visible {
+  transform: translate(-50%, -50%) scale(1.28);
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32);
+  z-index: 8;
+}
+.rnode__slot { display: flex; align-items: center; line-height: 0; }
+.rnode [data-flag] {
+  box-shadow: 0 0 0 1.5px var(--color-border);
+  transition: box-shadow 0.12s ease, opacity 0.12s ease;
+}
+.rnode [data-result="won"] [data-flag] { box-shadow: 0 0 0 2px var(--color-win); }
+.rnode [data-result="lost"] { opacity: 0.38; }
+/* subtle size hierarchy toward the centre — deeper rounds read as bigger */
+.rnode--r16 [data-flag] { width: 24px; height: 24px; }
+.rnode--qf [data-flag] { width: 26px; height: 26px; }
+.rnode--sf [data-flag] { width: 28px; height: 28px; }
+
 /* centre cluster: trophy, FINAL label, the Final node, date */
 .radial-final {
   position: absolute;
@@ -408,13 +449,15 @@ input::placeholder { color: var(--color-text-dim); }
 .radial-node--final:hover,
 .radial-node--final:focus-visible { transform: scale(1.06); }
 
-/* phones: shrink the ring nodes so the dense outer arcs stop colliding
-   (the final cluster keeps its size as the centrepiece) */
+/* phones: shrink the badges so the outer arc neither collides nor clips
+   past the stage edge (nodes extend beyond their ring radius). */
 @media (max-width: 560px) {
-  .radial-node:not(.radial-node--final) { transform: translate(-50%, -50%) scale(0.76); }
-  .radial-node:not(.radial-node--final):hover,
-  .radial-node:not(.radial-node--final):focus-visible { transform: translate(-50%, -50%) scale(0.88); }
-  .rn-date { font-size: 7.5px; }
+  .rnode { gap: 1px; padding: 2px; }
+  .rnode [data-flag] { width: 15px; height: 15px; box-shadow: 0 0 0 1px var(--color-border); }
+  .rnode--r16 [data-flag] { width: 16px; height: 16px; }
+  .rnode--qf [data-flag] { width: 18px; height: 18px; }
+  .rnode--sf [data-flag] { width: 20px; height: 20px; }
+  .rnode [data-result="won"] [data-flag] { box-shadow: 0 0 0 1.5px var(--color-win); }
 }
 
 @media (prefers-reduced-motion: reduce) {

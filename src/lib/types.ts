@@ -79,8 +79,12 @@ export interface LiveMatch {
   /** Knockout decider — set even when fullTime is level (extra time / penalties) */
   winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null;
   score: {
+    // football-data's `fullTime` folds the shootout goals in (a 1–1 decided
+    // 4–2 on penalties arrives as fullTime 5–3), so a shootout needs the
+    // separate `penalties` tally subtracted back out to show the real "1–1".
     fullTime: { home: number | null; away: number | null };
     halfTime: { home: number | null; away: number | null };
+    penalties?: { home: number | null; away: number | null };
   };
 }
 

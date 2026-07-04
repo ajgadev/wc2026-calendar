@@ -56,6 +56,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
       score: {
         fullTime: m.score?.fullTime ?? { home: null, away: null },
         halfTime: m.score?.halfTime ?? { home: null, away: null },
+        ...(m.score?.penalties ? { penalties: m.score.penalties } : {}),
       },
     }));
     const body = JSON.stringify(slim);

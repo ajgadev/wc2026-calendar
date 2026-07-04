@@ -16,6 +16,8 @@ export interface LiveStatus {
   away: number | null;
   /** knockout decider, oriented to the static match's a/b sides */
   winner?: 'a' | 'b' | null;
+  /** shootout tally [a, b], oriented to the static sides, when the match went to penalties */
+  pens?: [number, number] | null;
 }
 
 export interface JoinableMatch {
@@ -53,13 +55,23 @@ export function joinLive(staticMatches: JoinableMatch[], live: LiveMatch[]): Liv
       lm.winner === 'HOME_TEAM' ? (swap ? 'b' : 'a')
       : lm.winner === 'AWAY_TEAM' ? (swap ? 'a' : 'b')
       : null;
+    // `fullTime` includes the shootout goals — subtract the penalty tally so
+    // the scoreline is the pre-shootout result ("1–1", not "5–3").
+    const p = lm.score.penalties;
+    const pens: [number, number] | null =
+      p && p.home !== null && p.away !== null ? [p.home, p.away] : null;
+    const ftHome = lm.score.fullTime.home;
+    const ftAway = lm.score.fullTime.away;
+    const homeScore = ftHome !== null && pens ? ftHome - pens[0] : ftHome;
+    const awayScore = ftAway !== null && pens ? ftAway - pens[1] : ftAway;
     out.push({
       n: m.n,
       status: lm.status,
       minute: lm.minute,
-      home: swap ? lm.score.fullTime.away : lm.score.fullTime.home,
-      away: swap ? lm.score.fullTime.home : lm.score.fullTime.away,
+      home: swap ? awayScore : homeScore,
+      away: swap ? homeScore : awayScore,
       winner,
+      pens: pens ? (swap ? [pens[1], pens[0]] : pens) : null,
     });
   }
   return out;

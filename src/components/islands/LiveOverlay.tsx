@@ -126,8 +126,9 @@ function patch(statuses: LiveStatus[], minutes?: Map<number, string>) {
     // the static pen tally gives "1–1 (4–3p)", else the live winner gives
     // "1–1 pens" — and mark the winning side so the bold/dim/arrow CSS
     // fires. The tally itself lands with the nightly rebuild.
-    const staticPens = lookups().pens.get(s.n) ?? null;
-    const decided = isFt && s.home !== null && s.away !== null ? decide([s.home, s.away], staticPens, s.winner) : null;
+    // Prefer the shootout tally from the live feed; fall back to the nightly-baked one.
+    const pens = s.pens ?? lookups().pens.get(s.n) ?? null;
+    const decided = isFt && s.home !== null && s.away !== null ? decide([s.home, s.away], pens, s.winner) : null;
     const win = decided?.win ?? null;
     const scoreText = decided ? decided.scoreText : score;
     // ESPN clock first (football-data has none); HT for paused; else blank
@@ -141,8 +142,8 @@ function patch(statuses: LiveStatus[], minutes?: Map<number, string>) {
       el.querySelectorAll<HTMLElement>('[data-score]').forEach((n) => {
         if (scoreText && n.textContent !== scoreText) n.textContent = scoreText;
       });
-      if (s.home !== null) el.querySelectorAll<HTMLElement>('[data-score-home]').forEach((n) => { n.textContent = penCell(s.home!, staticPens?.[0]); });
-      if (s.away !== null) el.querySelectorAll<HTMLElement>('[data-score-away]').forEach((n) => { n.textContent = penCell(s.away!, staticPens?.[1]); });
+      if (s.home !== null) el.querySelectorAll<HTMLElement>('[data-score-home]').forEach((n) => { n.textContent = penCell(s.home!, pens?.[0]); });
+      if (s.away !== null) el.querySelectorAll<HTMLElement>('[data-score-away]').forEach((n) => { n.textContent = penCell(s.away!, pens?.[1]); });
       if (score && prevScores.get(s.n) !== undefined && prevScores.get(s.n) !== score) {
         // the one allowed effect besides the LIVE pulse: a brief flash
         el.querySelectorAll<HTMLElement>('.score-slot').forEach((slot) => {

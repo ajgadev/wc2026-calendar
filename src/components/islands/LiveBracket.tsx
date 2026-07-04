@@ -94,6 +94,7 @@ function resolveBracket(
       const isLive = s.status === 'IN_PLAY' || s.status === 'PAUSED';
       r.state.set(s.n, isFt ? 'ft' : isLive ? 'live' : 'up');
       if (s.winner) r.winnerSide.set(s.n, s.winner);
+      if (s.pens) r.pens.set(s.n, s.pens); // live shootout tally, before the nightly bake lands
       if (s.home !== null && s.away !== null) {
         if (isFt) r.finalScore.set(s.n, [s.home, s.away]);
         else if (isLive) r.liveScore.set(s.n, [s.home, s.away]);
