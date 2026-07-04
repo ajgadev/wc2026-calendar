@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { appData, flagUrl } from '../../lib/client';
+import { TEAM_COLORS } from '../../data/teamColors';
 import { startLivePoll } from '../../lib/livePoll';
 import { joinLive } from '../../lib/merge';
 import { penCell } from '../../lib/result';
@@ -236,6 +237,15 @@ export default function LiveBracket() {
           if (btn.dataset.state !== v.state) btn.dataset.state = v.state;
           patchSlot(btn, 'a', v.a, v.score ? v.score[0] : null, v.pens ? v.pens[0] : null, v.won === 'a' ? 'won' : v.won === 'b' ? 'lost' : '', teams);
           patchSlot(btn, 'b', v.b, v.score ? v.score[1] : null, v.pens ? v.pens[1] : null, v.won === 'b' ? 'won' : v.won === 'a' ? 'lost' : '', teams);
+        }
+        // radial connector: tint this match's outgoing line with the winner's
+        // country colour once decided (grey again if it somehow un-resolves)
+        const winCode = v.won === 'a' ? v.a : v.won === 'b' ? v.b : undefined;
+        const color = winCode ? TEAM_COLORS[winCode] ?? 'var(--color-win)' : '';
+        for (const edge of document.querySelectorAll<SVGPathElement>(`[data-radial-edge="${n}"]`)) {
+          edge.setAttribute('stroke', color || 'var(--color-border)');
+          edge.setAttribute('stroke-width', color ? '2.4' : '1.3');
+          edge.setAttribute('opacity', color ? '0.92' : '1');
         }
       }
     };

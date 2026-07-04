@@ -321,6 +321,12 @@ input::placeholder { color: var(--color-text-dim); }
 [data-brmode="radial"] .brview-tree { display: none; }
 [data-brmode="auto"] .brview-tree { display: none; }
 
+/* The tree scaler breaks out to the full viewport width (JS sets width +
+   margin) and zooms its inner chart to fit; clip any residual bleed and
+   centre the chart so wide screens show it larger but centred. */
+.brview-tree { overflow-x: clip; }
+.brview-tree [data-tree-inner] { margin-inline: auto; }
+
 /* ---- Radial bracket ----
    Every match is an absolutely-positioned node on a concentric ring
    (R32 outermost → Final at the centre); an SVG behind them draws the

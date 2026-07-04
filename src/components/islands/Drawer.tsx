@@ -593,6 +593,13 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
   const hasSelectedFree = !!rights?.broadcasters.some((b) => b.free && b.coverage === 'selected');
   // Germany: definitive per-match free/paid verdict where we've confirmed it
   const deVerdict = market === 'DE' ? DE_MATCH_FTA[m.n] ?? null : null;
+  // Do we have a channel pinned to THIS match, or only the generic market list?
+  const hasPerMatch =
+    (market === 'US' && usChannels.length > 0) || !!deVerdict || (market !== 'US' && sdbForMarket.length > 0);
+  // Knockout channel splits are announced late and the free listing APIs
+  // don't carry them yet — say so honestly rather than implying the
+  // generic rights below pin down this specific match.
+  const showKnockoutNote = m.stage !== 'GR' && !hasPerMatch;
 
   return (
     <div className={cardCls}>
@@ -639,6 +646,12 @@ function WatchSection({ m, venueDay }: { m: Match; venueDay: string }) {
             <span className="text-text">on ARD / ZDF</span>
           )}
           <span className="text-text-dim">· also MagentaTV</span>
+        </span>
+      )}
+
+      {showKnockoutNote && (
+        <span className="t-meta text-text-2">
+          The exact channel for this knockout match isn't confirmed yet — splits are usually announced closer to kickoff. A rights holder below carries it; check local listings for the channel.
         </span>
       )}
 

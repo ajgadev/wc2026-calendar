@@ -5,6 +5,7 @@ import { TEAMS } from '../data/teams';
 import { STADIUMS } from '../data/stadiums';
 import Drawer from './islands/Drawer';
 import Tweaks from './islands/Tweaks';
+import NextMatch from './islands/NextMatch';
 
 interface Props {
   title?: string;
@@ -138,6 +139,8 @@ const appData = JSON.stringify({
           </a>
         ))}
       </nav>
+
+      <NextMatch client:idle />
 
       <slot />
 

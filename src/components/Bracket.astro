@@ -11,8 +11,9 @@
  * Both derive from the schedule's W{n} references (lib/bracket), so
  * resolved teams fill in on rebuild with zero code changes.
  */
-import { MATCHES } from '../data/schedule';
+import { MATCHES, MATCH_BY_N } from '../data/schedule';
 import { TEAMS } from '../data/teams';
+import { TEAM_COLORS } from '../data/teamColors';
 import { buildBracketTree, shortPlaceholder } from '../lib/bracket';
 import { dayLabel } from '../lib/time';
 import { stadiumOf, flagSrc, hostClass, matchDayKey, stateOf, venueChip, searchText } from '../lib/view';
@@ -99,13 +100,17 @@ type Ring = 'R32' | 'R16' | 'QF' | 'SF';
 const RING_R: Record<Ring, number> = { R32: 0.43, R16: 0.325, QF: 0.22, SF: 0.118 };
 const rad = (deg: number) => (deg * Math.PI) / 180;
 
-// A match whose winner is decided lights its outgoing connector gold, so
-// the advancing paths trace inward toward the Final like the wallchart.
-const decidedN = new Set<number>();
-for (const m of MATCHES) {
-  if (m.stage === 'GR' || !m.ft) continue;
-  if (decide(m.ft, m.pens ?? null).win) decidedN.add(m.n);
-}
+// A decided match tints its outgoing connector with the winner's country
+// colour, so each advancing path traces inward toward the Final in that
+// nation's colour (Argentina celeste, Canada red, …); undecided stay grey.
+const winColorOf = (childN: number): string | null => {
+  const m = MATCH_BY_N[childN];
+  if (!m || !m.ft) return null;
+  const d = decide(m.ft, m.pens ?? null);
+  if (!d.win) return null;
+  const code = d.win === 'a' ? m.a : m.b;
+  return code ? (TEAM_COLORS[code] ?? 'var(--color-win)') : 'var(--color-win)';
+};
 
 // One global angle per match. R32 is a single ring split into two
 // contiguous halves; the right half is centred on 0° (east), the left on
@@ -150,17 +155,19 @@ for (const half of [tree.right, tree.left]) {
 }
 if (tree.final) rPos.set(tree.final.n, CENTER);
 
-// Connector curves: child → parent, control point pulled toward centre.
-const rEdges: { d: string; hot: boolean }[] = [];
+// Connectors: near-straight child → parent segments (only a slight inward
+// bow) so the chart reads like a printed wallchart, not deep curves.
+const rEdges: { d: string; color: string; child: number }[] = [];
 const link = (childN: number | undefined, parent: { x: number; y: number } | undefined) => {
   if (childN == null || !parent) return;
   const c = rPos.get(childN);
   if (!c) return;
-  const mx = (c.x + parent.x) / 2 + (0.5 - (c.x + parent.x) / 2) * 0.5;
-  const my = (c.y + parent.y) / 2 + (0.5 - (c.y + parent.y) / 2) * 0.5;
+  const mx = (c.x + parent.x) / 2 + (0.5 - (c.x + parent.x) / 2) * 0.1;
+  const my = (c.y + parent.y) / 2 + (0.5 - (c.y + parent.y) / 2) * 0.1;
   rEdges.push({
     d: `M${(c.x * 1000).toFixed(1)} ${(c.y * 1000).toFixed(1)} Q${(mx * 1000).toFixed(1)} ${(my * 1000).toFixed(1)} ${(parent.x * 1000).toFixed(1)} ${(parent.y * 1000).toFixed(1)}`,
-    hot: decidedN.has(childN),
+    color: winColorOf(childN) ?? '',
+    child: childN,
   });
 };
 for (const half of [tree.right, tree.left]) {
@@ -196,8 +203,8 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
   <!-- The wallchart is laid out at a fixed natural width; a scaler shrinks
        the whole thing to fit the column so the full bracket is visible with
        no horizontal scroll (falls back to scroll if scaling isn't wired). -->
-  <div class="brview-tree overflow-x-auto pb-2.5" data-tree-scaler>
-    <div class="flex flex-col gap-1.5" data-tree-inner style="width:max-content;transform-origin:top left">
+  <div class="brview-tree pb-2.5" data-tree-scaler>
+    <div class="flex flex-col gap-1.5" data-tree-inner style="width:max-content">
 
       <!-- header labels aligned to columns -->
       <div class="flex items-end">
@@ -315,8 +322,8 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
     <div class="radial-stage" data-radial>
       <!-- connector curves, child → parent, converging on the centre -->
       <svg viewBox="0 0 1000 1000" class="pointer-events-none absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        {rEdges.filter((e) => !e.hot).map((e) => <path d={e.d} fill="none" stroke="var(--color-border)" stroke-width="1.3" stroke-linecap="round" />)}
-        {rEdges.filter((e) => e.hot).map((e) => <path d={e.d} fill="none" stroke="var(--color-win)" stroke-width="2" stroke-linecap="round" opacity="0.85" />)}
+        {rEdges.filter((e) => !e.color).map((e) => <path data-radial-edge={e.child} d={e.d} fill="none" stroke="var(--color-border)" stroke-width="1.3" stroke-linecap="round" />)}
+        {rEdges.filter((e) => e.color).map((e) => <path data-radial-edge={e.child} d={e.d} fill="none" stroke={e.color} stroke-width="2.4" stroke-linecap="round" opacity="0.92" />)}
       </svg>
 
       <!-- centre: trophy + the Final -->
@@ -404,20 +411,31 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
   if (root) {
     const segs = root.querySelectorAll<HTMLElement>('[data-brset]');
 
-    // Fit the fixed-width tree into the available column so the whole
-    // bracket shows without a horizontal scroll. Never upscales past 1:1.
+    // Scale the fixed-width wallchart to show the whole thing with no
+    // horizontal scroll, using the full viewport width (the chart breaks
+    // out of the max-width column) so wide screens get a bigger bracket.
+    // `zoom` (not `transform`) so the layout box scales too — otherwise the
+    // unscaled height would leak as vertical overflow.
     const scaler = root.querySelector<HTMLElement>('[data-tree-scaler]');
     const inner = root.querySelector<HTMLElement>('[data-tree-inner]');
     const fitTree = () => {
       if (!scaler || !inner) return;
-      if (root.dataset.brmode !== 'tree') { scaler.style.height = ''; return; }
-      inner.style.transform = 'none'; // measure natural size unscaled
-      const avail = scaler.clientWidth;
+      if (root.dataset.brmode !== 'tree') {
+        scaler.style.width = scaler.style.marginLeft = '';
+        inner.style.zoom = '';
+        return;
+      }
+      // break out of the padded column to span (nearly) the whole viewport
+      inner.style.zoom = '1'; // measure natural width first
+      const gap = 16;
+      const docW = document.documentElement.clientWidth;
+      const rootLeft = root.getBoundingClientRect().left;
+      const avail = docW - gap * 2;
+      scaler.style.width = `${avail}px`;
+      scaler.style.marginLeft = `${gap - rootLeft}px`;
       const natural = inner.scrollWidth;
-      const s = natural > 0 ? Math.min(1, avail / natural) : 1;
-      inner.style.transform = `scale(${s})`;
-      scaler.style.height = `${inner.offsetHeight * s}px`;
-      scaler.style.overflowX = s < 1 ? 'hidden' : 'auto';
+      // never upscale past 1:1 — keeps the cards crisp and readable
+      inner.style.zoom = String(natural > 0 ? Math.min(1, avail / natural) : 1);
     };
 
     const apply = (mode: string) => {
