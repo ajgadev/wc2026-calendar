@@ -2645,12 +2645,12 @@
      "minute": "45"
     },
     {
-     "name": "Bradley Barcola",
-     "minute": "53"
-    },
-    {
      "name": "Kylian Mbappé",
      "minute": "74"
+    },
+    {
+     "name": "Bradley Barcola",
+     "minute": "53"
     }
    ],
    "goals2": [],
@@ -2841,6 +2841,33 @@
    "time": "19:00 UTC-4",
    "team1": "Portugal",
    "team2": "Croatia",
+   "score": {
+    "ft": [
+     2,
+     1
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Cristiano Ronaldo",
+     "minute": "68",
+     "penalty": true
+    },
+    {
+     "name": "Gonçalo Ramos",
+     "minute": "90+4"
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Ivan Perisic",
+     "minute": "53"
+    }
+   ],
    "ground": "Toronto"
   },
   {
@@ -2850,6 +2877,31 @@
    "time": "12:00 UTC-7",
    "team1": "Spain",
    "team2": "Austria",
+   "score": {
+    "ft": [
+     3,
+     0
+    ],
+    "ht": [
+     1,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Mikel Oyarzabal",
+     "minute": "36"
+    },
+    {
+     "name": "Mikel Oyarzabal",
+     "minute": "89"
+    },
+    {
+     "name": "Pedro Porro",
+     "minute": "66"
+    }
+   ],
+   "goals2": [],
    "ground": "Los Angeles (Inglewood)"
   },
   {
@@ -2859,6 +2911,27 @@
    "time": "20:00 UTC-7",
    "team1": "Switzerland",
    "team2": "Algeria",
+   "score": {
+    "ft": [
+     2,
+     0
+    ],
+    "ht": [
+     1,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Breel Embolo",
+     "minute": "10"
+    },
+    {
+     "name": "Dan Ndoye",
+     "minute": "46"
+    }
+   ],
+   "goals2": [],
    "ground": "Vancouver"
   },
   {
@@ -2868,6 +2941,45 @@
    "time": "18:00 UTC-4",
    "team1": "Argentina",
    "team2": "Cape Verde",
+   "score": {
+    "et": [
+     3,
+     2
+    ],
+    "ft": [
+     1,
+     1
+    ],
+    "ht": [
+     1,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Lionel Messi",
+     "minute": "29"
+    },
+    {
+     "name": "Lisandro Martínez",
+     "minute": "92"
+    },
+    {
+     "name": "Diney Borges",
+     "minute": "111",
+     "owngoal": true
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Deroy Duarte",
+     "minute": "59"
+    },
+    {
+     "name": "Sidny Lopes Cabral",
+     "minute": "103"
+    }
+   ],
    "ground": "Miami (Miami Gardens)"
   },
   {
@@ -2877,6 +2989,23 @@
    "time": "20:30 UTC-5",
    "team1": "Colombia",
    "team2": "Ghana",
+   "score": {
+    "ft": [
+     1,
+     0
+    ],
+    "ht": [
+     1,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Jhon Arias",
+     "minute": "14"
+    }
+   ],
+   "goals2": [],
    "ground": "Kansas City"
   },
   {
@@ -2886,6 +3015,37 @@
    "time": "13:00 UTC-5",
    "team1": "Australia",
    "team2": "Egypt",
+   "score": {
+    "p": [
+     2,
+     4
+    ],
+    "et": [
+     1,
+     1
+    ],
+    "ft": [
+     1,
+     1
+    ],
+    "ht": [
+     0,
+     1
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Mohamed Hany",
+     "minute": "55",
+     "owngoal": true
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Emam Ashour",
+     "minute": "13"
+    }
+   ],
    "ground": "Dallas (Arlington)"
   },
   {
@@ -2929,8 +3089,8 @@
    "num": 93,
    "date": "2026-07-06",
    "time": "14:00 UTC-5",
-   "team1": "W83",
-   "team2": "W84",
+   "team1": "Portugal",
+   "team2": "Spain",
    "ground": "Dallas (Arlington)"
   },
   {
@@ -2956,7 +3116,7 @@
    "num": 96,
    "date": "2026-07-07",
    "time": "13:00 UTC-7",
-   "team1": "W85",
+   "team1": "Switzerland",
    "team2": "W87",
    "ground": "Vancouver"
   },
