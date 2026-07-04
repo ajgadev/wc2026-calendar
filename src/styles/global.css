@@ -393,7 +393,9 @@ input::placeholder { color: var(--color-text-dim); }
    LiveBracket patches it exactly like the tree. */
 .rnode {
   position: absolute;
-  transform: translate(-50%, -50%);
+  /* --rot lays the pair along the circle's tangent (0° at the poles, ±90°
+     at east/west); the badges counter-rotate below to stay upright */
+  transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
   display: flex;
   align-items: center;
   gap: 3px;
@@ -406,7 +408,7 @@ input::placeholder { color: var(--color-text-dim); }
 }
 .rnode:hover,
 .rnode:focus-visible {
-  transform: translate(-50%, -50%) scale(1.28);
+  transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) scale(1.28);
   background: var(--color-surface);
   border-color: var(--color-border-strong);
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32);
@@ -415,6 +417,8 @@ input::placeholder { color: var(--color-text-dim); }
 .rnode__slot { display: flex; align-items: center; line-height: 0; }
 .rnode [data-flag] {
   box-shadow: 0 0 0 1.5px var(--color-border);
+  /* keep the flag upright while the pair follows the circumference */
+  transform: rotate(calc(-1 * var(--rot, 0deg)));
   transition: box-shadow 0.12s ease, opacity 0.12s ease;
 }
 .rnode [data-result="won"] [data-flag] { box-shadow: 0 0 0 2px var(--color-win); }
