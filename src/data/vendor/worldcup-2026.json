@@ -3055,6 +3055,24 @@
    "time": "17:00 UTC-4",
    "team1": "Paraguay",
    "team2": "France",
+   "score": {
+    "ft": [
+     0,
+     1
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [],
+   "goals2": [
+    {
+     "name": "Kylian Mbappé",
+     "minute": "70",
+     "penalty": true
+    }
+   ],
    "ground": "Philadelphia"
   },
   {
@@ -3064,6 +3082,31 @@
    "time": "12:00 UTC-5",
    "team1": "Canada",
    "team2": "Morocco",
+   "score": {
+    "ft": [
+     0,
+     3
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [],
+   "goals2": [
+    {
+     "name": "Azzedine Ounahi",
+     "minute": "50"
+    },
+    {
+     "name": "Azzedine Ounahi",
+     "minute": "82"
+    },
+    {
+     "name": "Soufiane Rahimi",
+     "minute": "90+8"
+    }
+   ],
    "ground": "Houston"
   },
   {
@@ -3107,8 +3150,8 @@
    "num": 95,
    "date": "2026-07-07",
    "time": "12:00 UTC-4",
-   "team1": "W86",
-   "team2": "W88",
+   "team1": "Argentina",
+   "team2": "Egypt",
    "ground": "Atlanta"
   },
   {
@@ -3117,7 +3160,7 @@
    "date": "2026-07-07",
    "time": "13:00 UTC-7",
    "team1": "Switzerland",
-   "team2": "W87",
+   "team2": "Colombia",
    "ground": "Vancouver"
   },
   {
