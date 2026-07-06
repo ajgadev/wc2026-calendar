@@ -174,11 +174,24 @@ const flagAt = (n: number, side: 'a' | 'b'): { x: number; y: number } | null => 
   return { x: c.x + s * HALF_SEP * Math.cos(r), y: c.y + s * HALF_SEP * Math.sin(r) };
 };
 
-// Connectors: near-straight (slight inward bow). Each child feeds a fixed
+// Connectors: right-angle "elbows", not curves. Each child feeds a fixed
 // parent slot (R16[i] ← R32[2i]=a / R32[2i+1]=b, etc.), so the line ends on
 // that slot's badge — where the child's winner lands — and is tinted with
 // that winner's country colour. Undecided → grey, drawn from centre.
+//
+// The elbow is drawn in polar space so it reads like a wallchart bent into a
+// circle: a straight RADIAL leg inward from the child (toward the centre)
+// down to the parent's ring, then a straight TANGENTIAL leg across to the
+// parent slot — a clean L with a single 90° corner, no bézier bow. The
+// corner is nudged short of a hard miter with a tiny rounded joint.
 const rEdges: { d: string; color: string; child: number }[] = [];
+const CORNER = 0.012; // radius of the rounded elbow joint (fraction of stage)
+const polar = (p: { x: number; y: number }) => ({
+  r: Math.hypot(p.x - CENTER.x, p.y - CENTER.y),
+  a: Math.atan2(p.y - CENTER.y, p.x - CENTER.x),
+});
+const atPolar = (r: number, a: number) => ({ x: CENTER.x + r * Math.cos(a), y: CENTER.y + r * Math.sin(a) });
+const P = (p: { x: number; y: number }) => `${(p.x * 1000).toFixed(1)} ${(p.y * 1000).toFixed(1)}`;
 const pushEdge = (
   start: { x: number; y: number } | null,
   end: { x: number; y: number } | null,
@@ -186,10 +199,23 @@ const pushEdge = (
   child: number,
 ) => {
   if (!start || !end) return;
-  const mx = (start.x + end.x) / 2 + (0.5 - (start.x + end.x) / 2) * 0.1;
-  const my = (start.y + end.y) / 2 + (0.5 - (start.y + end.y) / 2) * 0.1;
+  const s = polar(start);
+  const e = polar(end);
+  // Corner sits at the parent's radius, on the child's ray → radial leg first.
+  const corner = atPolar(e.r, s.a);
+  // Straight-line fallback when the two share a ray (e.g. SF → centre Final).
+  if (Math.abs(s.a - e.a) < 1e-3 || e.r < 1e-4) {
+    rEdges.push({ d: `M${P(start)} L${P(end)}`, color, child });
+    return;
+  }
+  // Pull the two legs back from the corner and bridge them with a short
+  // quadratic so the 90° turn is crisp but not a razor point.
+  const cIn = atPolar(e.r + CORNER, s.a); // on the radial leg, just before the corner
+  const legLen = Math.hypot(end.x - corner.x, end.y - corner.y) || 1;
+  const step = Math.min(CORNER, legLen) / legLen; // step toward end, clamped
+  const cOut = { x: corner.x + (end.x - corner.x) * step, y: corner.y + (end.y - corner.y) * step };
   rEdges.push({
-    d: `M${(start.x * 1000).toFixed(1)} ${(start.y * 1000).toFixed(1)} Q${(mx * 1000).toFixed(1)} ${(my * 1000).toFixed(1)} ${(end.x * 1000).toFixed(1)} ${(end.y * 1000).toFixed(1)}`,
+    d: `M${P(start)} L${P(cIn)} Q${P(corner)} ${P(cOut)} L${P(end)}`,
     color,
     child,
   });
@@ -352,10 +378,10 @@ const pct = (v: number) => `${(v * 100).toFixed(2)}%`;
   <!-- ============ RADIAL ============ -->
   <div class="brview-radial">
     <div class="radial-stage" data-radial>
-      <!-- connector curves, child → parent, converging on the centre -->
+      <!-- connector elbows, child → parent, converging on the centre -->
       <svg viewBox="0 0 1000 1000" class="pointer-events-none absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        {rEdges.filter((e) => !e.color).map((e) => <path data-radial-edge={e.child} d={e.d} fill="none" stroke="var(--color-border)" stroke-width="1.3" stroke-linecap="round" />)}
-        {rEdges.filter((e) => e.color).map((e) => <path data-radial-edge={e.child} d={e.d} fill="none" stroke={e.color} stroke-width="2.4" stroke-linecap="round" opacity="0.92" />)}
+        {rEdges.filter((e) => !e.color).map((e) => <path data-radial-edge={e.child} d={e.d} fill="none" stroke="var(--color-border)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />)}
+        {rEdges.filter((e) => e.color).map((e) => <path data-radial-edge={e.child} d={e.d} fill="none" stroke={e.color} stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92" />)}
       </svg>
 
       <!-- centre: trophy + the Final -->
