@@ -225,9 +225,11 @@ const pushEdge = (
 };
 const linkFlag = (child: Match | undefined, parentN: number, slot: 'a' | 'b') => {
   if (!child) return;
-  const win = decidedSide(child);
-  // decided: winner-badge (child) → the slot it feeds (parent); else centre → slot
-  const start = win ? flagAt(child.n, win) : rPos.get(child.n) ?? null;
+  // Always start from the child match's centre (decided or not) → the slot it
+  // feeds on the parent. Colour still carries the winner; only the origin is
+  // the node centre, so decided edges leave the match the same way undecided
+  // ones do rather than sprouting from the winning badge.
+  const start = rPos.get(child.n) ?? null;
   const end = parentN === (tree.final?.n ?? -1) ? CENTER : flagAt(parentN, slot);
   pushEdge(start, end, colorOf(child), child.n);
 };
