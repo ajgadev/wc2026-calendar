@@ -3116,6 +3116,33 @@
    "time": "16:00 UTC-4",
    "team1": "Brazil",
    "team2": "Norway",
+   "score": {
+    "ft": [
+     1,
+     2
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Neymar",
+     "minute": "90+10",
+     "penalty": true
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Erling Haaland",
+     "minute": "79"
+    },
+    {
+     "name": "Erling Haaland",
+     "minute": "90"
+    }
+   ],
    "ground": "New York/New Jersey (East Rutherford)"
   },
   {
@@ -3125,6 +3152,42 @@
    "time": "18:00 UTC-6",
    "team1": "Mexico",
    "team2": "England",
+   "score": {
+    "ft": [
+     2,
+     3
+    ],
+    "ht": [
+     1,
+     2
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Julián Quiñones",
+     "minute": "42"
+    },
+    {
+     "name": "Raúl Jiménez",
+     "minute": "69",
+     "penalty": true
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Jude Bellingham",
+     "minute": "36"
+    },
+    {
+     "name": "Jude Bellingham",
+     "minute": "38"
+    },
+    {
+     "name": "Harry Kane",
+     "minute": "60",
+     "penalty": true
+    }
+   ],
    "ground": "Mexico City"
   },
   {
@@ -3168,8 +3231,8 @@
    "num": 97,
    "date": "2026-07-09",
    "time": "16:00 UTC-4",
-   "team1": "W89",
-   "team2": "W90",
+   "team1": "France",
+   "team2": "Morocco",
    "ground": "Boston (Foxborough)"
   },
   {
