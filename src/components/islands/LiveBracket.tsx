@@ -55,8 +55,14 @@ function decide(r: Resolver, n: number, want: 'W' | 'L'): string | undefined {
   const w = r.winnerSide.get(n);
   if (w) return want === 'W' ? (w === 'a' ? a : b) : w === 'a' ? b : a;
   const f = r.finalScore.get(n);
-  if (!f || f[0] === f[1]) return undefined; // level + no decider yet → unknown
-  const winA = f[0] > f[1];
+  if (!f) return undefined;
+  // level full time → resolve by the shootout tally if we have it (baked or
+  // live); otherwise the decider isn't known yet.
+  const winA = f[0] !== f[1] ? f[0] > f[1] : (() => {
+    const p = r.pens.get(n);
+    return p && p[0] !== p[1] ? p[0] > p[1] : null;
+  })();
+  if (winA === null) return undefined;
   return want === 'W' ? (winA ? a : b) : winA ? b : a;
 }
 
@@ -161,7 +167,12 @@ function resolveBracket(
     const score = r.finalScore.get(m.n) ?? r.liveScore.get(m.n) ?? null;
     let won: Side | null = null;
     if (state === 'ft') {
-      won = r.winnerSide.get(m.n) ?? (score && score[0] !== score[1] ? (score[0] > score[1] ? 'a' : 'b') : null);
+      const p = r.pens.get(m.n) ?? null;
+      won =
+        r.winnerSide.get(m.n) ??
+        (score && score[0] !== score[1] ? (score[0] > score[1] ? 'a' : 'b') : null) ??
+        // level full time settled on penalties (baked tally, no live winner)
+        (p && p[0] !== p[1] ? (p[0] > p[1] ? 'a' : 'b') : null);
     }
     out.set(m.n, { a: r.codeA.get(m.n), b: r.codeB.get(m.n), state, score, pens: r.pens.get(m.n) ?? null, won });
   }
