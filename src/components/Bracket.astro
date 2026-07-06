@@ -100,12 +100,15 @@ type Ring = 'R32' | 'R16' | 'QF' | 'SF';
 const RING_R: Record<Ring, number> = { R32: 0.43, R16: 0.325, QF: 0.22, SF: 0.118 };
 const rad = (deg: number) => (deg * Math.PI) / 180;
 
-// Tangent angle for a node's flag pair: perpendicular to the radius,
-// normalised to (−90°, 90°] so the two flags always follow the circle's
-// circumference (horizontal at the poles, vertical at east/west) without
-// ever flipping upside-down.
-const normDeg = (a: number) => ((((a + 90) % 180) + 180) % 180) - 90;
-const rotOf = (deg: number) => normDeg(deg + 90);
+// Rotation that lays a node's flag pair along the circle's tangent
+// (perpendicular to the radius). This is the RAW tangent — deliberately NOT
+// normalised to (−90°, 90°]: normalising would flip the pair by 180° on half
+// the ring, which swaps slot a/b's physical side relative to their feeders and
+// makes every winner's connector cross over to the far badge. Keeping the raw
+// tangent means slot a always sits on the side facing its (lower-angle) feeder,
+// so lines run straight. Each flag counter-rotates by −rot in CSS, so an
+// arbitrarily large rotation still renders every flag upright.
+const rotOf = (deg: number) => deg + 90;
 // Winner colour / side for a decided match (else '' / null).
 const decidedSide = (m: Match | undefined): 'a' | 'b' | null =>
   m && m.ft ? decide(m.ft, m.pens ?? null).win : null;
