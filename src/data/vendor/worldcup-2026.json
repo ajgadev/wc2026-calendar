@@ -3055,6 +3055,24 @@
    "time": "17:00 UTC-4",
    "team1": "Paraguay",
    "team2": "France",
+   "score": {
+    "ft": [
+     0,
+     1
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [],
+   "goals2": [
+    {
+     "name": "Kylian Mbappé",
+     "minute": "70",
+     "penalty": true
+    }
+   ],
    "ground": "Philadelphia"
   },
   {
@@ -3064,6 +3082,31 @@
    "time": "12:00 UTC-5",
    "team1": "Canada",
    "team2": "Morocco",
+   "score": {
+    "ft": [
+     0,
+     3
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [],
+   "goals2": [
+    {
+     "name": "Azzedine Ounahi",
+     "minute": "50"
+    },
+    {
+     "name": "Azzedine Ounahi",
+     "minute": "82"
+    },
+    {
+     "name": "Soufiane Rahimi",
+     "minute": "90+8"
+    }
+   ],
    "ground": "Houston"
   },
   {
@@ -3073,6 +3116,33 @@
    "time": "16:00 UTC-4",
    "team1": "Brazil",
    "team2": "Norway",
+   "score": {
+    "ft": [
+     1,
+     2
+    ],
+    "ht": [
+     0,
+     0
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Neymar",
+     "minute": "90+10",
+     "penalty": true
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Erling Haaland",
+     "minute": "79"
+    },
+    {
+     "name": "Erling Haaland",
+     "minute": "90"
+    }
+   ],
    "ground": "New York/New Jersey (East Rutherford)"
   },
   {
@@ -3082,6 +3152,42 @@
    "time": "18:00 UTC-6",
    "team1": "Mexico",
    "team2": "England",
+   "score": {
+    "ft": [
+     2,
+     3
+    ],
+    "ht": [
+     1,
+     2
+    ]
+   },
+   "goals1": [
+    {
+     "name": "Julián Quiñones",
+     "minute": "42"
+    },
+    {
+     "name": "Raúl Jiménez",
+     "minute": "69",
+     "penalty": true
+    }
+   ],
+   "goals2": [
+    {
+     "name": "Jude Bellingham",
+     "minute": "36"
+    },
+    {
+     "name": "Jude Bellingham",
+     "minute": "38"
+    },
+    {
+     "name": "Harry Kane",
+     "minute": "60",
+     "penalty": true
+    }
+   ],
    "ground": "Mexico City"
   },
   {
@@ -3107,8 +3213,8 @@
    "num": 95,
    "date": "2026-07-07",
    "time": "12:00 UTC-4",
-   "team1": "W86",
-   "team2": "W88",
+   "team1": "Argentina",
+   "team2": "Egypt",
    "ground": "Atlanta"
   },
   {
@@ -3117,7 +3223,7 @@
    "date": "2026-07-07",
    "time": "13:00 UTC-7",
    "team1": "Switzerland",
-   "team2": "W87",
+   "team2": "Colombia",
    "ground": "Vancouver"
   },
   {
@@ -3125,8 +3231,8 @@
    "num": 97,
    "date": "2026-07-09",
    "time": "16:00 UTC-4",
-   "team1": "W89",
-   "team2": "W90",
+   "team1": "France",
+   "team2": "Morocco",
    "ground": "Boston (Foxborough)"
   },
   {
