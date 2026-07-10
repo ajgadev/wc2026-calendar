@@ -18807,5 +18807,184 @@
     ]
    }
   }
+ },
+ "97": {
+  "cards": [
+   {
+    "minute": 63,
+    "side": 1,
+    "player": "Issa Diop",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 60,
+    "side": 0,
+    "player": "Kylian Mbappé"
+   },
+   {
+    "minute": 66,
+    "side": 0,
+    "player": "Ousmane Dembélé"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Mike Maignan",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "William Saliba",
+      "jersey": "17",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Dayot Upamecano",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Lucas Digne",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jules Koundé",
+      "jersey": "5",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Michael Olise",
+      "jersey": "11",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Adrien Rabiot",
+      "jersey": "14",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Manu Koné",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Kylian Mbappé",
+      "jersey": "10",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Désiré Doué",
+      "jersey": "20",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Ousmane Dembélé",
+      "jersey": "7",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Bradley Barcola",
+     "Warren Zaïre-Emery",
+     "Jean-Philippe Mateta",
+     "Malo Gusto"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Yassine Bounou",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Noussair Mazraoui",
+      "jersey": "3",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Issa Diop",
+      "jersey": "14",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Anass Salah-Eddine",
+      "jersey": "26",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Achraf Hakimi",
+      "jersey": "2",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Azzedine Ounahi",
+      "jersey": "8",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Neil El Aynaoui",
+      "jersey": "24",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Ayyoub Bouaddi",
+      "jersey": "6",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Bilal El Khannouss",
+      "jersey": "23",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Chemsdine Talbi",
+      "jersey": "7",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Brahim Díaz",
+      "jersey": "10",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Gessime Yassine",
+     "Sofyan Amrabat",
+     "Soufiane Rahimi",
+     "Amine Sbaï",
+     "Zakaria El Ouahdi"
+    ]
+   }
+  }
  }
 }
