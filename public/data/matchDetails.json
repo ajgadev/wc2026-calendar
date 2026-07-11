@@ -18986,5 +18986,207 @@
     ]
    }
   }
+ },
+ "98": {
+  "cards": [
+   {
+    "minute": 43,
+    "side": 0,
+    "player": "Pau Cubarsí",
+    "type": "Y"
+   },
+   {
+    "minute": 85,
+    "side": 1,
+    "player": "Kevin De Bruyne",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 0,
+    "player": "Aymeric Laporte",
+    "type": "Y"
+   },
+   {
+    "minute": 95,
+    "side": 1,
+    "player": "Axel Witsel",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 30,
+    "side": 0,
+    "player": "Fabián Ruiz"
+   },
+   {
+    "minute": 41,
+    "side": 1,
+    "player": "Charles De Ketelaere"
+   },
+   {
+    "minute": 88,
+    "side": 0,
+    "player": "Mikel Merino"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Unai Simón",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Aymeric Laporte",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pau Cubarsí",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Marc Cucurella",
+      "jersey": "24",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Pedro Porro",
+      "jersey": "12",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Dani Olmo",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Fabián Ruiz",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Rodri",
+      "jersey": "16",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Mikel Oyarzabal",
+      "jersey": "21",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Álex Baena",
+      "jersey": "15",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Lamine Yamal",
+      "jersey": "19",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Nico Williams",
+     "Mikel Merino",
+     "Pedri",
+     "Ferran Torres"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Thibaut Courtois",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Brandon Mechele",
+      "jersey": "4",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Nathan Ngoy",
+      "jersey": "25",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Maxim De Cuyper",
+      "jersey": "5",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Timothy Castagne",
+      "jersey": "21",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Kevin De Bruyne",
+      "jersey": "7",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Nicolas Raskin",
+      "jersey": "23",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Hans Vanaken",
+      "jersey": "20",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Charles De Ketelaere",
+      "jersey": "17",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Jérémy Doku",
+      "jersey": "11",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Leandro Trossard",
+      "jersey": "10",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Alexis Saelemaekers",
+     "Joaquin Seys",
+     "Senne Lammens",
+     "Axel Witsel",
+     "Romelu Lukaku"
+    ]
+   }
+  }
  }
 }
