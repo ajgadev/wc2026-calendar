@@ -19591,5 +19591,198 @@
     ]
    }
   }
+ },
+ "101": {
+  "cards": [
+   {
+    "minute": 9,
+    "side": 0,
+    "player": "Adrien Rabiot",
+    "type": "Y"
+   },
+   {
+    "minute": 31,
+    "side": 1,
+    "player": "Marc Cucurella",
+    "type": "Y"
+   },
+   {
+    "minute": 86,
+    "side": 0,
+    "player": "Kylian Mbappé",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 22,
+    "side": 1,
+    "player": "Mikel Oyarzabal",
+    "penalty": true
+   },
+   {
+    "minute": 58,
+    "side": 1,
+    "player": "Pedro Porro"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Mike Maignan",
+      "jersey": "16",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "William Saliba",
+      "jersey": "17",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Dayot Upamecano",
+      "jersey": "4",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Lucas Digne",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Jules Koundé",
+      "jersey": "5",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Michael Olise",
+      "jersey": "11",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Adrien Rabiot",
+      "jersey": "14",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Aurélien Tchouaméni",
+      "jersey": "8",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Kylian Mbappé",
+      "jersey": "10",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Bradley Barcola",
+      "jersey": "12",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Ousmane Dembélé",
+      "jersey": "7",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Manu Koné",
+     "Theo Hernández",
+     "Désiré Doué",
+     "Rayan Cherki",
+     "Maxence Lacroix"
+    ]
+   },
+   "b": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Unai Simón",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Aymeric Laporte",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pau Cubarsí",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Marc Cucurella",
+      "jersey": "24",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Pedro Porro",
+      "jersey": "12",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Dani Olmo",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Fabián Ruiz",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Rodri",
+      "jersey": "16",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Mikel Oyarzabal",
+      "jersey": "21",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Álex Baena",
+      "jersey": "15",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Lamine Yamal",
+      "jersey": "19",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Ferran Torres",
+     "Marcos Llorente",
+     "Nico Williams",
+     "Pedri",
+     "Mikel Merino"
+    ]
+   }
+  }
  }
 }
