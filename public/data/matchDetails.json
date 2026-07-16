@@ -19784,5 +19784,208 @@
     ]
    }
   }
+ },
+ "102": {
+  "cards": [
+   {
+    "minute": 37,
+    "side": 0,
+    "player": "Elliot Anderson",
+    "type": "Y"
+   },
+   {
+    "minute": 42,
+    "side": 1,
+    "player": "Lisandro Martínez",
+    "type": "Y"
+   },
+   {
+    "minute": 51,
+    "side": 1,
+    "player": "Cristian Romero",
+    "type": "Y"
+   },
+   {
+    "minute": 94,
+    "side": 1,
+    "player": "Rodrigo De Paul",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 55,
+    "side": 0,
+    "player": "Anthony Gordon"
+   },
+   {
+    "minute": 85,
+    "side": 1,
+    "player": "Enzo Fernández"
+   },
+   {
+    "minute": 92,
+    "side": 1,
+    "player": "Lautaro Martínez"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Jordan Pickford",
+      "jersey": "1",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Marc Guéhi",
+      "jersey": "6",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "John Stones",
+      "jersey": "5",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Djed Spence",
+      "jersey": "25",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Reece James",
+      "jersey": "24",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Jude Bellingham",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Elliot Anderson",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Declan Rice",
+      "jersey": "4",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Harry Kane",
+      "jersey": "9",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Anthony Gordon",
+      "jersey": "18",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Morgan Rogers",
+      "jersey": "17",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Dan Burn",
+     "Marcus Rashford",
+     "Ivan Toney",
+     "Ezri Konsa",
+     "Nico O'Reilly"
+    ]
+   },
+   "b": {
+    "formation": "4-1-4-1",
+    "starters": [
+     {
+      "name": "Emiliano Martínez",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Lisandro Martínez",
+      "jersey": "6",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Cristian Romero",
+      "jersey": "13",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Leandro Paredes",
+      "jersey": "5",
+      "pos": "DM",
+      "place": 4
+     },
+     {
+      "name": "Nicolás Tagliafico",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Nahuel Molina",
+      "jersey": "26",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Alexis Mac Allister",
+      "jersey": "20",
+      "pos": "CM-L",
+      "place": 10
+     },
+     {
+      "name": "Enzo Fernández",
+      "jersey": "24",
+      "pos": "CM-R",
+      "place": 8
+     },
+     {
+      "name": "Julián Álvarez",
+      "jersey": "9",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Giuliano Simeone",
+      "jersey": "17",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Lionel Messi",
+      "jersey": "10",
+      "pos": "F",
+      "place": 9
+     }
+    ],
+    "subbedIn": [
+     "Gonzalo Montiel",
+     "Lautaro Martínez",
+     "Nico González",
+     "Nicolás Otamendi",
+     "Rodrigo De Paul"
+    ]
+   }
+  }
  }
 }
