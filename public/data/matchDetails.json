@@ -20201,5 +20201,212 @@
     ]
    }
   }
+ },
+ "104": {
+  "cards": [
+   {
+    "minute": 41,
+    "side": 1,
+    "player": "Lisandro Martínez",
+    "type": "Y"
+   },
+   {
+    "minute": 52,
+    "side": 1,
+    "player": "Leandro Paredes",
+    "type": "Y"
+   },
+   {
+    "minute": 82,
+    "side": 1,
+    "player": "Enzo Fernández",
+    "type": "Y"
+   },
+   {
+    "minute": 92,
+    "side": 1,
+    "player": "Cristian Romero",
+    "type": "Y"
+   },
+   {
+    "minute": 93,
+    "side": 1,
+    "player": "Enzo Fernández",
+    "type": "YR"
+   },
+   {
+    "minute": 111,
+    "side": 1,
+    "player": "Alexis Mac Allister",
+    "type": "Y"
+   }
+  ],
+  "goals": [
+   {
+    "minute": 106,
+    "side": 0,
+    "player": "Ferran Torres"
+   }
+  ],
+  "lineups": {
+   "a": {
+    "formation": "4-2-3-1",
+    "starters": [
+     {
+      "name": "Unai Simón",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Aymeric Laporte",
+      "jersey": "14",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Pau Cubarsí",
+      "jersey": "22",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Marc Cucurella",
+      "jersey": "24",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Pedro Porro",
+      "jersey": "12",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Dani Olmo",
+      "jersey": "10",
+      "pos": "AM",
+      "place": 10
+     },
+     {
+      "name": "Fabián Ruiz",
+      "jersey": "8",
+      "pos": "LM",
+      "place": 4
+     },
+     {
+      "name": "Rodri",
+      "jersey": "16",
+      "pos": "RM",
+      "place": 8
+     },
+     {
+      "name": "Mikel Oyarzabal",
+      "jersey": "21",
+      "pos": "F",
+      "place": 9
+     },
+     {
+      "name": "Álex Baena",
+      "jersey": "15",
+      "pos": "AM-L",
+      "place": 11
+     },
+     {
+      "name": "Lamine Yamal",
+      "jersey": "19",
+      "pos": "AM-R",
+      "place": 7
+     }
+    ],
+    "subbedIn": [
+     "Martín Zubimendi",
+     "Nico Williams",
+     "Ferran Torres",
+     "Pedri",
+     "Mikel Merino",
+     "Eric García"
+    ]
+   },
+   "b": {
+    "formation": "4-4-2",
+    "starters": [
+     {
+      "name": "Emiliano Martínez",
+      "jersey": "23",
+      "pos": "G",
+      "place": 1
+     },
+     {
+      "name": "Lisandro Martínez",
+      "jersey": "6",
+      "pos": "CD-L",
+      "place": 6
+     },
+     {
+      "name": "Cristian Romero",
+      "jersey": "13",
+      "pos": "CD-R",
+      "place": 5
+     },
+     {
+      "name": "Nicolás Tagliafico",
+      "jersey": "3",
+      "pos": "LB",
+      "place": 3
+     },
+     {
+      "name": "Gonzalo Montiel",
+      "jersey": "4",
+      "pos": "RB",
+      "place": 2
+     },
+     {
+      "name": "Alexis Mac Allister",
+      "jersey": "20",
+      "pos": "CM-L",
+      "place": 8
+     },
+     {
+      "name": "Enzo Fernández",
+      "jersey": "24",
+      "pos": "CM-R",
+      "place": 4
+     },
+     {
+      "name": "Nico González",
+      "jersey": "15",
+      "pos": "LM",
+      "place": 11
+     },
+     {
+      "name": "Rodrigo De Paul",
+      "jersey": "7",
+      "pos": "RM",
+      "place": 7
+     },
+     {
+      "name": "Julián Álvarez",
+      "jersey": "9",
+      "pos": "CF-L",
+      "place": 9
+     },
+     {
+      "name": "Lionel Messi",
+      "jersey": "10",
+      "pos": "CF-R",
+      "place": 10
+     }
+    ],
+    "subbedIn": [
+     "Leandro Paredes",
+     "Nicolás Otamendi",
+     "Nahuel Molina",
+     "Giuliano Simeone",
+     "Marcos Senesi",
+     "Facundo Medina"
+    ]
+   }
+  }
  }
 }
